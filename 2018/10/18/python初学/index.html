@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="似雍&amp;&amp;非庸">
 <meta property="og:description" content="初识python2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-24T14:04:01.399Z">
+<meta property="og:image" content="http://pg7xbkpbr.bkt.clouddn.com/open%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F%E6%8F%8F%E8%BF%B0.png">
+<meta property="og:image" content="http://pg7xbkpbr.bkt.clouddn.com/file%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95.png">
+<meta property="og:updated_time" content="2018-10-26T13:29:44.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python2初学">
 <meta name="twitter:description" content="初识python2">
+<meta name="twitter:image" content="http://pg7xbkpbr.bkt.clouddn.com/open%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F%E6%8F%8F%E8%BF%B0.png">
 
 
 
@@ -852,6 +855,108 @@ Python 还支持复数，复数由实数部分和虚数部分构成，可以用 
 <p>实例中有 int 对象 2，指向它的变量是 b，在传递给 ChangeInt 函数时，按传值的方式复制了变量 b，a 和 b 都指向了同一个 Int 对象，在 a=10 时，则新生成一个 int 值对象 10，并让 a 指向它。<br><strong>传可变对象实例</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"> </span><br><span class="line"># 可写函数说明</span><br><span class="line">def changeme( mylist ):</span><br><span class="line">   &quot;修改传入的列表&quot;</span><br><span class="line">   mylist.append([1,2,3,4]);</span><br><span class="line">   print &quot;函数内取值: &quot;, mylist</span><br><span class="line">   return</span><br><span class="line"> </span><br><span class="line"># 调用changeme函数</span><br><span class="line">mylist = [10,20,30];</span><br><span class="line">changeme( mylist );</span><br><span class="line">print &quot;函数外取值: &quot;, mylist</span><br></pre></td></tr></table></figure>
 <p>实例中传入函数的和在末尾添加新内容的对象用的是同一个引用。<br>输出结果如下：<br>函数内取值:  [10, 20, 30, [1, 2, 3, 4]]<br>函数外取值:  [10, 20, 30, [1, 2, 3, 4]]</p>
+<h6 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h6><p>调用函数时可使用的正式参数类型：</p>
+<ul>
+<li>必备参数</li>
+<li>关键字参数</li>
+<li>默认参数</li>
+<li>不定长参数</li>
+</ul>
+<p><strong>不定长参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def functionname([formal_args,] *var_args_tuple ):</span><br><span class="line">   &quot;函数_文档字符串&quot;</span><br><span class="line">   function_suite</span><br><span class="line">   return [expression]</span><br></pre></td></tr></table></figure>
+<p>加了星号（*）的变量名会存放所有未命名的变量参数。</p>
+<h6 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h6><p>python 使用 lambda 来创建匿名函数。</p>
+<ul>
+<li>lambda只是一个表达式，函数体比def简单很多。</li>
+<li>lambda的主体是一个表达式，而不是代码块。仅仅能在lambda表达式中封装有限的逻辑进去。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数。</li>
+<li>虽然lambda函数看起来只能写一行，却不等同于C或C++的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。      </li>
+</ul>
+<p><strong>语法</strong><br>lambda函数的语法只包含一个语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lambda [arg1 [,arg2,.....argn]]:expression</span><br></pre></td></tr></table></figure>
+<h5 id="python模块"><a href="#python模块" class="headerlink" title="python模块"></a>python模块</h5><p>Python 模块(Module)，是一个 Python 文件，以 .py 结尾，包含了 Python 对象定义和Python语句。</p>
+<p>模块让你能够有逻辑地组织你的 Python 代码段。</p>
+<p>把相关的代码分配到一个模块里能让你的代码更好用，更易懂。</p>
+<p>模块能定义函数，类和变量，模块里也能包含可执行的代码。</p>
+<h6 id="模块的引入"><a href="#模块的引入" class="headerlink" title="模块的引入"></a>模块的引入</h6><p>可以使用 import 语句来引入模块，语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import module1[, module2[,... moduleN]]</span><br></pre></td></tr></table></figure>
+<p>比如要引用模块 math，就可以在文件最开始的地方用 import math 来引入。在调用 math 模块中的函数时，必须这样引用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">模块名.函数名</span><br></pre></td></tr></table></figure></p>
+<h6 id="from…import-语句"><a href="#from…import-语句" class="headerlink" title="from…import 语句"></a>from…import 语句</h6><p>Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中。语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from modname import name1[, name2[, ... nameN]]</span><br></pre></td></tr></table></figure></p>
+<p>例如，要导入模块 fib 的 fibonacci 函数，使用如下语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from fib import fibonacci</span><br></pre></td></tr></table></figure></p>
+<p>这个声明不会把整个 fib 模块导入到当前的命名空间中，它只会将 fib 里的 fibonacci 单个引入到执行这个声明的模块的全局符号表。</p>
+<h6 id="from…import-语句-1"><a href="#from…import-语句-1" class="headerlink" title="from…import* 语句"></a>from…import* 语句</h6><p>把一个模块的所有内容全都导入到当前的命名空间也是可行的，只需使用如下声明： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from modname import *</span><br></pre></td></tr></table></figure>
+<p>这提供了一个简单的方法来导入一个模块中的所有项目。然而这种声明不该被过多地使用。</p>
+<h5 id="搜索路径"><a href="#搜索路径" class="headerlink" title="搜索路径"></a>搜索路径</h5><p>当你导入一个模块，Python 解析器对模块位置的搜索顺序是：</p>
+<ol>
+<li>当前目录</li>
+<li>如果不在当前目录，Python 则搜索在 shell 变量 PYTHONPATH 下的每个目录。<br>3.如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/。</li>
+</ol>
+<p>模块搜索路径存储在 system 模块的 sys.path 变量中。变量里包含当前目录，PYTHONPATH和由安装过程决定的默认目录。</p>
+<h5 id="PYTHONPATH-变量"><a href="#PYTHONPATH-变量" class="headerlink" title="PYTHONPATH 变量"></a>PYTHONPATH 变量</h5><p>作为环境变量，PYTHONPATH 由装在一个列表里的许多目录组成。PYTHONPATH 的语法和 shell 变量 PATH 的一样。</p>
+<p>在 Windows 系统，典型的 PYTHONPATH 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set PYTHONPATH=c:\python27\lib;</span><br></pre></td></tr></table></figure>
+<p>在 UNIX 系统，典型的 PYTHONPATH 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set PYTHONPATH=/usr/local/lib/python</span><br></pre></td></tr></table></figure>
+<h5 id="命名空间和作用域"><a href="#命名空间和作用域" class="headerlink" title="命名空间和作用域"></a>命名空间和作用域</h5><p>变量是拥有匹配对象的名字（标识符）。命名空间是一个包含了变量名称们（键）和它们各自相应的对象们（值）的字典。</p>
+<p>一个 Python 表达式可以访问局部命名空间和全局命名空间里的变量。如果一个局部变量和一个全局变量重名，则局部变量会覆盖全局变量。</p>
+<p>每个函数都有自己的命名空间。类的方法的作用域规则和通常函数的一样。</p>
+<p>Python 会智能地猜测一个变量是局部的还是全局的，它假设任何在函数内赋值的变量都是局部的。</p>
+<p>因此，如果要给函数内的全局变量赋值，必须使用 global 语句。</p>
+<p>global VarName 的表达式会告诉 Python， VarName 是一个全局变量，这样 Python 就不会在局部命名空间里寻找这个变量了。</p>
+<h5 id="globals-和-locals-函数"><a href="#globals-和-locals-函数" class="headerlink" title="globals() 和 locals() 函数"></a>globals() 和 locals() 函数</h5><p>根据调用地方的不同，globals() 和 locals() 函数可被用来返回全局和局部命名空间里的名字。</p>
+<p>如果在函数内部调用 locals()，返回的是所有能在该函数里访问的命名。</p>
+<p>如果在函数内部调用 globals()，返回的是所有在该函数里能访问的全局名字。</p>
+<p>两个函数的返回类型都是字典。所以名字们能用 keys() 函数摘取。    </p>
+<p>dir()函数一个排好序的字符串列表，内容是一个模块里定义过的名字。</p>
+<p>返回的列表容纳了在一个模块里定义的所有模块，变量和函数。</p>
+<h5 id="Python中的包"><a href="#Python中的包" class="headerlink" title="Python中的包"></a>Python中的包</h5><p>包是一个分层次的文件目录结构，它定义了一个由模块及子包，和子包下的子包等组成的 Python 的应用环境。</p>
+<h5 id="读取键盘输入"><a href="#读取键盘输入" class="headerlink" title="读取键盘输入"></a>读取键盘输入</h5><p>raw_input([prompt]) 函数从标准输入读取一个行，并返回一个字符串（去掉结尾的换行符）；<br>input([prompt]) 函数和 raw_input([prompt]) 函数基本类似，但是 input 可以接收一个Python表达式作为输入，并将运算结果返回。 </p>
+<h6 id="open函数"><a href="#open函数" class="headerlink" title="open函数"></a>open函数</h6><p> 你必须先用Python内置的open()函数打开一个文件，创建一个file对象，相关的方法才可以调用它进行读写。</p>
+<p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file object = open(file_name [, access_mode][, buffering])</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>file_name：file_name变量是一个包含了你要访问的文件名称的字符串值。</li>
+<li>access_mode：access_mode决定了打开文件的模式：只读，写入，追加等。所有可取值见如下的完全列表。这个参数是非强制的，默认文件访问模式为只读(r)。</li>
+<li>buffering:如果buffering的值被设为0，就不会有寄存。如果buffering的值取1，访问文件时会寄存行。如果将buffering的值设为大于1的整数，表明了这就是的寄存区的缓冲大小。如果取负值，寄存区的缓冲大小则为系统默认。<br><img src="http://pg7xbkpbr.bkt.clouddn.com/open%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F%E6%8F%8F%E8%BF%B0.png" alt="模式"><br><a href="http://pg7xbkpbr.bkt.clouddn.com/open%E5%87%BD%E6%95%B0%E6%89%93%E5%BC%80%E6%A8%A1%E5%BC%8F.png" target="_blank" rel="noopener">模式简图</a></li>
+</ul>
+<h6 id="File对象的属性"><a href="#File对象的属性" class="headerlink" title="File对象的属性"></a>File对象的属性</h6><p>一个文件被打开后，你有一个file对象，你可以得到有关该文件的各种信息。 </p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file.closed</td>
+<td>返回true如果文件已被关闭，否则返回false。</td>
+</tr>
+<tr>
+<td>file.mode</td>
+<td>返回被打开文件的访问模式。</td>
+</tr>
+<tr>
+<td>file.name</td>
+<td>返回文件的名称。</td>
+</tr>
+<tr>
+<td>file.softspace</td>
+<td>如果用print输出后，必须跟一个空格符，则返回false。否则返回true。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://pg7xbkpbr.bkt.clouddn.com/file%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95.png" alt="file对象的方法"></p>
+<h6 id="close-方法"><a href="#close-方法" class="headerlink" title="close()方法"></a>close()方法</h6><p>File 对象的 close（）方法刷新缓冲区里任何还没写入的信息，并关闭该文件，这之后便不能再进行写入。<br> 语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileObject.close()</span><br></pre></td></tr></table></figure></p>
+<h6 id="write-方法"><a href="#write-方法" class="headerlink" title="write()方法"></a>write()方法</h6><p> write()方法可将任何字符串写入一个打开的文件。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。</p>
+<p>write()方法不会在字符串的结尾添加换行符(‘\n’)：<br> 语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileObject.write(string)</span><br></pre></td></tr></table></figure></p>
+<h6 id="read-方法"><a href="#read-方法" class="headerlink" title="read()方法"></a>read()方法</h6><p>read（）方法从一个打开的文件中读取一个字符串。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。</p>
+<p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileObject.read([count])</span><br></pre></td></tr></table></figure></p>
+<p>被传递的参数是要从已打开文件中读取的字节计数。该方法从文件的开头开始读入，如果没有传入count，它会尝试尽可能多地读取更多的内容，很可能是直到文件的末尾。</p>
+<h6 id="通过write-写入后用read-函数会有错误"><a href="#通过write-写入后用read-函数会有错误" class="headerlink" title="通过write()写入后用read()函数会有错误"></a>通过write()写入后用read()函数会有错误</h6><h5 id="文件定位"><a href="#文件定位" class="headerlink" title="文件定位"></a>文件定位</h5><p>tell()方法告诉你文件内的当前位置。通过read()函数后指针会指到读到的位置。</p>
+<p> seek（offset [,from]）方法改变当前文件的位置。Offset变量表示要移动的字节数。From变量指定开始移动字节的参考位置。</p>
+<p>如果from被设为0，这意味着将文件的开头作为移动字节的参考位置。如果设为1，则使用当前的位置作为参考位置。如果它被设为2，那么该文件的末尾将作为参考位置。 </p>
+<p>##### </p>
 
       
     </div>
@@ -1004,7 +1109,7 @@ Python 还支持复数，复数由实数部分和虚数部分构成，可以用 
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1015,7 +1120,7 @@ Python 还支持复数，复数由实数部分和虚数部分构成，可以用 
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1026,7 +1131,7 @@ Python 还支持复数，复数由实数部分和虚数部分构成，可以用 
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1062,7 +1167,7 @@ Python 还支持复数，复数由实数部分和虚数部分构成，可以用 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#python运算符"><span class="nav-number">1.</span> <span class="nav-text">python运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python位运算符"><span class="nav-number">1.1.</span> <span class="nav-text">python位运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Python成员运算符"><span class="nav-number">1.2.</span> <span class="nav-text">Python成员运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Python身份运算符"><span class="nav-number">1.3.</span> <span class="nav-text">Python身份运算符</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python运算符优先级"><span class="nav-number">2.</span> <span class="nav-text">Python运算符优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python中的break，continue，pass"><span class="nav-number">2.1.</span> <span class="nav-text">python中的break，continue，pass</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-Number-数字"><span class="nav-number">3.</span> <span class="nav-text">Python Number(数字)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python-字符串"><span class="nav-number">4.</span> <span class="nav-text">python 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python-字符串更新"><span class="nav-number">4.1.</span> <span class="nav-text">python 字符串更新</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Python-字符串格式化"><span class="nav-number">4.2.</span> <span class="nav-text">Python 字符串格式化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python三引号"><span class="nav-number">4.3.</span> <span class="nav-text">python三引号</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Unicode-字符串"><span class="nav-number">4.4.</span> <span class="nav-text">Unicode 字符串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python的字符串内建函数"><span class="nav-number">4.5.</span> <span class="nav-text">python的字符串内建函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-列表-List"><span class="nav-number">5.</span> <span class="nav-text">Python 列表(List)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python列表脚本操作符"><span class="nav-number">5.1.</span> <span class="nav-text">python列表脚本操作符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python列表函数"><span class="nav-number">5.2.</span> <span class="nav-text">python列表函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python列表函数-1"><span class="nav-number">5.3.</span> <span class="nav-text">python列表函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-元组"><span class="nav-number">6.</span> <span class="nav-text">Python 元组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#元组运算符"><span class="nav-number">6.1.</span> <span class="nav-text">元组运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#无关闭分隔符"><span class="nav-number">6.2.</span> <span class="nav-text">无关闭分隔符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#元组内置函数"><span class="nav-number">6.3.</span> <span class="nav-text">元组内置函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-字典-Dictionary"><span class="nav-number">7.</span> <span class="nav-text">Python 字典(Dictionary)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字典内置函数"><span class="nav-number">7.1.</span> <span class="nav-text">字典内置函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字典内置方法"><span class="nav-number">7.2.</span> <span class="nav-text">字典内置方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python时间和日期"><span class="nav-number">8.</span> <span class="nav-text">python时间和日期</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#格式化日期"><span class="nav-number">8.1.</span> <span class="nav-text">格式化日期</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#获取某月日历"><span class="nav-number">8.2.</span> <span class="nav-text">获取某月日历</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python函数"><span class="nav-number">9.</span> <span class="nav-text">python函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义函数"><span class="nav-number">9.1.</span> <span class="nav-text">定义函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可更改-mutable-与不可更改-immutable-对象"><span class="nav-number">10.</span> <span class="nav-text">可更改(mutable)与不可更改(immutable)对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#python运算符"><span class="nav-number">1.</span> <span class="nav-text">python运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python位运算符"><span class="nav-number">1.1.</span> <span class="nav-text">python位运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Python成员运算符"><span class="nav-number">1.2.</span> <span class="nav-text">Python成员运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Python身份运算符"><span class="nav-number">1.3.</span> <span class="nav-text">Python身份运算符</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python运算符优先级"><span class="nav-number">2.</span> <span class="nav-text">Python运算符优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python中的break，continue，pass"><span class="nav-number">2.1.</span> <span class="nav-text">python中的break，continue，pass</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-Number-数字"><span class="nav-number">3.</span> <span class="nav-text">Python Number(数字)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python-字符串"><span class="nav-number">4.</span> <span class="nav-text">python 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python-字符串更新"><span class="nav-number">4.1.</span> <span class="nav-text">python 字符串更新</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Python-字符串格式化"><span class="nav-number">4.2.</span> <span class="nav-text">Python 字符串格式化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python三引号"><span class="nav-number">4.3.</span> <span class="nav-text">python三引号</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Unicode-字符串"><span class="nav-number">4.4.</span> <span class="nav-text">Unicode 字符串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python的字符串内建函数"><span class="nav-number">4.5.</span> <span class="nav-text">python的字符串内建函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-列表-List"><span class="nav-number">5.</span> <span class="nav-text">Python 列表(List)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#python列表脚本操作符"><span class="nav-number">5.1.</span> <span class="nav-text">python列表脚本操作符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python列表函数"><span class="nav-number">5.2.</span> <span class="nav-text">python列表函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#python列表函数-1"><span class="nav-number">5.3.</span> <span class="nav-text">python列表函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-元组"><span class="nav-number">6.</span> <span class="nav-text">Python 元组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#元组运算符"><span class="nav-number">6.1.</span> <span class="nav-text">元组运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#无关闭分隔符"><span class="nav-number">6.2.</span> <span class="nav-text">无关闭分隔符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#元组内置函数"><span class="nav-number">6.3.</span> <span class="nav-text">元组内置函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python-字典-Dictionary"><span class="nav-number">7.</span> <span class="nav-text">Python 字典(Dictionary)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字典内置函数"><span class="nav-number">7.1.</span> <span class="nav-text">字典内置函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字典内置方法"><span class="nav-number">7.2.</span> <span class="nav-text">字典内置方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python时间和日期"><span class="nav-number">8.</span> <span class="nav-text">python时间和日期</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#格式化日期"><span class="nav-number">8.1.</span> <span class="nav-text">格式化日期</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#获取某月日历"><span class="nav-number">8.2.</span> <span class="nav-text">获取某月日历</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python函数"><span class="nav-number">9.</span> <span class="nav-text">python函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义函数"><span class="nav-number">9.1.</span> <span class="nav-text">定义函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可更改-mutable-与不可更改-immutable-对象"><span class="nav-number">10.</span> <span class="nav-text">可更改(mutable)与不可更改(immutable)对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#参数"><span class="nav-number">10.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#匿名函数"><span class="nav-number">10.2.</span> <span class="nav-text">匿名函数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python模块"><span class="nav-number">11.</span> <span class="nav-text">python模块</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#模块的引入"><span class="nav-number">11.1.</span> <span class="nav-text">模块的引入</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#from…import-语句"><span class="nav-number">11.2.</span> <span class="nav-text">from…import 语句</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#from…import-语句-1"><span class="nav-number">11.3.</span> <span class="nav-text">from…import* 语句</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索路径"><span class="nav-number">12.</span> <span class="nav-text">搜索路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PYTHONPATH-变量"><span class="nav-number">13.</span> <span class="nav-text">PYTHONPATH 变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命名空间和作用域"><span class="nav-number">14.</span> <span class="nav-text">命名空间和作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#globals-和-locals-函数"><span class="nav-number">15.</span> <span class="nav-text">globals() 和 locals() 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Python中的包"><span class="nav-number">16.</span> <span class="nav-text">Python中的包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#读取键盘输入"><span class="nav-number">17.</span> <span class="nav-text">读取键盘输入</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#open函数"><span class="nav-number">17.1.</span> <span class="nav-text">open函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#File对象的属性"><span class="nav-number">17.2.</span> <span class="nav-text">File对象的属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#close-方法"><span class="nav-number">17.3.</span> <span class="nav-text">close()方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#write-方法"><span class="nav-number">17.4.</span> <span class="nav-text">write()方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#read-方法"><span class="nav-number">17.5.</span> <span class="nav-text">read()方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#通过write-写入后用read-函数会有错误"><span class="nav-number">17.6.</span> <span class="nav-text">通过write()写入后用read()函数会有错误</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件定位"><span class="nav-number">18.</span> <span class="nav-text">文件定位</span></a></li></ol></div>
             
 
           </div>
