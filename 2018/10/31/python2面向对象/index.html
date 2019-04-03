@@ -1,0 +1,1126 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      python2面向对象 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/img/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《python2面向对象》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2018/10/31/python2面向对象/" itemprop="url">
+		python2面向对象
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2018/10/31/python2面向对象/" itemprop="url">
+		<time datetime="2018-10-31T13:21:33.000Z" itemprop="datePublished">
+	  		2018-10-31
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2018/10/31/python2面向对象/" itemprop="url">
+		<time datetime="2018-10-31T13:21:33.000Z" itemprop="dateUpdated">
+	  		2019-04-03
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/python2/" class=" ">
+			python2
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2018/10/31/python2面向对象/_visitors" data-url="/2018/10/31/python2面向对象/" data-title="python2面向对象">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2018/10/31/python2面向对象/_likes" data-url="/2018/10/31/python2面向对象/" data-title="python2面向对象" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="基本概念理解"><a href="#基本概念理解" class="headerlink" title="基本概念理解"></a>基本概念理解</h2><p>  首先，要弄懂几个概念<br>  类是为了描述具有相同属性和方法的对象的集合。我的理解就是一个模型。<br>  对象是对类的实例化。个人理解是通过模型实例化的物。<br>  面向对象就是类实例化成为对象的过程。<br>  数据成员，就是<strong>类里面的变量</strong>。<br>  方法，就是类里定义的函数。     </p>
+<blockquote>
+<p>  个人理解仅供参考</p>
+</blockquote>
+<h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><pre><code>class ClassName:
+   &#39;类的帮助信息&#39;   #类文档字符串即注释
+   class_suite  #类体
+</code></pre><p>class_suite 由类成员，方法，数据属性组成。</p>
+<p>类的方法与普通的函数只有一个特别的区别——它们必须有一个额外的第一个参数名称, 按照惯例它的名称是 self。</p>
+<h2 id="类的实例–对象"><a href="#类的实例–对象" class="headerlink" title="类的实例–对象"></a>类的实例–对象</h2><p>格式：</p>
+<pre><code>对象名=类名（参数）
+</code></pre><p>参数指这个类的构造函数完成初始化需要的参数，通过 __init__ 方法接收参数。</p>
+<p>访问属性<br>格式：</p>
+<pre><code>对象名.属性名
+</code></pre><p>也可使用以下方式访问属性：</p>
+<ul>
+<li>getattr(obj, name[, default]) : 访问对象的属性。返回属性的值。</li>
+<li>hasattr(obj,name) : 检查是否存在一个属性。如果存在这个属性返回Ture。</li>
+<li>setattr(obj,name,value) : 设置一个属性。如果属性不存在，会创建一个新属性。</li>
+<li>delattr(obj, name) : 删除属性。</li>
+</ul>
+<h2 id="python内置类属性"><a href="#python内置类属性" class="headerlink" title="python内置类属性"></a>python内置类属性</h2><ul>
+<li>__dict__ : 类的属性（包含一个字典，由类的数据属性组成）</li>
+<li>__doc__ :类的文档字符串 </li>
+<li>__name__: 类名 </li>
+<li>__module__: 类定义所在的模块（类的全名是’__main__.className’，如果类位于一个导入模块mymod中，那么className.__module__ 等于 mymod） </li>
+<li>__bases__ : 类的所有父类构成元素（包含了一个由所有父类组成的元组）</li>
+</ul>
+<h2 id="python-对象销毁（垃圾回收）"><a href="#python-对象销毁（垃圾回收）" class="headerlink" title="python 对象销毁（垃圾回收）"></a>python 对象销毁（垃圾回收）</h2><p> Python 使用了引用计数这一简单技术来跟踪和回收垃圾。<br>在 Python 内部记录着所有使用中的对象各有多少引用。</p>
+<p>一个内部跟踪变量，称为一个引用计数器。</p>
+<p>当对象被创建时， 就创建了一个引用计数， 当这个对象不再需要时， 也就是说， 这个对象的引用计数变为0 时， 它被垃圾回收。但是回收不是”立即”的， 由解释器在适当的时机，将垃圾对象占用的内存空间回收。</p>
+<p>垃圾回收机制不仅针对引用计数为0的对象，同样也可以处理循环引用的情况。循环引用指的是，两个对象相互引用，但是没有其他变量引用他们。这种情况下，仅使用引用计数是不够的。Python 的垃圾收集器实际上是一个引用计数器和一个循环垃圾收集器。作为引用计数的补充， 垃圾收集器也会留心被分配的总量很大（及未通过引用计数销毁的那些）的对象。 在这种情况下， 解释器会暂停下来， 试图清理所有未引用的循环。</p>
+<p>析构函数 __del__ ，__del__在对象销毁的时候被调用。</p>
+<h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><p>通过继承创建的新类称为子类或派生类，被继承的类称为基类、父类或超类。<br><strong>继承语法：</strong></p>
+<pre><code>class 派生类名(基类名)
+</code></pre><p>python中继承的特点：</p>
+<h3 id="一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。"><a href="#一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。" class="headerlink" title="一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。"></a>一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。</h3><ol>
+<li>子类不重写__init__，实例化子类时，会自动调用父类定义的 __init__。</li>
+<li>如果子类重写了__init__ 时，实例化子类，就不会调用父类已经定义的 __init__。</li>
+<li>如果子类重写了__init__ 时，又要继承父类的构造方法，可以使用 super 关键字:<pre><code>super(子类，self).__init__(参数1，参数2，....)
+</code></pre>还有一种经典的写法：<pre><code>父类名称.__init__(self,参数1，参数2，...)
+</code></pre>实例：</li>
+</ol>
+<pre><code>#coding=utf-8
+
+class Father(object):
+    def __init__(self, name):
+        self.name=name
+        print ( &quot;name: %s&quot; %( self.name) )
+    def getName(self):
+        return &#39;Father &#39; + self.name
+
+# class Son(Father):#写法一
+#      &quot;&quot;&quot;docstring for Son&quot;&quot;&quot; 
+#      def __init__(self, name1):
+#          Father.__init__(self,name1)
+#          self.name1 = name1
+#          print ( &quot;name1: %s&quot; %( self.name) )
+
+class Son(Father):#写法二
+    def __init__(self, name1):
+        super(Son,self).__init__(name1)
+        self.name1=name1
+        print ( &quot;name1: %s&quot; %( self.name) ) 
+
+s=Son(&quot;aaa&quot;)
+print s.getName()
+</code></pre><h3 id="二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上-self-参数变量。区别在于类中调用普通函数时并不需要带上-self-参数"><a href="#二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上-self-参数变量。区别在于类中调用普通函数时并不需要带上-self-参数" class="headerlink" title="二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数"></a>二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数</h3><p>（理解的不太透）</p>
+<h3 id="三、Python-总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）"><a href="#三、Python-总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）" class="headerlink" title="三、Python 总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）"></a>三、Python 总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）</h3><p>可以使用issubclass()或者isinstance()方法来检测类的继承关系或实例关系。</p>
+<ul>
+<li>issubclass() - 布尔函数判断一个类是另一个类的子类或者子孙类，语法：issubclass(sub,sup)</li>
+<li>isinstance(obj, Class) 布尔函数如果obj是Class类的实例对象或者是一个Class子类的实例对象则返回true。</li>
+</ul>
+<h2 id="方法重写"><a href="#方法重写" class="headerlink" title="方法重写"></a>方法重写</h2><p>如果你的父类方法的功能不能满足你的需求，你可以在子类重写你父类的方法。</p>
+<h2 id="基础重载方法"><a href="#基础重载方法" class="headerlink" title="基础重载方法"></a>基础重载方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>简单的调用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__init__ ( self [,args…] )</td>
+<td>构造函数</td>
+<td>obj = className(args)</td>
+</tr>
+<tr>
+<td>__del__( self )</td>
+<td>析构方法，删除一个对象</td>
+<td>del obj</td>
+</tr>
+<tr>
+<td>__repr__( self )</td>
+<td>转化为供解释器读取的形式</td>
+<td>repr(obj)</td>
+</tr>
+<tr>
+<td>__str__( self )</td>
+<td>用于将值转化为适于人阅读的形式</td>
+<td>str(obj)</td>
+</tr>
+<tr>
+<td>__cmp__ ( self, x )</td>
+<td>对象比较</td>
+<td>cmp(obj,x)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p>看着实例理解</p>
+<pre><code>class Vector:
+   def __init__(self, a, b):
+      self.a = a
+      self.b = b
+
+   def __str__(self):
+      return &#39;Vector (%d, %d)&#39; % (self.a, self.b)
+
+   def __add__(self,other):
+      return Vector(self.a + other.a, self.b + other.b)
+
+v1 = Vector(2,10)
+v2 = Vector(5,-2)
+print v1 + v2
+</code></pre><p>因为__add__返回值是一个对象，在python中返回值是对象时，它真正返回的是对象的地址，这时python自动调用__str__把对象转换成适于人阅读的形式，然后就出现结果啦。(个人理解仅供参考)</p>
+<p>首先,解释一下__xxx__函数在类中有特殊的用法，每次在返回值是对象时都会在最后自动调用。如果没有__xxx__时在python中返回的是对象的地址。<br>例：</p>
+<pre><code>#coding=utf-8
+class Cat:
+    &quot;&quot;&quot;定义一个猫类&quot;&quot;&quot;
+
+    def __init__(self, new_name, new_age):
+        &quot;&quot;&quot;在创建完对象之后 会自动调用, 它完成对象的初始化的功能&quot;&quot;&quot;
+        # self.name = &quot;汤姆&quot;
+        # self.age = 20
+        self.name = new_name
+        self.age = new_age  # 它是一个对象中的属性,在对象中存储,即只要这个对象还存在,那么这个变量就可以使用
+        # num = 100  # 它是一个局部变量,当这个函数执行完之后,这个变量的空间就没有了,因此其他方法不能使用这个变量
+
+    def __str__(self):
+        &quot;&quot;&quot;返回一个对象的描述信息&quot;&quot;&quot;
+        # print(num)
+        return &quot;名字是:%s , 年龄是:%d&quot; % (self.name, self.age)
+
+    def eat(self):
+        print(&quot;%s在吃鱼....&quot; % self.name)
+
+    def drink(self):
+        print(&quot;%s在喝可乐...&quot; % self.name)
+
+    def introduce(self):
+        # print(&quot;名字是:%s, 年龄是:%d&quot; % (汤姆的名字, 汤姆的年龄))
+        # print(&quot;名字是:%s, 年龄是:%d&quot; % (tom.name, tom.age))
+        print(&quot;名字是:%s, 年龄是:%d&quot; % (self.name, self.age))
+
+# 创建了一个对象
+tom = Cat(&quot;汤姆&quot;, 30)
+print(tom)
+</code></pre><p>从这个例子可以看出</p>
+<h2 id="类属性与方法"><a href="#类属性与方法" class="headerlink" title="类属性与方法"></a>类属性与方法</h2><h3 id="类的私有属性"><a href="#类的私有属性" class="headerlink" title="类的私有属性"></a>类的私有属性</h3><p>__private_attrs：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用时 self.__private_attrs。</p>
+<h3 id="类的方法"><a href="#类的方法" class="headerlink" title="类的方法"></a>类的方法</h3><p>在类的内部，使用 def 关键字可以为类定义一个方法，与一般函数定义不同，类方法必须包含参数 self,且为第一个参数。</p>
+<h3 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h3><p> __private_method：两个下划线开头，声明该方法为私有方法，不能在类的外部调用。在类的内部调用 self.__private_methods </p>
+<p> <strong>Python不允许实例化的类访问私有数据，但你可以使用 object._className__attrName（ 对象名._类名__私有属性名 ）访问属性</strong></p>
+<h3 id="单下划线、双下划线、头尾双下划线说明："><a href="#单下划线、双下划线、头尾双下划线说明：" class="headerlink" title="单下划线、双下划线、头尾双下划线说明："></a>单下划线、双下划线、头尾双下划线说明：</h3><ul>
+<li>__foo__: 定义的是特殊方法，一般是系统定义名字 ，类似 __init__() 之类的。</li>
+<li>_foo: 以单下划线开头的表示的是 protected 类型的变量，即保护类型只能允许其本身与子类进行访问，不能用于 from module import *</li>
+<li>__foo: 双下划线的表示的是私有类型(private)的变量, 只能是允许这个类本身进行访问了。</li>
+</ul>
+<p>pythpn2中的面向对象我就有这么多认识，中间参杂个人见解仅供参考，面向对象学了两天了，自我认为理解的挺透。继续努力吧。</p>
+<p> — — — — — — — — — — — — — — — — — — — — — — — — — —参考菜鸟教程</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/74.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/11/01/python2正则表达式/" title="python2正则表达式" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2018/10/28/php之正则匹配/" title="php之正则匹配" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2018/11/16/python网络爬虫Requests/" title="python网络爬虫Requests">
+							python网络爬虫Requests
+						</a>
+						<p>
+							Requests 继承了urllib2的所有特性。Requests支持HTTP连接保持和连接池，支持使用cookie保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。
+安装方式pip...
+						</p>
+					</div>
+
+					<a href="/2018/11/16/python网络爬虫Requests/" title="python网络爬虫Requests">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python网络爬虫Requests">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/16/解决windows-cmd中python中文乱码问题/" title="解决windows cmd中python中文乱码问题">
+							解决windows cmd中python中文乱码问题
+						</a>
+						<p>
+							问题原因中文windows默认的输出编码为gbk ，与脚本中定义的UTF-8不一样，所以出现了解码失败的情况
+方法一我们可以通过改变cmd命令行窗口的输出格式来解决这个问题
+chcp 65001 就是换成UTF-8代码页
+chcp 9...
+						</p>
+					</div>
+
+					<a href="/2018/11/16/解决windows-cmd中python中文乱码问题/" title="解决windows cmd中python中文乱码问题">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="解决windows cmd中python中文乱码问题">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/08/python网络爬虫urllib2/" title="python网络爬虫urllib2">
+							python网络爬虫urllib2
+						</a>
+						<p>
+							爬虫简介个人认为：爬虫就是用来抓取网页数据（即：源代码）的程序。
+urllib2简介urllib2是用于获取URLs(统一资源定位符)的一个Python模块。Urllib2使用相关的网络协议(FTP,http)。urllib2 在 p...
+						</p>
+					</div>
+
+					<a href="/2018/11/08/python网络爬虫urllib2/" title="python网络爬虫urllib2">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python网络爬虫urllib2">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/01/python2正则表达式/" title="python2正则表达式">
+							python2正则表达式
+						</a>
+						<p>
+							首先，介绍一下正则表达式：
+正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。
+然后再说python中的正则表达式功能： 
+Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达...
+						</p>
+					</div>
+
+					<a href="/2018/11/01/python2正则表达式/" title="python2正则表达式">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python2正则表达式">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/10/18/python初学/" title="python2初学">
+							python2初学
+						</a>
+						<p>
+							python使用中文编码只需在开头加上   #coding=utf-8在 Python 中，所有标识符可以包括英文、数字以及下划线(_)，但不能以数字开头。Python 中的标识符是区分大小写的。以下划线开头的标识符是有特殊意义的。以...
+						</p>
+					</div>
+
+					<a href="/2018/10/18/python初学/" title="python2初学">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python2初学">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
+							2019年上海嘉韦思杯writeup
+						</a>
+						<p>
+							1土肥原贤二报错注入
+1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
+
+然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+						</p>
+					</div>
+
+					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
+							nmap的使用
+						</a>
+						<p>
+							前言端口范围：1-65535
+常见的端口以及服务：
+
+21 — ftp协议
+22 — ssh远程登陆端口(linux)
+23 — telnet协议
+25 — 邮箱协议 smtp 发送邮件
+110 — pop3协议 接收邮件
+80 — ...
+						</p>
+					</div>
+
+					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="nmap的使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
+							xss的绕过和利用
+						</a>
+						<p>
+							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
+						</p>
+					</div>
+
+					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="xss的绕过和利用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
+							ctf中web的常见知识点
+						</a>
+						<p>
+							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
+域名解析可以更改HTTP头部host字段为flag.bugku.com
+把 flag.bugku.com 解析到120.24.86.145
+直接在
+c:\wind...
+						</p>
+					</div>
+
+					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="ctf中web的常见知识点">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
+							2018安恒杯好黑的黑名单
+						</a>
+						<p>
+							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
+  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
+						</p>
+					</div>
+
+					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

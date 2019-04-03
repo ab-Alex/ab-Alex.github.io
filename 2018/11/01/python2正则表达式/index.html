@@ -1,0 +1,1307 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      python2正则表达式 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/img/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《python2正则表达式》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2018/11/01/python2正则表达式/" itemprop="url">
+		python2正则表达式
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2018/11/01/python2正则表达式/" itemprop="url">
+		<time datetime="2018-11-01T13:35:18.000Z" itemprop="datePublished">
+	  		2018-11-01
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2018/11/01/python2正则表达式/" itemprop="url">
+		<time datetime="2018-11-01T13:35:18.000Z" itemprop="dateUpdated">
+	  		2019-04-03
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/python2/" class=" ">
+			python2
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2018/11/01/python2正则表达式/_visitors" data-url="/2018/11/01/python2正则表达式/" data-title="python2正则表达式">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2018/11/01/python2正则表达式/_likes" data-url="/2018/11/01/python2正则表达式/" data-title="python2正则表达式" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>首先，介绍一下正则表达式：</p>
+<p>正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。</p>
+<p>然后再说python中的正则表达式功能： </p>
+<p>Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达式模式。</p>
+<p>re 模块使 Python 语言拥有全部的正则表达式功能。</p>
+<p>compile 函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。</p>
+<p>re 模块也提供了与这些方法功能完全一致的函数，这些函数使用一个模式字符串做为它们的第一个参数。</p>
+<h2 id="re-match函数"><a href="#re-match函数" class="headerlink" title="re.match函数"></a>re.match函数</h2><p>re.match 尝试从字符串的起始位置匹配一个模式，<strong>如果不是起始位置匹配成功的话，match()就返回none。</strong><br>语法：</p>
+<pre><code>re.match(pattern, string, flags=0)
+</code></pre><p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pattern</td>
+<td>正则表达式</td>
+</tr>
+<tr>
+<td>string</td>
+<td>要匹配的字符串</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。<a href="">详细信息</a></td>
+</tr>
+</tbody>
+</table>
+<p>匹配成功re.match返回一个匹配的对象，否则返回None。<br>可以使用group(num) 或 groups() 匹配对象函数来获取匹配表达式。</p>
+<table>
+<thead>
+<tr>
+<th>匹配对象方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>group(num=0)</td>
+<td>匹配的整个表达式的字符串，group() 可以一次输入多个组号，在这种情况下它将返回一个包含那些组所对应值的元组。</td>
+</tr>
+<tr>
+<td>groups()</td>
+<td>返回一个包含所有小组字符串的元组，从 1 到 所含的小组号。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="re-search-方法"><a href="#re-search-方法" class="headerlink" title="re.search()方法"></a>re.search()方法</h2><p>re.search 扫描整个字符串并返回第一个成功的匹配。<br>语法：</p>
+<pre><code>re.search(pattern, string, flags=0)
+</code></pre><p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pattern</td>
+<td>匹配的正则表达式</td>
+</tr>
+<tr>
+<td>string</td>
+<td>要匹配的字符串</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>标志位，用于控制正则表达式的匹配的方式。如：是否区分大小写，多行匹配等等。</td>
+</tr>
+</tbody>
+</table>
+<p>匹配成功re.search()方法返回一个匹配的对象，否则返回None。<br>也可可以使用group(num) 或 groups() 匹配对象函数来获取匹配表达式。 匹配对象方法同上</p>
+<h2 id="re-match与re-search的区别"><a href="#re-match与re-search的区别" class="headerlink" title="re.match与re.search的区别"></a>re.match与re.search的区别</h2><p>re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；而re.search匹配整个字符串，<strong>直到找到一个匹配</strong>。</p>
+<h2 id="检索和替换"><a href="#检索和替换" class="headerlink" title="检索和替换"></a>检索和替换</h2><h3 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub"></a>re.sub</h3><p>re 模块提供了re.sub用于替换字符串中的匹配项。<br>语法：</p>
+<pre><code>re.sub(pattern, repl, string, count=0, flags=0)
+</code></pre><p>参数：</p>
+<ul>
+<li>pattern : 正则中的模式字符串。</li>
+<li>repl : 替换的字符串，<strong>也可为一个函数</strong>。</li>
+<li>string : 要被查找替换的原始字符串。</li>
+<li>count : 模式匹配后替换的最大次数，默认 0表示替换所有的匹配。</li>
+</ul>
+<h3 id="re-compile-函数"><a href="#re-compile-函数" class="headerlink" title="re.compile 函数"></a>re.compile 函数</h3><p>compile 函数用于编译正则表达式，生成一个正则表达式（ Pattern ）对象，供 match() 和 search() 这两个函数使用。<br>语法：</p>
+<pre><code>re.compile(pattern[, flags])
+</code></pre><p>参数：</p>
+<ul>
+<li>pattern : 一个字符串形式的正则表达式</li>
+<li>flags : 可选，表示匹配模式，比如忽略大小写，多行模式等，具体参数为：</li>
+</ul>
+<ol>
+<li>re.I 忽略大小写</li>
+<li>re.L 表示特殊字符集 \w, \W, \b, \B, \s, \S 依赖于当前环境</li>
+<li>re.M 多行模式</li>
+<li>re.S 即为 . 并且包括换行符在内的任意字符（. 不包括换行符）</li>
+<li>re.U 表示特殊字符集 \w, \W, \b, \B, \d, \D, \s, \S 依赖于 Unicode 字符属性数据库</li>
+<li>re.X 为了增加可读性，忽略空格和 # 后面的注释</li>
+</ol>
+<p>当匹配成功时返回一个 Match 对象，其中：</p>
+<ul>
+<li>group([group1, …]) 方法用于获得一个或多个分组匹配的字符串，当要获得整个匹配的子串时，可直接使用 group() 或 group(0)；</li>
+<li>start([group]) 方法用于获取分组匹配的子串在整个字符串中的起始位置（子串第一个字符的索引），参数默认值为 0；</li>
+<li>end([group]) 方法用于获取分组匹配的子串在整个字符串中的结束位置（子串最后一个字符的索引+1），参数默认值为 0；</li>
+<li>span([group]) 方法返回 (start(group), end(group))。</li>
+</ul>
+<h2 id="findall"><a href="#findall" class="headerlink" title="findall"></a>findall</h2><p>在字符串中找到正则表达式所匹配的所有子串，并返回一个列表，如果没有找到匹配的，则返回空列表。<br><strong>注意</strong>： match 和 search 是匹配一次 findall 匹配所有。<br>语法：</p>
+<pre><code>findall(string[, pos[, endpos]])
+</code></pre><p>参数：</p>
+<ul>
+<li>string : 待匹配的字符串。</li>
+<li>pos : 可选参数，指定字符串的起始位置，默认为 0。</li>
+<li>endpos : 可选参数，指定字符串的结束位置，默认为字符串的长度。</li>
+</ul>
+<h2 id="re-finditer"><a href="#re-finditer" class="headerlink" title="re.finditer"></a>re.finditer</h2><p>在字符串中找到正则表达式所匹配的所有子串，并把它们作为一个迭代器返回。<br>语法：</p>
+<pre><code>re.finditer(pattern, string, flags=0)
+</code></pre><p>参数同re.match()。</p>
+<h2 id="re-split"><a href="#re-split" class="headerlink" title="re.split"></a>re.split</h2><p>split 方法按照能够匹配的子串将字符串分割后返回列表。<br>语法：</p>
+<pre><code>re.split(pattern, string[, maxsplit=0, flags=0])
+</code></pre><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pattern</td>
+<td>匹配的正则表达式</td>
+</tr>
+<tr>
+<td>string</td>
+<td>要匹配的字符串</td>
+</tr>
+<tr>
+<td>maxsplit</td>
+<td>分隔次数，maxsplit=1 分隔一次，默认为 0，不限制次数。</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="正则表达式对象"><a href="#正则表达式对象" class="headerlink" title="正则表达式对象"></a>正则表达式对象</h2><p>re.compile() 返回 RegexObject 对象。<br>group() 返回被 RE 匹配的字符串。</p>
+<ul>
+<li>start() 返回匹配开始的位置 </li>
+<li>end() 返回匹配结束的位置 </li>
+<li>span() 返回一个元组包含匹配 (开始,结束) 的位置 </li>
+</ul>
+<h2 id="正则表达式修饰符-可选标志"><a href="#正则表达式修饰符-可选标志" class="headerlink" title="正则表达式修饰符-可选标志"></a>正则表达式修饰符-可选标志</h2><p>正则表达式可以包含一些可选标志修饰符来控制匹配的模式。修饰符被指定为一个可选的标志。多个标志可以通过按位 OR(|) 它们来指定。如 re.I | re.M 被设置成 I 和 M 标志：</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>re.I</td>
+<td>使匹配对大小写不敏感</td>
+</tr>
+<tr>
+<td>re.L</td>
+<td>做本地化识别（locale-aware）匹配</td>
+</tr>
+<tr>
+<td>re.M</td>
+<td>多行匹配，影响 ^ 和 $</td>
+</tr>
+<tr>
+<td>re.S</td>
+<td>使 . 匹配包括换行在内的所有字符</td>
+</tr>
+<tr>
+<td>re.U</td>
+<td>根据Unicode字符集解析字符。这个标志影响 \w, \W, \b, \B.</td>
+</tr>
+<tr>
+<td>re.X</td>
+<td>该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解</td>
+</tr>
+</tbody>
+</table>
+<h2 id="正则表达式模式"><a href="#正则表达式模式" class="headerlink" title="正则表达式模式"></a>正则表达式模式</h2><p>字母和数字表示他们自身。一个正则表达式模式中的字母和数字匹配同样的字符串。</p>
+<p>多数字母和数字前加一个反斜杠时会拥有不同的含义。</p>
+<p>标点符号只有被转义时才匹配自身，否则它们表示特殊的含义。</p>
+<p>由于正则表达式通常都包含反斜杠，所以你最好使用原始字符串来表示它们。模式元素(如 r’\t’，等价于 ‘\\t’)匹配相应的特殊字符<strong>可以在参数pattern前加r防止转义</strong></p>
+<p>反斜杠本身需要使用反斜杠转义。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>匹配字符串的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的末尾</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配任意一个字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。</td>
+</tr>
+<tr>
+<td>[…]</td>
+<td>用来表示一组字符中的任意一个。如[amk] 匹配 ‘a’，’m’或’k’</td>
+</tr>
+<tr>
+<td>[^…]</td>
+<td>不在[]中的一个字符。如[^abc] 匹配除了a,b,c之外的字符。</td>
+</tr>
+<tr>
+<td>re*</td>
+<td>匹配0个或多个的表达式</td>
+</tr>
+<tr>
+<td>re+</td>
+<td>匹配0个或多个的表达式</td>
+</tr>
+<tr>
+<td>re?</td>
+<td>匹配0个或1个由前面的正则表达式定义的片段，非贪婪方式</td>
+</tr>
+<tr>
+<td>re{n}</td>
+<td>精确匹配 n 个前面表达式。例如， o{2} 不能匹配 “Bob” 中的 “o”，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td>re{n,}</td>
+<td>匹配 n 个前面表达式。例如， o{2,} 不能匹配”Bob”中的”o”，但能匹配 “foooood”中的所有 o。”o{1,}” 等价于 “o+”。”o{0,}” 则等价于 “o*”。</td>
+</tr>
+<tr>
+<td>re{ n, m}</td>
+<td>匹配 n 到 m 次由前面的正则表达式定义的片段，贪婪方式</td>
+</tr>
+<tr>
+<td>a\</td>
+<td>b</td>
+<td>匹配a或b</td>
+</tr>
+<tr>
+<td>(re)</td>
+<td>匹配括号内的表达式，也表示一个组</td>
+</tr>
+<tr>
+<td>(?imx)</td>
+<td>正则表达式包含三种可选标志：i, m, 或 x 。只影响括号中的区域。</td>
+</tr>
+<tr>
+<td>(?-imx)</td>
+<td>正则表达式关闭 i, m, 或 x 可选标志。只影响括号中的区域。</td>
+</tr>
+<tr>
+<td>(?: re)</td>
+<td>类似 (…), 但是不表示一个组</td>
+</tr>
+<tr>
+<td>(?imx: re)</td>
+<td>在括号中使用i, m, 或 x 可选标志</td>
+</tr>
+<tr>
+<td>(?-imx: re)</td>
+<td>在括号中不使用i, m, 或 x 可选标志</td>
+</tr>
+<tr>
+<td>(?#…)</td>
+<td>注释.</td>
+</tr>
+<tr>
+<td>(?= re)</td>
+<td>前向肯定界定符。如果所含正则表达式，以 … 表示，在当前位置成功匹配时成功，否则失败。但一旦所含表达式已经尝试，匹配引擎根本没有提高；模式的剩余部分还要尝试界定符的右边。</td>
+</tr>
+<tr>
+<td>(?! re)</td>
+<td>前向否定界定符。与肯定界定符相反；当所含表达式不能在字符串当前位置匹配时成功</td>
+</tr>
+<tr>
+<td>(?&gt; re)</td>
+<td>匹配的独立模式，省去回溯。</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母数字及下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母数字及下划线</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意空白字符，等价于 [\t\n\r\f].</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任意非空字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配任意数字，等价于 [0-9].</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配任意非数字</td>
+</tr>
+<tr>
+<td>\A</td>
+<td>匹配字符串开始</td>
+</tr>
+<tr>
+<td>\Z</td>
+<td>匹配字符串结束，如果是存在换行，只匹配到换行前的结束字符串。</td>
+</tr>
+<tr>
+<td>\z</td>
+<td>匹配字符串结束</td>
+</tr>
+<tr>
+<td>\G</td>
+<td>匹配最后匹配完成的位置</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界，也就是指单词和空格间的位置。例如， ‘er\b’ 可以匹配”never” 中的 ‘er’，但不能匹配 “verb” 中的 ‘er’。</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配非单词边界。’er\B’ 能匹配 “verb” 中的 ‘er’，但不能匹配 “never” 中的 ‘er’。</td>
+</tr>
+<tr>
+<td>\n, \t, 等.</td>
+<td>匹配一个换行符。匹配一个制表符。等</td>
+</tr>
+<tr>
+<td>\1…\9</td>
+<td>匹配第n个分组的内容。</td>
+</tr>
+<tr>
+<td>\10</td>
+<td>匹配第n个分组的内容，如果它经匹配。否则指的是八进制字符码的表达式。</td>
+</tr>
+</tbody>
+</table>
+<p>表中的re代表元字符</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/74.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/11/08/python网络爬虫urllib2/" title="python网络爬虫urllib2" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2018/10/31/python2面向对象/" title="python2面向对象" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2018/11/16/python网络爬虫Requests/" title="python网络爬虫Requests">
+							python网络爬虫Requests
+						</a>
+						<p>
+							Requests 继承了urllib2的所有特性。Requests支持HTTP连接保持和连接池，支持使用cookie保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。
+安装方式pip...
+						</p>
+					</div>
+
+					<a href="/2018/11/16/python网络爬虫Requests/" title="python网络爬虫Requests">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python网络爬虫Requests">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/16/解决windows-cmd中python中文乱码问题/" title="解决windows cmd中python中文乱码问题">
+							解决windows cmd中python中文乱码问题
+						</a>
+						<p>
+							问题原因中文windows默认的输出编码为gbk ，与脚本中定义的UTF-8不一样，所以出现了解码失败的情况
+方法一我们可以通过改变cmd命令行窗口的输出格式来解决这个问题
+chcp 65001 就是换成UTF-8代码页
+chcp 9...
+						</p>
+					</div>
+
+					<a href="/2018/11/16/解决windows-cmd中python中文乱码问题/" title="解决windows cmd中python中文乱码问题">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="解决windows cmd中python中文乱码问题">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/08/python网络爬虫urllib2/" title="python网络爬虫urllib2">
+							python网络爬虫urllib2
+						</a>
+						<p>
+							爬虫简介个人认为：爬虫就是用来抓取网页数据（即：源代码）的程序。
+urllib2简介urllib2是用于获取URLs(统一资源定位符)的一个Python模块。Urllib2使用相关的网络协议(FTP,http)。urllib2 在 p...
+						</p>
+					</div>
+
+					<a href="/2018/11/08/python网络爬虫urllib2/" title="python网络爬虫urllib2">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python网络爬虫urllib2">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/10/31/python2面向对象/" title="python2面向对象">
+							python2面向对象
+						</a>
+						<p>
+							基本概念理解  首先，要弄懂几个概念  类是为了描述具有相同属性和方法的对象的集合。我的理解就是一个模型。  对象是对类的实例化。个人理解是通过模型实例化的物。  面向对象就是类实例化成为对象的过程。  数据成员，就是类里面的变量。 ...
+						</p>
+					</div>
+
+					<a href="/2018/10/31/python2面向对象/" title="python2面向对象">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python2面向对象">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/10/18/python初学/" title="python2初学">
+							python2初学
+						</a>
+						<p>
+							python使用中文编码只需在开头加上   #coding=utf-8在 Python 中，所有标识符可以包括英文、数字以及下划线(_)，但不能以数字开头。Python 中的标识符是区分大小写的。以下划线开头的标识符是有特殊意义的。以...
+						</p>
+					</div>
+
+					<a href="/2018/10/18/python初学/" title="python2初学">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="python2初学">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
+							2019年上海嘉韦思杯writeup
+						</a>
+						<p>
+							1土肥原贤二报错注入
+1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
+
+然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+						</p>
+					</div>
+
+					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
+							nmap的使用
+						</a>
+						<p>
+							前言端口范围：1-65535
+常见的端口以及服务：
+
+21 — ftp协议
+22 — ssh远程登陆端口(linux)
+23 — telnet协议
+25 — 邮箱协议 smtp 发送邮件
+110 — pop3协议 接收邮件
+80 — ...
+						</p>
+					</div>
+
+					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="nmap的使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
+							xss的绕过和利用
+						</a>
+						<p>
+							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
+						</p>
+					</div>
+
+					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="xss的绕过和利用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
+							ctf中web的常见知识点
+						</a>
+						<p>
+							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
+域名解析可以更改HTTP头部host字段为flag.bugku.com
+把 flag.bugku.com 解析到120.24.86.145
+直接在
+c:\wind...
+						</p>
+					</div>
+
+					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="ctf中web的常见知识点">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
+							2018安恒杯好黑的黑名单
+						</a>
+						<p>
+							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
+  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
+						</p>
+					</div>
+
+					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
+						<img src="/images/post-cover/74.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>
