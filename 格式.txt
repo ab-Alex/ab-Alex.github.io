@@ -1,0 +1,6 @@
+title: bugku备份是个好好习惯
+date: 2018-10-12 18:05:13
+tags: ctf
+description: 备份泄露
+archives: ctf
+categories: ctf
