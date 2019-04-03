@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具的使用," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="nmap基础使用">
+<meta name="keywords" content="工具的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nmap的使用">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/nmap的使用/index.html">
+<meta property="og:site_name" content="似雍&amp;&amp;非庸">
+<meta property="og:description" content="nmap基础使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-28T08:57:56.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nmap的使用">
+<meta name="twitter:description" content="nmap基础使用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/26/nmap的使用/"/>
+
+
+
+
+
+  <title>nmap的使用 | 似雍&&非庸</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">似雍&&非庸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/nmap的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alex">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="似雍&&非庸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nmap的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-26T15:18:05+08:00">
+                2019-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  nmap基础使用
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>端口范围：1-65535</p>
+<p>常见的端口以及服务：</p>
+<ul>
+<li>21 — ftp协议</li>
+<li>22 — ssh远程登陆端口(linux)</li>
+<li>23 — telnet协议</li>
+<li>25 — 邮箱协议 smtp 发送邮件</li>
+<li>110 — pop3协议 接收邮件</li>
+<li>80 — 最常见的web服务端口</li>
+<li>8080 — java web服务端口</li>
+<li>5000 — python web服务端口</li>
+<li>3000 — ruby web服务端口</li>
+<li>135，445 — 远程连接端口</li>
+<li>3389 — windows远程连接端口</li>
+<li>3306 — mysql数据库端口</li>
+<li>1433 — sql-server数据端口</li>
+<li>6379 — redis数据库端口</li>
+</ul>
+<h4 id="nmap的介绍"><a href="#nmap的介绍" class="headerlink" title="nmap的介绍"></a>nmap的介绍</h4><p>nmap是一个网络探测和安全审核的工具，设计目标是快速地扫描大型网络。用原始IP报文来发现网络上有哪些主机，那些 主机提供什么服务(应用程序名和版本)，那些服务运行在什么操作系统(包括版本信息)， 它们使用什么类型的报文过滤器/防火墙，以及一堆其它功能。</p>
+<p>nmap的基本功能：</p>
+<ul>
+<li>探测一组主机是否在线</li>
+<li>扫描主机端口，嗅探所提供的网络服务，推断主机所用的操作系统。</li>
+<li>鉴别安全过滤机制。</li>
+<li>将所有的探测结果记录到日志。</li>
+</ul>
+<h4 id="nmap语法"><a href="#nmap语法" class="headerlink" title="nmap语法"></a>nmap语法</h4><p>Nmap的固定语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap 【选项|多选项|协议【目标】</span><br><span class="line">注： 选项与多选项之间用空格分隔开。若某些选项需要指定数据，选项与指定数据也需要用空格分开。（有些选项与参数直接可以不用空格分开。如：-p80)</span><br></pre></td></tr></table></figure>
+<h4 id="nmap端口状态解析"><a href="#nmap端口状态解析" class="headerlink" title="nmap端口状态解析"></a>nmap端口状态解析</h4><ul>
+<li>open ： 应用程序在该端口接收 TCP 连接或者 UDP 报文。 </li>
+<li>closed ：关闭的端口对于nmap也是可访问的， 它接收nmap探测报文并作出响应。但没有应用程序在其上监听。</li>
+<li>filtered ：由于包过滤阻止探测报文到达端口，nmap无法确定该端口是否开放。过滤可能来自专业的防火墙设备，路由规则 或者主机上的软件防火墙。</li>
+<li>unfiltered ：未被过滤状态意味着端口可访问，但是nmap无法确定它是开放还是关闭。 只有用于映射防火墙规则集的 ACK 扫描才会把端口分类到这个状态。</li>
+<li>open | filtered ：无法确定端口是开放还是被过滤， 开放的端口不响应就是一个例子。没有响应也可能意味着报文过滤器丢弃了探测报文或者它引发的任何反应。UDP，IP协议,FIN, Null 等扫描会引起。</li>
+<li>closed|filtered：（关闭或者被过滤的）：无法确定端口是关闭的还是被过滤的</li>
+</ul>
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">-iL 从主机地址列表文件中导入扫描地址</span><br><span class="line">-iR [主机数量] 随机选择目标进行扫描，主机数量设置为零是将无休止进行扫描</span><br><span class="line">--exclude 排除某个主机地址</span><br><span class="line">--excludefile 排除主机地址列表文件的地址</span><br><span class="line">-sL 列表扫描，仅将指定的目标ip列举出来，不进行主机发现</span><br><span class="line">-sn 和-sP一样只利用ping扫描进行主机发现，不扫描目标主机的端口</span><br><span class="line">-Pn 将所有指定的主机视为已开启状态，跳过主机发现过程</span><br><span class="line"></span><br><span class="line">-PS TCP SYN ping，发送一个设置了SYN标志位的空TCP报文，默认端口为80，也可指定端口</span><br><span class="line">-PA TCP ACK ping，发送一个设置了ACK标志位的TCP报文，默认端口为80，也可指定端口</span><br><span class="line">-PU UDP ping，发送一个空的UDP报文到指定端口，可以穿透只过滤TCP的防火墙</span><br><span class="line">-P0 使用IP协议ping</span><br><span class="line">-PR 使用ARP ping</span><br><span class="line">-n/-R -n 不进行域名解析，加速扫描，-R 为目标ip做反向域名解析，扫描较慢</span><br><span class="line">-dns-severs 自定义域名解析服务器地址</span><br><span class="line">-tranceroute 目标主机路由追踪</span><br><span class="line"></span><br><span class="line">-sS TCP SYN扫描，半开放扫描，速度快隐蔽性好（不完成TCP连接），能够明确区分端口状态</span><br><span class="line">-sT TCP连接扫描，容易产生记录，效率低</span><br><span class="line">-sA TCP ACK扫描，只设置ACK标志位，区别被过滤与未被过滤的</span><br><span class="line">-sU UDP服务扫描，例如DNS/DHCP等，效率低</span><br><span class="line">-sN； -sF； -sX TCP Null，Fin，Xmas扫描，从RFC挖掘的微妙方法来区分开放关闭端口</span><br><span class="line">-sI 利用僵尸主机上已知IP分段ID序列生成算法来探测目标上开放端口的信息，极端隐蔽</span><br><span class="line">-sO IP协议扫描，可以确定目标主机支持哪些IP协议，例如TCP/ICMP等</span><br><span class="line">-p 指定扫描的端口，可以是单个端口，也可以是端口范围，可以指定UDP或TCP协议扫描特定端口</span><br><span class="line">-p &lt;name&gt; 指定扫描的协议，例如-p http 扫描http协议的端口状态</span><br><span class="line">--exclude-ports 排除指定端口不扫描</span><br><span class="line">-F 快速模式，仅扫描100个常用端口</span><br><span class="line"></span><br><span class="line">-sV 进行服务版本探测</span><br><span class="line">--version-intensity &lt;level&gt; 设置版本扫描强度，范围0-9，默认为7，强度越高，时间越长，服务越可能被正确识别</span><br><span class="line"></span><br><span class="line">-sC 使用默认类别的脚本进行扫描</span><br><span class="line">--script=&lt;lua script&gt; 使用某个或某类脚本进行扫描，支持通配符描述</span><br><span class="line"></span><br><span class="line">-O 启动操作系统 探测</span><br><span class="line">-A 同时启用操作系统探测和服务版本探测</span><br><span class="line">--osscan-limit 针对指定的目标进行操作系统检测</span><br><span class="line">--osscan-guess 当Nmap无法确定所检测的操作系统是，会尽可能地提供最相近的匹配</span><br><span class="line"></span><br><span class="line">-T 设置时间模板级数，范围0-5中选择，T0，T1用于IDS规避，T2降低扫描速度以使用更少的带宽和资源。默认T3，未做任何优化。T4假设具有合适及可靠的网络从而加速扫描。T5假设具有特别快的网络或者愿意为速度牺牲准确率</span><br><span class="line">-host-timeout&lt;time&gt; 放弃低速目标主机，时间单位为毫秒</span><br><span class="line"></span><br><span class="line">-f （报文分段）；--mtu (使用指定的MTU) 将TCP头分段在几个包中，使得包过滤器、IDS以及其他工具的检测更加困难</span><br><span class="line">-D &lt;decoy1[,docoy2][,ME]...&gt; 隐蔽扫描。使用逗号分开每个诱饵主机，用自己真实IP作为诱饵使用ME选项。如在6号或者更靠后的位置使用ME选项，一些检测器就不报告真实ip。如不使用ME，真实IP将随机放置</span><br><span class="line">-S &lt;ip_Address&gt; 伪造数据包的源地址</span><br><span class="line">-source-port&lt;portnumber&gt; /g &lt;portnumber&gt; 伪造源端口</span><br><span class="line"></span><br><span class="line">-oN 标准输出</span><br><span class="line">-oX XML输出写入指定的文件</span><br><span class="line">-oS 脚本小子输出，类似于交互工具输出</span><br><span class="line">-oG Grep输出</span><br><span class="line">-oA 输出至所有格式</span><br><span class="line">-v 提高输出信息的详细度</span><br><span class="line">-resume &lt;filename&gt; 继续中断的扫描</span><br><span class="line"></span><br><span class="line">-opne 只显示开启的端口</span><br></pre></td></tr></table></figure>
+<h4 id="扫描技巧"><a href="#扫描技巧" class="headerlink" title="扫描技巧"></a>扫描技巧</h4><ul>
+<li>扫描单一的一个主机：nmap (IP地址)</li>
+<li></li>
+<li>扫描整个子网： nmap (IP地址)/24  </li>
+<li></li>
+<li>扫描多个目标： nmap (IP地址1) (IP地址2)</li>
+<li></li>
+<li>扫描一个范围内的目标：nmap 192.168.1.1-100</li>
+<li>(扫描IP地址为192.168.1.1-192.168.1.100内的所有主机)</li>
+<li></li>
+<li>如果你有一个ip地址列表，将这个保存为一个txt文件，和namp在同一目录下,扫描这个txt内的所有主机。命令： nmap -iL target.txt</li>
+<li>扫描特定主机的特定端口 nmap -p80,21,8080 192.168.0.1 或 nmap -p50-900 192.168.1.1</li>
+<li>简单扫描，详细输出返回结果 nmap -vv 192.168.1.1</li>
+<li>简单扫描并进行路由追踪 nmap -traceroute baidu.com</li>
+<li>ping扫描，不扫描端口（需要root权限） nmap -sP 192.168.0.1或nmap -sN 192.168.0.1</li>
+<li>探测操作系统类型 nmap -O 192.168.0.1</li>
+<li>Nmap万能开关-A参数 nmap -A 192.168.0.1  (-A包含1-10000端口的ping扫描，脚本扫描，路由追踪，服务探测)</li>
+<li>半开放的TCP SYN端口 nmap -sS 192.168.0.1</li>
+<li>扫描UDP服务端口 nmap -sU 192.168.0.1</li>
+<li>TCP连接扫描端口 nmap -sT 192.168.1.1</li>
+<li>由于IDS/IPS系统的存在，防火墙可能会阻止掉SYN数据包，此时可发送设置了FIN标志的数据包，不需要完成TCP握手，不会在目标产生日志 nmap -sF <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
+<li>服务版本探测 nmap -sV 192.168.1.1</li>
+</ul>
+<h4 id="脚本扫描"><a href="#脚本扫描" class="headerlink" title="脚本扫描"></a>脚本扫描</h4><p>脚本目录在 /usr/share/nmap/scripts</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.png" alt="Alex 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="Alex 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具的使用/" rel="tag"># 工具的使用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/17/xss的绕过和利用/" rel="next" title="“xssxss的绕过和利用">
+                <i class="fa fa-chevron-left"></i> “xssxss的绕过和利用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/writeup/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/timg.jpg"
+                alt="Alex" />
+            
+              <p class="site-author-name" itemprop="name">Alex</p>
+              <p class="site-description motion-element" itemprop="description">在你知道更好方法前尽你所能，在你知道更好方法后，再做得更好。Do the best you can until you know better.Then, when you know better,do better.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+          <br>
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=200436&auto=1&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap的介绍"><span class="nav-number">2.</span> <span class="nav-text">nmap的介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap语法"><span class="nav-number">3.</span> <span class="nav-text">nmap语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap端口状态解析"><span class="nav-number">4.</span> <span class="nav-text">nmap端口状态解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-number">5.</span> <span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扫描技巧"><span class="nav-number">6.</span> <span class="nav-text">扫描技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本扫描"><span class="nav-number">7.</span> <span class="nav-text">脚本扫描</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018/9 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alex</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
