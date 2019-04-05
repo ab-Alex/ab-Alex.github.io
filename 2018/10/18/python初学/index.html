@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/10/18/python初学/" itemprop="url">
 		<time datetime="2018-10-18T10:23:30.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -334,32 +334,26 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>python使用中文编码只需在开头加上   #coding=utf-8<br>在 Python 中，所有标识符可以包括英文、数字以及下划线(_)，但不能以数字开头。Python 中的标识符是区分大小写的。<br>以下划线开头的标识符是有特殊意义的。以单下划线开头 _foo 的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 from xxx import * 而导入；<br>以双下划线开头的 <strong>foo 代表类的私有成员；以双下划线开头和结尾的 </strong>foo__ 代表 Python 里特殊方法专用的标识，如 <strong>init</strong>() 代表类的构造函数。<br>Python 可以同一行显示多条语句，方法是用分号 ; 分开<br>每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建</p>
-<p>多个变量赋值<br>Python允许你同时为多个变量赋值。例如：<br>    a = b = c = 1</p>
-<pre><code>以上实例，创建一个整型对象，值为1，三个变量被分配到相同的内存空间上。
-您也可以为多个对象指定多个变量。例如：
-a, b, c = 1, 2, &quot;john&quot;
-
-以上实例，两个整型对象 1 和 2 分别分配给变量 a 和 b，字符串对象 &quot;john&quot; 分配给变量 c。
-Python有五个标准的数据类型：
-
-Numbers（数字）
-String（字符串）
-List（列表）
-Tuple（元组）
-Dictionary（字典）
-
-Python支持四种不同的数字类型
-
-int（有符号整型）
-long（长整型[也可以代表八进制和十六进制]）
-float（浮点型）
-complex（复数） 
-Python 还支持复数，复数由实数部分和虚数部分构成，可以用 a + bj,或者 complex(a,b) 表示， 复数的实部 a 和虚部 b 都是浮点型。
-在 Python3.X 版本中 long 类型被移除，使用 int 替代。
-
-元组用&quot;()&quot;标识。内部元素用逗号隔开。但是元组不能二次赋值，相当于只读列表。
-</code></pre><p><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0.png" target="_blank" rel="noopener">数据转换类型函数</a></p>
+		<p>python使用中文编码只需在开头加上   #coding=utf-8<br>在 Python 中，所有标识符可以包括英文、数字以及下划线(_)，但不能以数字开头。Python 中的标识符是区分大小写的。<br>以下划线开头的标识符是有特殊意义的。以单下划线开头 _foo 的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 from xxx import * 而导入；<br>以双下划线开头的 <strong>foo 代表类的私有成员；以双下划线开头和结尾的 </strong>foo__ 代表 Python 里特殊方法专用的标识，如 <strong>init</strong>() 代表类的构造函数。<br>Python 可以同一行显示多条语句，方法是用分号 ; 分开<br>每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建<br>多个变量赋值<br>Python允许你同时为多个变量赋值。例如：<br>    a = b = c = 1</p>
+<p>以上实例，创建一个整型对象，值为1，三个变量被分配到相同的内存空间上。<br>您也可以为多个对象指定多个变量。例如：</p>
+<pre class="line-numbers language-python"><code class="language-python">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"john"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>以上实例，两个整型对象 1 和 2 分别分配给变量 a 和 b，字符串对象 “john” 分配给变量 c。<br>Python有五个标准的数据类型：</p>
+<pre class="line-numbers language-python"><code class="language-python">    Numbers（数字）
+    String（字符串）
+    List（列表）
+    Tuple（元组）
+    Dictionary（字典）
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>Python支持四种不同的数字类型
+</code></pre><pre class="line-numbers language-python"><code class="language-python">  int（有符号整型）
+  long（长整型<span class="token punctuation">[</span>也可以代表八进制和十六进制<span class="token punctuation">]</span>）
+  float（浮点型）
+  complex（复数） 
+  Python 还支持复数，复数由实数部分和虚数部分构成，可以用 a <span class="token operator">+</span> bj<span class="token punctuation">,</span>或者 complex<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> 表示， 复数的实部 a 和虚部 b 都是浮点型。
+  在 Python3<span class="token punctuation">.</span>X 版本中 long 类型被移除，使用 int 替代。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>元组用”()”标识。内部元素用逗号隔开。但是元组不能二次赋值，相当于只读列表。<br><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0.png" target="_blank" rel="noopener">数据转换类型函数</a></p>
 <h5 id="python运算符"><a href="#python运算符" class="headerlink" title="python运算符"></a>python运算符</h5><p>Python2.x里，整数除整数，只能得出整数如果要得到小数部分，把其中一个数改成浮点数即可。</p>
 <h6 id="python位运算符"><a href="#python位运算符" class="headerlink" title="python位运算符"></a>python位运算符</h6><p>按位运算符是把数字看作二进制来进行计算的。</p>
 <table>
@@ -519,50 +513,56 @@ Python 还支持复数，复数由实数部分和虚数部分构成，可以用 
 <p><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0.png" target="_blank" rel="noopener">python随机数函数</a></p>
 <p><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E6%95%B0%E5%AD%A6%E5%B8%B8%E9%87%8F.png" target="_blank" rel="noopener">python数学常量</a></p>
 <h5 id="python-字符串"><a href="#python-字符串" class="headerlink" title="python 字符串"></a>python 字符串</h5><p>字符串是python中最常见的数据类型。我们可以使用引号(‘或”)来创建字符串。<br>python访问字符串，可以使用方括号来截取字符串。<br>例：</p>
-<pre><code>var1 = &#39;Hello World!&#39;
-var2 = &quot;Python Runoob&quot;
+<pre class="line-numbers language-python"><code class="language-python">var1 <span class="token operator">=</span> <span class="token string">'Hello World!'</span>
+var2 <span class="token operator">=</span> <span class="token string">"Python Runoob"</span>
 
-print &quot;var1[0]: &quot;, var1[0]
-print &quot;var2[1:5]: &quot;, var2[1:5]
-</code></pre><p>执行结果：</p>
-<pre><code>var1[0]:  H
-var2[1:5]:  ytho
-</code></pre><h6 id="python-字符串更新"><a href="#python-字符串更新" class="headerlink" title="python 字符串更新"></a>python 字符串更新</h6><p>python中可以对已存在的字符串进行修改，并赋值给另一个变量。例：</p>
-<pre><code># -*- coding: UTF-8 -*-
+<span class="token keyword">print</span> <span class="token string">"var1[0]: "</span><span class="token punctuation">,</span> var1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span> <span class="token string">"var2[1:5]: "</span><span class="token punctuation">,</span> var2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行结果：</p>
+<pre class="line-numbers language-python"><code class="language-python">var1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">:</span>  H
+var2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span>  ytho
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h6 id="python-字符串更新"><a href="#python-字符串更新" class="headerlink" title="python 字符串更新"></a>python 字符串更新</h6><p>python中可以对已存在的字符串进行修改，并赋值给另一个变量。例：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: UTF-8 -*-</span>
 
-var1 = &#39;Hello World!&#39;
+var1 <span class="token operator">=</span> <span class="token string">'Hello World!'</span>
 
-print &quot;更新字符串 :- &quot;, var1[:6] + &#39;Runoob!&#39;
-</code></pre><p>执行结果：<br>更新字符串 :-  Hello Runoob!</p>
+<span class="token keyword">print</span> <span class="token string">"更新字符串 :- "</span><span class="token punctuation">,</span> var1<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'Runoob!'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行结果：<br>更新字符串 :-  Hello Runoob!</p>
 <p><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6.png" target="_blank" rel="noopener">python转义字符</a><br><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97%E7%AC%A6.png" target="_blank" rel="noopener">python字符串运算符</a></p>
 <h6 id="Python-字符串格式化"><a href="#Python-字符串格式化" class="headerlink" title="Python 字符串格式化"></a>Python 字符串格式化</h6><p>Python 支持格式化字符串的输出 。尽管这样可能会用到非常复杂的表达式，但最基本的用法是将一个值插入到一个有字符串格式符 %s 的字符串中。</p>
 <p>在 Python 中，字符串格式化使用与 C 中 sprintf 函数一样的语法。<br>例：</p>
-<pre><code>print &quot;My name is %s and weight is %d kg!&quot; % (&#39;Zara&#39;, 21)
-</code></pre><p>输出结果：<br>My name is Zara and weight is 21 kg!</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span> <span class="token string">"My name is %s and weight is %d kg!"</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token string">'Zara'</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输出结果：<br>My name is Zara and weight is 21 kg!</p>
 <p><a href="http://pg7xbkpbr.bkt.clouddn.com/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%AC%A6%E5%8F%B7.png" target="_blank" rel="noopener">python字符串格式化符号</a><br><a href="http://pg7xbkpbr.bkt.clouddn.com/%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%BE%85%E5%8A%A9%E6%8C%87%E4%BB%A4.png" target="_blank" rel="noopener">格式化操作符辅助指令</a>     </p>
 <h6 id="python三引号"><a href="#python三引号" class="headerlink" title="python三引号"></a>python三引号</h6><p>python中三引号可以将复杂的字符串进行复制:</p>
 <p>python三引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。</p>
 <p>三引号的语法是一对连续的单引号或者双引号（通常都是成对的用）。<br>三引号让程序员从引号和特殊字符串的泥潭里面解脱出来，自始至终保持一小块字符串的格式是所谓的WYSIWYG（所见即所得）格式的。</p>
 <p>一个典型的用例是，当你需要一块HTML或者SQL时，这时用字符串组合，特殊字符串转义将会非常的繁琐。</p>
-<pre><code> errHTML = &#39;&#39;&#39;
-&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;
-Friends CGI Demo&lt;/TITLE&gt;&lt;/HEAD&gt;
-&lt;BODY&gt;&lt;H3&gt;ERROR&lt;/H3&gt;
-&lt;B&gt;%s&lt;/B&gt;&lt;P&gt;
-&lt;FORM&gt;&lt;INPUT TYPE=button VALUE=Back
-ONCLICK=&quot;window.history.back()&quot;&gt;&lt;/FORM&gt;
-&lt;/BODY&gt;&lt;/HTML&gt;
-&#39;&#39;&#39;
-cursor.execute(&#39;&#39;&#39;
+<pre class="line-numbers language-python"><code class="language-python"> errHTML <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
+&lt;HTML>&lt;HEAD>&lt;TITLE>
+Friends CGI Demo&lt;/TITLE>&lt;/HEAD>
+&lt;BODY>&lt;H3>ERROR&lt;/H3>
+&lt;B>%s&lt;/B>&lt;P>
+&lt;FORM>&lt;INPUT TYPE=button VALUE=Back
+ONCLICK="window.history.back()">&lt;/FORM>
+&lt;/BODY>&lt;/HTML>
+'''</span>
+cursor<span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token triple-quoted-string string">'''
 CREATE TABLE users (  
 login VARCHAR(8), 
 uid INTEGER,
 prid INTEGER)
-&#39;&#39;&#39;)
-</code></pre><h6 id="Unicode-字符串"><a href="#Unicode-字符串" class="headerlink" title="Unicode 字符串"></a>Unicode 字符串</h6><p>引号前小写的”u”表示这里创建的是一个 Unicode 字符串。如果你想加入一个特殊字符，可以使用 Python 的 Unicode-Escape 编码。<br>如下例所示：</p>
-<pre><code>&gt;&gt;&gt;u&#39;Hello\u0020World !&#39;   
-u&#39;Hello World !&#39;
-</code></pre><p>被替换的 \u0020 标识表示在给定位置插入编码值为 0x0020 的 Unicode 字符（空格符）。</p>
+'''</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h6 id="Unicode-字符串"><a href="#Unicode-字符串" class="headerlink" title="Unicode 字符串"></a>Unicode 字符串</h6><p>引号前小写的”u”表示这里创建的是一个 Unicode 字符串。如果你想加入一个特殊字符，可以使用 Python 的 Unicode-Escape 编码。<br>如下例所示：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span>u<span class="token string">'Hello\u0020World !'</span>   
+u<span class="token string">'Hello World !'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>被替换的 \u0020 标识表示在给定位置插入编码值为 0x0020 的 Unicode 字符（空格符）。</p>
 <h6 id="python的字符串内建函数"><a href="#python的字符串内建函数" class="headerlink" title="python的字符串内建函数"></a>python的字符串内建函数</h6><p>略</p>
 <h5 id="Python-列表-List"><a href="#Python-列表-List" class="headerlink" title="Python 列表(List)"></a>Python 列表(List)</h5><p>序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引。<br>Python有6个序列的内置类型，但最常见的是列表和元组。<br>序列都可以进行的操作包括索引，切片，加，乘，检查成员。<br>此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。</p>
 <p>列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。</p>
@@ -792,32 +792,34 @@ u&#39;Hello World !&#39;
 <p>每个时间戳都以自从1970年1月1日午夜（历元）经过了多长时间来表示。</p>
 <p>Python 的 time 模块下有很多函数可以转换常见日期格式。如函数time.time()用于获取当前时间戳。<br>时间戳单位最适于做日期运算。但是1970年之前的日期就无法以此表示了。太遥远的日期也不行，UNIX和Windows只支持到2038年。</p>
 <h6 id="格式化日期"><a href="#格式化日期" class="headerlink" title="格式化日期"></a>格式化日期</h6><p>最简单的获取可读的时间模式的函数是asctime():</p>
-<pre><code>#!/usr/bin/python
-# -*- coding: UTF-8 -*-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#!/usr/bin/python</span>
+<span class="token comment" spellcheck="true"># -*- coding: UTF-8 -*-</span>
 
-import time
+<span class="token keyword">import</span> time
 
-localtime = time.asctime( time.localtime(time.time()) )
-print &quot;本地时间为 :&quot;, localtime
-</code></pre><p>我们可以使用 time 模块的 strftime 方法来格式化日期，：</p>
+localtime <span class="token operator">=</span> time<span class="token punctuation">.</span>asctime<span class="token punctuation">(</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+<span class="token keyword">print</span> <span class="token string">"本地时间为 :"</span><span class="token punctuation">,</span> localtime
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们可以使用 time 模块的 strftime 方法来格式化日期，：</p>
 <p>time.strftime(format[, t])</p>
-<pre><code>
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
+<pre class="line-numbers language-python"><code class="language-python">
+<span class="token comment" spellcheck="true">#!/usr/bin/python</span>
+<span class="token comment" spellcheck="true"># -*- coding: UTF-8 -*-</span>
 
-import time
+<span class="token keyword">import</span> time
 
-# 格式化成2016-03-20 11:45:39形式
-print time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime()) 
+<span class="token comment" spellcheck="true"># 格式化成2016-03-20 11:45:39形式</span>
+<span class="token keyword">print</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%Y-%m-%d %H:%M:%S"</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
 
-# 格式化成Sat Mar 28 22:24:24 2016形式
-print time.strftime(&quot;%a %b %d %H:%M:%S %Y&quot;, time.localtime()) 
+<span class="token comment" spellcheck="true"># 格式化成Sat Mar 28 22:24:24 2016形式</span>
+<span class="token keyword">print</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">"%a %b %d %H:%M:%S %Y"</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>localtime<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
 
-# 将格式字符串转换为时间戳
-a = &quot;Sat Mar 28 22:24:24 2016&quot;
-print time.mktime(time.strptime(a,&quot;%a %b %d %H:%M:%S %Y&quot;))
+<span class="token comment" spellcheck="true"># 将格式字符串转换为时间戳</span>
+a <span class="token operator">=</span> <span class="token string">"Sat Mar 28 22:24:24 2016"</span>
+<span class="token keyword">print</span> time<span class="token punctuation">.</span>mktime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span>a<span class="token punctuation">,</span><span class="token string">"%a %b %d %H:%M:%S %Y"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-</code></pre><p>python中时间日期格式化符号：</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>python中时间日期格式化符号：</p>
 <ul>
 <li>%y 两位数的年份表示（00-99）</li>
 <li>%Y 四位数的年份表示（000-9999）</li>
@@ -843,14 +845,15 @@ print time.mktime(time.strptime(a,&quot;%a %b %d %H:%M:%S %Y&quot;))
 <li>%% %号本身</li>
 </ul>
 <h6 id="获取某月日历"><a href="#获取某月日历" class="headerlink" title="获取某月日历"></a>获取某月日历</h6><p>Calendar模块有很广泛的方法用来处理年历和月历，例如打印某月的月历：</p>
-<pre><code># -*- coding: UTF-8 -*-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: UTF-8 -*-</span>
 
-import calendar
+<span class="token keyword">import</span> calendar
 
-cal = calendar.month(2016, 1)
-print &quot;以下输出2016年1月份的日历:&quot;
-print cal
-</code></pre><h5 id="python函数"><a href="#python函数" class="headerlink" title="python函数"></a>python函数</h5><h6 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h6><p>规则：</p>
+cal <span class="token operator">=</span> calendar<span class="token punctuation">.</span>month<span class="token punctuation">(</span><span class="token number">2016</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span> <span class="token string">"以下输出2016年1月份的日历:"</span>
+<span class="token keyword">print</span> cal
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="python函数"><a href="#python函数" class="headerlink" title="python函数"></a>python函数</h5><h6 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h6><p>规则：</p>
 <ul>
 <li>函数代码块以 def 关键词开头，后接函数标识符名称和圆括号()。</li>
 <li>任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数。</li>
@@ -869,29 +872,31 @@ print cal
 <li><strong>可变类型</strong>：类似 c++ 的引用传递，如 列表，字典。如 fun（la），则是将 la 真正的传过去，修改后fun外部的la也会受影响。</li>
 </ul>
 <p><strong>python 中一切都是对象，严格意义我们不能说值传递还是引用传递，我们应该说传不可变对象和传可变对象。</strong><br><strong><strong>python 传不可变对象实例</strong></strong></p>
-<pre><code># -*- coding: UTF-8 -*-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: UTF-8 -*-</span>
 
-def ChangeInt( a ):
-    a = 10
+<span class="token keyword">def</span> <span class="token function">ChangeInt</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span><span class="token punctuation">:</span>
+    a <span class="token operator">=</span> <span class="token number">10</span>
 
-b = 2
-ChangeInt(b)
-print b # 结果是 2
-</code></pre><p>实例中有 int 对象 2，指向它的变量是 b，在传递给 ChangeInt 函数时，按传值的方式复制了变量 b，a 和 b 都指向了同一个 Int 对象，在 a=10 时，则新生成一个 int 值对象 10，并让 a 指向它。<br><strong>传可变对象实例</strong></p>
-<pre><code># -*- coding: UTF-8 -*-
+b <span class="token operator">=</span> <span class="token number">2</span>
+ChangeInt<span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+<span class="token keyword">print</span> b <span class="token comment" spellcheck="true"># 结果是 2</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实例中有 int 对象 2，指向它的变量是 b，在传递给 ChangeInt 函数时，按传值的方式复制了变量 b，a 和 b 都指向了同一个 Int 对象，在 a=10 时，则新生成一个 int 值对象 10，并让 a 指向它。<br><strong>传可变对象实例</strong></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: UTF-8 -*-</span>
 
-# 可写函数说明
-def changeme( mylist ):
-   &quot;修改传入的列表&quot;
-   mylist.append([1,2,3,4]);
-   print &quot;函数内取值: &quot;, mylist
-   return
+<span class="token comment" spellcheck="true"># 可写函数说明</span>
+<span class="token keyword">def</span> <span class="token function">changeme</span><span class="token punctuation">(</span> mylist <span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token string">"修改传入的列表"</span>
+   mylist<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">print</span> <span class="token string">"函数内取值: "</span><span class="token punctuation">,</span> mylist
+   <span class="token keyword">return</span>
 
-# 调用changeme函数
-mylist = [10,20,30];
-changeme( mylist );
-print &quot;函数外取值: &quot;, mylist
-</code></pre><p>实例中传入函数的和在末尾添加新内容的对象用的是同一个引用。<br>输出结果如下：<br>函数内取值:  [10, 20, 30, [1, 2, 3, 4]]<br>函数外取值:  [10, 20, 30, [1, 2, 3, 4]]</p>
+<span class="token comment" spellcheck="true"># 调用changeme函数</span>
+mylist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+changeme<span class="token punctuation">(</span> mylist <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">print</span> <span class="token string">"函数外取值: "</span><span class="token punctuation">,</span> mylist
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实例中传入函数的和在末尾添加新内容的对象用的是同一个引用。<br>输出结果如下：<br>函数内取值:  [10, 20, 30, [1, 2, 3, 4]]<br>函数外取值:  [10, 20, 30, [1, 2, 3, 4]]</p>
 <h6 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h6><p>调用函数时可使用的正式参数类型：</p>
 <ul>
 <li>必备参数</li>
@@ -900,12 +905,13 @@ print &quot;函数外取值: &quot;, mylist
 <li>不定长参数</li>
 </ul>
 <p><strong>不定长参数</strong></p>
-<pre><code>def functionname([formal_args,] *var_args_tuple ):
-   &quot;函数_文档字符串&quot;
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">functionname</span><span class="token punctuation">(</span><span class="token punctuation">[</span>formal_args<span class="token punctuation">,</span><span class="token punctuation">]</span> <span class="token operator">*</span>var_args_tuple <span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token string">"函数_文档字符串"</span>
    function_suite
-   return [expression]
+   <span class="token keyword">return</span> <span class="token punctuation">[</span>expression<span class="token punctuation">]</span>
 
-</code></pre><p>加了星号（*）的变量名会存放所有未命名的变量参数。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>加了星号（*）的变量名会存放所有未命名的变量参数。</p>
 <h6 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h6><p>python 使用 lambda 来创建匿名函数。</p>
 <ul>
 <li>lambda只是一个表达式，函数体比def简单很多。</li>
@@ -914,23 +920,29 @@ print &quot;函数外取值: &quot;, mylist
 <li>虽然lambda函数看起来只能写一行，却不等同于C或C++的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。      </li>
 </ul>
 <p><strong>语法</strong><br>lambda函数的语法只包含一个语句。</p>
-<pre><code>lambda [arg1 [,arg2,.....argn]]:expression
-</code></pre><h5 id="python模块"><a href="#python模块" class="headerlink" title="python模块"></a>python模块</h5><p>Python 模块(Module)，是一个 Python 文件，以 .py 结尾，包含了 Python 对象定义和Python语句。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">lambda</span> <span class="token punctuation">[</span>arg1 <span class="token punctuation">[</span><span class="token punctuation">,</span>arg2<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>argn<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">:</span>expression
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="python模块"><a href="#python模块" class="headerlink" title="python模块"></a>python模块</h5><p>Python 模块(Module)，是一个 Python 文件，以 .py 结尾，包含了 Python 对象定义和Python语句。</p>
 <p>模块让你能够有逻辑地组织你的 Python 代码段。</p>
 <p>把相关的代码分配到一个模块里能让你的代码更好用，更易懂。</p>
 <p>模块能定义函数，类和变量，模块里也能包含可执行的代码。</p>
 <h6 id="模块的引入"><a href="#模块的引入" class="headerlink" title="模块的引入"></a>模块的引入</h6><p>可以使用 import 语句来引入模块，语法如下：</p>
-<pre><code>import module1[, module2[,... moduleN]]
-</code></pre><p>比如要引用模块 math，就可以在文件最开始的地方用 import math 来引入。在调用 math 模块中的函数时，必须这样引用：</p>
-<pre><code>模块名.函数名
-</code></pre><h6 id="from…import-语句"><a href="#from…import-语句" class="headerlink" title="from…import 语句"></a>from…import 语句</h6><p>Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中。语法如下：</p>
-<pre><code>from modname import name1[, name2[, ... nameN]]
-</code></pre><p>例如，要导入模块 fib 的 fibonacci 函数，使用如下语句：</p>
-<pre><code>from fib import fibonacci
-</code></pre><p>这个声明不会把整个 fib 模块导入到当前的命名空间中，它只会将 fib 里的 fibonacci 单个引入到执行这个声明的模块的全局符号表。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> module1<span class="token punctuation">[</span><span class="token punctuation">,</span> module2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> moduleN<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>比如要引用模块 math，就可以在文件最开始的地方用 import math 来引入。在调用 math 模块中的函数时，必须这样引用：</p>
+<pre class="line-numbers language-python"><code class="language-python">模块名<span class="token punctuation">.</span>函数名
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="from…import-语句"><a href="#from…import-语句" class="headerlink" title="from…import 语句"></a>from…import 语句</h6><p>Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中。语法如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> modname <span class="token keyword">import</span> name1<span class="token punctuation">[</span><span class="token punctuation">,</span> name2<span class="token punctuation">[</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> nameN<span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如，要导入模块 fib 的 fibonacci 函数，使用如下语句：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> fib <span class="token keyword">import</span> fibonacci
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个声明不会把整个 fib 模块导入到当前的命名空间中，它只会将 fib 里的 fibonacci 单个引入到执行这个声明的模块的全局符号表。</p>
 <h6 id="from…import-语句-1"><a href="#from…import-语句-1" class="headerlink" title="from…import* 语句"></a>from…import* 语句</h6><p>把一个模块的所有内容全都导入到当前的命名空间也是可行的，只需使用如下声明： </p>
-<pre><code>from modname import *
-</code></pre><p>这提供了一个简单的方法来导入一个模块中的所有项目。然而这种声明不该被过多地使用。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> modname <span class="token keyword">import</span> <span class="token operator">*</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这提供了一个简单的方法来导入一个模块中的所有项目。然而这种声明不该被过多地使用。</p>
 <h5 id="搜索路径"><a href="#搜索路径" class="headerlink" title="搜索路径"></a>搜索路径</h5><p>当你导入一个模块，Python 解析器对模块位置的搜索顺序是：</p>
 <ol>
 <li>当前目录</li>
@@ -939,10 +951,12 @@ print &quot;函数外取值: &quot;, mylist
 <p>模块搜索路径存储在 system 模块的 sys.path 变量中。变量里包含当前目录，PYTHONPATH和由安装过程决定的默认目录。</p>
 <h5 id="PYTHONPATH-变量"><a href="#PYTHONPATH-变量" class="headerlink" title="PYTHONPATH 变量"></a>PYTHONPATH 变量</h5><p>作为环境变量，PYTHONPATH 由装在一个列表里的许多目录组成。PYTHONPATH 的语法和 shell 变量 PATH 的一样。</p>
 <p>在 Windows 系统，典型的 PYTHONPATH 如下：</p>
-<pre><code>set PYTHONPATH=c:\python27\lib;
-</code></pre><p>在 UNIX 系统，典型的 PYTHONPATH 如下：</p>
-<pre><code>set PYTHONPATH=/usr/local/lib/python
-</code></pre><h5 id="命名空间和作用域"><a href="#命名空间和作用域" class="headerlink" title="命名空间和作用域"></a>命名空间和作用域</h5><p>变量是拥有匹配对象的名字（标识符）。命名空间是一个包含了变量名称们（键）和它们各自相应的对象们（值）的字典。</p>
+<pre class="line-numbers language-python"><code class="language-python">set PYTHONPATH<span class="token operator">=</span>c<span class="token punctuation">:</span>\python27\lib<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在 UNIX 系统，典型的 PYTHONPATH 如下：</p>
+<pre class="line-numbers language-python"><code class="language-python">set PYTHONPATH<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>lib<span class="token operator">/</span>python
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="命名空间和作用域"><a href="#命名空间和作用域" class="headerlink" title="命名空间和作用域"></a>命名空间和作用域</h5><p>变量是拥有匹配对象的名字（标识符）。命名空间是一个包含了变量名称们（键）和它们各自相应的对象们（值）的字典。</p>
 <p>一个 Python 表达式可以访问局部命名空间和全局命名空间里的变量。如果一个局部变量和一个全局变量重名，则局部变量会覆盖全局变量。</p>
 <p>每个函数都有自己的命名空间。类的方法的作用域规则和通常函数的一样。</p>
 <p>Python 会智能地猜测一个变量是局部的还是全局的，它假设任何在函数内赋值的变量都是局部的。</p>
@@ -958,8 +972,9 @@ print &quot;函数外取值: &quot;, mylist
 <h5 id="读取键盘输入"><a href="#读取键盘输入" class="headerlink" title="读取键盘输入"></a>读取键盘输入</h5><p>raw_input([prompt]) 函数从标准输入读取一个行，并返回一个字符串（去掉结尾的换行符）；<br>input([prompt]) 函数和 raw_input([prompt]) 函数基本类似，但是 input 可以接收一个Python表达式作为输入，并将运算结果返回。 </p>
 <h6 id="open函数"><a href="#open函数" class="headerlink" title="open函数"></a>open函数</h6><p> 你必须先用Python内置的open()函数打开一个文件，创建一个file对象，相关的方法才可以调用它进行读写。</p>
 <p>语法： </p>
-<pre><code>file object = open(file_name [, access_mode][, buffering])
-</code></pre><ul>
+<pre class="line-numbers language-python"><code class="language-python">file object <span class="token operator">=</span> open<span class="token punctuation">(</span>file_name <span class="token punctuation">[</span><span class="token punctuation">,</span> access_mode<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">,</span> buffering<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
 <li>file_name：file_name变量是一个包含了你要访问的文件名称的字符串值。</li>
 <li>access_mode：access_mode决定了打开文件的模式：只读，写入，追加等。所有可取值见如下的完全列表。这个参数是非强制的，默认文件访问模式为只读(r)。</li>
 <li>buffering:如果buffering的值被设为0，就不会有寄存。如果buffering的值取1，访问文件时会寄存行。如果将buffering的值设为大于1的整数，表明了这就是的寄存区的缓冲大小。如果取负值，寄存区的缓冲大小则为系统默认。<br><img src="http://pg7xbkpbr.bkt.clouddn.com/open%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F%E6%8F%8F%E8%BF%B0.png" alt="模式"><br><a href="http://pg7xbkpbr.bkt.clouddn.com/open%E5%87%BD%E6%95%B0%E6%89%93%E5%BC%80%E6%A8%A1%E5%BC%8F.png" target="_blank" rel="noopener">模式简图</a></li>
@@ -993,31 +1008,36 @@ print &quot;函数外取值: &quot;, mylist
 </table>
 <p><img src="http://pg7xbkpbr.bkt.clouddn.com/file%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95.png" alt="file对象的方法"></p>
 <h6 id="close-方法"><a href="#close-方法" class="headerlink" title="close()方法"></a>close()方法</h6><p>File 对象的 close（）方法刷新缓冲区里任何还没写入的信息，并关闭该文件，这之后便不能再进行写入。<br> 语法：</p>
-<pre><code>fileObject.close()
-</code></pre><h6 id="write-方法"><a href="#write-方法" class="headerlink" title="write()方法"></a>write()方法</h6><p> write()方法可将任何字符串写入一个打开的文件。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。</p>
+<pre class="line-numbers language-python"><code class="language-python">fileObject<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="write-方法"><a href="#write-方法" class="headerlink" title="write()方法"></a>write()方法</h6><p> write()方法可将任何字符串写入一个打开的文件。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。</p>
 <p>write()方法不会在字符串的结尾添加换行符(‘\n’)：<br> 语法：</p>
-<pre><code>fileObject.write(string)
-</code></pre><h6 id="read-方法"><a href="#read-方法" class="headerlink" title="read()方法"></a>read()方法</h6><p>read（）方法从一个打开的文件中读取一个字符串。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。</p>
+<pre class="line-numbers language-python"><code class="language-python">fileObject<span class="token punctuation">.</span>write<span class="token punctuation">(</span>string<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="read-方法"><a href="#read-方法" class="headerlink" title="read()方法"></a>read()方法</h6><p>read（）方法从一个打开的文件中读取一个字符串。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。</p>
 <p>语法： </p>
-<pre><code>fileObject.read([count])
-</code></pre><p>被传递的参数是要从已打开文件中读取的字节计数。该方法从文件的开头开始读入，如果没有传入count，它会尝试尽可能多地读取更多的内容，很可能是直到文件的末尾。</p>
+<pre class="line-numbers language-python"><code class="language-python">fileObject<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">[</span>count<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>被传递的参数是要从已打开文件中读取的字节计数。该方法从文件的开头开始读入，如果没有传入count，它会尝试尽可能多地读取更多的内容，很可能是直到文件的末尾。</p>
 <h6 id="通过write-写入后用read-函数会有错误"><a href="#通过write-写入后用read-函数会有错误" class="headerlink" title="通过write()写入后用read()函数会有错误"></a>通过write()写入后用read()函数会有错误</h6><h5 id="文件定位"><a href="#文件定位" class="headerlink" title="文件定位"></a>文件定位</h5><p>tell()方法告诉你文件内的当前位置。通过read()函数后指针会指到读到的位置。</p>
 <p> seek（offset [,from]）方法改变当前文件的位置。Offset变量表示要移动的字节数。From变量指定开始移动字节的参考位置。</p>
 <p>如果from被设为0，这意味着将文件的开头作为移动字节的参考位置。如果设为1，则使用当前的位置作为参考位置。如果它被设为2，那么该文件的末尾将作为参考位置。 </p>
 <h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><p>捕捉异常可以使用try/except语句。<br>try/except语句用来检测try语句块中的错误，从而让except语句捕获异常信息并处理。<br>try….except…else的语法： </p>
-<pre><code>try:
-&lt;语句&gt;        #运行别的代码
-except &lt;名字&gt;：
-&lt;语句&gt;        #如果在try部份引发了&#39;name&#39;异常
-except &lt;名字&gt;，&lt;数据&gt;:
-&lt;语句&gt;        #如果引发了&#39;name&#39;异常，获得附加的数据
-else:
-&lt;语句&gt;        #如果没有异常发生
-</code></pre><p>以上方式try-except语句捕获所有发生的异常。但这不是一个很好的方式，我们不能通过该程序识别出具体的异常信息。因为它捕获所有的异常。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">try</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>语句<span class="token operator">></span>        <span class="token comment" spellcheck="true">#运行别的代码</span>
+<span class="token keyword">except</span> <span class="token operator">&lt;</span>名字<span class="token operator">></span>：
+<span class="token operator">&lt;</span>语句<span class="token operator">></span>        <span class="token comment" spellcheck="true">#如果在try部份引发了'name'异常</span>
+<span class="token keyword">except</span> <span class="token operator">&lt;</span>名字<span class="token operator">></span>，<span class="token operator">&lt;</span>数据<span class="token operator">></span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>语句<span class="token operator">></span>        <span class="token comment" spellcheck="true">#如果引发了'name'异常，获得附加的数据</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>语句<span class="token operator">></span>        <span class="token comment" spellcheck="true">#如果没有异常发生</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以上方式try-except语句捕获所有发生的异常。但这不是一个很好的方式，我们不能通过该程序识别出具体的异常信息。因为它捕获所有的异常。</p>
 <p><strong>try-finally 语句</strong><br>try-finally 语句无论是否发生异常都将执行最后的代码。</p>
 <h6 id="触发异常"><a href="#触发异常" class="headerlink" title="触发异常"></a>触发异常</h6><p>raise语句自己触发异常<br>raise语法格式如下：</p>
-<pre><code>raise [Exception [, args [, traceback]]]
-</code></pre><p>语句中 Exception 是异常的类型（例如，NameError）参数标准异常中任一种，args 是自已提供的异常参数。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">raise</span> <span class="token punctuation">[</span>Exception <span class="token punctuation">[</span><span class="token punctuation">,</span> args <span class="token punctuation">[</span><span class="token punctuation">,</span> traceback<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>语句中 Exception 是异常的类型（例如，NameError）参数标准异常中任一种，args 是自已提供的异常参数。</p>
 <p>最后一个参数是可选的（在实践中很少使用），如果存在，是跟踪异常对象。</p>
 <h5 id="python内置函数"><a href="#python内置函数" class="headerlink" title="python内置函数"></a>python内置函数</h5><table>
 <thead>

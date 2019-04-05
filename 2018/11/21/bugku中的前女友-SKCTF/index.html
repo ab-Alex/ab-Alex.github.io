@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/11/21/bugku中的前女友-SKCTF/" itemprop="url">
 		<time datetime="2018-11-21T12:13:28.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -334,8 +334,9 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h2><h3 id="strcmp-函数"><a href="#strcmp-函数" class="headerlink" title="strcmp()函数"></a>strcmp()函数</h3><pre><code>int strcmp ( string $str1 , string $str2 )
-</code></pre><p><strong>说明</strong></p>
+		<h2 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h2><h3 id="strcmp-函数"><a href="#strcmp-函数" class="headerlink" title="strcmp()函数"></a>strcmp()函数</h3><pre class="line-numbers language-php"><code class="language-php">int <span class="token function">strcmp</span> <span class="token punctuation">(</span> string <span class="token variable">$str1</span> <span class="token punctuation">,</span> string <span class="token variable">$str2</span> <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>说明</strong></p>
 <p>注意该比较区分大小写。</p>
 <p><strong>参数</strong></p>
 <p>str1</p>
@@ -346,57 +347,61 @@
 <p>strcmp二进制安全字符串比较，如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。</p>
 <p><strong>漏洞：当这个函数接受到了不符合的类型，这个函数将发生错误，但是在5.3之前的php中，显示了报错的警告信息后，将return 0 !!!!所以可以传入数组让其返回值为0。</strong></p>
 <p>这一个漏洞适用与5.3之前版本的php</p>
-<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><pre><code>&lt;?php
-$a=-1;
-$b=1
-if(!$a or !$b){
-    echo &quot;true&quot;;
-}
-?&gt;
-</code></pre><p>无输出。即：!$a为假和$b为假。!0为真。</p>
+<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$a</span> <span class="token keyword">or</span> <span class="token operator">!</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string">"true"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>无输出。即：!$a为假和$b为假。!0为真。</p>
 <h3 id="与"><a href="#与" class="headerlink" title="== 与 ==="></a>== 与 ===</h3><p> php中有两种比较的符号 == 与 === ，=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较。</p>
 <p>== 在进行比较的时候，会先将字符串类型转化成相同，再比较。这里举个例子，为什么下面的结果是true。</p>
-<pre><code>var_dump(&quot;0e123456&quot;==&quot;0e4456789&quot;); //true
-</code></pre><p>“0e123456”==”0e456789”相互比较的时候，会将0e这类字符串识别为科学技术法的数字，0的无论多少次方都是零，所以相等。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token string">"0e123456"</span><span class="token operator">==</span><span class="token string">"0e4456789"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//true</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>“0e123456”==”0e456789”相互比较的时候，会将0e这类字符串识别为科学技术法的数字，0的无论多少次方都是零，所以相等。</p>
 <p>介绍一批md5开头是0e的字符串 上文提到过，0e在比较的时候会将其视作为科学计数法，所以无论0e后面是什么，0的多少次方还是0。</p>
-<pre><code>QNKCDZO
-0e830400451993494058024219903391
+<pre class="line-numbers language-php"><code class="language-php"><span class="token constant">QNKCDZO</span>
+<span class="token number">0e830400451993494058024219903391</span>
 
 s878926199a
-0e545993274517709034328855841020
+<span class="token number">0e545993274517709034328855841020</span>
 
 s155964671a
-0e342768416822451524974117254469
+<span class="token number">0e342768416822451524974117254469</span>
 
 s214587387a
-0e848240448830537924465865611904
+<span class="token number">0e848240448830537924465865611904</span>
 
 s214587387a
-0e848240448830537924465865611904
+<span class="token number">0e848240448830537924465865611904</span>
 
 s878926199a
-0e545993274517709034328855841020
+<span class="token number">0e545993274517709034328855841020</span>
 
 s1091221200a
-0e940624217856561557816327384675
+<span class="token number">0e940624217856561557816327384675</span>
 
 s1885207154a
-0e509367213418206700842008763514
-</code></pre><h3 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h3><p>md5()函数无法对数组进行加密。即：加密结果都一样为空。</p>
+<span class="token number">0e509367213418206700842008763514</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h3><p>md5()函数无法对数组进行加密。即：加密结果都一样为空。</p>
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>打开题目查看源代码发现存在一个链接code.txt,进入code.txt。发现：</p>
-<pre><code>&lt;?php
-if(isset($_GET[&#39;v1&#39;]) &amp;&amp; isset($_GET[&#39;v2&#39;]) &amp;&amp; isset($_GET[&#39;v3&#39;])){
-    $v1 = $_GET[&#39;v1&#39;];
-    $v2 = $_GET[&#39;v2&#39;];
-    $v3 = $_GET[&#39;v3&#39;];
-    if($v1 != $v2 &amp;&amp; md5($v1) == md5($v2)){
-        if(!strcmp($v3, $flag)){
-            echo $flag;
-        }
-    }
-}
-?&gt;
-</code></pre><p>绕过payload：<a href="http://118.89.219.210:49162/?v1=s1885207154a&amp;v2=s1091221200a&amp;v3[]=1（payload有很多种）" target="_blank" rel="noopener">http://118.89.219.210:49162/?v1=s1885207154a&amp;v2=s1091221200a&amp;v3[]=1（payload有很多种）</a></p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v3'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$v1</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$v2</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$v3</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v3'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$v1</span> <span class="token operator">!=</span> <span class="token variable">$v2</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$v1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strcmp</span><span class="token punctuation">(</span><span class="token variable">$v3</span><span class="token punctuation">,</span> <span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>绕过payload：<a href="http://118.89.219.210:49162/?v1=s1885207154a&amp;v2=s1091221200a&amp;v3[]=1（payload有很多种）" target="_blank" rel="noopener">http://118.89.219.210:49162/?v1=s1885207154a&amp;v2=s1091221200a&amp;v3[]=1（payload有很多种）</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>php是门强大的语言，神奇无比。需要继续学习。</p>
 <p>如果有误请指出。</p>
 	
@@ -563,7 +568,7 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 							首先，护网杯对新手不友好。看题看到绝望！！！全程懵逼状态。好啦不吐槽啦。。。。
 进入正题：迟来的签到题
 首先从文件下载下来看着像base64.但通过base64解码工具解码出来
-    V_UPVSUSUQR^W_###QV&#...
+    V_UPVSUSUQR^W_###QV'R...
 						</p>
 					</div>
 

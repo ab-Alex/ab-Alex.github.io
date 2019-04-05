@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/11/01/python2正则表达式/" itemprop="url">
 		<time datetime="2018-11-01T13:35:18.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -342,8 +342,9 @@
 <p>compile 函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。</p>
 <p>re 模块也提供了与这些方法功能完全一致的函数，这些函数使用一个模式字符串做为它们的第一个参数。</p>
 <h2 id="re-match函数"><a href="#re-match函数" class="headerlink" title="re.match函数"></a>re.match函数</h2><p>re.match 尝试从字符串的起始位置匹配一个模式，<strong>如果不是起始位置匹配成功的话，match()就返回none。</strong><br>语法：</p>
-<pre><code>re.match(pattern, string, flags=0)
-</code></pre><p>参数说明：</p>
+<pre class="line-numbers language-python"><code class="language-python">re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数说明：</p>
 <table>
 <thead>
 <tr>
@@ -386,8 +387,9 @@
 </tbody>
 </table>
 <h2 id="re-search-方法"><a href="#re-search-方法" class="headerlink" title="re.search()方法"></a>re.search()方法</h2><p>re.search 扫描整个字符串并返回第一个成功的匹配。<br>语法：</p>
-<pre><code>re.search(pattern, string, flags=0)
-</code></pre><p>参数说明：</p>
+<pre class="line-numbers language-python"><code class="language-python">re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数说明：</p>
 <table>
 <thead>
 <tr>
@@ -413,8 +415,9 @@
 <p>匹配成功re.search()方法返回一个匹配的对象，否则返回None。<br>也可可以使用group(num) 或 groups() 匹配对象函数来获取匹配表达式。 匹配对象方法同上</p>
 <h2 id="re-match与re-search的区别"><a href="#re-match与re-search的区别" class="headerlink" title="re.match与re.search的区别"></a>re.match与re.search的区别</h2><p>re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；而re.search匹配整个字符串，<strong>直到找到一个匹配</strong>。</p>
 <h2 id="检索和替换"><a href="#检索和替换" class="headerlink" title="检索和替换"></a>检索和替换</h2><h3 id="re-sub"><a href="#re-sub" class="headerlink" title="re.sub"></a>re.sub</h3><p>re 模块提供了re.sub用于替换字符串中的匹配项。<br>语法：</p>
-<pre><code>re.sub(pattern, repl, string, count=0, flags=0)
-</code></pre><p>参数：</p>
+<pre class="line-numbers language-python"><code class="language-python">re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> repl<span class="token punctuation">,</span> string<span class="token punctuation">,</span> count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数：</p>
 <ul>
 <li>pattern : 正则中的模式字符串。</li>
 <li>repl : 替换的字符串，<strong>也可为一个函数</strong>。</li>
@@ -422,8 +425,9 @@
 <li>count : 模式匹配后替换的最大次数，默认 0表示替换所有的匹配。</li>
 </ul>
 <h3 id="re-compile-函数"><a href="#re-compile-函数" class="headerlink" title="re.compile 函数"></a>re.compile 函数</h3><p>compile 函数用于编译正则表达式，生成一个正则表达式（ Pattern ）对象，供 match() 和 search() 这两个函数使用。<br>语法：</p>
-<pre><code>re.compile(pattern[, flags])
-</code></pre><p>参数：</p>
+<pre class="line-numbers language-python"><code class="language-python">re<span class="token punctuation">.</span>compile<span class="token punctuation">(</span>pattern<span class="token punctuation">[</span><span class="token punctuation">,</span> flags<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数：</p>
 <ul>
 <li>pattern : 一个字符串形式的正则表达式</li>
 <li>flags : 可选，表示匹配模式，比如忽略大小写，多行模式等，具体参数为：</li>
@@ -444,19 +448,22 @@
 <li>span([group]) 方法返回 (start(group), end(group))。</li>
 </ul>
 <h2 id="findall"><a href="#findall" class="headerlink" title="findall"></a>findall</h2><p>在字符串中找到正则表达式所匹配的所有子串，并返回一个列表，如果没有找到匹配的，则返回空列表。<br><strong>注意</strong>： match 和 search 是匹配一次 findall 匹配所有。<br>语法：</p>
-<pre><code>findall(string[, pos[, endpos]])
-</code></pre><p>参数：</p>
+<pre class="line-numbers language-python"><code class="language-python">findall<span class="token punctuation">(</span>string<span class="token punctuation">[</span><span class="token punctuation">,</span> pos<span class="token punctuation">[</span><span class="token punctuation">,</span> endpos<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数：</p>
 <ul>
 <li>string : 待匹配的字符串。</li>
 <li>pos : 可选参数，指定字符串的起始位置，默认为 0。</li>
 <li>endpos : 可选参数，指定字符串的结束位置，默认为字符串的长度。</li>
 </ul>
 <h2 id="re-finditer"><a href="#re-finditer" class="headerlink" title="re.finditer"></a>re.finditer</h2><p>在字符串中找到正则表达式所匹配的所有子串，并把它们作为一个迭代器返回。<br>语法：</p>
-<pre><code>re.finditer(pattern, string, flags=0)
-</code></pre><p>参数同re.match()。</p>
+<pre class="line-numbers language-python"><code class="language-python">re<span class="token punctuation">.</span>finditer<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数同re.match()。</p>
 <h2 id="re-split"><a href="#re-split" class="headerlink" title="re.split"></a>re.split</h2><p>split 方法按照能够匹配的子串将字符串分割后返回列表。<br>语法：</p>
-<pre><code>re.split(pattern, string[, maxsplit=0, flags=0])
-</code></pre><table>
+<pre class="line-numbers language-python"><code class="language-python">re<span class="token punctuation">.</span>split<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">[</span><span class="token punctuation">,</span> maxsplit<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<table>
 <thead>
 <tr>
 <th>参数</th>

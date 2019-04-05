@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/10/12/bugku备份是个好好习惯/" itemprop="url">
 		<time datetime="2018-10-12T10:05:13.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -335,30 +335,31 @@
 
 	<div class="article-content" id="article-content">
 		<p>本题提示备份：<br>    首先，可以用御剑等工具进行扫描,发现存在备份泄露，然后可以进行index.php.bak。对原码进行下载分析。</p>
-<pre><code>&lt;?php
-/**
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">/**
  * Created by PhpStorm.
  * User: Norse
  * Date: 2017/8/6
  * Time: 20:22
-*/
+*/</span>
 
-include_once &quot;flag.php&quot;;
-ini_set(&quot;display_errors&quot;, 0);
-$str = strstr($_SERVER[&#39;REQUEST_URI&#39;], &#39;?&#39;);//获得的$str=包括？的参数
-$str = substr($str,1);//把除问号以外的字符截取出来
-$str = str_replace(&#39;key&#39;,&#39;&#39;,$str);
-//把$str中的key匹配用空替代
-parse_str($str);
-//
-echo md5($key1);
+<span class="token keyword">include_once</span> <span class="token string">"flag.php"</span><span class="token punctuation">;</span>
+<span class="token function">ini_set</span><span class="token punctuation">(</span><span class="token string">"display_errors"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$str</span> <span class="token operator">=</span> <span class="token function">strstr</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string">'REQUEST_URI'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'?'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获得的$str=包括？的参数</span>
+<span class="token variable">$str</span> <span class="token operator">=</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//把除问号以外的字符截取出来</span>
+<span class="token variable">$str</span> <span class="token operator">=</span> <span class="token function">str_replace</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">,</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//把$str中的key匹配用空替代</span>
+<span class="token function">parse_str</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token keyword">echo</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$key1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-echo md5($key2);
-if(md5($key1) == md5($key2) &amp;&amp; $key1 !== $key2){
-    echo $flag.&quot;取得flag&quot;;
-}
-?&gt;
-</code></pre><p>分析可发现 md5($key1) == md5($key2) &amp;&amp; $key1 !== $key2 这句是关键。题目对key进行啦过滤<br>可以考虑构造kkeyey进行绕过。然后对key1,key2的值进行md5加密，并进行比较，如果md5加密的值一样而未加密的值不同，就输出flag.<br>有两种绕过方法：<br>1.md5()函数无法处理数组，如果传入数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。所以可以传入数组。<br>payload：<a href="http://120.24.86.145:8002/web16/?kkeyey1[]=anything&amp;kkeyey2[]=anything" target="_blank" rel="noopener">http://120.24.86.145:8002/web16/?kkeyey1[]=anything&amp;kkeyey2[]=anything</a><br>2.利用漏洞<br>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。<br>下列的字符串的MD5值都是0e开头的：</p>
+<span class="token keyword">echo</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$key2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$key1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$key2</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$key1</span> <span class="token operator">!==</span> <span class="token variable">$key2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">.</span><span class="token string">"取得flag"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分析可发现 md5($key1) == md5($key2) &amp;&amp; $key1 !== $key2 这句是关键。题目对key进行啦过滤<br>可以考虑构造kkeyey进行绕过。然后对key1,key2的值进行md5加密，并进行比较，如果md5加密的值一样而未加密的值不同，就输出flag.<br>有两种绕过方法：<br>1.md5()函数无法处理数组，如果传入数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。所以可以传入数组。<br>payload：<a href="http://120.24.86.145:8002/web16/?kkeyey1[]=anything&amp;kkeyey2[]=anything" target="_blank" rel="noopener">http://120.24.86.145:8002/web16/?kkeyey1[]=anything&amp;kkeyey2[]=anything</a><br>2.利用漏洞<br>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。<br>下列的字符串的MD5值都是0e开头的：</p>
 <p>QNKCDZO</p>
 <p>240610708</p>
 <p>s878926199a</p>
@@ -488,6 +489,7 @@ function ge...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -496,7 +498,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 
@@ -554,7 +556,7 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 							首先，护网杯对新手不友好。看题看到绝望！！！全程懵逼状态。好啦不吐槽啦。。。。
 进入正题：迟来的签到题
 首先从文件下载下来看着像base64.但通过base64解码工具解码出来
-    V_UPVSUSUQR^W_###QV&#...
+    V_UPVSUSUQR^W_###QV'R...
 						</p>
 					</div>
 

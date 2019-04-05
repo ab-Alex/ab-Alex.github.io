@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/11/21/php序列化和反序列化/" itemprop="url">
 		<time datetime="2018-11-21T07:48:08.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -335,217 +335,246 @@
 
 	<div class="article-content" id="article-content">
 		<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。</p>
-<h3 id="序列化函数："><a href="#序列化函数：" class="headerlink" title="序列化函数："></a>序列化函数：</h3><pre><code>string serialize ( mixed $value )
-</code></pre><p><strong>说明：</strong></p>
+<h3 id="序列化函数："><a href="#序列化函数：" class="headerlink" title="序列化函数："></a>序列化函数：</h3><pre class="line-numbers language-php"><code class="language-php">string <span class="token function">serialize</span> <span class="token punctuation">(</span> mixed <span class="token variable">$value</span> <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>说明：</strong></p>
 <p>返回对象的字符串表示。 </p>
 <p><strong>返回值：</strong></p>
 <p>返回对象的字符串表示或者 NULL 。</p>
 <p><strong>参数：</strong></p>
 <p>任意类型。</p>
 <h3 id="对象的序列化"><a href="#对象的序列化" class="headerlink" title="对象的序列化"></a>对象的序列化</h3><p><strong>注意：序列化担当着对象析构器的角色。在此方法之后，__destruct() 方法将不会被调用。</strong></p>
-<pre><code>&lt;?php
-class aa{
-    public $a;
-    public $b;
-    public function __construct()
-    {
-        # 构造函数
-        $this-&gt;a=&#39;hello&#39;;
-        $this-&gt;b=&#39;world&#39;;
-    }
-}
-$obj = new aa;
-$str=serialize($obj);
-var_dump($str);
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>string(53) &quot;O:2:&quot;aa&quot;:2:{s:1:&quot;a&quot;;s:5:&quot;hello&quot;;s:1:&quot;b&quot;;s:5:&quot;world&quot;;}&quot; 
-</code></pre><p>解释：<br>string(53)：指序列化后的字符类型为字符串长度为53。</p>
-<pre><code> O:strlen(object name):object name:object size:{s:strlen(property name):property name:property definition;(repeated per property)}
-</code></pre><h3 id="数组的序列化"><a href="#数组的序列化" class="headerlink" title="数组的序列化"></a>数组的序列化</h3><pre><code>&lt;?php
-$a=array(&#39;aaaa&#39;,100,2.5,true);
-$str=serialize($a);
-var_dump($str);
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>string(49) &quot;a:4:{i:0;s:4:&quot;aaaa&quot;;i:1;i:100;i:2;d:2.5;i:3;b:1;}&quot; 
-</code></pre><p>解释：</p>
-<pre><code>a:size:{key 类型:key长度:key的值;value类型：value长度:value的值;(repeated per element)}
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name">aa</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$a</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$b</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token shell-comment comment"># 构造函数</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">a</span><span class="token operator">=</span><span class="token string">'hello'</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">b</span><span class="token operator">=</span><span class="token string">'world'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token variable">$obj</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">aa</span><span class="token punctuation">;</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$obj</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">string</span><span class="token punctuation">(</span><span class="token number">53</span><span class="token punctuation">)</span> <span class="token string">"O:2:"</span>aa<span class="token string">":2:{s:1:"</span>a<span class="token string">";s:5:"</span>hello<span class="token string">";s:1:"</span>b<span class="token string">";s:5:"</span>world<span class="token string">";}"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>解释：<br>string(53)：指序列化后的字符类型为字符串长度为53。</p>
+<pre class="line-numbers language-php"><code class="language-php"> O<span class="token punctuation">:</span><span class="token function">strlen</span><span class="token punctuation">(</span>object name<span class="token punctuation">)</span><span class="token punctuation">:</span>object name<span class="token punctuation">:</span>object size<span class="token punctuation">:</span><span class="token punctuation">{</span>s<span class="token punctuation">:</span><span class="token function">strlen</span><span class="token punctuation">(</span>property name<span class="token punctuation">)</span><span class="token punctuation">:</span>property name<span class="token punctuation">:</span>property definition<span class="token punctuation">;</span><span class="token punctuation">(</span>repeated per property<span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="数组的序列化"><a href="#数组的序列化" class="headerlink" title="数组的序列化"></a>数组的序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string">'aaaa'</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">2.5</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">string</span><span class="token punctuation">(</span><span class="token number">49</span><span class="token punctuation">)</span> <span class="token string">"a:4:{i:0;s:4:"</span>aaaa<span class="token string">";i:1;i:100;i:2;d:2.5;i:3;b:1;}"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>解释：</p>
+<pre class="line-numbers language-php"><code class="language-php">a<span class="token punctuation">:</span>size<span class="token punctuation">:</span><span class="token punctuation">{</span>key 类型<span class="token punctuation">:</span>key长度<span class="token punctuation">:</span>key的值<span class="token punctuation">;</span>value类型：value长度<span class="token punctuation">:</span>value的值<span class="token punctuation">;</span><span class="token punctuation">(</span>repeated per element<span class="token punctuation">)</span><span class="token punctuation">}</span>
 默认int，double，bool不显示长度
-</code></pre><h3 id="字符串的反序列化"><a href="#字符串的反序列化" class="headerlink" title="字符串的反序列化"></a>字符串的反序列化</h3><pre><code>&lt;?php
-$a=&#39;asdf&#39;;
-$str=serialize($a);
-var_dump($str);
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>string(11) &quot;s:4:&quot;asdf&quot;;&quot; 
-</code></pre><p>解释：</p>
-<pre><code>s:size:value;
-</code></pre><h3 id="数字的序列化"><a href="#数字的序列化" class="headerlink" title="数字的序列化"></a>数字的序列化</h3><pre><code>&lt;?php
-$a=6;
-$b=6.6;
-$str1=serialize($a);
-$str2=serialize($b);
-var_dump($str1);
-echo &quot;&lt;br&gt;&quot;;
-var_dump($str2);
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>string(4) &quot;i:6;&quot;
-string(21) &quot;d:6.5999999999999996;&quot; 
-</code></pre><p>解释：</p>
-<pre><code> i:value;
- d:value;
-</code></pre><p>这里至于为什么是6.5999999999999996，我也不知道。</p>
-<h3 id="布尔和NULL的序列化"><a href="#布尔和NULL的序列化" class="headerlink" title="布尔和NULL的序列化"></a>布尔和NULL的序列化</h3><pre><code>&lt;?php
-$a=false;
-$b=NULL;
-$str1=serialize($a);
-$str2=serialize($b);
-var_dump($str1);
-echo &quot;&lt;br&gt;&quot;;
-var_dump($str2);
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>string(4) &quot;b:0;&quot;
-string(2) &quot;N;&quot; 
-</code></pre><p>解释：</p>
-<pre><code>b:value;(保存1或0)
-N;
-</code></pre><h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><h3 id="反序列化函数："><a href="#反序列化函数：" class="headerlink" title="反序列化函数："></a>反序列化函数：</h3><pre><code>mixed unserialize ( string $str )
-</code></pre><p>unserialize()反序列化函数用于将单一的已序列化的变量转换回序列化之前的值。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="字符串的反序列化"><a href="#字符串的反序列化" class="headerlink" title="字符串的反序列化"></a>字符串的反序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token string">'asdf'</span><span class="token punctuation">;</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">string</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token string">"s:4:"</span>asdf<span class="token string">";"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>解释：</p>
+<pre class="line-numbers language-php"><code class="language-php">s<span class="token punctuation">:</span>size<span class="token punctuation">:</span>value<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="数字的序列化"><a href="#数字的序列化" class="headerlink" title="数字的序列化"></a>数字的序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token number">6.6</span><span class="token punctuation">;</span>
+<span class="token variable">$str1</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$str2</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">string</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"i:6;"</span>
+<span class="token function">string</span><span class="token punctuation">(</span><span class="token number">21</span><span class="token punctuation">)</span> <span class="token string">"d:6.5999999999999996;"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>解释：</p>
+<pre class="line-numbers language-php"><code class="language-php"> i<span class="token punctuation">:</span>value<span class="token punctuation">;</span>
+ d<span class="token punctuation">:</span>value<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这里至于为什么是6.5999999999999996，我也不知道。</p>
+<h3 id="布尔和NULL的序列化"><a href="#布尔和NULL的序列化" class="headerlink" title="布尔和NULL的序列化"></a>布尔和NULL的序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token keyword">NULL</span><span class="token punctuation">;</span>
+<span class="token variable">$str1</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$str2</span><span class="token operator">=</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">string</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"b:0;"</span>
+<span class="token function">string</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"N;"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>解释：</p>
+<pre class="line-numbers language-php"><code class="language-php">b<span class="token punctuation">:</span>value<span class="token punctuation">;</span><span class="token punctuation">(</span>保存<span class="token number">1</span>或<span class="token number">0</span><span class="token punctuation">)</span>
+N<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><h3 id="反序列化函数："><a href="#反序列化函数：" class="headerlink" title="反序列化函数："></a>反序列化函数：</h3><pre class="line-numbers language-php"><code class="language-php">mixed <span class="token function">unserialize</span> <span class="token punctuation">(</span> string <span class="token variable">$str</span> <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>unserialize()反序列化函数用于将单一的已序列化的变量转换回序列化之前的值。</p>
 <p><strong>参数：</strong></p>
 <p>对象的字符串表示。</p>
 <p><strong>返回值：</strong></p>
 <p>返回没有序列化之前的原始值。</p>
-<h3 id="对象的反序列化"><a href="#对象的反序列化" class="headerlink" title="对象的反序列化"></a>对象的反序列化</h3><pre><code>&lt;?php
-class aa{
-    public $a;
-    public $b;
-    public function __construct()
-    {
-        # 构造函数
-        $this-&gt;a=&#39;hello&#39;;
-        $this-&gt;b=&#39;world&#39;;
-    }
-    public function __toString(){
-        #对象以字符串形式输出时自动调用
-        echo &#39;调用了__toString()函数&#39;;
-        return $this-&gt;a;
-    }
-}
-// $obj = new aa;
-// $str=serialize($obj);
-// var_dump($str);
-$str=&#39;O:2:&quot;aa&quot;:2:{s:1:&quot;a&quot;;s:5:&quot;hello&quot;;s:1:&quot;b&quot;;s:5:&quot;world&quot;;}&#39;;
-$obj=unserialize($str);
-var_dump($obj);
-echo &quot;&lt;br&gt;&quot;;
-echo $obj;
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>object(aa)#2 (2) { [&quot;a&quot;]=&gt; string(5) &quot;hello&quot; [&quot;b&quot;]=&gt; string(5) &quot;world&quot; }
-调用了__toString()函数hello 
-</code></pre><p>解释：<br>object(aa):指反序列化后的值为对象，类名为aa。</p>
+<h3 id="对象的反序列化"><a href="#对象的反序列化" class="headerlink" title="对象的反序列化"></a>对象的反序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name">aa</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$a</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$b</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token shell-comment comment"># 构造函数</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">a</span><span class="token operator">=</span><span class="token string">'hello'</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">b</span><span class="token operator">=</span><span class="token string">'world'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token shell-comment comment">#对象以字符串形式输出时自动调用</span>
+        <span class="token keyword">echo</span> <span class="token string">'调用了__toString()函数'</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">a</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// $obj = new aa;</span>
+<span class="token comment" spellcheck="true">// $str=serialize($obj);</span>
+<span class="token comment" spellcheck="true">// var_dump($str);</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token string">'O:2:"aa":2:{s:1:"a";s:5:"hello";s:1:"b";s:5:"world";}'</span><span class="token punctuation">;</span>
+<span class="token variable">$obj</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$obj</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$obj</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">object</span><span class="token punctuation">(</span>aa<span class="token punctuation">)</span><span class="token shell-comment comment">#2 (2) { [</span><span class="token string">"a"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">></span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"hello"</span> <span class="token punctuation">[</span><span class="token string">"b"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">></span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"world"</span> <span class="token punctuation">}</span>
+调用了<span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>函数hello 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>解释：<br>object(aa):指反序列化后的值为对象，类名为aa。</p>
 <p><strong>注意：这里生成了一个对象但没有调用构造函数</strong>。</p>
 <p>这里我们可以改变里面的变量值：</p>
-<pre><code>&lt;?php
-class aa{
-    public $a;
-    public $b;
-    public function __construct()
-    {
-        # 构造函数
-        $this-&gt;a=&#39;hello&#39;;
-        $this-&gt;b=&#39;world&#39;;
-    }
-    public function __toString(){
-        echo &#39;调用了__toString()函数&#39;;
-        return $this-&gt;a;
-    }
-}
-// $obj = new aa;
-// $str=serialize($obj);
-// var_dump($str);
-$str=&#39;O:2:&quot;aa&quot;:2:{s:1:&quot;a&quot;;s:3:&quot;asd&quot;;s:1:&quot;b&quot;;s:5:&quot;world&quot;;}&#39;;
-$obj=unserialize($str);
-var_dump($obj);
-echo &quot;&lt;br&gt;&quot;;
-echo $obj;
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>object(aa)#2 (2) { [&quot;a&quot;]=&gt; string(3) &quot;asd&quot; [&quot;b&quot;]=&gt; string(5) &quot;world&quot; }
-调用了__toString()函数asd 
-</code></pre><p>说明我们已经改变啦变量a的值。所以这里存在漏洞。</p>
-<h3 id="数组的反序列化"><a href="#数组的反序列化" class="headerlink" title="数组的反序列化"></a>数组的反序列化</h3><pre><code>&lt;?php
-// $a=array(&#39;a&#39;=&gt;&#39;aaaa&#39;,100,2.5,true);
-// $str=serialize($a);
-// var_dump($str);
-$b=&#39;a:4:{s:1:&quot;a&quot;;s:4:&quot;aaaa&quot;;i:0;i:100;i:1;d:2.5;i:2;b:1;}&#39;;
-$arr=unserialize($b);
-echo &quot;&lt;pre&gt;&quot;;
-print_r($arr);
-echo &quot;&lt;/pre&gt;&quot;;
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>Array
-(
-    [a] =&gt; aaaa
-    [0] =&gt; 100
-    [1] =&gt; 2.5
-    [2] =&gt; 1
-)
-</code></pre><p>解释：<br>如果bool类型的值在转化回数组的过程中1转换为1，0转换为空。</p>
-<h3 id="字符串反序列化"><a href="#字符串反序列化" class="headerlink" title="字符串反序列化"></a>字符串反序列化</h3><pre><code>&lt;?php
-// $a=&#39;asdf&#39;;
-// $str=serialize($a);
-// var_dump($str);
-$b=&#39;s:4:&quot;asdf&quot;;&#39;;
-$str=unserialize($b);
-echo $str;
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>asdf
-</code></pre><h3 id="数字的反序列化"><a href="#数字的反序列化" class="headerlink" title="数字的反序列化"></a>数字的反序列化</h3><pre><code>&lt;?php
-// $a=6;
-// $b=6.6;
-// $str1=serialize($a);
-// $str2=serialize($b);
-// var_dump($str1);
-// echo &quot;&lt;br&gt;&quot;;
-// var_dump($str2);
-$a=&#39;i:6;&#39;;
-$b=&#39;d:6.5999999999999996;&#39;;
-$str1=unserialize($a);
-$str2=unserialize($b);
-var_dump($str1);
-echo &quot;&lt;br&gt;&quot;;
-var_dump($str2);
-?&gt;
-</code></pre><p>输出结果:</p>
-<pre><code>int(6)
-float(6.6) 
-</code></pre><p>发现：小数点后有14位时开始对十分位四舍五入。</p>
-<h3 id="布尔值和NULL的反序列化"><a href="#布尔值和NULL的反序列化" class="headerlink" title="布尔值和NULL的反序列化"></a>布尔值和NULL的反序列化</h3><pre><code>&lt;?php
-// $a=false;
-// $b=NULL;
-// $str1=serialize($a);
-// $str2=serialize($b);
-// var_dump($str1);
-// echo &quot;&lt;br&gt;&quot;;
-// var_dump($str2);
-$a=&#39;b:0;&#39;;
-$b=&#39;N;&#39;;
-$str1=unserialize($a);
-$str2=unserialize($b);
-var_dump($str1);
-echo &quot;&lt;br&gt;&quot;;
-var_dump($str2);
-?&gt;
-</code></pre><p>输出结果：</p>
-<pre><code>bool(false)
-NULL 
-</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>序列化和反序列化是个很神奇的东西。需要多多了解和掌握。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name">aa</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$a</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$b</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token shell-comment comment"># 构造函数</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">a</span><span class="token operator">=</span><span class="token string">'hello'</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">b</span><span class="token operator">=</span><span class="token string">'world'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token string">'调用了__toString()函数'</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">a</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// $obj = new aa;</span>
+<span class="token comment" spellcheck="true">// $str=serialize($obj);</span>
+<span class="token comment" spellcheck="true">// var_dump($str);</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token string">'O:2:"aa":2:{s:1:"a";s:3:"asd";s:1:"b";s:5:"world";}'</span><span class="token punctuation">;</span>
+<span class="token variable">$obj</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$obj</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$obj</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">object</span><span class="token punctuation">(</span>aa<span class="token punctuation">)</span><span class="token shell-comment comment">#2 (2) { [</span><span class="token string">"a"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">></span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"asd"</span> <span class="token punctuation">[</span><span class="token string">"b"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">></span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"world"</span> <span class="token punctuation">}</span>
+调用了<span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>函数asd 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>说明我们已经改变啦变量a的值。所以这里存在漏洞。</p>
+<h3 id="数组的反序列化"><a href="#数组的反序列化" class="headerlink" title="数组的反序列化"></a>数组的反序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// $a=array('a'=>'aaaa',100,2.5,true);</span>
+<span class="token comment" spellcheck="true">// $str=serialize($a);</span>
+<span class="token comment" spellcheck="true">// var_dump($str);</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token string">'a:4:{s:1:"a";s:4:"aaaa";i:0;i:100;i:1;d:2.5;i:2;b:1;}'</span><span class="token punctuation">;</span>
+<span class="token variable">$arr</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;pre>"</span><span class="token punctuation">;</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token variable">$arr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;/pre>"</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token keyword">Array</span>
+<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">></span> aaaa
+    <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">100</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">2.5</span>
+    <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">1</span>
+<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解释：<br>如果bool类型的值在转化回数组的过程中1转换为1，0转换为空。</p>
+<h3 id="字符串反序列化"><a href="#字符串反序列化" class="headerlink" title="字符串反序列化"></a>字符串反序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// $a='asdf';</span>
+<span class="token comment" spellcheck="true">// $str=serialize($a);</span>
+<span class="token comment" spellcheck="true">// var_dump($str);</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token string">'s:4:"asdf";'</span><span class="token punctuation">;</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$str</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php">asdf
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="数字的反序列化"><a href="#数字的反序列化" class="headerlink" title="数字的反序列化"></a>数字的反序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// $a=6;</span>
+<span class="token comment" spellcheck="true">// $b=6.6;</span>
+<span class="token comment" spellcheck="true">// $str1=serialize($a);</span>
+<span class="token comment" spellcheck="true">// $str2=serialize($b);</span>
+<span class="token comment" spellcheck="true">// var_dump($str1);</span>
+<span class="token comment" spellcheck="true">// echo "</span><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span></span>"<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// var_dump($str2);</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token string">'i:6;'</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token string">'d:6.5999999999999996;'</span><span class="token punctuation">;</span>
+<span class="token variable">$str1</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$str2</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果:</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">int</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
+<span class="token function">float</span><span class="token punctuation">(</span><span class="token number">6.6</span><span class="token punctuation">)</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>发现：小数点后有14位时开始对十分位四舍五入。</p>
+<h3 id="布尔值和NULL的反序列化"><a href="#布尔值和NULL的反序列化" class="headerlink" title="布尔值和NULL的反序列化"></a>布尔值和NULL的反序列化</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token comment" spellcheck="true">// $a=false;</span>
+<span class="token comment" spellcheck="true">// $b=NULL;</span>
+<span class="token comment" spellcheck="true">// $str1=serialize($a);</span>
+<span class="token comment" spellcheck="true">// $str2=serialize($b);</span>
+<span class="token comment" spellcheck="true">// var_dump($str1);</span>
+<span class="token comment" spellcheck="true">// echo "</span><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span></span>"<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// var_dump($str2);</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token string">'b:0;'</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token string">'N;'</span><span class="token punctuation">;</span>
+<span class="token variable">$str1</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$str2</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$str2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">bool</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">NULL</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>序列化和反序列化是个很神奇的东西。需要多多了解和掌握。</p>
 <p>如有不足请指出。</p>
 	
 	</div>
@@ -731,6 +760,7 @@ function ge...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -739,7 +769,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 

@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/10/15/护网杯签到题/" itemprop="url">
 		<time datetime="2018-10-15T13:07:29.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -337,45 +337,48 @@
 		<pre><code>首先，护网杯对新手不友好。看题看到绝望！！！全程懵逼状态。好啦不吐槽啦。。。。
 进入正题：迟来的签到题
 首先从文件下载下来看着像base64.但通过base64解码工具解码出来
-</code></pre><pre><code>    V_UPVSUSUQR^W_###QV&#39;R#P$&#39;^VV_&#39;$^
-</code></pre><pre><code>然而并没有发现点什么。
+</code></pre><pre class="line-numbers language-txt"><code class="language-txt">    V_UPVSUSUQR^W_###QV'R#P$'^VV_'$^
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code>然而并没有发现点什么。
 题目中有easy xor？？？的提示
 xor异或（见过多次还没好好了解）
 异或（xor）是一个数学运算符。它应用于逻辑运算。异或的数学符号为“⊕”，计算机符号为“xor”。
 如果a、b两个值不相同，则异或结果为1。如果a、b两个值相同，异或结果为0。
-</code></pre><pre><code>    1. a ⊕ a = 0
+</code></pre><pre class="line-numbers language-txt"><code class="language-txt">    1. a ⊕ a = 0
     2. a ⊕ b = b ⊕ a
     3. a ⊕b ⊕ c = a ⊕ (b ⊕ c) = (a ⊕ b) ⊕ c;
     4. d = a ⊕ b ⊕ c 可以推出 a = d ⊕ b ⊕ c.
     5. a ⊕ b ⊕ a = b.
     6.若x是二进制数0101，y是二进制数1011；
     则x⊕y=1110
-</code></pre><pre><code>只有在两个比较的位不同时其结果是1，否则结果为0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>只有在两个比较的位不同时其结果是1，否则结果为0
 即“两个输入相同时为0，不同则为1”！
 回到正题 签到题
 话不多说看脚本
-</code></pre><pre><code>    #!/usr/bin/python
-    #-*- coding: UTF-8 -*-
-    str1 = &quot;AAoHAR1WX1VQVlNVU1VRUl5XXyMjI1FWJ1IjUCQnXlZWXyckXhs=&quot;
-    import base64
-    def my_encode(str_1):
-        a = base64.b64encode(str_1)
-        return a
+</code></pre><pre class="line-numbers language-python"><code class="language-python">    <span class="token comment" spellcheck="true">#!/usr/bin/python</span>
+    <span class="token comment" spellcheck="true">#-*- coding: UTF-8 -*-</span>
+    str1 <span class="token operator">=</span> <span class="token string">"AAoHAR1WX1VQVlNVU1VRUl5XXyMjI1FWJ1IjUCQnXlZWXyckXhs="</span>
+    <span class="token keyword">import</span> base64
+    <span class="token keyword">def</span> <span class="token function">my_encode</span><span class="token punctuation">(</span>str_1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        a <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>str_1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> a
 
-    def my_decode(str_1):
-        a = base64.b64decode(str_1)
-        return a
+    <span class="token keyword">def</span> <span class="token function">my_decode</span><span class="token punctuation">(</span>str_1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        a <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>str_1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> a
 
-    base_str = my_decode(str1)
-    flag = &quot;&quot;
-    # for y in range(32,128):
-    #     for x in base_str:
-    #         flag += chr(ord(x)^y)
-    #     print flag
-    for x in base_str:
-        flag+=chr(ord(x)^ord(&quot;f&quot;))
-    print flag
-</code></pre><pre><code>flag就出来了。脚本有点复杂部分可以省略。。。
+    base_str <span class="token operator">=</span> my_decode<span class="token punctuation">(</span>str1<span class="token punctuation">)</span>
+    flag <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token comment" spellcheck="true"># for y in range(32,128):</span>
+    <span class="token comment" spellcheck="true">#     for x in base_str:</span>
+    <span class="token comment" spellcheck="true">#         flag += chr(ord(x)^y)</span>
+    <span class="token comment" spellcheck="true">#     print flag</span>
+    <span class="token keyword">for</span> x <span class="token keyword">in</span> base_str<span class="token punctuation">:</span>
+        flag<span class="token operator">+=</span>chr<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">^</span>ord<span class="token punctuation">(</span><span class="token string">"f"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span> flag
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>flag就出来了。脚本有点复杂部分可以省略。。。
 还太菜继续努力小伙子你还年轻。
 </code></pre>	
 	</div>
@@ -500,6 +503,7 @@ function ge...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -508,7 +512,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 

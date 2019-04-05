@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2019/03/26/nmap的使用/" itemprop="url">
 		<time datetime="2019-03-26T07:18:05.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -361,9 +361,10 @@
 <li>将所有的探测结果记录到日志。</li>
 </ul>
 <h4 id="nmap语法"><a href="#nmap语法" class="headerlink" title="nmap语法"></a>nmap语法</h4><p>Nmap的固定语法格式：</p>
-<pre><code>nmap 【选项|多选项|协议【目标】
-注： 选项与多选项之间用空格分隔开。若某些选项需要指定数据，选项与指定数据也需要用空格分开。（有些选项与参数直接可以不用空格分开。如：-p80)
-</code></pre><h4 id="nmap端口状态解析"><a href="#nmap端口状态解析" class="headerlink" title="nmap端口状态解析"></a>nmap端口状态解析</h4><ul>
+<pre class="line-numbers language-bash"><code class="language-bash">nmap 【选项<span class="token operator">|</span>多选项<span class="token operator">|</span>协议【目标】
+注： 选项与多选项之间用空格分隔开。若某些选项需要指定数据，选项与指定数据也需要用空格分开。（有些选项与参数直接可以不用空格分开。如：-p80<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="nmap端口状态解析"><a href="#nmap端口状态解析" class="headerlink" title="nmap端口状态解析"></a>nmap端口状态解析</h4><ul>
 <li>open ： 应用程序在该端口接收 TCP 连接或者 UDP 报文。 </li>
 <li>closed ：关闭的端口对于nmap也是可访问的， 它接收nmap探测报文并作出响应。但没有应用程序在其上监听。</li>
 <li>filtered ：由于包过滤阻止探测报文到达端口，nmap无法确定该端口是否开放。过滤可能来自专业的防火墙设备，路由规则 或者主机上的软件防火墙。</li>
@@ -371,7 +372,7 @@
 <li>open | filtered ：无法确定端口是开放还是被过滤， 开放的端口不响应就是一个例子。没有响应也可能意味着报文过滤器丢弃了探测报文或者它引发的任何反应。UDP，IP协议,FIN, Null 等扫描会引起。</li>
 <li>closed|filtered：（关闭或者被过滤的）：无法确定端口是关闭的还是被过滤的</li>
 </ul>
-<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><pre><code>-iL 从主机地址列表文件中导入扫描地址
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><pre class="line-numbers language-txt"><code class="language-txt">-iL 从主机地址列表文件中导入扫描地址
 -iR [主机数量] 随机选择目标进行扫描，主机数量设置为零是将无休止进行扫描
 --exclude 排除某个主机地址
 --excludefile 排除主机地址列表文件的地址
@@ -396,15 +397,15 @@
 -sI 利用僵尸主机上已知IP分段ID序列生成算法来探测目标上开放端口的信息，极端隐蔽
 -sO IP协议扫描，可以确定目标主机支持哪些IP协议，例如TCP/ICMP等
 -p 指定扫描的端口，可以是单个端口，也可以是端口范围，可以指定UDP或TCP协议扫描特定端口
--p &lt;name&gt; 指定扫描的协议，例如-p http 扫描http协议的端口状态
+-p <name> 指定扫描的协议，例如-p http 扫描http协议的端口状态
 --exclude-ports 排除指定端口不扫描
 -F 快速模式，仅扫描100个常用端口
 
 -sV 进行服务版本探测
---version-intensity &lt;level&gt; 设置版本扫描强度，范围0-9，默认为7，强度越高，时间越长，服务越可能被正确识别
+--version-intensity <level> 设置版本扫描强度，范围0-9，默认为7，强度越高，时间越长，服务越可能被正确识别
 
 -sC 使用默认类别的脚本进行扫描
---script=&lt;lua script&gt; 使用某个或某类脚本进行扫描，支持通配符描述
+--script=<lua script> 使用某个或某类脚本进行扫描，支持通配符描述
 
 -O 启动操作系统 探测
 -A 同时启用操作系统探测和服务版本探测
@@ -412,12 +413,12 @@
 --osscan-guess 当Nmap无法确定所检测的操作系统是，会尽可能地提供最相近的匹配
 
 -T 设置时间模板级数，范围0-5中选择，T0，T1用于IDS规避，T2降低扫描速度以使用更少的带宽和资源。默认T3，未做任何优化。T4假设具有合适及可靠的网络从而加速扫描。T5假设具有特别快的网络或者愿意为速度牺牲准确率
--host-timeout&lt;time&gt; 放弃低速目标主机，时间单位为毫秒
+-host-timeout<time> 放弃低速目标主机，时间单位为毫秒
 
 -f （报文分段）；--mtu (使用指定的MTU) 将TCP头分段在几个包中，使得包过滤器、IDS以及其他工具的检测更加困难
--D &lt;decoy1[,docoy2][,ME]...&gt; 隐蔽扫描。使用逗号分开每个诱饵主机，用自己真实IP作为诱饵使用ME选项。如在6号或者更靠后的位置使用ME选项，一些检测器就不报告真实ip。如不使用ME，真实IP将随机放置
--S &lt;ip_Address&gt; 伪造数据包的源地址
--source-port&lt;portnumber&gt; /g &lt;portnumber&gt; 伪造源端口
+-D <decoy1[,docoy2][,ME]...> 隐蔽扫描。使用逗号分开每个诱饵主机，用自己真实IP作为诱饵使用ME选项。如在6号或者更靠后的位置使用ME选项，一些检测器就不报告真实ip。如不使用ME，真实IP将随机放置
+-S <ip_Address> 伪造数据包的源地址
+-source-port<portnumber> /g <portnumber> 伪造源端口
 
 -oN 标准输出
 -oX XML输出写入指定的文件
@@ -425,10 +426,11 @@
 -oG Grep输出
 -oA 输出至所有格式
 -v 提高输出信息的详细度
--resume &lt;filename&gt; 继续中断的扫描
+-resume <filename> 继续中断的扫描
 
 -opne 只显示开启的端口
-</code></pre><h4 id="扫描技巧"><a href="#扫描技巧" class="headerlink" title="扫描技巧"></a>扫描技巧</h4><ul>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="扫描技巧"><a href="#扫描技巧" class="headerlink" title="扫描技巧"></a>扫描技巧</h4><ul>
 <li>扫描单一的一个主机：nmap (IP地址)</li>
 <li></li>
 <li>扫描整个子网： nmap (IP地址)/24  </li>
@@ -656,6 +658,7 @@ function ge...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -664,7 +667,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 
@@ -682,10 +685,11 @@ strcmp二进制安全字...
 						<p>
 							序列化在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。
 序列化函数：string serialize ( mixed $value )
+
 说明：
 返回对象的字符串表示。 
 返回值：
-返回对象的字符串表示或...
+返回对象的字符串表示...
 						</p>
 					</div>
 

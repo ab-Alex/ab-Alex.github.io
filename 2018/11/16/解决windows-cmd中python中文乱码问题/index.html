@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/11/16/解决windows-cmd中python中文乱码问题/" itemprop="url">
 		<time datetime="2018-11-16T06:23:40.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -336,16 +336,18 @@
 	<div class="article-content" id="article-content">
 		<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>中文windows默认的输出编码为gbk ，与脚本中定义的UTF-8不一样，所以出现了解码失败的情况</p>
 <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>我们可以通过改变cmd命令行窗口的输出格式来解决这个问题</p>
-<pre><code>chcp 65001 就是换成UTF-8代码页
+<pre class="line-numbers language-bash"><code class="language-bash">chcp 65001 就是换成UTF-8代码页
 chcp 936 可以换回默认的GBK
-</code></pre><p>但是这样就降低了脚本的兼容性，在其他环境运行的时候可能还会出现这样的错误，</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>但是这样就降低了脚本的兼容性，在其他环境运行的时候可能还会出现这样的错误，</p>
 <p>而且可能会影响其他脚本运行，所以推荐使用第二种方法。</p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><pre><code>#coding=utf-8
-b=&quot;请输入想要爬取的贴吧：&quot;
-print b
-a=&quot;请输入想要爬取的贴吧：&quot;.decode(&#39;utf-8&#39;).encode(&#39;gbk&#39;)
-print a
-</code></pre><p>用decode(‘utf-8’).encode(‘gbk’)就解决啦cmd中显示乱码的问题了。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#coding=utf-8</span>
+b<span class="token operator">=</span><span class="token string">"请输入想要爬取的贴吧："</span>
+<span class="token keyword">print</span> b
+a<span class="token operator">=</span><span class="token string">"请输入想要爬取的贴吧："</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'gbk'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span> a
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用decode(‘utf-8’).encode(‘gbk’)就解决啦cmd中显示乱码的问题了。</p>
 	
 	</div>
 	

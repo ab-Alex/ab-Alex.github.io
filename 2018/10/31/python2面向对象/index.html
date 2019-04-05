@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/10/31/python2面向对象/" itemprop="url">
 		<time datetime="2018-10-31T13:21:33.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -338,17 +338,20 @@
 <blockquote>
 <p>  个人理解仅供参考</p>
 </blockquote>
-<h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><pre><code>class ClassName:
-   &#39;类的帮助信息&#39;   #类文档字符串即注释
-   class_suite  #类体
-</code></pre><p>class_suite 由类成员，方法，数据属性组成。</p>
+<h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">ClassName</span><span class="token punctuation">:</span>
+   <span class="token string">'类的帮助信息'</span>   <span class="token comment" spellcheck="true">#类文档字符串即注释</span>
+   class_suite  <span class="token comment" spellcheck="true">#类体</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>class_suite 由类成员，方法，数据属性组成。</p>
 <p>类的方法与普通的函数只有一个特别的区别——它们必须有一个额外的第一个参数名称, 按照惯例它的名称是 self。</p>
 <h2 id="类的实例–对象"><a href="#类的实例–对象" class="headerlink" title="类的实例–对象"></a>类的实例–对象</h2><p>格式：</p>
-<pre><code>对象名=类名（参数）
-</code></pre><p>参数指这个类的构造函数完成初始化需要的参数，通过 __init__ 方法接收参数。</p>
+<pre class="line-numbers language-python"><code class="language-python">对象名<span class="token operator">=</span>类名（参数）
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>参数指这个类的构造函数完成初始化需要的参数，通过 __init__ 方法接收参数。</p>
 <p>访问属性<br>格式：</p>
-<pre><code>对象名.属性名
-</code></pre><p>也可使用以下方式访问属性：</p>
+<pre class="line-numbers language-python"><code class="language-python">对象名<span class="token punctuation">.</span>属性名
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>也可使用以下方式访问属性：</p>
 <ul>
 <li>getattr(obj, name[, default]) : 访问对象的属性。返回属性的值。</li>
 <li>hasattr(obj,name) : 检查是否存在一个属性。如果存在这个属性返回Ture。</li>
@@ -368,40 +371,44 @@
 <p>垃圾回收机制不仅针对引用计数为0的对象，同样也可以处理循环引用的情况。循环引用指的是，两个对象相互引用，但是没有其他变量引用他们。这种情况下，仅使用引用计数是不够的。Python 的垃圾收集器实际上是一个引用计数器和一个循环垃圾收集器。作为引用计数的补充， 垃圾收集器也会留心被分配的总量很大（及未通过引用计数销毁的那些）的对象。 在这种情况下， 解释器会暂停下来， 试图清理所有未引用的循环。</p>
 <p>析构函数 __del__ ，__del__在对象销毁的时候被调用。</p>
 <h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><p>通过继承创建的新类称为子类或派生类，被继承的类称为基类、父类或超类。<br><strong>继承语法：</strong></p>
-<pre><code>class 派生类名(基类名)
-</code></pre><p>python中继承的特点：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> 派生类名<span class="token punctuation">(</span>基类名<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>python中继承的特点：</p>
 <h3 id="一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。"><a href="#一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。" class="headerlink" title="一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。"></a>一、如果在子类中需要父类的构造方法就需要显示的调用父类的构造方法，或者不重写父类的构造方法。</h3><ol>
 <li>子类不重写__init__，实例化子类时，会自动调用父类定义的 __init__。</li>
 <li>如果子类重写了__init__ 时，实例化子类，就不会调用父类已经定义的 __init__。</li>
-<li>如果子类重写了__init__ 时，又要继承父类的构造方法，可以使用 super 关键字:<pre><code>super(子类，self).__init__(参数1，参数2，....)
-</code></pre>还有一种经典的写法：<pre><code>父类名称.__init__(self,参数1，参数2，...)
-</code></pre>实例：</li>
+<li>如果子类重写了__init__ 时，又要继承父类的构造方法，可以使用 super 关键字:<pre class="line-numbers language-python"><code class="language-python">super<span class="token punctuation">(</span>子类，self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>参数<span class="token number">1</span>，参数<span class="token number">2</span>，<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+还有一种经典的写法：<pre class="line-numbers language-python"><code class="language-python">父类名称<span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>self<span class="token punctuation">,</span>参数<span class="token number">1</span>，参数<span class="token number">2</span>，<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+实例：</li>
 </ol>
-<pre><code>#coding=utf-8
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#coding=utf-8</span>
 
-class Father(object):
-    def __init__(self, name):
-        self.name=name
-        print ( &quot;name: %s&quot; %( self.name) )
-    def getName(self):
-        return &#39;Father &#39; + self.name
+<span class="token keyword">class</span> <span class="token class-name">Father</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name<span class="token operator">=</span>name
+        <span class="token keyword">print</span> <span class="token punctuation">(</span> <span class="token string">"name: %s"</span> <span class="token operator">%</span><span class="token punctuation">(</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">getName</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'Father '</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>name
 
-# class Son(Father):#写法一
-#      &quot;&quot;&quot;docstring for Son&quot;&quot;&quot; 
-#      def __init__(self, name1):
-#          Father.__init__(self,name1)
-#          self.name1 = name1
-#          print ( &quot;name1: %s&quot; %( self.name) )
+<span class="token comment" spellcheck="true"># class Son(Father):#写法一</span>
+<span class="token comment" spellcheck="true">#      </span><span class="token triple-quoted-string string">"""docstring for Son"""</span> 
+<span class="token comment" spellcheck="true">#      def __init__(self, name1):</span>
+<span class="token comment" spellcheck="true">#          Father.__init__(self,name1)</span>
+<span class="token comment" spellcheck="true">#          self.name1 = name1</span>
+<span class="token comment" spellcheck="true">#          print ( "name1: %s" %( self.name) )</span>
 
-class Son(Father):#写法二
-    def __init__(self, name1):
-        super(Son,self).__init__(name1)
-        self.name1=name1
-        print ( &quot;name1: %s&quot; %( self.name) ) 
+<span class="token keyword">class</span> <span class="token class-name">Son</span><span class="token punctuation">(</span>Father<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#写法二</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>Son<span class="token punctuation">,</span>self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>name1<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>name1<span class="token operator">=</span>name1
+        <span class="token keyword">print</span> <span class="token punctuation">(</span> <span class="token string">"name1: %s"</span> <span class="token operator">%</span><span class="token punctuation">(</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token punctuation">)</span> 
 
-s=Son(&quot;aaa&quot;)
-print s.getName()
-</code></pre><h3 id="二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上-self-参数变量。区别在于类中调用普通函数时并不需要带上-self-参数"><a href="#二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上-self-参数变量。区别在于类中调用普通函数时并不需要带上-self-参数" class="headerlink" title="二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数"></a>二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数</h3><p>（理解的不太透）</p>
+s<span class="token operator">=</span>Son<span class="token punctuation">(</span><span class="token string">"aaa"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span> s<span class="token punctuation">.</span>getName<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上-self-参数变量。区别在于类中调用普通函数时并不需要带上-self-参数"><a href="#二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上-self-参数变量。区别在于类中调用普通函数时并不需要带上-self-参数" class="headerlink" title="二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数"></a>二、在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数</h3><p>（理解的不太透）</p>
 <h3 id="三、Python-总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）"><a href="#三、Python-总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）" class="headerlink" title="三、Python 总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）"></a>三、Python 总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）</h3><p>可以使用issubclass()或者isinstance()方法来检测类的继承关系或实例关系。</p>
 <ul>
 <li>issubclass() - 布尔函数判断一个类是另一个类的子类或者子孙类，语法：issubclass(sub,sup)</li>
@@ -445,54 +452,56 @@ print s.getName()
 </tbody>
 </table>
 <h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p>看着实例理解</p>
-<pre><code>class Vector:
-   def __init__(self, a, b):
-      self.a = a
-      self.b = b
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Vector</span><span class="token punctuation">:</span>
+   <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      self<span class="token punctuation">.</span>a <span class="token operator">=</span> a
+      self<span class="token punctuation">.</span>b <span class="token operator">=</span> b
 
-   def __str__(self):
-      return &#39;Vector (%d, %d)&#39; % (self.a, self.b)
+   <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token string">'Vector (%d, %d)'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>a<span class="token punctuation">,</span> self<span class="token punctuation">.</span>b<span class="token punctuation">)</span>
 
-   def __add__(self,other):
-      return Vector(self.a + other.a, self.b + other.b)
+   <span class="token keyword">def</span> <span class="token function">__add__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> Vector<span class="token punctuation">(</span>self<span class="token punctuation">.</span>a <span class="token operator">+</span> other<span class="token punctuation">.</span>a<span class="token punctuation">,</span> self<span class="token punctuation">.</span>b <span class="token operator">+</span> other<span class="token punctuation">.</span>b<span class="token punctuation">)</span>
 
-v1 = Vector(2,10)
-v2 = Vector(5,-2)
-print v1 + v2
-</code></pre><p>因为__add__返回值是一个对象，在python中返回值是对象时，它真正返回的是对象的地址，这时python自动调用__str__把对象转换成适于人阅读的形式，然后就出现结果啦。(个人理解仅供参考)</p>
+v1 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> Vector<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span> v1 <span class="token operator">+</span> v2
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为__add__返回值是一个对象，在python中返回值是对象时，它真正返回的是对象的地址，这时python自动调用__str__把对象转换成适于人阅读的形式，然后就出现结果啦。(个人理解仅供参考)</p>
 <p>首先,解释一下__xxx__函数在类中有特殊的用法，每次在返回值是对象时都会在最后自动调用。如果没有__xxx__时在python中返回的是对象的地址。<br>例：</p>
-<pre><code>#coding=utf-8
-class Cat:
-    &quot;&quot;&quot;定义一个猫类&quot;&quot;&quot;
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#coding=utf-8</span>
+<span class="token keyword">class</span> <span class="token class-name">Cat</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""定义一个猫类"""</span>
 
-    def __init__(self, new_name, new_age):
-        &quot;&quot;&quot;在创建完对象之后 会自动调用, 它完成对象的初始化的功能&quot;&quot;&quot;
-        # self.name = &quot;汤姆&quot;
-        # self.age = 20
-        self.name = new_name
-        self.age = new_age  # 它是一个对象中的属性,在对象中存储,即只要这个对象还存在,那么这个变量就可以使用
-        # num = 100  # 它是一个局部变量,当这个函数执行完之后,这个变量的空间就没有了,因此其他方法不能使用这个变量
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> new_name<span class="token punctuation">,</span> new_age<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""在创建完对象之后 会自动调用, 它完成对象的初始化的功能"""</span>
+        <span class="token comment" spellcheck="true"># self.name = "汤姆"</span>
+        <span class="token comment" spellcheck="true"># self.age = 20</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> new_name
+        self<span class="token punctuation">.</span>age <span class="token operator">=</span> new_age  <span class="token comment" spellcheck="true"># 它是一个对象中的属性,在对象中存储,即只要这个对象还存在,那么这个变量就可以使用</span>
+        <span class="token comment" spellcheck="true"># num = 100  # 它是一个局部变量,当这个函数执行完之后,这个变量的空间就没有了,因此其他方法不能使用这个变量</span>
 
-    def __str__(self):
-        &quot;&quot;&quot;返回一个对象的描述信息&quot;&quot;&quot;
-        # print(num)
-        return &quot;名字是:%s , 年龄是:%d&quot; % (self.name, self.age)
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""返回一个对象的描述信息"""</span>
+        <span class="token comment" spellcheck="true"># print(num)</span>
+        <span class="token keyword">return</span> <span class="token string">"名字是:%s , 年龄是:%d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>age<span class="token punctuation">)</span>
 
-    def eat(self):
-        print(&quot;%s在吃鱼....&quot; % self.name)
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s在吃鱼...."</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
 
-    def drink(self):
-        print(&quot;%s在喝可乐...&quot; % self.name)
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s在喝可乐..."</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
 
-    def introduce(self):
-        # print(&quot;名字是:%s, 年龄是:%d&quot; % (汤姆的名字, 汤姆的年龄))
-        # print(&quot;名字是:%s, 年龄是:%d&quot; % (tom.name, tom.age))
-        print(&quot;名字是:%s, 年龄是:%d&quot; % (self.name, self.age))
+    <span class="token keyword">def</span> <span class="token function">introduce</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># print("名字是:%s, 年龄是:%d" % (汤姆的名字, 汤姆的年龄))</span>
+        <span class="token comment" spellcheck="true"># print("名字是:%s, 年龄是:%d" % (tom.name, tom.age))</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"名字是:%s, 年龄是:%d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-# 创建了一个对象
-tom = Cat(&quot;汤姆&quot;, 30)
-print(tom)
-</code></pre><p>从这个例子可以看出</p>
+<span class="token comment" spellcheck="true"># 创建了一个对象</span>
+tom <span class="token operator">=</span> Cat<span class="token punctuation">(</span><span class="token string">"汤姆"</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>tom<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从这个例子可以看出</p>
 <h2 id="类属性与方法"><a href="#类属性与方法" class="headerlink" title="类属性与方法"></a>类属性与方法</h2><h3 id="类的私有属性"><a href="#类的私有属性" class="headerlink" title="类的私有属性"></a>类的私有属性</h3><p>__private_attrs：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用时 self.__private_attrs。</p>
 <h3 id="类的方法"><a href="#类的方法" class="headerlink" title="类的方法"></a>类的方法</h3><p>在类的内部，使用 def 关键字可以为类定义一个方法，与一般函数定义不同，类方法必须包含参数 self,且为第一个参数。</p>
 <h3 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h3><p> __private_method：两个下划线开头，声明该方法为私有方法，不能在类的外部调用。在类的内部调用 self.__private_methods </p>

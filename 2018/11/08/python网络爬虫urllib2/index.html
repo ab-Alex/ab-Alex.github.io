@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/11/08/python网络爬虫urllib2/" itemprop="url">
 		<time datetime="2018-11-08T11:40:14.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -337,134 +337,140 @@
 		<h2 id="爬虫简介"><a href="#爬虫简介" class="headerlink" title="爬虫简介"></a>爬虫简介</h2><p>个人认为：爬虫就是用来抓取网页数据（即：源代码）的程序。</p>
 <h2 id="urllib2简介"><a href="#urllib2简介" class="headerlink" title="urllib2简介"></a>urllib2简介</h2><p>urllib2是用于获取URLs(统一资源定位符)的一个Python模块。Urllib2使用相关的网络协议(FTP,http)。urllib2 在 python3 中被改为urllib.request</p>
 <p>简单的获取网页内容的实例：</p>
-<pre><code>#coding = utf-8
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#coding = utf-8</span>
 
-import urllib2 #导入urllib2模块
-Response=urllib2.urlopen(&#39;http://www.baidu.com&#39;)
-# 向指定的url发送请求，并返回服务器响应的类文件对象
-print Response.read()
-#read()方法读取文件全部内容，返回字符串
-</code></pre><h3 id="urllib2-urlopen-url-data-headers"><a href="#urllib2-urlopen-url-data-headers" class="headerlink" title="urllib2.urlopen(url[,data][,headers])"></a>urllib2.urlopen(url[,data][,headers])</h3><p>模拟浏览器发送GET请求，就需要使用Request对象，通过往Request对象添加HTTP头，我们就可以把请求伪装成浏览器。</p>
+<span class="token keyword">import</span> urllib2 <span class="token comment" spellcheck="true">#导入urllib2模块</span>
+Response<span class="token operator">=</span>urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span><span class="token string">'http://www.baidu.com'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 向指定的url发送请求，并返回服务器响应的类文件对象</span>
+<span class="token keyword">print</span> Response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#read()方法读取文件全部内容，返回字符串</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="urllib2-urlopen-url-data-headers"><a href="#urllib2-urlopen-url-data-headers" class="headerlink" title="urllib2.urlopen(url[,data][,headers])"></a>urllib2.urlopen(url[,data][,headers])</h3><p>模拟浏览器发送GET请求，就需要使用Request对象，通过往Request对象添加HTTP头，我们就可以把请求伪装成浏览器。</p>
 <p>urllib2 对应Request对象表示你做出HTTP请求，最简单的形式，创建一个指定要获取的网址的Request对象。<br><strong>(个人认为：Request对象就是浏览器发的请求包）</strong><br>这个Request对象调用urlopen，返回URL请求的Response对象。Response对象是一个类似于文件对象，你可以在Response中使用 .read()。</p>
 <p><strong>注：参数通过urllib2.Request()来传</strong></p>
-<pre><code>import urllib2
-req = urllib2.Request(&#39;http://python.org&#39;)
-response = urllib2.urlopen(req)
-the_page = response.read()
-print the_page
-</code></pre><p>在HTTP协议中，Request对象有两个额外的事情可以做，第一，你可以通过将数据发送到服务器；第二，你可以通过数据的额外的信息(metadata)或请求到服务器本身，这个信息是发送HTTP’headers’。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> urllib2
+req <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">'http://python.org'</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>req<span class="token punctuation">)</span>
+the_page <span class="token operator">=</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span> the_page
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在HTTP协议中，Request对象有两个额外的事情可以做，第一，你可以通过将数据发送到服务器；第二，你可以通过数据的额外的信息(metadata)或请求到服务器本身，这个信息是发送HTTP’headers’。</p>
 <h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
 <li>url：统一资源定位符,即：网站地址</li>
 <li>data（默认空）：是伴随 url 提交的数据（比如要post的数据），同时 HTTP 请求将从 “GET”方式 改为 “POST”方式。</li>
 <li>headers（默认空）：是一个<strong>字典</strong>，包含了需要发送的HTTP报头的键值对。</li>
 </ul>
 <p><strong>注：urllib2默认的User-Agent是Python-urllib/x.y（x和y是Python主版本和次版本号,例如 Python-urllib/2.7）,容易被检查到是爬虫</strong></p>
-<pre><code># _*_ coding:utf-8 _*_
-import urllib2
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># _*_ coding:utf-8 _*_</span>
+<span class="token keyword">import</span> urllib2
 
-# User-Agent是爬虫与反爬虫的第一步即构造客户端浏览器和系统信息
-ua_headers = {&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36&#39;}
-# 通过urllib2.Request()方法构造一个请求对象
-request = urllib2.Request(&#39;http://www.baidu.com/&#39;,headers=ua_headers)
+<span class="token comment" spellcheck="true"># User-Agent是爬虫与反爬虫的第一步即构造客户端浏览器和系统信息</span>
+ua_headers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'User-Agent'</span><span class="token punctuation">:</span><span class="token string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true"># 通过urllib2.Request()方法构造一个请求对象</span>
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">'http://www.baidu.com/'</span><span class="token punctuation">,</span>headers<span class="token operator">=</span>ua_headers<span class="token punctuation">)</span>
 
-#向指定的url地址发送请求，并返回服务器响应的类文件对象
-response = urllib2.urlopen(request)
+<span class="token comment" spellcheck="true">#向指定的url地址发送请求，并返回服务器响应的类文件对象</span>
+response <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
 
-# 服务器返回的类文件对象支持python文件对象的操作方法
-# read()方法就是读取文件里的全部内容，返回字符串
-html = response.read()
+<span class="token comment" spellcheck="true"># 服务器返回的类文件对象支持python文件对象的操作方法</span>
+<span class="token comment" spellcheck="true"># read()方法就是读取文件里的全部内容，返回字符串</span>
+html <span class="token operator">=</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-print html
-</code></pre><h3 id="response的常用方法"><a href="#response的常用方法" class="headerlink" title="response的常用方法"></a>response的常用方法</h3><pre><code># _*_ coding:utf-8 _*_
-import urllib2
+<span class="token keyword">print</span> html
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="response的常用方法"><a href="#response的常用方法" class="headerlink" title="response的常用方法"></a>response的常用方法</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># _*_ coding:utf-8 _*_</span>
+<span class="token keyword">import</span> urllib2
 
-# User-Agent是爬虫与反爬虫的第一步
-ua_headers = {&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36&#39;}
-# 通过urllib2.Request()方法构造一个请求对象
-request = urllib2.Request(&#39;http://www.baidu.com/&#39;,headers=ua_headers)
+<span class="token comment" spellcheck="true"># User-Agent是爬虫与反爬虫的第一步</span>
+ua_headers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'User-Agent'</span><span class="token punctuation">:</span><span class="token string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true"># 通过urllib2.Request()方法构造一个请求对象</span>
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">'http://www.baidu.com/'</span><span class="token punctuation">,</span>headers<span class="token operator">=</span>ua_headers<span class="token punctuation">)</span>
 
-#向指定的url地址发送请求，并返回服务器响应的类文件对象
-response = urllib2.urlopen(request)
+<span class="token comment" spellcheck="true">#向指定的url地址发送请求，并返回服务器响应的类文件对象</span>
+response <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
 
-# 服务器返回的类文件对象支持python文件对象的操作方法
-# read()方法就是读取文件里的全部内容，返回字符串
-html = response.read()
+<span class="token comment" spellcheck="true"># 服务器返回的类文件对象支持python文件对象的操作方法</span>
+<span class="token comment" spellcheck="true"># read()方法就是读取文件里的全部内容，返回字符串</span>
+html <span class="token operator">=</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-# 返回HTTP的响应吗，成功返回200,4服务器页面出错，5服务器问题
-print response.getcode()     #200
+<span class="token comment" spellcheck="true"># 返回HTTP的响应吗，成功返回200,4服务器页面出错，5服务器问题</span>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>getcode<span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">#200</span>
 
-# 返回数据的实际url,防止重定向
-print response.geturl()     #https://www.baidu.com/
+<span class="token comment" spellcheck="true"># 返回数据的实际url,防止重定向</span>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>geturl<span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">#https://www.baidu.com/</span>
 
-# 返回服务器响应的HTTP报头
-print response.info()
+<span class="token comment" spellcheck="true"># 返回服务器响应的HTTP报头</span>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-# print html
-</code></pre><p>随机选择一个Use-Agent<br>为了防止封IP，先生成一个user-agent列表，然后从中随机选择一个</p>
-<pre><code># _*_ coding:utf-8 _*_
-import urllib2
-import random
+<span class="token comment" spellcheck="true"># print html</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>随机选择一个Use-Agent<br>为了防止封IP，先生成一个user-agent列表，然后从中随机选择一个</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># _*_ coding:utf-8 _*_</span>
+<span class="token keyword">import</span> urllib2
+<span class="token keyword">import</span> random
 
-url = &#39;http:/www.baidu.com/&#39;
+url <span class="token operator">=</span> <span class="token string">'http:/www.baidu.com/'</span>
 
-# 可以试User-Agent列表，也可以是代理列表
-ua_list = [&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1&quot;,
-    &quot;Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1&quot;,
-    &quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3&quot;,
-    &quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;,
-    &quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;
-]
+<span class="token comment" spellcheck="true"># 可以试User-Agent列表，也可以是代理列表</span>
+ua_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span>
+<span class="token punctuation">]</span>
 
-# 在User-Agent列表中随机选择一个User-Agent
-user_agent = random.choice(ua_list)
+<span class="token comment" spellcheck="true"># 在User-Agent列表中随机选择一个User-Agent</span>
+user_agent <span class="token operator">=</span> random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>ua_list<span class="token punctuation">)</span>
 
-# 构造一个请求
-request = urllib2.Request(url)
+<span class="token comment" spellcheck="true"># 构造一个请求</span>
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
 
-# add_header()方法添加/修改一个HTTP报头
-request.add_header(&#39;User-Agent&#39;,user_agent)
+<span class="token comment" spellcheck="true"># add_header()方法添加/修改一个HTTP报头</span>
+request<span class="token punctuation">.</span>add_header<span class="token punctuation">(</span><span class="token string">'User-Agent'</span><span class="token punctuation">,</span>user_agent<span class="token punctuation">)</span>
 
-#get_header()获取一个已有的HTTP报头的值,注意只能第一个字母大写，后面的要小写
-print request.get_header(&#39;User-agent&#39;)
-</code></pre><h2 id="添加更多的Header信息"><a href="#添加更多的Header信息" class="headerlink" title="添加更多的Header信息"></a>添加更多的Header信息</h2><p>在HTTP Request中加入特定的Header，来构造一个完整的HTTP请求消息。</p>
+<span class="token comment" spellcheck="true">#get_header()获取一个已有的HTTP报头的值,注意只能第一个字母大写，后面的要小写</span>
+<span class="token keyword">print</span> request<span class="token punctuation">.</span>get_header<span class="token punctuation">(</span><span class="token string">'User-agent'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="添加更多的Header信息"><a href="#添加更多的Header信息" class="headerlink" title="添加更多的Header信息"></a>添加更多的Header信息</h2><p>在HTTP Request中加入特定的Header，来构造一个完整的HTTP请求消息。</p>
 <p><strong>可以通过Request.add_header()添加或修改一个特定的header也可以通过调用Request.get_header()来查看已有的header信息。</strong></p>
 <p>实例：</p>
-<pre><code># urllib2_headers.py
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># urllib2_headers.py</span>
 
-import urllib2
+<span class="token keyword">import</span> urllib2
 
-url = &quot;http://www.itcast.cn&quot;
+url <span class="token operator">=</span> <span class="token string">"http://www.itcast.cn"</span>
 
-#IE 9.0 的 User-Agent
-header = {&quot;User-Agent&quot; : &quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;&quot;} 
-request = urllib2.Request(url, headers = header)
+<span class="token comment" spellcheck="true">#IE 9.0 的 User-Agent</span>
+header <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"User-Agent"</span> <span class="token punctuation">:</span> <span class="token string">"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;"</span><span class="token punctuation">}</span> 
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers <span class="token operator">=</span> header<span class="token punctuation">)</span>
 
-#也可以通过调用Request.add_header() 添加/修改一个特定的header
-request.add_header(&quot;Connection&quot;, &quot;keep-alive&quot;)
+<span class="token comment" spellcheck="true">#也可以通过调用Request.add_header() 添加/修改一个特定的header</span>
+request<span class="token punctuation">.</span>add_header<span class="token punctuation">(</span><span class="token string">"Connection"</span><span class="token punctuation">,</span> <span class="token string">"keep-alive"</span><span class="token punctuation">)</span>
 
-# 也可以通过调用Request.get_header()来查看header信息
-# request.get_header(header_name=&quot;Connection&quot;)
+<span class="token comment" spellcheck="true"># 也可以通过调用Request.get_header()来查看header信息</span>
+<span class="token comment" spellcheck="true"># request.get_header(header_name="Connection")</span>
 
-response = urllib2.urlopen(req)
+response <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>req<span class="token punctuation">)</span>
 
-print response.code     #可以查看响应状态码
-html = response.read()
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>code     <span class="token comment" spellcheck="true">#可以查看响应状态码</span>
+html <span class="token operator">=</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-print html
-</code></pre><p><strong>urllib2默认只支持HTTP/HTTPS的GET和POST方法</strong></p>
+<span class="token keyword">print</span> html
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>urllib2默认只支持HTTP/HTTPS的GET和POST方法</strong></p>
 <h2 id="urllib和urllib2的异同"><a href="#urllib和urllib2的异同" class="headerlink" title="urllib和urllib2的异同"></a>urllib和urllib2的异同</h2><ul>
 <li>urllib 模块仅可以接受URL，不能创建 设置了headers 的Request 类实例；</li>
 <li>但是 urllib 提供 urlencode 方法用来产生GET查询字符串，而 urllib2 则没有。（这是 urllib 和 urllib2 经常一起使用的主要原因）</li>
@@ -472,24 +478,25 @@ print html
 </ul>
 <h2 id="URL编码转换"><a href="#URL编码转换" class="headerlink" title="URL编码转换"></a>URL编码转换</h2><p>一般HTTP请求提交数据，需要编码成 URL编码格式，然后做为url的一部分，或者作为参数传到Request对象中。</p>
 <h2 id="处理HTTPS请求SSL证书验证"><a href="#处理HTTPS请求SSL证书验证" class="headerlink" title="处理HTTPS请求SSL证书验证"></a>处理HTTPS请求SSL证书验证</h2><p>urllib2可以为 HTTPS 请求验证SSL证书，就像web浏览器一样，如果网站的SSL证书是经过CA认证的，则能够正常访问。如果以后遇到这种网站，我们需要单独处理SSL证书，让程序忽略SSL证书验证错误，即可正常访问。</p>
-<pre><code>import urllib
-import urllib2
-# 1. 导入Python SSL处理模块
-import ssl
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> urllib
+<span class="token keyword">import</span> urllib2
+<span class="token comment" spellcheck="true"># 1. 导入Python SSL处理模块</span>
+<span class="token keyword">import</span> ssl
 
-# 2. 表示忽略未经核实的SSL证书认证
-context = ssl._create_unverified_context()
+<span class="token comment" spellcheck="true"># 2. 表示忽略未经核实的SSL证书认证</span>
+context <span class="token operator">=</span> ssl<span class="token punctuation">.</span>_create_unverified_context<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-url = &quot;https://www.12306.cn/mormhweb/&quot;
-headers = {&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36&quot;}
+url <span class="token operator">=</span> <span class="token string">"https://www.12306.cn/mormhweb/"</span>
+headers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"User-Agent"</span><span class="token punctuation">:</span> <span class="token string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"</span><span class="token punctuation">}</span>
 
-request = urllib2.Request(url, headers = headers)
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span>url<span class="token punctuation">,</span> headers <span class="token operator">=</span> headers<span class="token punctuation">)</span>
 
-# 3. 在urlopen()方法里 指明添加 context 参数
-response = urllib2.urlopen(request, context = context)
+<span class="token comment" spellcheck="true"># 3. 在urlopen()方法里 指明添加 context 参数</span>
+response <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>request<span class="token punctuation">,</span> context <span class="token operator">=</span> context<span class="token punctuation">)</span>
 
-print response.read()
-</code></pre><h2 id="Handler处理器-和-自定义Opener"><a href="#Handler处理器-和-自定义Opener" class="headerlink" title="Handler处理器 和 自定义Opener"></a>Handler处理器 和 自定义Opener</h2><p>opener是 urllib2.OpenerDirector 的实例，我们一直使用的urlopen，它是一个特殊的opener（也就是模块帮我们构建好的）。</p>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Handler处理器-和-自定义Opener"><a href="#Handler处理器-和-自定义Opener" class="headerlink" title="Handler处理器 和 自定义Opener"></a>Handler处理器 和 自定义Opener</h2><p>opener是 urllib2.OpenerDirector 的实例，我们一直使用的urlopen，它是一个特殊的opener（也就是模块帮我们构建好的）。</p>
 <p>但是基本的urlopen()方法不支持代理、cookie等其他的HTTP/HTTPS高级功能。所以要支持这些功能：</p>
 <ol>
 <li>使用相关的 Handler处理器 来创建特定功能的处理器对象；</li>
@@ -497,89 +504,93 @@ print response.read()
 <li>使用自定义的opener对象，调用open()方法发送请求。</li>
 </ol>
 <p>如果程序里所有的请求都使用自定义的opener，可以使用urllib2.install_opener() 将自定义的 opener 对象 定义为 全局opener，表示如果之后凡是调用urlopen，都将使用这个opener（根据自己的需求来选择）</p>
-<h3 id="简单的自定义opener"><a href="#简单的自定义opener" class="headerlink" title="简单的自定义opener()"></a>简单的自定义opener()</h3><pre><code>import urllib2
+<h3 id="简单的自定义opener"><a href="#简单的自定义opener" class="headerlink" title="简单的自定义opener()"></a>简单的自定义opener()</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> urllib2
 
-# 构建一个HTTPHandler 处理器对象，支持处理HTTP请求
-http_handler = urllib2.HTTPHandler()
+<span class="token comment" spellcheck="true"># 构建一个HTTPHandler 处理器对象，支持处理HTTP请求</span>
+http_handler <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>HTTPHandler<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-# 构建一个HTTPHandler 处理器对象，支持处理HTTPS请求
-# http_handler = urllib2.HTTPSHandler()
+<span class="token comment" spellcheck="true"># 构建一个HTTPHandler 处理器对象，支持处理HTTPS请求</span>
+<span class="token comment" spellcheck="true"># http_handler = urllib2.HTTPSHandler()</span>
 
-# 调用urllib2.build_opener()方法，创建支持处理HTTP请求的opener对象
-opener = urllib2.build_opener(http_handler)
+<span class="token comment" spellcheck="true"># 调用urllib2.build_opener()方法，创建支持处理HTTP请求的opener对象</span>
+opener <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>build_opener<span class="token punctuation">(</span>http_handler<span class="token punctuation">)</span>
 
-# 构建 Request请求
-request = urllib2.Request(&quot;http://www.baidu.com/&quot;)
+<span class="token comment" spellcheck="true"># 构建 Request请求</span>
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">"http://www.baidu.com/"</span><span class="token punctuation">)</span>
 
-# 调用自定义opener对象的open()方法，发送request请求
-response = opener.open(request)
+<span class="token comment" spellcheck="true"># 调用自定义opener对象的open()方法，发送request请求</span>
+response <span class="token operator">=</span> opener<span class="token punctuation">.</span>open<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
 
-# 获取服务器响应内容
-print response.read()
-</code></pre><p>这种方式发送请求得到的结果，和使用urllib2.urlopen()发送HTTP/HTTPS请求得到的结果是一样的。</p>
+<span class="token comment" spellcheck="true"># 获取服务器响应内容</span>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种方式发送请求得到的结果，和使用urllib2.urlopen()发送HTTP/HTTPS请求得到的结果是一样的。</p>
 <p>如果在 HTTPHandler()增加 debuglevel=1参数，还会将 Debug Log 打开，这样程序在执行的时候，会把收包和发包的报头在屏幕上自动打印出来，方便调试，有时可以省去抓包的工作。</p>
-<pre><code># 构建一个HTTPHandler 处理器对象，支持处理HTTP请求，同时开启Debug Log，debuglevel 值默认 0
-http_handler = urllib2.HTTPHandler(debuglevel=1)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 构建一个HTTPHandler 处理器对象，支持处理HTTP请求，同时开启Debug Log，debuglevel 值默认 0</span>
+http_handler <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>HTTPHandler<span class="token punctuation">(</span>debuglevel<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
 
-# 构建一个HTTPHSandler 处理器对象，支持处理HTTPS请求，同时开启Debug Log，debuglevel 值默认 0
-https_handler = urllib2.HTTPSHandler(debuglevel=1)
-</code></pre><h2 id="ProxyHandler处理器（代理设置）"><a href="#ProxyHandler处理器（代理设置）" class="headerlink" title="ProxyHandler处理器（代理设置）"></a>ProxyHandler处理器（代理设置）</h2><p>使用代理IP，这是爬虫/反爬虫的第二大招，通常也是最好用的。</p>
+<span class="token comment" spellcheck="true"># 构建一个HTTPHSandler 处理器对象，支持处理HTTPS请求，同时开启Debug Log，debuglevel 值默认 0</span>
+https_handler <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>HTTPSHandler<span class="token punctuation">(</span>debuglevel<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="ProxyHandler处理器（代理设置）"><a href="#ProxyHandler处理器（代理设置）" class="headerlink" title="ProxyHandler处理器（代理设置）"></a>ProxyHandler处理器（代理设置）</h2><p>使用代理IP，这是爬虫/反爬虫的第二大招，通常也是最好用的。</p>
 <p>很多网站会检测某一段时间某个IP的访问次数(通过流量统计，系统日志等)，如果访问次数多的不像正常人，它会禁止这个IP的访问。</p>
 <p>所以我们可以设置一些代理服务器，每隔一段时间换一个代理，就算IP被禁止，依然可以换个IP继续爬取。</p>
-<pre><code>import urllib2
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> urllib2
 
-# 构建了两个代理Handler，一个有代理IP，一个没有代理IP
-httpproxy_handler = urllib2.ProxyHandler({&quot;http&quot; : &quot;124.88.67.81:80&quot;})
-nullproxy_handler = urllib2.ProxyHandler({})
+<span class="token comment" spellcheck="true"># 构建了两个代理Handler，一个有代理IP，一个没有代理IP</span>
+httpproxy_handler <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>ProxyHandler<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"http"</span> <span class="token punctuation">:</span> <span class="token string">"124.88.67.81:80"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+nullproxy_handler <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>ProxyHandler<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-proxySwitch = True #定义一个代理开关
+proxySwitch <span class="token operator">=</span> <span class="token boolean">True</span> <span class="token comment" spellcheck="true">#定义一个代理开关</span>
 
-# 通过 urllib2.build_opener()方法使用这些代理Handler对象，创建自定义opener对象
-# 根据代理开关是否打开，使用不同的代理模式
-if proxySwitch:  
-    opener = urllib2.build_opener(httpproxy_handler)
-else:
-    opener = urllib2.build_opener(nullproxy_handler)
+<span class="token comment" spellcheck="true"># 通过 urllib2.build_opener()方法使用这些代理Handler对象，创建自定义opener对象</span>
+<span class="token comment" spellcheck="true"># 根据代理开关是否打开，使用不同的代理模式</span>
+<span class="token keyword">if</span> proxySwitch<span class="token punctuation">:</span>  
+    opener <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>build_opener<span class="token punctuation">(</span>httpproxy_handler<span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    opener <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>build_opener<span class="token punctuation">(</span>nullproxy_handler<span class="token punctuation">)</span>
 
-request = urllib2.Request(&quot;http://www.baidu.com/&quot;)
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">"http://www.baidu.com/"</span><span class="token punctuation">)</span>
 
-# 1. 如果这么写，只有使用opener.open()方法发送请求才使用自定义的代理，而urlopen()则不使用自定义代理。
-response = opener.open(request)
+<span class="token comment" spellcheck="true"># 1. 如果这么写，只有使用opener.open()方法发送请求才使用自定义的代理，而urlopen()则不使用自定义代理。</span>
+response <span class="token operator">=</span> opener<span class="token punctuation">.</span>open<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
 
-# 2. 如果这么写，就是将opener应用到全局，之后所有的，不管是opener.open()还是urlopen() 发送请求，都将使用自定义代理。
-# urllib2.install_opener(opener)
-# response = urlopen(request)
+<span class="token comment" spellcheck="true"># 2. 如果这么写，就是将opener应用到全局，之后所有的，不管是opener.open()还是urlopen() 发送请求，都将使用自定义代理。</span>
+<span class="token comment" spellcheck="true"># urllib2.install_opener(opener)</span>
+<span class="token comment" spellcheck="true"># response = urlopen(request)</span>
 
-print response.read()
-</code></pre><p>免费短期代理网站举例：</p>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>免费短期代理网站举例：</p>
 <ul>
 <li><a href="http://www.xicidaili.com/" target="_blank" rel="noopener">西刺免费代理IP</a></li>
 <li><a href="https://www.kuaidaili.com/free/inha/" target="_blank" rel="noopener">快代理免费代理</a></li>
 <li><a href="http://www.goubanjia.com//" target="_blank" rel="noopener">全网代理IP</a></li>
 </ul>
 <p>如果代理IP足够多，就可以像随机获取User-Agent一样，随机选择一个代理去访问网站。</p>
-<pre><code>import urllib2
-import random
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> urllib2
+<span class="token keyword">import</span> random
 
-proxy_list = [
-    {&quot;http&quot; : &quot;124.88.67.81:80&quot;},
-    {&quot;http&quot; : &quot;124.88.67.81:80&quot;},
-    {&quot;http&quot; : &quot;124.88.67.81:80&quot;},
-    {&quot;http&quot; : &quot;124.88.67.81:80&quot;},
-    {&quot;http&quot; : &quot;124.88.67.81:80&quot;}
-]
+proxy_list <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token string">"http"</span> <span class="token punctuation">:</span> <span class="token string">"124.88.67.81:80"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"http"</span> <span class="token punctuation">:</span> <span class="token string">"124.88.67.81:80"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"http"</span> <span class="token punctuation">:</span> <span class="token string">"124.88.67.81:80"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"http"</span> <span class="token punctuation">:</span> <span class="token string">"124.88.67.81:80"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"http"</span> <span class="token punctuation">:</span> <span class="token string">"124.88.67.81:80"</span><span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
 
-# 随机选择一个代理
-proxy = random.choice(proxy_list)
-# 使用选择的代理构建代理处理器对象
-httpproxy_handler = urllib2.ProxyHandler(proxy)
+<span class="token comment" spellcheck="true"># 随机选择一个代理</span>
+proxy <span class="token operator">=</span> random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>proxy_list<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 使用选择的代理构建代理处理器对象</span>
+httpproxy_handler <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>ProxyHandler<span class="token punctuation">(</span>proxy<span class="token punctuation">)</span>
 
-opener = urllib2.build_opener(httpproxy_handler)
+opener <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>build_opener<span class="token punctuation">(</span>httpproxy_handler<span class="token punctuation">)</span>
 
-request = urllib2.Request(&quot;http://www.baidu.com/&quot;)
-response = opener.open(request)
-print response.read()
-</code></pre><p>这些免费开放代理一般会有很多人都在使用，而且代理有寿命短，速度慢，匿名度不高，HTTP/HTTPS支持不稳定等缺点（免费没好货）。</p>
+request <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>Request<span class="token punctuation">(</span><span class="token string">"http://www.baidu.com/"</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> opener<span class="token punctuation">.</span>open<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+<span class="token keyword">print</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这些免费开放代理一般会有很多人都在使用，而且代理有寿命短，速度慢，匿名度不高，HTTP/HTTPS支持不稳定等缺点（免费没好货）。</p>
 	
 	</div>
 	

