@@ -594,6 +594,25 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 		
 				<li>
 					<div>
+						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
+							php create_function()代码注入
+						</a>
+						<p>
+							create_function代码注入string create_function(string $args , string $code)
+$args 变量部分
+$code 方法代码部分
+返回值：以字符串形式返回唯一的函数名，如果出...
+						</p>
+					</div>
+
+					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
+						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
 							nmap的使用
 						</a>
@@ -612,22 +631,6 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 
 					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
 						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
-							xss的绕过和利用
-						</a>
-						<p>
-							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
-						</p>
-					</div>
-
-					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
-						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
 					</a>
 				</li>											
 		
@@ -701,7 +704,7 @@ ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
 		//id: decodeURI(window.location.pathname),
 		//id: (window.location.pathname).split("/").pop().substring(0, 49),
 		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
-		repo: 'Annie-Gitalk',
+		repo: 'blog-Comment-Repo',
 		owner: 'ab-Alex',
 		admin: 'ab-Alex',
 		distractionFreeMode: 'true',

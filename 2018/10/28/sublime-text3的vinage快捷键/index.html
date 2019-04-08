@@ -483,6 +483,25 @@ bp设置和使用proxy设置
 		
 				<li>
 					<div>
+						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
+							php create_function()代码注入
+						</a>
+						<p>
+							create_function代码注入string create_function(string $args , string $code)
+$args 变量部分
+$code 方法代码部分
+返回值：以字符串形式返回唯一的函数名，如果出...
+						</p>
+					</div>
+
+					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
+						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
 							2019年上海嘉韦思杯writeup
 						</a>
@@ -601,28 +620,6 @@ strcmp二进制安全...
 				</li>											
 		
 		
-				<li>
-					<div>
-						<a href="/2018/11/21/php序列化和反序列化/" title="php序列化和反序列化">
-							php序列化和反序列化
-						</a>
-						<p>
-							序列化在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。
-序列化函数：string serialize ( mixed $value )
-
-说明：
-返回对象的字符串表示。 
-返回值：
-返回对象的字符串表示...
-						</p>
-					</div>
-
-					<a href="/2018/11/21/php序列化和反序列化/" title="php序列化和反序列化">				
-						<img src="/images/post-cover/5.jpg" class="relateImg" alt="php序列化和反序列化">
-					</a>
-				</li>											
-		
-		
 	</ul>
 </div>	
 			</div>
@@ -692,7 +689,7 @@ strcmp二进制安全...
 		//id: decodeURI(window.location.pathname),
 		//id: (window.location.pathname).split("/").pop().substring(0, 49),
 		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
-		repo: 'Annie-Gitalk',
+		repo: 'blog-Comment-Repo',
 		owner: 'ab-Alex',
 		admin: 'ab-Alex',
 		distractionFreeMode: 'true',

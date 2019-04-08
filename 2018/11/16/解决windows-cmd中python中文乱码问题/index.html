@@ -474,6 +474,25 @@ Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达.
 		
 				<li>
 					<div>
+						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
+							php create_function()代码注入
+						</a>
+						<p>
+							create_function代码注入string create_function(string $args , string $code)
+$args 变量部分
+$code 方法代码部分
+返回值：以字符串形式返回唯一的函数名，如果出...
+						</p>
+					</div>
+
+					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
+						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
 							2019年上海嘉韦思杯writeup
 						</a>
@@ -551,23 +570,6 @@ c:\wind...
 				</li>											
 		
 		
-				<li>
-					<div>
-						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
-							2018安恒杯好黑的黑名单
-						</a>
-						<p>
-							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
-  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
-						</p>
-					</div>
-
-					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
-						<img src="/images/post-cover/15.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
-					</a>
-				</li>											
-		
-		
 	</ul>
 </div>	
 			</div>
@@ -637,7 +639,7 @@ c:\wind...
 		//id: decodeURI(window.location.pathname),
 		//id: (window.location.pathname).split("/").pop().substring(0, 49),
 		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
-		repo: 'Annie-Gitalk',
+		repo: 'blog-Comment-Repo',
 		owner: 'ab-Alex',
 		admin: 'ab-Alex',
 		distractionFreeMode: 'true',
