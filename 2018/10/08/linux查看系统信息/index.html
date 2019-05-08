@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      2019ddctfwriteup | 似雍&amp;&amp;非庸
+      linux查看系统信息 | 似雍&amp;&amp;非庸
     
   </title>
   <meta name="author" content="Alex">
@@ -115,7 +115,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《2019ddctfwriteup》
+						当前文章&nbsp;:&nbsp;《linux查看系统信息》
 					
 				</p>
 				<!-- Progress bar -->
@@ -278,8 +278,8 @@
 	
 	<div class="article-title">
 		
-	<a href="/2019/04/30/2019ddctfwriteup/" itemprop="url">
-		2019ddctfwriteup
+	<a href="/2018/10/08/linux查看系统信息/" itemprop="url">
+		linux查看系统信息
 	</a>
 
 	</div>
@@ -288,17 +288,17 @@
 		<span>
 			
 	发布于
-	<a href="/2019/04/30/2019ddctfwriteup/" itemprop="url">
-		<time datetime="2019-04-30T11:11:02.000Z" itemprop="datePublished">
-	  		2019-04-30
+	<a href="/2018/10/08/linux查看系统信息/" itemprop="url">
+		<time datetime="2018-10-08T14:53:20.000Z" itemprop="datePublished">
+	  		2018-10-08
 	  </time>
 	</a> 
 
 	/
 	更新于
-	<a href="/2019/04/30/2019ddctfwriteup/" itemprop="url">
-		<time datetime="2019-04-30T11:11:02.000Z" itemprop="dateUpdated">
-	  		2019-04-30
+	<a href="/2018/10/08/linux查看系统信息/" itemprop="url">
+		<time datetime="2018-10-08T14:53:20.000Z" itemprop="dateUpdated">
+	  		2019-05-08
 	  </time>
 	</a> 	
 
@@ -306,12 +306,18 @@
 		/
 		<span>
 			<i class="fa fa-tags"></i>
-					
+			
+	
+		<a href="/tags/linux/" class=" ">
+			linux
+		</a>
+	
+		
 		</span>
 		/
 		
 
-    <span class="leancloud_visitors" id="/2019/04/30/2019ddctfwriteup/_visitors" data-url="/2019/04/30/2019ddctfwriteup/" data-title="2019ddctfwriteup">
+    <span class="leancloud_visitors" id="/2018/10/08/linux查看系统信息/_visitors" data-url="/2018/10/08/linux查看系统信息/" data-title="linux查看系统信息">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -320,7 +326,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2019/04/30/2019ddctfwriteup/_likes" data-url="/2019/04/30/2019ddctfwriteup/" data-title="2019ddctfwriteup" rel="unlike">
+    <span class="leancloud_likes" id="/2018/10/08/linux查看系统信息/_likes" data-url="/2018/10/08/linux查看系统信息/" data-title="linux查看系统信息" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -329,10 +335,77 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-			
+		<p>linux系统下经常查看各种信息，总结一下。</p>
+<h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">uname</span> -a               <span class="token comment" spellcheck="true"># 查看内核/操作系统/CPU信息</span>
+<span class="token function">head</span> -n 1 /etc/issue   <span class="token comment" spellcheck="true"># 查看操作系统版本</span>
+<span class="token function">cat</span> /etc/issue <span class="token operator">|</span> <span class="token function">grep</span> Linux   <span class="token comment" spellcheck="true"># 查看当前操作系统内核信息</span>
+<span class="token function">cat</span> /proc/cpuinfo      <span class="token comment" spellcheck="true"># 查看CPU信息</span>
+<span class="token function">hostname</span>               <span class="token comment" spellcheck="true"># 查看计算机名</span>
+lspci -tv              <span class="token comment" spellcheck="true"># 列出所有PCI设备</span>
+lsusb -tv              <span class="token comment" spellcheck="true"># 列出所有USB设备</span>
+lsmod                  <span class="token comment" spellcheck="true"># 列出加载的内核模块</span>
+<span class="token function">env</span>                    <span class="token comment" spellcheck="true"># 查看环境变量</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">free</span> -m                <span class="token comment" spellcheck="true"># 查看内存使用量和交换区使用量</span>
+<span class="token function">df</span> -h                  <span class="token comment" spellcheck="true"># 查看各分区使用情况</span>
+<span class="token function">du</span> -sh <span class="token operator">&lt;</span>dir<span class="token operator">></span>           <span class="token comment" spellcheck="true"># 查看指定目录的大小</span>
+<span class="token function">cat</span> /proc/meminfo      <span class="token comment" spellcheck="true"># 查看内存信息</span>
+<span class="token function">grep</span> MemTotal /proc/meminfo   <span class="token comment" spellcheck="true"># 查看内存总量</span>
+<span class="token function">grep</span> MemFree /proc/meminfo    <span class="token comment" spellcheck="true"># 查看空闲内存量</span>
+<span class="token function">uptime</span>                 <span class="token comment" spellcheck="true"># 查看系统运行时间、用户数、负载</span>
+<span class="token function">cat</span> /proc/loadavg      <span class="token comment" spellcheck="true"># 查看系统负载</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="磁盘和分区"><a href="#磁盘和分区" class="headerlink" title="磁盘和分区"></a>磁盘和分区</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">free</span> -m                <span class="token comment" spellcheck="true"># 查看内存使用量和交换区使用量</span>
+<span class="token function">df</span> -h                  <span class="token comment" spellcheck="true"># 查看各分区使用情况</span>
+<span class="token function">du</span> -sh <span class="token operator">&lt;</span>dir<span class="token operator">></span>           <span class="token comment" spellcheck="true"># 查看指定目录的大小</span>
+<span class="token function">cat</span> /proc/meminfo      <span class="token comment" spellcheck="true"># 查看内存信息</span>
+<span class="token function">grep</span> MemTotal /proc/meminfo   <span class="token comment" spellcheck="true"># 查看内存总量</span>
+<span class="token function">grep</span> MemFree /proc/meminfo    <span class="token comment" spellcheck="true"># 查看空闲内存量</span>
+<span class="token function">uptime</span>                 <span class="token comment" spellcheck="true"># 查看系统运行时间、用户数、负载</span>
+<span class="token function">cat</span> /proc/loadavg      <span class="token comment" spellcheck="true"># 查看系统负载</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ifconfig</span>               <span class="token comment" spellcheck="true"># 查看所有网络接口的属性</span>
+iptables -L            <span class="token comment" spellcheck="true"># 查看防火墙设置</span>
+route -n               <span class="token comment" spellcheck="true"># 查看路由表</span>
+<span class="token function">netstat</span> -lntp          <span class="token comment" spellcheck="true"># 查看所有监听端口</span>
+<span class="token function">netstat</span> -antp          <span class="token comment" spellcheck="true"># 查看所有已经建立的连接</span>
+<span class="token function">netstat</span> -s             <span class="token comment" spellcheck="true"># 查看网络统计信息</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> -ef                 <span class="token comment" spellcheck="true"># 查看所有进程</span>
+<span class="token function">top</span>                    <span class="token comment" spellcheck="true"># 实时显示进程状态</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h3><pre class="line-numbers language-bash"><code class="language-bash">w                      <span class="token comment" spellcheck="true"># 查看活动用户</span>
+<span class="token function">id</span> <span class="token operator">&lt;</span>username<span class="token operator">></span>          <span class="token comment" spellcheck="true"># 查看指定用户信息</span>
+last                   <span class="token comment" spellcheck="true"># 查看用户登录日志</span>
+<span class="token function">cut</span> -d: -f1 /etc/passwd       <span class="token comment" spellcheck="true"># 查看系统所有用户</span>
+<span class="token function">cut</span> -d: -f1 /etc/group        <span class="token comment" spellcheck="true"># 查看系统所有组</span>
+<span class="token function">crontab</span> -l             <span class="token comment" spellcheck="true"># 查看当前用户的计划任务</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">chkconfig</span> --list       <span class="token comment" spellcheck="true"># 列出所有系统服务</span>
+<span class="token function">chkconfig</span> --list <span class="token operator">|</span> <span class="token function">grep</span> on    <span class="token comment" spellcheck="true"># 列出所有启动的系统服务</span>
+rpm -qa                <span class="token comment" spellcheck="true"># 查看所有安装的软件包</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="查看cpu信息"><a href="#查看cpu信息" class="headerlink" title="查看cpu信息"></a>查看cpu信息</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> name <span class="token operator">|</span> <span class="token function">cut</span> -f2 -d: <span class="token operator">|</span> <span class="token function">uniq</span> -c 
+      8  Intel<span class="token punctuation">(</span>R<span class="token punctuation">)</span> Xeon<span class="token punctuation">(</span>R<span class="token punctuation">)</span> CPU            E5410   @ 2.33GHz
+看到有8个逻辑 CPU, 也知道了 CPU 型号
+
+<span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> physical <span class="token operator">|</span> <span class="token function">uniq</span> -c 
+      4 physical <span class="token function">id</span>      <span class="token keyword">:</span> 0 
+      4 physical <span class="token function">id</span>      <span class="token keyword">:</span> 1
+说明实际上是两颗4核的CPU
+
+getconf LONG_BIT 
+   32
+说明当前 CPU 运行在 32bit 模式下, 但不代表 CPU 不支持 64bit
+
+<span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> flags <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">' lm '</span> <span class="token operator">|</span> <span class="token function">wc</span> -l 
+   8
+结果大于 0, 说明支持 64bit 计算. lm指 long mode, 支持 lm 则是 64bit
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+	<div id="current-post-cover" data-scr="/images/post-cover/29.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -346,8 +419,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
+			<a href="/2018/10/12/bugku备份是个好好习惯/" title="bugku备份是个好习惯" rel="prev">
+				&laquo;上一篇
+			</a>
 		
-			<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结" rel="next">
+		
+			<a href="/2018/10/07/burp的基本-高级使用/" title="burp的基本&高级使用" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -682,6 +759,17 @@ function ge...
 
 <!-- show math formula -->
 
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
 
 
 <script>
@@ -768,6 +856,13 @@ function ge...
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	
 		</main>
 		
