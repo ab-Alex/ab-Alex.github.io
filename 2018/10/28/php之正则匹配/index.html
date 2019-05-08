@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2018/10/28/php之正则匹配/" itemprop="url">
 		<time datetime="2018-10-28T06:09:00.000Z" itemprop="dateUpdated">
-	  		2019-04-03
+	  		2019-04-16
 	  </time>
 	</a> 	
 
@@ -339,36 +339,66 @@
 <h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式:"></a>正则表达式:</h2><p>1.原子</p>
 <p>2.元子符</p>
 <p>3.模式修正符</p>
-<h3 id="原子"><a href="#原子" class="headerlink" title="原子:"></a>原子:</h3><p>.           匹配除换行符以外的任意字符</p>
-<p>a-z</p>
-<p>A-Z</p>
-<p>0-9</p>
-<p>[0-9]</p>
-<p>[^0-9]</p>
-<p>\d   匹配数字</p>
-<p>\D</p>
-<p>\w   匹配字母或数字或下划线或汉字 等价于 ‘[^A-Za-z0-9_]’</p>
-<p>\W</p>
-<p>\s   匹配任意的空白符</p>
-<p>\S</p>
-<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符:"></a>元字符:</h3><p>*   #0个、1个或多个</p>
-<p>+   #1个或多个</p>
-<p>?   #0个或1个</p>
-<p>|   #或</p>
-<p>\b  #词边界</p>
-<p>\B  #非词边界</p>
-<p>{3}  #3个</p>
-<p>{3,7} #3个到7个</p>
-<p>{3,}  #3个以上</p>
-<p>^   #以什么开始</p>
-<p>$   #以什么结尾</p>
-<p>向后引用:</p>
-<p>(abc)</p>
-<p>$1</p>
-<p>\\1</p>
-<h3 id="模式修正符"><a href="#模式修正符" class="headerlink" title="模式修正符:"></a>模式修正符:</h3><p>i #忽略大小写</p>
-<p>U #贪婪模式(最小化匹配)</p>
-<p>m #把\n视为多行</p>
+<h3 id="原子"><a href="#原子" class="headerlink" title="原子:"></a>原子:</h3><pre class="line-numbers language-txt"><code class="language-txt">.           匹配除换行符以外的任意字符
+
+a-z
+
+A-Z
+
+0-9
+
+[0-9]
+
+[^0-9]
+
+\d   匹配数字
+
+\D
+
+\w   匹配字母或数字或下划线或汉字 等价于 '[^A-Za-z0-9_]'
+
+\W
+
+\s   匹配任意的空白符
+
+\S
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符:"></a>元字符:</h3><pre class="line-numbers language-txt"><code class="language-txt">*   #0个、1个或多个
+
++   #1个或多个
+
+?   #0个或1个
+
+|   #或
+
+\b  #词边界
+
+\B  #非词边界
+
+{3}  #3个
+
+{3,7} #3个到7个
+
+{3,}  #3个以上
+
+^   #以什么开始
+
+$   #以什么结尾
+
+向后引用:
+
+(abc)
+
+$1
+
+\\1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="模式修正符"><a href="#模式修正符" class="headerlink" title="模式修正符:"></a>模式修正符:</h3><pre class="line-numbers language-txt"><code class="language-txt">i #忽略大小写
+
+U #非贪婪模式(最小化匹配)
+
+m #把\n视为多行
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="能够使用正则的函数"><a href="#能够使用正则的函数" class="headerlink" title="能够使用正则的函数:"></a>能够使用正则的函数:</h3><p>preg_match();</p>
 <p>preg_match_all();</p>
 <p>preg_replace();</p>
@@ -436,6 +466,41 @@ $code 方法代码部分
 
 					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
 						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">
+							2019ddctfwriteup
+						</a>
+						<p>
+							
+						</p>
+					</div>
+
+					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="2019ddctfwriteup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">
+							sql注入知识总结
+						</a>
+						<p>
+							前言最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。
+知识储备sql注入中常用到的库和表information_schema库
+
+这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，...
+						</p>
+					</div>
+
+					<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="sql注入知识总结">
 					</a>
 				</li>											
 		
@@ -573,54 +638,6 @@ Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多�
 
 					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
 						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">
-							insert into 注入
-						</a>
-						<p>
-							题目题目连接：http://123.206.87.240:8002/web15/题目提示：
-flag格式：flag{xxxxxxxxxxxx}
-不如写个Python吧
-
-error_reporting(0);
-
-function ge...
-						</p>
-					</div>
-
-					<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">				
-						<img src="/images/post-cover/7.jpg" class="relateImg" alt="insert into 注入">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/11/21/bugku中的前女友-SKCTF/" title="bugku中的前女友(SKCTF)">
-							bugku中的前女友(SKCTF)
-						</a>
-						<p>
-							知识储备strcmp()函数int strcmp ( string $str1 , string $str2 )
-
-说明
-注意该比较区分大小写。
-参数
-str1
-第一个字符串。
-str2
-第二个字符串。
-返回值
-strcmp二进制安全...
-						</p>
-					</div>
-
-					<a href="/2018/11/21/bugku中的前女友-SKCTF/" title="bugku中的前女友(SKCTF)">				
-						<img src="/images/post-cover/11.jpg" class="relateImg" alt="bugku中的前女友(SKCTF)">
 					</a>
 				</li>											
 		
