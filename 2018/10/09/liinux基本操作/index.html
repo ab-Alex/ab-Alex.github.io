@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      linux查看系统信息 | 似雍&amp;&amp;非庸
+      liinux基本操作 | 似雍&amp;&amp;非庸
     
   </title>
   <meta name="author" content="Alex">
@@ -115,7 +115,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《linux查看系统信息》
+						当前文章&nbsp;:&nbsp;《liinux基本操作》
 					
 				</p>
 				<!-- Progress bar -->
@@ -278,8 +278,8 @@
 	
 	<div class="article-title">
 		
-	<a href="/2018/10/08/linux查看系统信息/" itemprop="url">
-		linux查看系统信息
+	<a href="/2018/10/09/liinux基本操作/" itemprop="url">
+		liinux基本操作
 	</a>
 
 	</div>
@@ -288,17 +288,17 @@
 		<span>
 			
 	发布于
-	<a href="/2018/10/08/linux查看系统信息/" itemprop="url">
-		<time datetime="2018-10-08T14:53:20.000Z" itemprop="datePublished">
-	  		2018-10-08
+	<a href="/2018/10/09/liinux基本操作/" itemprop="url">
+		<time datetime="2018-10-09T07:08:59.000Z" itemprop="datePublished">
+	  		2018-10-09
 	  </time>
 	</a> 
 
 	/
 	更新于
-	<a href="/2018/10/08/linux查看系统信息/" itemprop="url">
-		<time datetime="2018-10-08T14:53:20.000Z" itemprop="dateUpdated">
-	  		2019-05-08
+	<a href="/2018/10/09/liinux基本操作/" itemprop="url">
+		<time datetime="2018-10-09T07:08:59.000Z" itemprop="dateUpdated">
+	  		2019-05-09
 	  </time>
 	</a> 	
 
@@ -317,7 +317,7 @@
 		/
 		
 
-    <span class="leancloud_visitors" id="/2018/10/08/linux查看系统信息/_visitors" data-url="/2018/10/08/linux查看系统信息/" data-title="linux查看系统信息">
+    <span class="leancloud_visitors" id="/2018/10/09/liinux基本操作/_visitors" data-url="/2018/10/09/liinux基本操作/" data-title="liinux基本操作">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -326,7 +326,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2018/10/08/linux查看系统信息/_likes" data-url="/2018/10/08/linux查看系统信息/" data-title="linux查看系统信息" rel="unlike">
+    <span class="leancloud_likes" id="/2018/10/09/liinux基本操作/_likes" data-url="/2018/10/09/liinux基本操作/" data-title="liinux基本操作" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -335,77 +335,215 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>linux系统下经常查看各种信息，总结一下。</p>
-<h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">uname</span> -a               <span class="token comment" spellcheck="true"># 查看内核/操作系统/CPU信息</span>
-<span class="token function">head</span> -n 1 /etc/issue   <span class="token comment" spellcheck="true"># 查看操作系统版本</span>
-<span class="token function">cat</span> /etc/issue <span class="token operator">|</span> <span class="token function">grep</span> Linux   <span class="token comment" spellcheck="true"># 查看当前操作系统内核信息</span>
-<span class="token function">cat</span> /proc/cpuinfo      <span class="token comment" spellcheck="true"># 查看CPU信息</span>
-<span class="token function">hostname</span>               <span class="token comment" spellcheck="true"># 查看计算机名</span>
-lspci -tv              <span class="token comment" spellcheck="true"># 列出所有PCI设备</span>
-lsusb -tv              <span class="token comment" spellcheck="true"># 列出所有USB设备</span>
-lsmod                  <span class="token comment" spellcheck="true"># 列出加载的内核模块</span>
-<span class="token function">env</span>                    <span class="token comment" spellcheck="true"># 查看环境变量</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">free</span> -m                <span class="token comment" spellcheck="true"># 查看内存使用量和交换区使用量</span>
-<span class="token function">df</span> -h                  <span class="token comment" spellcheck="true"># 查看各分区使用情况</span>
-<span class="token function">du</span> -sh <span class="token operator">&lt;</span>dir<span class="token operator">></span>           <span class="token comment" spellcheck="true"># 查看指定目录的大小</span>
-<span class="token function">cat</span> /proc/meminfo      <span class="token comment" spellcheck="true"># 查看内存信息</span>
-<span class="token function">grep</span> MemTotal /proc/meminfo   <span class="token comment" spellcheck="true"># 查看内存总量</span>
-<span class="token function">grep</span> MemFree /proc/meminfo    <span class="token comment" spellcheck="true"># 查看空闲内存量</span>
-<span class="token function">uptime</span>                 <span class="token comment" spellcheck="true"># 查看系统运行时间、用户数、负载</span>
-<span class="token function">cat</span> /proc/loadavg      <span class="token comment" spellcheck="true"># 查看系统负载</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="磁盘和分区"><a href="#磁盘和分区" class="headerlink" title="磁盘和分区"></a>磁盘和分区</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">free</span> -m                <span class="token comment" spellcheck="true"># 查看内存使用量和交换区使用量</span>
-<span class="token function">df</span> -h                  <span class="token comment" spellcheck="true"># 查看各分区使用情况</span>
-<span class="token function">du</span> -sh <span class="token operator">&lt;</span>dir<span class="token operator">></span>           <span class="token comment" spellcheck="true"># 查看指定目录的大小</span>
-<span class="token function">cat</span> /proc/meminfo      <span class="token comment" spellcheck="true"># 查看内存信息</span>
-<span class="token function">grep</span> MemTotal /proc/meminfo   <span class="token comment" spellcheck="true"># 查看内存总量</span>
-<span class="token function">grep</span> MemFree /proc/meminfo    <span class="token comment" spellcheck="true"># 查看空闲内存量</span>
-<span class="token function">uptime</span>                 <span class="token comment" spellcheck="true"># 查看系统运行时间、用户数、负载</span>
-<span class="token function">cat</span> /proc/loadavg      <span class="token comment" spellcheck="true"># 查看系统负载</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ifconfig</span>               <span class="token comment" spellcheck="true"># 查看所有网络接口的属性</span>
-iptables -L            <span class="token comment" spellcheck="true"># 查看防火墙设置</span>
-route -n               <span class="token comment" spellcheck="true"># 查看路由表</span>
-<span class="token function">netstat</span> -lntp          <span class="token comment" spellcheck="true"># 查看所有监听端口</span>
-<span class="token function">netstat</span> -antp          <span class="token comment" spellcheck="true"># 查看所有已经建立的连接</span>
-<span class="token function">netstat</span> -s             <span class="token comment" spellcheck="true"># 查看网络统计信息</span>
+		<h3 id="centos常用命令及快捷键整理"><a href="#centos常用命令及快捷键整理" class="headerlink" title="centos常用命令及快捷键整理"></a>centos常用命令及快捷键整理</h3><h4 id="常用linux命令"><a href="#常用linux命令" class="headerlink" title="常用linux命令"></a>常用linux命令</h4><h5 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> /home                        进入 <span class="token string">'/home'</span> 目录
+<span class="token function">cd</span> <span class="token punctuation">..</span>                                返回上一级目录
+<span class="token function">cd</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>                             返回上两级目录
+<span class="token function">cd</span> -                                 返回上次所在目录
+<span class="token function">cp</span> file1 file2                    将file1复制为file2
+<span class="token function">cp</span> -a dir1 dir2                 复制一个目录
+<span class="token function">cp</span> -a /tmp/dir1 <span class="token keyword">.</span>              复制一个目录到当前工作目录（.代表当前目录）
+<span class="token function">ls</span>                                    查看目录中的文件
+<span class="token function">ls</span> -a                                显示隐藏文件
+<span class="token function">ls</span> -l                                 显示详细信息
+<span class="token function">ls</span> -lrt                               按时间显示文件（l表示详细列表，r表示反向排序，t表示按时间排序）
+<span class="token function">pwd</span>                                显示工作路径
+<span class="token function">mkdir</span> dir1                       创建 <span class="token string">'dir1'</span> 目录
+<span class="token function">mkdir</span> dir1 dir2                同时创建两个目录
+<span class="token function">mkdir</span> -p /tmp/dir1/dir2    创建一个目录树
+<span class="token function">mv</span> dir1 dir2                    移动/重命名一个目录
+<span class="token function">rm</span> -f file1                        删除 <span class="token string">'file1'</span>
+<span class="token function">rm</span> -rf dir1                       删除 <span class="token string">'dir1'</span> 目录及其子目录内容
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> file1                          从第一个字节开始正向查看文件的内容
+<span class="token function">head</span> -2 file1                   查看一个文件的前两行
+<span class="token function">more</span> file1                       查看一个长文件的内容
+tac file1                          从最后一行开始反向查看一个文件的内容
+<span class="token function">tail</span> -3 file1                      查看一个文件的最后三行
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">grep</span> str /tmp/test            在文件 <span class="token string">'/tmp/test'</span> 中查找 <span class="token string">"str"</span>
+<span class="token function">grep</span> ^str /tmp/test           在文件 <span class="token string">'/tmp/test'</span> 中查找以 <span class="token string">"str"</span> 开始的行
+<span class="token function">grep</span> <span class="token punctuation">[</span>0-9<span class="token punctuation">]</span> /tmp/test         查找 <span class="token string">'/tmp/test'</span> 文件中所有包含数字的行
+<span class="token function">grep</span> str -r /tmp/*             在目录 <span class="token string">'/tmp'</span> 及其子目录中查找 <span class="token string">"str"</span>
+<span class="token function">diff</span> file1 file2                   找出两个文件的不同处
+<span class="token function">sdiff</span> file1 file2                 以对比的方式显示两个文件的不同
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> -ef                 <span class="token comment" spellcheck="true"># 查看所有进程</span>
-<span class="token function">top</span>                    <span class="token comment" spellcheck="true"># 实时显示进程状态</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h3><pre class="line-numbers language-bash"><code class="language-bash">w                      <span class="token comment" spellcheck="true"># 查看活动用户</span>
-<span class="token function">id</span> <span class="token operator">&lt;</span>username<span class="token operator">></span>          <span class="token comment" spellcheck="true"># 查看指定用户信息</span>
-last                   <span class="token comment" spellcheck="true"># 查看用户登录日志</span>
-<span class="token function">cut</span> -d: -f1 /etc/passwd       <span class="token comment" spellcheck="true"># 查看系统所有用户</span>
-<span class="token function">cut</span> -d: -f1 /etc/group        <span class="token comment" spellcheck="true"># 查看系统所有组</span>
-<span class="token function">crontab</span> -l             <span class="token comment" spellcheck="true"># 查看当前用户的计划任务</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">chkconfig</span> --list       <span class="token comment" spellcheck="true"># 列出所有系统服务</span>
-<span class="token function">chkconfig</span> --list <span class="token operator">|</span> <span class="token function">grep</span> on    <span class="token comment" spellcheck="true"># 列出所有启动的系统服务</span>
-rpm -qa                <span class="token comment" spellcheck="true"># 查看所有安装的软件包</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h3 id="查看cpu信息"><a href="#查看cpu信息" class="headerlink" title="查看cpu信息"></a>查看cpu信息</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> name <span class="token operator">|</span> <span class="token function">cut</span> -f2 -d: <span class="token operator">|</span> <span class="token function">uniq</span> -c 
-      8  Intel<span class="token punctuation">(</span>R<span class="token punctuation">)</span> Xeon<span class="token punctuation">(</span>R<span class="token punctuation">)</span> CPU            E5410   @ 2.33GHz
-看到有8个逻辑 CPU, 也知道了 CPU 型号
+<h5 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h5><pre><code>find / -name file1                                                 从 &#39;/&#39; 开始进入根文件系统查找文件和目录
+find / -user user1                                                查找属于用户 &#39;user1&#39; 的文件和目录
+find /home/user1 -name \*.bin                            在目录 &#39;/ home/user1&#39; 中查找以 &#39;.bin&#39; 结尾的文件
+find /usr/bin -type f -atime +100                         查找在过去100天内未被使用过的执行文件
+find /usr/bin -type f -mtime -10                           查找在10天内被创建或者修改过的文件
+locate \*.ps                                                         寻找以 &#39;.ps&#39; 结尾的文件，先运行 &#39;updatedb&#39; 命令
+find -name &#39;*.[ch]&#39; | xargs grep -E &#39;expr&#39;              在当前目录及其子目录所有.c和.h文件中查找 &#39;expr&#39;
+find -type f -print0 | xargs -r0 grep -F &#39;expr&#39;        在当前目录及其子目录的常规文件中查找 &#39;expr&#39;
+find -maxdepth 1 -type f | xargs grep -F &#39;expr&#39;    在当前目录中查找 &#39;expr&#39;
+</code></pre><h5 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">bzip2</span> file1                                   压缩 file1
+bunzip2 file1.bz2                        解压 file1.bz2
+<span class="token function">gzip</span> file1                                     压缩 file1
+<span class="token function">gzip</span> -9 file1                                最大程度压缩 file1
+gunzip file1.gz                            解压 file1.gz
+<span class="token function">tar</span> -cvf archive.tar file1               把file1打包成 archive.tar
+c: 建立压缩档案；-v: 显示所有过程；-f: 使用档案名字，是必须的，是最后一个参数）
+<span class="token function">tar</span> -cvf archive.tar file1 dir1        把 file1，dir1 打包成 archive.tar
+<span class="token function">tar</span> -tf archive.tar                         显示一个包中的内容
+<span class="token function">tar</span> -xvf archive.tar                      释放一个包
+<span class="token function">tar</span> -xvf archive.tar -C /tmp         把压缩包释放到 /tmp目录下
+<span class="token function">zip</span> file1.zip file1                          创建一个zip格式的压缩包
+<span class="token function">zip</span> -r file1.zip file1 dir1               把文件和目录压缩成一个zip格式的压缩包
+unzip file1.zip                             解压一个zip格式的压缩包到当前目录
+unzip test.zip -d /tmp/                 解压一个zip格式的压缩包到 /tmp 目录
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="yum工具"><a href="#yum工具" class="headerlink" title="yum工具"></a>yum工具</h5><pre class="line-numbers language-bash"><code class="language-bash">yum -y <span class="token function">install</span> <span class="token punctuation">[</span>package<span class="token punctuation">]</span>              下载并安装一个rpm包
+yum localinstall <span class="token punctuation">[</span>package.rpm<span class="token punctuation">]</span>    安装一个rpm包，使用你自己的软件仓库解决所有依赖关系
+yum -y update                              更新当前系统中安装的所有rpm包
+yum update <span class="token punctuation">[</span>package<span class="token punctuation">]</span>                 更新一个rpm包
+yum remove <span class="token punctuation">[</span>package<span class="token punctuation">]</span>                删除一个rpm包
+yum list                                        列出当前系统中安装的所有包
+yum search <span class="token punctuation">[</span>package<span class="token punctuation">]</span>                 在rpm仓库中搜寻软件包
+yum clean <span class="token punctuation">[</span>package<span class="token punctuation">]</span>                   清除缓存目录（/var/cache/yum）下的软件包
+yum clean headers                      删除所有头文件
+yum clean all                                删除所有缓存的包和头文件
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ifconfig</span> eth0                                                                       显示一个以太网卡的配置
+<span class="token function">ifconfig</span> eth0 192.168.1.1 netmask 255.255.255.0            配置网卡的IP地址
+<span class="token function">ifdown</span> eth0                                                                        禁用 <span class="token string">'eth0'</span> 网络设备
+<span class="token function">ifup</span> eth0                                                                            启用 <span class="token string">'eth0'</span> 网络设备
+iwconfig eth1                                                                     显示一个无线网卡的配置
+iwlist scan                                                                         显示无线网络
+ip addr show                                                                     显示网卡的IP地址
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">su</span> -                                 切换到root权限（与su有区别）
+<span class="token function">shutdown</span> -h now           关机
+<span class="token function">shutdown</span> -r now            重启
+<span class="token function">top</span>                                  罗列使用CPU资源最多的linux任务 （输入q退出）
+pstree                             以树状图显示程序
+<span class="token function">man</span> <span class="token function">ping</span>                        查看参考手册（例如ping 命令）
+<span class="token function">passwd</span>                          修改密码
+<span class="token function">df</span> -h                               显示磁盘的使用情况
+<span class="token function">cal</span> -3                             显示前一个月，当前月以及下一个月的月历
+<span class="token function">cal</span> 10 1988                   显示指定月，年的月历
+<span class="token function">date</span> --date <span class="token string">'1970-01-01 UTC 1427888888 seconds'</span>   把一相对于1970-01-01 00:00的秒数转换成时间
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><pre class="line-numbers language-bash"><code class="language-bash">Ctrl + u            删除光标之前到行首的字符
+Ctrl + k            删除光标之前到行尾的字符
+Ctrl + c            取消当前行输入的命令，相当于Ctrl + Break
+Ctrl + a            光标移动到行首（ahead of line），相当于通常的Home键
+Ctrl + e            光标移动到行尾（end of line）
+Ctrl + f             光标向前（forward）移动一个字符位置
+Ctrl + b            光标往回（backward）移动一个字符位置
+Ctrl + l             清屏，相当于执行clear命令
+Ctrl + r            显示:号提示，根据用户输入查找相关历史命令（reverse-i-search）
+Ctrl + w           删除从光标位置前到当前所处单词（word）的开头
+Ctrl + t             交换光标位置前的两个字符
+Ctrl + y            粘贴最后一次被删除的单词
+Ctrl + Alt + d   显示桌面
+Alt + b             光标往回（backward）移动到前一个单词
+Alt + d             删除从光标位置到当前所处单词的末尾
+Alt + F2           运行
+Alt + F4           关闭当前窗口
+Alt + F9           最小化当前窗口
+Alt + F10         最大化当前窗口
+Alt + Tab         切换窗口
+Alt +按住左键  移动窗口（或在最下面的任务栏滚动鼠标滑轮）
+<span class="token punctuation">[</span>鼠标中间键<span class="token punctuation">]</span> 粘贴突出显示的文本。使用鼠标左键来选择文本。把光标指向想粘贴文本的地方。点击鼠标中间键来粘贴。
+<span class="token punctuation">[</span>Tab<span class="token punctuation">]</span> 命令行自动补全。使用 shell 提示时可使用这一方式。键入命令或文件名的前几个字符，然后按 <span class="token punctuation">[</span>Tab<span class="token punctuation">]</span> 键，它会自动补全命令或显示匹配键入字符的所有命令。
+在桌面或文件管理器中直接按 / 就可以输入位置，打开文件管理器。
+快速搜索：在 <span class="token function">vi</span> 或 Firefox 中直接按 / 即可进入搜索状态。
+网站链接和图片可直接拖放到桌面或者目录，可以马上下载。
+直接将文件管理器中的文件拖到终端中就可以在终端中得到完整的路径名。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Ubuntu快捷键"><a href="#Ubuntu快捷键" class="headerlink" title="Ubuntu快捷键"></a>Ubuntu快捷键</h3><pre class="line-numbers language-bash"><code class="language-bash">Tab    自动补全
+Ctrl+a    光标移动到开始位置
+Ctrl+e    光标移动到最末尾
+Ctrl+k    删除此处至末尾的所有内容
+Ctrl+u    删除此处至开始的所有内容
+Ctrl+d    删除当前字符
+Ctrl+h    删除当前字符前一个字符
+Ctrl+w    删除此处到左边的单词
+Ctrl+y    粘贴由Ctrl+u， Ctrl+d， Ctrl+w删除的单词
+Ctrl+l    相当于clear，即清屏
+Ctrl+r    查找历史命令
+Ctrl+b    向回移动光标
+Ctrl+f    向前移动光标
+Ctrl+t    将光标位置的字符和前一个字符进行位置交换
+Ctrl+<span class="token operator">&amp;</span>    恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容
+Ctrl+S    暂停屏幕输出
+Ctrl+Q    继续屏幕输出
+Ctrl+Left-Arrow    光标移动到上一个单词的词首
+Ctrl+Right-Arrow    光标移动到下一个单词的词尾
+Ctrl+p    向上显示缓存命令
+Ctrl+n    向下显示缓存命令
+Ctrl+d    关闭终端
+Ctrl+xx    在EOL和当前光标位置移动
+Ctrl+x@    显示可能hostname补全
+Ctrl+c    终止进程/命令
+Shift+上或下    终端上下滚动
+Shift+PgUp/PgDn    终端上下翻页滚动
+Ctrl+Shift+n    新终端
+alt+F2    输入gnome-terminal打开终端
+Shift+Ctrl+T    打开新的标签页
+Shift+Ctrl+W    关闭标签页
+Shift+Ctrl+C    复制
+Shift+Ctrl+V    粘贴
+Alt+数字    切换至对应的标签页
+Shift+Ctrl+N    打开新的终端窗口
+Shift+Ctrl+Q    管壁终端窗口
+Shift+Ctrl+PgUp/PgDn    左移右移标签页
+Ctrl+PgUp/PgDn    切换标签页
+F1    打开帮助指南
+F10    激活菜单栏
+F11    全屏切换
+Alt+F    打开 “文件” 菜单（file）
+Alt+E    打开 “编辑” 菜单（edit）
+Alt+V    打开 “查看” 菜单（view）
+Alt+S    打开 “搜索” 菜单（search）
+Alt+T    打开 “终端” 菜单（terminal）
+Alt+H    打开 “帮助” 菜单（help）
 
-<span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> physical <span class="token operator">|</span> <span class="token function">uniq</span> -c 
-      4 physical <span class="token function">id</span>      <span class="token keyword">:</span> 0 
-      4 physical <span class="token function">id</span>      <span class="token keyword">:</span> 1
-说明实际上是两颗4核的CPU
+另外一些小技巧包括：在终端窗口命令提示符下，连续按两次 Tab 键、或者连续按三次 Esc 键、或者按 Ctrl+I 组合键，将显示所有的命令及工具名称。Application 键即位置在键盘上右 Ctrl 键左边的那个键，作用相当于单击鼠标右键。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Terminal终端"><a href="#Terminal终端" class="headerlink" title="Terminal终端"></a>Terminal终端</h4><pre class="line-numbers language-bash"><code class="language-bash">CTRL + ALT + T: 打开终端
+TAB: 自动补全命令或文件名
+CTRL + SHIFT + V: 粘贴（Linux中不需要复制的动作，文本被选择就自动被复制）
+CTRL + SHIFT + T: 新建标签页
+CTRL + D: 关闭标签页
+CTRL + L: 清楚屏幕
+CTRL + R + 文本: 在输入历史中搜索
+CTRL + A: 移动到行首
+CTRL + E: 移动到行末
+CTRL + C: 终止当前任务
+CTRL + Z: 把当前任务放到后台运行（相当于运行命令时后面加<span class="token operator">&amp;</span>）
+~: 表示用户目录路径
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h4><pre class="line-numbers language-bash"><code class="language-bash">ALT + F1: 聚焦到桌面左侧任务导航栏，可按上下键导航。
+ALT + F2: 运行命令
+ALT + F4: 关闭窗口
+ALT + TAB: 切换程序窗口
+ALT + 空格: 打开窗口菜单
+PRINT: 桌面截图
 
-getconf LONG_BIT 
-   32
-说明当前 CPU 运行在 32bit 模式下, 但不代表 CPU 不支持 64bit
-
-<span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> flags <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">' lm '</span> <span class="token operator">|</span> <span class="token function">wc</span> -l 
-   8
-结果大于 0, 说明支持 64bit 计算. lm指 long mode, 支持 lm 则是 64bit
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+SUPER: 打开Dash面板，可搜索或浏览项目，默认有个搜索框，按“下”方向键进入浏览区域（SUPER键指Win键或苹果电脑的Command键）
+在Dash面板中按CTRL + TAB: 切换到下一个子面板（可搜索不同类型项目，如程序、文件、音乐）
+SUPER + A: 搜索或浏览程序（Application）
+SUPER + F: 搜索或浏览文件（File）
+SUPER + M: 搜索或浏览音乐文件（Music）
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="Gedit文本编辑器"><a href="#Gedit文本编辑器" class="headerlink" title="Gedit文本编辑器"></a>Gedit文本编辑器</h5><pre class="line-numbers language-bash"><code class="language-bash">启动gedit：SUPER + A，然后按gedit，回车
+CTRL + N: 新建文档
+CTRL + W: 关闭文档
+CTRL + S: 保存
+CTRL + SHIFT + S: 另存为
+CTRL + S: 搜索
+CTRL + H: 搜索并替换
+CTRL + I: 跳到某一行
+CTRL + C: 复制
+CTRL + V: 粘贴
+CTRL + X: 剪切
+CTRL + Q: 退出
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/images/post-cover/29.jpg"></div>
+	<div id="current-post-cover" data-scr="/images/post-cover/30.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -419,12 +557,12 @@ getconf LONG_BIT
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2018/10/09/liinux基本操作/" title="liinux基本操作" rel="prev">
+			<a href="/2018/10/12/bugku备份是个好好习惯/" title="bugku备份是个好习惯" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2018/10/07/burp的基本-高级使用/" title="burp的基本&高级使用" rel="next">
+			<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -461,17 +599,19 @@ getconf LONG_BIT
 		
 				<li>
 					<div>
-						<a href="/2018/10/09/liinux基本操作/" title="liinux基本操作">
-							liinux基本操作
+						<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息">
+							linux查看系统信息
 						</a>
 						<p>
-							centos常用命令及快捷键整理常用linux命令文件和目录cd /home                        进入 '/home' 目录
-cd ..                                返回上一...
+							linux系统下经常查看各种信息，总结一下。
+系统uname -a               # 查看内核/操作系统/CPU信息
+head -n 1 /etc/issue   # 查看操作系统版本
+cat /etc/issue | ...
 						</p>
 					</div>
 
-					<a href="/2018/10/09/liinux基本操作/" title="liinux基本操作">				
-						<img src="/images/post-cover/30.jpg" class="relateImg" alt="liinux基本操作">
+					<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="linux查看系统信息">
 					</a>
 				</li>											
 		
