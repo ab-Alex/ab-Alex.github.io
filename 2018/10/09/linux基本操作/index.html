@@ -367,16 +367,17 @@ tac file1                          从最后一行开始反向查看一个文件
 <span class="token function">diff</span> file1 file2                   找出两个文件的不同处
 <span class="token function">sdiff</span> file1 file2                 以对比的方式显示两个文件的不同
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h5 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h5><pre><code>find / -name file1                                                 从 &#39;/&#39; 开始进入根文件系统查找文件和目录
-find / -user user1                                                查找属于用户 &#39;user1&#39; 的文件和目录
-find /home/user1 -name \*.bin                            在目录 &#39;/ home/user1&#39; 中查找以 &#39;.bin&#39; 结尾的文件
-find /usr/bin -type f -atime +100                         查找在过去100天内未被使用过的执行文件
-find /usr/bin -type f -mtime -10                           查找在10天内被创建或者修改过的文件
-locate \*.ps                                                         寻找以 &#39;.ps&#39; 结尾的文件，先运行 &#39;updatedb&#39; 命令
-find -name &#39;*.[ch]&#39; | xargs grep -E &#39;expr&#39;              在当前目录及其子目录所有.c和.h文件中查找 &#39;expr&#39;
-find -type f -print0 | xargs -r0 grep -F &#39;expr&#39;        在当前目录及其子目录的常规文件中查找 &#39;expr&#39;
-find -maxdepth 1 -type f | xargs grep -F &#39;expr&#39;    在当前目录中查找 &#39;expr&#39;
-</code></pre><h5 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">bzip2</span> file1                                   压缩 file1
+<h5 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">find</span> / -name file1                                                 从 <span class="token string">'/'</span> 开始进入根文件系统查找文件和目录
+<span class="token function">find</span> / -user user1                                                查找属于用户 <span class="token string">'user1'</span> 的文件和目录
+<span class="token function">find</span> /home/user1 -name \*.bin                            在目录 <span class="token string">'/ home/user1'</span> 中查找以 <span class="token string">'.bin'</span> 结尾的文件
+<span class="token function">find</span> /usr/bin -type f -atime +100                         查找在过去100天内未被使用过的执行文件
+<span class="token function">find</span> /usr/bin -type f -mtime -10                           查找在10天内被创建或者修改过的文件
+<span class="token function">locate</span> \*.ps                                                         寻找以 <span class="token string">'.ps'</span> 结尾的文件，先运行 <span class="token string">'updatedb'</span> 命令
+<span class="token function">find</span> -name <span class="token string">'*.[ch]'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">grep</span> -E <span class="token string">'expr'</span>              在当前目录及其子目录所有.c和.h文件中查找 <span class="token string">'expr'</span>
+<span class="token function">find</span> -type f -print0 <span class="token operator">|</span> <span class="token function">xargs</span> -r0 <span class="token function">grep</span> -F <span class="token string">'expr'</span>        在当前目录及其子目录的常规文件中查找 <span class="token string">'expr'</span>
+<span class="token function">find</span> -maxdepth 1 -type f <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">grep</span> -F <span class="token string">'expr'</span>    在当前目录中查找 <span class="token string">'expr'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h5><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">bzip2</span> file1                                   压缩 file1
 bunzip2 file1.bz2                        解压 file1.bz2
 <span class="token function">gzip</span> file1                                     压缩 file1
 <span class="token function">gzip</span> -9 file1                                最大程度压缩 file1
