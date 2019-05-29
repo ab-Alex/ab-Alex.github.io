@@ -317,7 +317,20 @@
 		/
 		
 
+    <span class="leancloud_visitors" id="/2019/04/08/php-create-function-代码注入/_visitors" data-url="/2019/04/08/php-create-function-代码注入/" data-title="php create_function()代码注入">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
 
+
+
+    <span class="leancloud_likes" id="/2019/04/08/php-create-function-代码注入/_likes" data-url="/2019/04/08/php-create-function-代码注入/" data-title="php create_function()代码注入" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
 
 	</div>
 
@@ -753,6 +766,14 @@ Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多�
 
 
 
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
  
 
 <!-- show math formula -->
@@ -970,6 +991,21 @@ Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多�
 		</div>
 		<div class="local-search-footer">
 			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
 
 		</div>
 	</div>
