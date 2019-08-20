@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/05/14/session反序列化/" itemprop="url">
 		<time datetime="2019-05-14T10:46:55.000Z" itemprop="dateUpdated">
-	  		2019-05-16
+	  		2019-07-16
 	  </time>
 	</a> 	
 
@@ -379,25 +379,27 @@ php_serialize  经过serialize()函数处理过的值，会将键名和值当作
 <pre class="line-numbers language-txt"><code class="language-txt">a:1:{s:4:"name";s:3:"123";}
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="php-session序列化漏洞"><a href="#php-session序列化漏洞" class="headerlink" title="php session序列化漏洞"></a>php session序列化漏洞</h3><p>PHP中的Session的实现是没有的问题，危害主要是由于程序员的Session使用不当而引起的。</p>
-<p>如果在PHP在反序列化存储的$_SESSION数据时使用的引擎和序列化使用的引擎不一样，会导致数据无法正确第反序列化。通过精心构造的数据包，就可以绕过程序的验证或者是执行一些系统的方法。<br>例：<br>实例代码：</p>
-<pre class="line-numbers language-session.php"><code class="language-session.php"><?php
-ini_set('session.serialize_handler','php_serialize');
-session_start();
-$_SESSION['name']=$_GET['a'];
-?>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-session2.php"><code class="language-session2.php"><?php
-ini_set('session.serialize_handler','php');
-session_start();
-class syclover{
- var $func="";
- function __construct() {
-  $this->func = "phpinfo()";
- }
- function __wakeup(){
-  eval($this->func);
- }
-}
+<p>如果在PHP在反序列化存储的$_SESSION数据时使用的引擎和序列化使用的引擎不一样，会导致数据无法正确第反序列化。通过精心构造的数据包，就可以绕过程序的验证或者是执行一些系统的方法。<br>例：<br>实例代码：<br>文件名session.php</p>
+<pre class="line-numbers language-php"><code class="language-php">
+<span class="token delimiter">&lt;?php</span>
+<span class="token function">ini_set</span><span class="token punctuation">(</span><span class="token string">'session.serialize_handler'</span><span class="token punctuation">,</span><span class="token string">'php_serialize'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>文件名：session2.php</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token function">ini_set</span><span class="token punctuation">(</span><span class="token string">'session.serialize_handler'</span><span class="token punctuation">,</span><span class="token string">'php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">syclover</span><span class="token punctuation">{</span>
+ <span class="token keyword">var</span> <span class="token variable">$func</span><span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">;</span>
+ <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">func</span> <span class="token operator">=</span> <span class="token string">"phpinfo()"</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">function</span> <span class="token function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">func</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在php_serialize引擎下，我们在访问session.php是传入a=|O:8:”syclover”:1:{s:4:”func”;s:10:”phpinfo();”;}<br>然后访问session2.php会执行phpinfo()函数。</p>
 <p>解释：$_SESSION的数据使用php_serialize引擎时，那么最后的存储在session文件的内容就是a:1:{s:4:”name”;s:49:”|O:8:”syclover”:1:{s:4:”func”;s:10:”phpinfo();”;}</p>
@@ -556,6 +558,10 @@ session.upload_progress.enabled=On
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
+			<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞" rel="prev">
+				&laquo;上一篇
+			</a>
+		
 		
 			<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结" rel="next">
 				下一篇&raquo;
@@ -628,156 +634,158 @@ A-Z
 		
 				<li>
 					<div>
-						<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">
-							sql注入知识总结
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
 						</a>
 						<p>
-							前言最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。
-知识储备sql注入中常用到的库和表information_schema库
-
-这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，...
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
 						</p>
 					</div>
 
-					<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="sql注入知识总结">
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
-							2019掘安杯writeup
+						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
+							phpinfo中的敏感信息
 						</a>
 						<p>
-							web部分下载下载与以前见到bugku的题差不多。
-提示：flag.php
-然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+							## 
+
+						</p>
+					</div>
+
+					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="phpinfo中的敏感信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
+							docker基础学习
+						</a>
+						<p>
+							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
+dock...
+						</p>
+					</div>
+
+					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/31/xss-payload/" title="xss payload">
+							xss payload
+						</a>
+						<p>
+							转换脚本#coding=utf-8
+import re
+
+s='javascript:alert(1);'
+flag_10=''
+flag_16=''
+flag_url=''
+for x in xrange(0,len(s)):
+  ...
+						</p>
+					</div>
+
+					<a href="/2019/07/31/xss-payload/" title="xss payload">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="xss payload">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
+							浏览器解释机制和svg xss
+						</a>
+						<p>
+							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
+浏览器解析机制浏览器解析一篇HTML文档...
+						</p>
+					</div>
+
+					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/24/flask框架/" title="flask框架">
+							flask框架
+						</a>
+						<p>
+							python flask框架hello worldfrom flask import Flask
+
+app = Flask(__name__)
+@app.route('/') 
+
+def index(name):
+    return...
+						</p>
+					</div>
+
+					<a href="/2019/07/24/flask框架/" title="flask框架">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
 &lt;?php
-header('Content-...
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
 						</p>
 					</div>
 
-					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
-						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
-							2019年上海嘉韦思杯writeup
+						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
+							哈希长度拓展攻击-hashpump
 						</a>
 						<p>
-							1土肥原贤二报错注入
-1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
+							哈希长度拓展攻击条件需要知道
 
-然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+密文长度 (SECRET)
+明文 （哈希值）
+部分密文内容 （auth）
+
+HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
 						</p>
 					</div>
 
-					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
-						<img src="/images/post-cover/14.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
-							nmap的使用
-						</a>
-						<p>
-							前言端口范围：1-65535
-常见的端口以及服务：
-
-21 — ftp协议
-22 — ssh远程登陆端口(linux)
-23 — telnet协议
-25 — 邮箱协议 smtp 发送邮件
-110 — pop3协议 接收邮件
-80 — ...
-						</p>
-					</div>
-
-					<a href="/2019/03/26/nmap的使用/" title="nmap的使用">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="nmap的使用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
-							xss的绕过和利用
-						</a>
-						<p>
-							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
-						</p>
-					</div>
-
-					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
-						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
-							ctf中web的常见知识点
-						</a>
-						<p>
-							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
-域名解析可以更改HTTP头部host字段为flag.bugku.com
-把 flag.bugku.com 解析到120.24.86.145
-直接在
-c:\wind...
-						</p>
-					</div>
-
-					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
-						<img src="/images/post-cover/9.jpg" class="relateImg" alt="ctf中web的常见知识点">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">
-							2018安恒杯好黑的黑名单
-						</a>
-						<p>
-							  emmm，这个题是个好题。本题考察sql注入。绕过方法是以前没有遇见过的。里面利用了betwee  and  的特性。
-  尝试对其进行注入，发现明显的过滤。一旦关键字在黑名单里，就会有：这么坏？想让我下面给你吃吗？XD 的字样。...
-						</p>
-					</div>
-
-					<a href="/2018/12/04/2018安恒杯好黑的黑名单/" title="2018安恒杯好黑的黑名单">				
-						<img src="/images/post-cover/15.jpg" class="relateImg" alt="2018安恒杯好黑的黑名单">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">
-							十大挖矿神器
-						</a>
-						<p>
-							十大挖洞必备神器
-0x00 Burp Suite
-
-
-Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
-也就是说，Burp Suite是web应用...
-						</p>
-					</div>
-
-					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
-						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
+					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
 					</a>
 				</li>											
 		

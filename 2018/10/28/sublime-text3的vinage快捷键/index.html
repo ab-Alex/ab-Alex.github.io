@@ -417,6 +417,28 @@
 		
 				<li>
 					<div>
+						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
+							哈希长度拓展攻击-hashpump
+						</a>
+						<p>
+							哈希长度拓展攻击条件需要知道
+
+密文长度 (SECRET)
+明文 （哈希值）
+部分密文内容 （auth）
+
+HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
+						</p>
+					</div>
+
+					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/03/26/nmap的使用/" title="nmap的使用">
 							nmap的使用
 						</a>
@@ -483,132 +505,114 @@ bp设置和使用proxy设置
 		
 				<li>
 					<div>
-						<a href="/2019/05/14/session反序列化/" title="session反序列化">
-							session反序列化
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
 						</a>
 						<p>
-							知识储备在php中session存储和反序列化存储在php.ini中的配置：
-
-session.save_path=""   --设置session的存储路径
-session.save_handler="" --设定用户自定义存储函数...
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
 						</p>
 					</div>
 
-					<a href="/2019/05/14/session反序列化/" title="session反序列化">				
-						<img src="/images/post-cover/32.jpg" class="relateImg" alt="session反序列化">
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">
-							sql注入知识总结
+						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
+							phpinfo中的敏感信息
 						</a>
 						<p>
-							前言最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。
-知识储备sql注入中常用到的库和表information_schema库
+							## 
 
-这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，...
 						</p>
 					</div>
 
-					<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="sql注入知识总结">
+					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="phpinfo中的敏感信息">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
-							2019掘安杯writeup
+						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
+							docker基础学习
 						</a>
 						<p>
-							web部分下载下载与以前见到bugku的题差不多。
-提示：flag.php
-然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
-&lt;?php
-header('Content-...
+							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
+dock...
 						</p>
 					</div>
 
-					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
-						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
+						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">
-							php create_function()代码注入
+						<a href="/2019/07/31/xss-payload/" title="xss payload">
+							xss payload
 						</a>
 						<p>
-							create_function代码注入string create_function(string $args , string $code)
-$args 变量部分
-$code 方法代码部分
-返回值：以字符串形式返回唯一的函数名，如果出...
+							转换脚本#coding=utf-8
+import re
+
+s='javascript:alert(1);'
+flag_10=''
+flag_16=''
+flag_url=''
+for x in xrange(0,len(s)):
+  ...
 						</p>
 					</div>
 
-					<a href="/2019/04/08/php-create-function-代码注入/" title="php create_function()代码注入">				
-						<img src="/images/post-cover/20.jpg" class="relateImg" alt="php create_function()代码注入">
+					<a href="/2019/07/31/xss-payload/" title="xss payload">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="xss payload">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">
-							2019年上海嘉韦思杯writeup
+						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
+							浏览器解释机制和svg xss
 						</a>
 						<p>
-							1土肥原贤二报错注入
-1’ and updatexml(1,concat(0x7e,(database()),0x7e),1)#
-
-然后注表1’ and updatexml(1,concat(0x7e,(select group_co...
+							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
+浏览器解析机制浏览器解析一篇HTML文档...
 						</p>
 					</div>
 
-					<a href="/2019/04/01/2019年上海嘉韦思杯writeup/" title="2019年上海嘉韦思杯writeup">				
-						<img src="/images/post-cover/14.jpg" class="relateImg" alt="2019年上海嘉韦思杯writeup">
+					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">
-							xss的绕过和利用
+						<a href="/2019/07/24/flask框架/" title="flask框架">
+							flask框架
 						</a>
 						<p>
-							xssXSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给...
+							python flask框架hello worldfrom flask import Flask
+
+app = Flask(__name__)
+@app.route('/') 
+
+def index(name):
+    return...
 						</p>
 					</div>
 
-					<a href="/2019/03/17/xss的绕过和利用/" title="xss的绕过和利用">				
-						<img src="/images/post-cover/19.jpg" class="relateImg" alt="xss的绕过和利用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">
-							ctf中web的常见知识点
-						</a>
-						<p>
-							本地访问和伪造ipX-Forwarded-For: 127.0.0.1
-域名解析可以更改HTTP头部host字段为flag.bugku.com
-把 flag.bugku.com 解析到120.24.86.145
-直接在
-c:\wind...
-						</p>
-					</div>
-
-					<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点">				
-						<img src="/images/post-cover/9.jpg" class="relateImg" alt="ctf中web的常见知识点">
+					<a href="/2019/07/24/flask框架/" title="flask框架">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
 					</a>
 				</li>											
 		
