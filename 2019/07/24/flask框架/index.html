@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/07/24/flask框架/" itemprop="url">
 		<time datetime="2019-07-24T01:18:05.000Z" itemprop="dateUpdated">
-	  		2019-07-25
+	  		2019-08-21
 	  </time>
 	</a> 	
 
@@ -598,18 +598,19 @@ app<span class="token punctuation">.</span>secret_key<span class="token operator
 
 变量或表达式由{{ }}修饰，而控制语句由{% %}修饰，其他的代码，就是我们常见的HTML。
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h4><pre><code>代码块需要包含在{% %}块中
+<h4 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h4><pre class="line-numbers language-html"><code class="language-html">代码块需要包含在{% %}块中
 
 {% extends 'layout.html' %}
 {% block title %}主页{% endblock %}
 {% block body %}
 
-    <div class="jumbotron">
-        <h1>主页</h1>
-    </div>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>jumbotron<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>主页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 
 {% endblock %}
-</code></pre>	
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	
 	</div>
 	
 	<div id="current-post-cover" data-scr="/images/post-cover/26.jpg"></div>
@@ -660,23 +661,6 @@ app<span class="token punctuation">.</span>secret_key<span class="token operator
 
 					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
 						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
-							phpinfo中的敏感信息
-						</a>
-						<p>
-							## 
-
-						</p>
-					</div>
-
-					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
-						<img src="/images/post-cover/28.jpg" class="relateImg" alt="phpinfo中的敏感信息">
 					</a>
 				</li>											
 		
@@ -785,16 +769,17 @@ HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数
 		
 				<li>
 					<div>
-						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">
-							‘sql注入新姿势-2019强网杯
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
+							sql注入新姿势-2019强网杯
 						</a>
 						<p>
-							
+							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
+随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
 						</p>
 					</div>
 
-					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">				
-						<img src="/img/cart_cover.jpg" class="relateImg" alt="‘sql注入新姿势-2019强网杯">
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
 					</a>
 				</li>											
 		
@@ -833,6 +818,25 @@ web1 &lt;?php
 
 					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
 						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">
+							文件上传漏洞
+						</a>
+						<p>
+							前言我是根据upload-lab来总结文件上传漏洞。思维导图：
+pass-01提示：在客户端使用js对不合法图片进行检查！所以我们可以通过抓包，改包就可以绕过。。。
+pass-02提示：服务端对数据包的MIME进行检查！
+这里是对Co...
+						</p>
+					</div>
+
+					<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">				
+						<img src="/images/post-cover/35.jpg" class="relateImg" alt="文件上传漏洞">
 					</a>
 				</li>											
 		

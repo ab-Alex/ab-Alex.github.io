@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/07/30/浏览器解释机制和svg-xss/" itemprop="url">
 		<time datetime="2019-07-30T05:19:37.000Z" itemprop="dateUpdated">
-	  		2019-07-31
+	  		2019-08-21
 	  </time>
 	</a> 	
 
@@ -345,17 +345,16 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>解释：当解析器解析完“<div>”并处于“数据状态”。在遇到“&#60;”和“&#62;”时会被解析为“&lt;”和“&gt;”，但这并不是意味着“&lt;”和“&gt;”将会被理解为标签的开始和结束。解析器在解析这个字符引用后不会转换到“标签开始状态”。正因为如此，就不会建立新标签。因此，我们能够利用字符实体编码这个行为来转义用户输入的数据从而确保用户输入的数据只能被解析成“数据”。</div></p>
 <p>在HTML中有五类元素：</p>
-<p>1  空元素(Void elements)，如<area>,<br>,<base>等等</p>
-<ol start="2">
-<li><p>原始文本元素(Raw text elements)，有<script>和<style></p>
-</li>
-<li><p>RCDATA元素(RCDATA elements)，有<textarea>和<title></p>
-</li>
-<li><p>外部元素(Foreign elements)，例如MathML命名空间或者SVG命名空间的元素</p>
-</li>
-<li><p>基本元素(Normal elements)，即除了以上4种元素以外的元素</p>
-</li>
-</ol>
+<pre class="line-numbers language-html"><code class="language-html">1  空元素(Void elements)，如<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>area</span><span class="token punctuation">></span></span>,<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>,<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>base</span><span class="token punctuation">></span></span>等等
+
+2.  原始文本元素(Raw text elements)，有<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>和<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span>
+
+3.  RCDATA元素(RCDATA elements)，有<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>textarea</span><span class="token punctuation">></span></span>和<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>
+
+4.  外部元素(Foreign elements)，例如MathML命名空间或者SVG命名空间的元素
+
+5.  基本元素(Normal elements)，即除了以上4种元素以外的元素
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>五类元素的区别如下</p>
 <ol>
 <li><p>空元素，不能容纳任何内容（因为它们没有闭合标签，没有内容能够放在开始标签和闭合标签中间）。</p>
@@ -369,7 +368,7 @@
 <li><p>基本元素，可以容纳文本、字符引用、其他元素和注释</p>
 </li>
 </ol>
-<p>上面的“RCDATA状态”可以解释字符实体，在解析这些字符引用的过程中不会进入“标签开始状态”。在浏览器解析RCDATA元素的过程中，解析器会进入“RCDATA状态”。在这个状态中，如果遇到“&lt;”字符，它会转换到“RCDATA小于号状态”。如果“&lt;”字符后没有紧跟着“/”和对应的标签名，解析器会转换回“RCDATA状态”。这意味着在RCDATA元素标签的内容中（例如<textarea>或<title>的内容中），唯一能够被解析器认做是标签的就是“</textarea>”或者“</title>”，即谁开始的这个状态，就解释谁的结束标签。<br>例子：</p>
+<p>上面的“RCDATA状态”可以解释字符实体，在解析这些字符引用的过程中不会进入“标签开始状态”。在浏览器解析RCDATA元素的过程中，解析器会进入“RCDATA状态”。在这个状态中，如果遇到“&lt;”字符，它会转换到“RCDATA小于号状态”。如果“&lt;”字符后没有紧跟着“/”和对应的标签名，解析器会转换回“RCDATA状态”。这意味着在RCDATA元素标签的内容中（例如<code>&lt;textarea&gt;或&lt;title&gt;</code>的内容中），唯一能够被解析器认做是标签的就是“<code>&lt;/textarea&gt;</code>”或者“<code>&lt;/title&gt;</code>”，即谁开始的这个状态，就解释谁的结束标签。<br>例子：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>textarea</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>textarea</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>textarea</span><span class="token punctuation">></span></span><span class="token entity" title="&#60;">&amp;#60;</span>script<span class="token entity" title="&#62;">&amp;#62;</span>alert(5)<span class="token entity" title="&#60;">&amp;#60;</span>/script<span class="token entity" title="&#62;">&amp;#62;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>textarea</span><span class="token punctuation">></span></span>
 都不会执行js代码。
@@ -402,7 +401,7 @@ URL 编码 "javascript:alert(1)"  不会执行。
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>能执行，这是“属性值中的字符引用”，这个情况中字符引用会被解码。我们将稍后讨论解析顺序。对href属性里的字符实体进行了解码。然后，当HTML解析器工作完成后，URL解析器开始解析href属性值里的链接。在这时，“javascript”协议已经被解码，它能够被URL解析器正确识别。这就是能被执行的原因。</p>
 <p>URL编码过程使用UTF-8编码类型来编码每一个字符。如果你尝试着将URL链接做了其他编码类型的编码，URL解析器就可能不会正确识别。</p>
-<h3 id="JavaScript-解析"><a href="#JavaScript-解析" class="headerlink" title="JavaScript 解析"></a>JavaScript 解析</h3><p><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">JavaScript解析细则</a></p>
+<h3 id="JavaScript-解析"><a href="#JavaScript-解析" class="headerlink" title="JavaScript 解析"></a>JavaScript 解析</h3><p><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank" rel="noopener">JavaScript解析细则</a></p>
 <p>所有的“script”块都属于“原始文本”元素。“script”块有个有趣的属性：在块中的字符引用并不会被解析和解码。“脚本数据状态”的状态转换规则，没有任何规则能转移到字符引用状态。这意味含有字符实体的脚本并不会执行。所以如果攻击者尝试着将输入数据编码成字符实体并将其放在script块中，它将不会被执行。<br>例：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token operator">&amp;</span>#<span class="token number">97</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">108</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">101</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">114</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">116</span><span class="token operator">&amp;</span>#<span class="token number">40</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">57</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">41</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">59</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 不会被执行。
@@ -444,7 +443,7 @@ Example B: <span class="token tag"><span class="token tag"><span class="token pu
 <pre class="line-numbers language-html"><code class="language-html">Example   C: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span>   <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript:window.open(<span class="token punctuation">'</span>UserInput<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例C与例A很像，但不同的是在UserInput前多了window.open()操作。因此，对UserInput多了一次额外的URL解码操作。总的来说，四轮解码操作被完成，顺序是HTML，URL，JavaScript和URL。</p>
-<h2 id="svg-xss"><a href="#svg-xss" class="headerlink" title="svg xss"></a>svg xss</h2><p>SVG 是使用 XML 来描述二维图形和绘图程序的语言。<br>也就是说<code>&lt;svg&gt;</code>遵循XML的定义。<br>在XML中实体会自动转义,除了<code>&lt;![CDATA[</code>和<code>]]&gt;</code>包含的实体<br>上面的例子就能说明这一点。<br><a href="https://www.w3.org/TR/SVG/script.html#ScriptElement">SVG标准</a>中定义了script标签的存在，<code>&lt;svg&gt;</code>遵循XML和SVG的定义，因此我们可以利用其来执行XSS。</p>
+<h2 id="svg-xss"><a href="#svg-xss" class="headerlink" title="svg xss"></a>svg xss</h2><p>SVG 是使用 XML 来描述二维图形和绘图程序的语言。<br>也就是说<code>&lt;svg&gt;</code>遵循XML的定义。<br>在XML中实体会自动转义,除了<code>&lt;![CDATA[</code>和<code>]]&gt;</code>包含的实体<br>上面的例子就能说明这一点。<br><a href="https://www.w3.org/TR/SVG/script.html#ScriptElement" target="_blank" rel="noopener">SVG标准</a>中定义了script标签的存在，<code>&lt;svg&gt;</code>遵循XML和SVG的定义，因此我们可以利用其来执行XSS。</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2000/svg<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xlink</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/1999/xlink<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Layer_1<span class="token punctuation">"</span></span> <span class="token attr-name">x</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0px<span class="token punctuation">"</span></span> <span class="token attr-name">y</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0px<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100px<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100px<span class="token punctuation">"</span></span> <span class="token attr-name">viewBox</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>-12.5 -12.5 100 100<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xml:</span>space</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>preserve<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>g</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>polygon</span> <span class="token attr-name">fill</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#00B0D9<span class="token punctuation">"</span></span> <span class="token attr-name">points</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>41.5,40 38.7,39.2 38.7,47.1 41.5,47.1 <span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>polygon</span><span class="token punctuation">></span></span>
@@ -476,7 +475,7 @@ Example B: <span class="token tag"><span class="token tag"><span class="token pu
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>svg</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是有点懵，先把xss学到这吧。 试试水去。之后再去存一点xss的payload。下次用的时候不用现想了。</p>
-</script></p></li></ol>	
+	
 	</div>
 	
 	<div id="current-post-cover" data-scr="/images/post-cover/25.jpg"></div>
@@ -574,23 +573,6 @@ for x in xrange(0,len(s)):
 		
 				<li>
 					<div>
-						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
-							phpinfo中的敏感信息
-						</a>
-						<p>
-							## 
-
-						</p>
-					</div>
-
-					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
-						<img src="/images/post-cover/28.jpg" class="relateImg" alt="phpinfo中的敏感信息">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
 						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
 							docker基础学习
 						</a>
@@ -674,16 +656,17 @@ HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数
 		
 				<li>
 					<div>
-						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">
-							‘sql注入新姿势-2019强网杯
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
+							sql注入新姿势-2019强网杯
 						</a>
 						<p>
-							
+							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
+随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
 						</p>
 					</div>
 
-					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">				
-						<img src="/img/cart_cover.jpg" class="relateImg" alt="‘sql注入新姿势-2019强网杯">
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
 					</a>
 				</li>											
 		
@@ -703,6 +686,25 @@ include_on...
 
 					<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">				
 						<img src="/images/post-cover/37.jpg" class="relateImg" alt="php代码审计之文件包含">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
+							ciscn线下部分题解
+						</a>
+						<p>
+							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
+web1 &lt;?php
+// ini_set("display_errors", "On"); 
+// error_reporting(E_ALL | ...
+						</p>
+					</div>
+
+					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
+						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
 					</a>
 				</li>											
 		

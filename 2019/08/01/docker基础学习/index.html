@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/08/01/docker基础学习/" itemprop="url">
 		<time datetime="2019-08-01T04:53:26.000Z" itemprop="dateUpdated">
-	  		2019-08-01
+	  		2019-08-21
 	  </time>
 	</a> 	
 
@@ -421,23 +421,25 @@ CMD echo "hello alex!"
 第二句 后面的词代表了作者。
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过dockerfile来生成image</p>
-<pre><code>docker build -t hello_alex .
+<pre class="line-numbers language-bash"><code class="language-bash">docker build -t hello_alex <span class="token keyword">.</span>
 
 解释 -t 后面是标签名 
 .代表的是包当前文件夹下的所有文件都送给docker demain来生成image。实际上就是路径
-</code></pre><p>第二个dockerfile</p>
-<pre><code>FROM ubuntu
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第二个dockerfile</p>
+<pre class="line-numbers language-bash"><code class="language-bash">FROM ubuntu
 MAINTAINER alex
-RUN sed -i &#39;s/archive.ubuntu.com/mirrors.ustc.edu.cn/g&#39; /etc/apt/sources.list 
-RUN apt-get update
-RUN apt-get install -y nginx-core
+RUN <span class="token function">sed</span> -i <span class="token string">'s/archive.ubuntu.com/mirrors.ustc.edu.cn/g'</span> /etc/apt/sources.list 
+RUN <span class="token function">apt-get</span> update
+RUN <span class="token function">apt-get</span> <span class="token function">install</span> -y nginx-core
 COPY index.html /var/www/html
-ENTRYPOINT [&quot;/usr/sbin/nginx&quot;,&quot;-g&quot;, &quot;daemon off;&quot;]
+ENTRYPOINT <span class="token punctuation">[</span><span class="token string">"/usr/sbin/nginx"</span>,<span class="token string">"-g"</span>, <span class="token string">"daemon off;"</span><span class="token punctuation">]</span>
 EXPOSE 80
 
 第三句就是加速
 最后一句是暴露端口
-</code></pre><table>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<table>
 <thead>
 <tr>
 <th>命令</th>
@@ -505,10 +507,12 @@ EXPOSE 80
 <pre class="line-numbers language-bash"><code class="language-bash">docker tag 要复制的镜像名 新镜像的名字
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>向仓库传本地镜像</p>
-<pre><code>docker login 
+<pre class="line-numbers language-bash"><code class="language-bash">docker login 
 登陆
 docker push 要上上传的image名字
-</code></pre>	
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>未完待续。。。</p>
+	
 	</div>
 	
 	<div id="current-post-cover" data-scr="/images/post-cover/27.jpg"></div>
@@ -525,7 +529,7 @@ docker push 要上上传的image名字
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息" rel="prev">
+			<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现" rel="prev">
 				&laquo;上一篇
 			</a>
 		
@@ -559,23 +563,6 @@ docker push 要上上传的image名字
 
 					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
 						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
-							phpinfo中的敏感信息
-						</a>
-						<p>
-							## 
-
-						</p>
-					</div>
-
-					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
-						<img src="/images/post-cover/28.jpg" class="relateImg" alt="phpinfo中的敏感信息">
 					</a>
 				</li>											
 		
@@ -689,16 +676,17 @@ HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数
 		
 				<li>
 					<div>
-						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">
-							‘sql注入新姿势-2019强网杯
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
+							sql注入新姿势-2019强网杯
 						</a>
 						<p>
-							
+							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
+随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
 						</p>
 					</div>
 
-					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="‘sql注入新姿势-2019强网杯">				
-						<img src="/img/cart_cover.jpg" class="relateImg" alt="‘sql注入新姿势-2019强网杯">
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
 					</a>
 				</li>											
 		
@@ -737,6 +725,25 @@ web1 &lt;?php
 
 					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
 						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">
+							文件上传漏洞
+						</a>
+						<p>
+							前言我是根据upload-lab来总结文件上传漏洞。思维导图：
+pass-01提示：在客户端使用js对不合法图片进行检查！所以我们可以通过抓包，改包就可以绕过。。。
+pass-02提示：服务端对数据包的MIME进行检查！
+这里是对Co...
+						</p>
+					</div>
+
+					<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">				
+						<img src="/images/post-cover/35.jpg" class="relateImg" alt="文件上传漏洞">
 					</a>
 				</li>											
 		

