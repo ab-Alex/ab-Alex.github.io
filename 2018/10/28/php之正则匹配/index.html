@@ -1,8 +1,3 @@
-<!--
-	作者：Sariay
-	时间：2018-09-25
-	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
--->
 
 	<!DOCTYPE html>
 	<html class="scrollbar">
@@ -477,8 +472,8 @@ session.save_handler="" --设定用户自定义存储函数...
 						</a>
 						<p>
 							create_function代码注入string create_function(string $args , string $code)
-$args 变量部分
-$code 方法代码部分
+
+$args 变量部分$code 方法代码部分
 返回值：以字符串形式返回唯一的函数名，如果出...
 						</p>
 					</div>
@@ -491,158 +486,148 @@ $code 方法代码部分
 		
 				<li>
 					<div>
-						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
-							2018n1ctf-esay-php复现
+						<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">
+							bypass disfunction
 						</a>
 						<p>
-							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
-环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
+							前言PHP 的 disabled_functions主要是用于禁用一些危险的函数防止攻击者执行系统命令。但是有一些绕过方法。这里做个总结。
+基本思路有四种绕过 disable_functions 的手法：第一种，攻击后端组件，寻找存在...
 						</p>
 					</div>
 
-					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
-						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
+					<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">				
+						<img src="/images/post-cover/24.jpg" class="relateImg" alt="bypass disfunction">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
-							docker基础学习
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
 						</a>
 						<p>
-							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
-dock...
-						</p>
-					</div>
-
-					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
-						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/07/31/xss-payload/" title="xss payload">
-							xss payload
-						</a>
-						<p>
-							转换脚本#coding=utf-8
-import re
-
-s='javascript:alert(1);'
-flag_10=''
-flag_16=''
-flag_url=''
-for x in xrange(0,len(s)):
-  ...
-						</p>
-					</div>
-
-					<a href="/2019/07/31/xss-payload/" title="xss payload">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="xss payload">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
-							浏览器解释机制和svg xss
-						</a>
-						<p>
-							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
-浏览器解析机制浏览器解析一篇HTML文档...
-						</p>
-					</div>
-
-					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
-						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/07/24/flask框架/" title="flask框架">
-							flask框架
-						</a>
-						<p>
-							python flask框架hello worldfrom flask import Flask
-
-app = Flask(__name__)
-@app.route('/') 
-
-def index(name):
-    return...
-						</p>
-					</div>
-
-					<a href="/2019/07/24/flask框架/" title="flask框架">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/06/16/刷题记录/" title="刷题记录">
-							刷题记录
-						</a>
-						<p>
-							一步步慢慢绕题目：
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
 &lt;?php
-show_source(__FILE__);
-$v1=0;$v2=0;$v3=0;
-$a=(array)json_decode(@$_GET['foo']);
-if(is_array($a)){
-...
+ini_set("display_errors"...
 						</p>
 					</div>
 
-					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
-						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">
-							哈希长度拓展攻击-hashpump
+						<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">
+							thinkphp5基础学习
 						</a>
 						<p>
-							哈希长度拓展攻击条件需要知道
-
-密文长度 (SECRET)
-明文 （哈希值）
-部分密文内容 （auth）
-
-HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、...
+							thinkphp5基础认识在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。
+在thinkphp中，是通过“入口文件...
 						</p>
 					</div>
 
-					<a href="/2019/06/14/哈希长度拓展攻击-hashpump/" title="哈希长度拓展攻击-hashpump">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="哈希长度拓展攻击-hashpump">
+					<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="thinkphp5基础学习">
 					</a>
 				</li>											
 		
 		
 				<li>
 					<div>
-						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
-							sql注入新姿势-2019强网杯
+						<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">
+							RCE提高篇
 						</a>
 						<p>
-							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
-随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
+							前言首先，需要了解一下命令执行的函数，这里推荐几篇文章，来认识这些函数。浅谈eval和assert从底层分析eval和assert的区别命令执行与代码执行的小结巧用命令注入的N种方式命令注入绕过姿势我就不在说这几个东西，大牛们都说的很...
 						</p>
 					</div>
 
-					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
-						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
+					<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="RCE提高篇">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">
+							phar拓展反序列化攻击面
+						</a>
+						<p>
+							pharphar扩展提供了一种将整个php应用程序放入名为“phar”（php archive）的单个文件中的方法，以便于分发和安装。除了提供这个服务之外，phar扩展还提供了一个文件格式抽象方法，用于通过phardata类创建和操作...
+						</p>
+					</div>
+
+					<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="phar拓展反序列化攻击面">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/09/基本工具使用/" title="基本工具使用">
+							基本工具使用
+						</a>
+						<p>
+							常用工具nc/ncatnc被誉为网络界的瑞士军刀。它的功能可见一般。。。
+
+侦听模式 / 传输模式 
+telnet / 获取banner信息 
+传输文本信息 
+传输文件/传输目录 
+加密传输文件 
+远程控制/木⻢ 
+加密所有流量 
+流...
+						</p>
+					</div>
+
+					<a href="/2019/10/09/基本工具使用/" title="基本工具使用">				
+						<img src="/images/post-cover/35.jpg" class="relateImg" alt="基本工具使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
+							buuctf刷题记录
+						</a>
+						<p>
+							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
+hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
+						</p>
+					</div>
+
+					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
+						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
 					</a>
 				</li>											
 		

