@@ -293,7 +293,7 @@
 	更新于
 	<a href="/2019/10/09/基本工具使用/" itemprop="url">
 		<time datetime="2019-10-09T07:23:23.000Z" itemprop="dateUpdated">
-	  		2019-10-10
+	  		2020-02-09
 	  </time>
 	</a> 	
 
@@ -347,11 +347,12 @@
 <pre class="line-numbers language-html"><code class="language-html">-v     显示详细信息
 -h     获取帮助信息
 -u     UDP 模式
+-c     执行传递的命令行
 -n     以数字形式表示的IP地址
 -p     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>通信端口</span><span class="token punctuation">></span></span>：设置本地主机使用的通信端口 (打开本地端口)
 -l     使用监听模式，监控传入的资料
 -q time    标准输出完成延时time秒后自动退出
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>实例1：聊天工具<br>A和B进行聊天<br>首先，A(ip为192.168.80.1)主机开启一个端口</p>
 <pre class="line-numbers language-html"><code class="language-html">nc -lvp 8888
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -389,9 +390,21 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>实例5：加密传输文件<br>A作为接收端，B作为发送端</p>
 <pre class="line-numbers language-html"><code class="language-html"> A：nc -lp 333 | mcrypt --flush -Fbqd -a rijndael-256 -m ecb > 1.mp4 
- B： mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt; a.mp4 | nc -nv 1.1.1.1 333 -q 1
+解密需要输入密钥才能获得原来的文件
+ B： mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt; a.mp4 | nc -nv 192.168.80.1 333 -q 1
+发送时需要输入两次密钥
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里不是利用nc的加密功能，这是用的mcrypt对文件进行加密，再用mcrypt对文件进行解密。</p>
+<p>NC -端口扫描</p>
+<pre class="line-numbers language-html"><code class="language-html">nc -nvz 192.168.80.1 1-65535  #tcp方式
+nc -vnzu 192.168.80.1 1-65535 #udp方式
+## 扫描结果不一定正确
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>nc的升级版就是ncat是nmap中的一个工具。<br>都知道nc可以反弹shell，但是nc反弹的shell没有身份验证。但是ncat可以验证。<br>ncat加密弹出shll：</p>
+<pre class="line-numbers language-html"><code class="language-html">A(192.168.1.110):ncat -c bash --allow 192.168.1.168 -vnl 9999 --ssl 加密开启shell
+B(192.168.1.168)：ncat -nv 192.168.1.110 9999 --ssl
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-	
+<h3 id="Wireshark"><a href="#Wireshark" class="headerlink" title="Wireshark"></a>Wireshark</h3>	
 	</div>
 	
 	<div id="current-post-cover" data-scr="/images/post-cover/35.jpg"></div>
@@ -477,27 +490,6 @@ HashPump安装HashPump是一个借助于OpenSSL实现了针对多种散列函数
 		
 				<li>
 					<div>
-						<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">
-							十大挖矿神器
-						</a>
-						<p>
-							十大挖洞必备神器
-0x00 Burp Suite
-
-
-Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。
-也就是说，Burp Suite是web应用...
-						</p>
-					</div>
-
-					<a href="/2018/11/28/十大挖矿神器/" title="十大挖矿神器">				
-						<img src="/images/post-cover/16.jpg" class="relateImg" alt="十大挖矿神器">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
 						<a href="/2018/10/28/sublime-text3的vinage快捷键/" title="sublime text3的vinage快捷键">
 							sublime text3的vinage快捷键
 						</a>
@@ -542,6 +534,79 @@ bp设置和使用proxy设置
 		
 				<li>
 					<div>
+						<a href="/2020/02/27/linux三剑客/" title="linux三剑客">
+							linux三剑客
+						</a>
+						<p>
+							前言之前用一些脚本都经常用到grep,sed,awk。但是一直不太熟悉，今天来学习一下，做个备忘录。
+grep格式：
+grep [OPTIONS] PATTERN [FILE...]
+grep [OPTIONS] [-e PATTER...
+						</p>
+					</div>
+
+					<a href="/2020/02/27/linux三剑客/" title="linux三剑客">				
+						<img src="/images/post-cover/39.jpg" class="relateImg" alt="linux三剑客">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">
+							计算机组成原理学习
+						</a>
+						<p>
+							计算机组成原理第一章 计算机系统概论计算机系统的层次结构
+冯·诺依曼计算机的特点
+
+计算机由运算器、存储器、控制器、输入设备和输出设备五大部件组成
+指令(程序)和数据以二进制同等地位地存储在存储器中，可按址寻访
+指令由操作码和地址码组...
+						</p>
+					</div>
+
+					<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="计算机组成原理学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">
 							bypass disfunction
 						</a>
@@ -572,60 +637,6 @@ ini_set("display_errors"...
 
 					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
 						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">
-							thinkphp5基础学习
-						</a>
-						<p>
-							thinkphp5基础认识在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。
-在thinkphp中，是通过“入口文件...
-						</p>
-					</div>
-
-					<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="thinkphp5基础学习">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">
-							RCE提高篇
-						</a>
-						<p>
-							前言首先，需要了解一下命令执行的函数，这里推荐几篇文章，来认识这些函数。浅谈eval和assert从底层分析eval和assert的区别命令执行与代码执行的小结巧用命令注入的N种方式命令注入绕过姿势我就不在说这几个东西，大牛们都说的很...
-						</p>
-					</div>
-
-					<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">				
-						<img src="/images/post-cover/32.jpg" class="relateImg" alt="RCE提高篇">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
-							buuctf刷题记录(序)
-						</a>
-						<p>
-							love math知识点：代码审计，绕waf直接给出源码：
-&lt;?php
-error_reporting(0);
-//听说你很喜欢数学，不知道你是否爱它胜过爱flag
-if(!isset($_GET['c'])){
-    sho...
-						</p>
-					</div>
-
-					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
-						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
 					</a>
 				</li>											
 		
@@ -907,7 +918,7 @@ if(!isset($_GET['c'])){
 	<div class="copyright">
 		<p>
 			 
-				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
 			
 			
 			

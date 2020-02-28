@@ -293,7 +293,7 @@
 	更新于
 	<a href="/2019/08/01/docker基础学习/" itemprop="url">
 		<time datetime="2019-08-01T04:53:26.000Z" itemprop="dateUpdated">
-	  		2019-10-02
+	  		2020-01-20
 	  </time>
 	</a> 	
 
@@ -508,6 +508,194 @@ EXPOSE 80
 登陆
 docker push 要上上传的image名字
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>docker下ubuntu16.04上搭建lamp环境：<br>安装php<br>参考：<a href="https://www.cnblogs.com/phpzhou/p/6288762.html" target="_blank" rel="noopener">ubuntu 使用apt-get install 安装php5.6–php7</a></p>
+<p>安装apache2:</p>
+<pre class="line-numbers language-html"><code class="language-html">apt-get install -y apache2
+service apache2 start //开启apache2服务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>安装mysql:</p>
+<pre class="line-numbers language-html"><code class="language-html">apt-get -y install mysql-server mysql-client
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后存在几个问题。<br>1.dockerfile在执行的时候不接受任何需要输入的参数，所以我们需要把输入的东西写在dockerfile里，否则dockerfile在运行到需要接受参数的地方就是一直处于等待状态。这里用到了静默安装。请参考<br><a href="https://blog.csdn.net/fickyou/article/details/50960444" target="_blank" rel="noopener">Linux下实现软件的静默安装 debconf</a></p>
+<p>2.CMD容器启动命令，执行完命令会自动退出。<br>解决的两种方法：<br>方法一</p>
+<p>写在 </p>
+<pre class="line-numbers language-html"><code class="language-html">dockerfile里写
+CMD ["/run.sh"]
+run.sh里写
+source /etc/apache2/envvars
+exec apache2 -D FOREGROUND
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者</p>
+<pre class="line-numbers language-html"><code class="language-html">ENTRYPOINT [ "/usr/sbin/apache2" ]
+CMD ["-D", "FOREGROUND"]
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>我的理解就是把apache2当作守护进程，一直运行，保证容器不退出。<br>缺点：不能重启apache服务。</p>
+<p>参考文章：<br><a href="https://yeasy.gitbooks.io/docker_practice/image/dockerfile/cmd.html" target="_blank" rel="noopener">CMD 容器启动命令</a><br>方法二：</p>
+<pre class="line-numbers language-html"><code class="language-html">dockerfile里写
+CMD ["/run.sh"]
+run.sh里写
+while true
+do
+ sleep 1
+done
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>命令一直不退出，就能保证容器一直在运行。<br>参考文章：<br><a href="https://yang1k.github.io/post/dockerfile-lamp/" target="_blank" rel="noopener">dockerfile-&gt;LAMP</a><br>综上所述，dockerfile如下：</p>
+<pre class="line-numbers language-html"><code class="language-html">FROM ubuntu:16.04
+
+MAINTAINER alex
+
+RUN apt-get update &amp;&amp; \
+    apt-get install -y apache2 software-properties-common &amp;&amp; \
+    LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php &amp;&amp; \
+    apt-get update &amp;&amp; \
+    apt-get install -y \
+    libapache2-mod-php5.6 \
+    php5.6 \
+    php5.6-cli \
+    php5.6-curl \
+    php5.6-dev \
+    php5.6-gd \
+    php5.6-imap \
+    php5.6-mbstring \
+    php5.6-mcrypt \
+    php5.6-mysql \
+    php5.6-pgsql \
+    php5.6-pspell \
+    php5.6-xml \
+    php5.6-xmlrpc \
+    php-apcu \
+    php-memcached \
+    php-pear \
+    vim \
+    &amp;&amp; apt-get clean \
+    &amp;&amp; rm -fr /var/lib/apt/lists/*
+
+RUN apt-get update &amp;&amp; \
+  echo 'mysql-server-5.7 mysql-server/root_password password root' |  debconf-set-selections &amp;&amp; \
+  echo 'mysql-server-5.7 mysql-server/root_password_again password root' | debconf-set-selections &amp;&amp; \
+  apt-get -y install mysql-server &amp;&amp; \
+  apt-get -y install mysql-client &amp;&amp; \
+  apt-get clean &amp;&amp; \
+  rm -fr /var/lib/apt/lists/*
+
+COPY html/ /var/www/html/
+COPY run.sh /run.sh
+RUN chmod 755 /run.sh &amp;&amp; \
+    chmod 755 -R /var/www/html/
+EXPOSE 80
+CMD ["/run.sh"]
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>run.sh：</p>
+<pre class="line-numbers language-html"><code class="language-html">#!/bin/bash
+chown www-data:www-data /var/www/html -R
+## 关闭报错机制
+if [ "$ALLOW_OVERRIDE" = "**False**" ]; then
+    unset ALLOW_OVERRIDE
+else
+    sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
+    a2enmod rewrite
+fi
+## 指定端口
+echo "ServerName localhost:80" >>/etc/apache2/apache2.conf
+service mysql restart
+service mysql stop
+# initialize database
+mysqld_safe --skip-grant-tables --skip-networking &amp;
+sleep 5
+## change root password
+mysql -uroot -e "use mysql;update user set authentication_string=PASSWORD('alex') where User='root';update user set plugin='mysql_native_password';flush privileges;"
+## 解决mysql5.7的中文乱码问题
+echo "no-auto-rehash
+default-character-set=utf8
+safe-updates">>/etc/mysql/conf.d/mysql.cnf
+
+echo "character-set-server=utf8
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES">>/etc/mysql/mysql.conf.d/mysqld.cnf
+## restart mysql
+service mysql restart
+
+mysql -uroot -palex &lt; /var/www/html/sql.sql
+rm /var/www/html/sql.sql
+
+## 解决vim汉语乱码问题
+echo "set fileencodings=ucs-bom,utf-8,latin1,gbk,cp936,gb2312
+set termencoding=utf-8
+set fileformats=unix
+set encoding=prc">>~/.vimrc
+
+## 修改apache的一些配置
+rm -rf /etc/apache2/apache2.conf /etc/apache2/mods-available/php5.6.conf
+mv /var/www/html/apache2.conf /etc/apache2/
+mv /var/www/html/php5.6.conf /etc/apache2/mods-available/
+
+chomd 644 -R /etc/apache2/
+
+service apache2 restart
+rm -rf /var/www/html/index.html
+## 防止容器退出
+while true
+do
+ sleep 1
+done
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其他的tips:<br>安装 vim：</p>
+<pre class="line-numbers language-html"><code class="language-html">apt-get install -y vim 
+
+echo "set fileencodings=ucs-bom,utf-8,latin1,gbk,cp936,gb2312
+set termencoding=utf-8
+set fileformats=unix
+set encoding=prc">>~/.vimrc
+#为了vim能显示中文
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在shell中修改mysql密码写法：</p>
+<pre class="line-numbers language-html"><code class="language-html">mysql版本小于5.7
+
+service mysql stop
+# initialize database
+mysqld_safe --skip-grant-tables&amp;
+sleep 5
+## change root password
+mysql -uroot -e "use mysql;UPDATE user SET password=PASSWORD('alex') WHERE user='root';FLUSH PRIVILEGES;"
+## restart mysql
+service mysql restart
+
+mysql版本大于等于5.7
+
+service mysql restart #dockerfile中刚安装好mysql的时候需要先重启
+service mysql stop
+# initialize database
+mysqld_safe --skip-grant-tables --skip-networking &amp;
+sleep 5
+## change root password
+mysql -uroot -e "use mysql;update user set authentication_string=PASSWORD('alex') where User='root';update user set plugin='mysql_native_password';flush privileges;"
+## restart mysql
+service mysql restart
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>修改apache服务的配置：<br><a href="https://www.cnblogs.com/web200/p/10734864.html" target="_blank" rel="noopener">apache目录权限控制</a><br>设置.phps，可以访问把</p>
+<pre class="line-numbers language-html"><code class="language-html">vim /etc/apache2/mods-available/php5.6.conf
+把这部分添加注释
+#<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FilesMatch</span> <span class="token attr-name">".+\.phps$"</span><span class="token punctuation">></span></span>
+#   SetHandler application/x-httpd-php-source
+    # Deny access to raw php sources by default
+    # To re-enable it's recommended to enable access to the files
+    # only in specific virtual host or directory
+#   Require all denied
+#<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>FilesMatch</span><span class="token punctuation">></span></span>
+
+重启apache服务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>修改mysql5.7的默认编码：<br>参考：<a href="https://www.jianshu.com/p/1deac307a923" target="_blank" rel="noopener">Linux mysql 5.7.22设置中文编码-解决乱码问题</a></p>
+<pre class="line-numbers language-html"><code class="language-html">echo "no-auto-rehash
+default-character-set=utf8
+safe-updates">>/etc/mysql/conf.d/mysql.cnf
+
+echo "character-set-server=utf8
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES">>/etc/mysql/mysql.conf.d/mysqld.cnf
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重启mysql后有效。</p>
+<pre class="line-numbers language-html"><code class="language-html">show variables like 'character%'; #查看字符集
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>未完待续。。。</p>
 	
 	</div>
@@ -549,6 +737,79 @@ docker push 要上上传的image名字
 		
 				<li>
 					<div>
+						<a href="/2020/02/27/linux三剑客/" title="linux三剑客">
+							linux三剑客
+						</a>
+						<p>
+							前言之前用一些脚本都经常用到grep,sed,awk。但是一直不太熟悉，今天来学习一下，做个备忘录。
+grep格式：
+grep [OPTIONS] PATTERN [FILE...]
+grep [OPTIONS] [-e PATTER...
+						</p>
+					</div>
+
+					<a href="/2020/02/27/linux三剑客/" title="linux三剑客">				
+						<img src="/images/post-cover/39.jpg" class="relateImg" alt="linux三剑客">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">
+							计算机组成原理学习
+						</a>
+						<p>
+							计算机组成原理第一章 计算机系统概论计算机系统的层次结构
+冯·诺依曼计算机的特点
+
+计算机由运算器、存储器、控制器、输入设备和输出设备五大部件组成
+指令(程序)和数据以二进制同等地位地存储在存储器中，可按址寻访
+指令由操作码和地址码组...
+						</p>
+					</div>
+
+					<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="计算机组成原理学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
 						<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">
 							bypass disfunction
 						</a>
@@ -579,23 +840,6 @@ ini_set("display_errors"...
 
 					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
 						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">
-							thinkphp5基础学习
-						</a>
-						<p>
-							thinkphp5基础认识在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。
-在thinkphp中，是通过“入口文件...
-						</p>
-					</div>
-
-					<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="thinkphp5基础学习">
 					</a>
 				</li>											
 		
@@ -674,57 +918,6 @@ telnet / 获取banner信息
 
 					<a href="/2019/10/09/基本工具使用/" title="基本工具使用">				
 						<img src="/images/post-cover/35.jpg" class="relateImg" alt="基本工具使用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
-							buuctf刷题记录
-						</a>
-						<p>
-							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
-hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
-						</p>
-					</div>
-
-					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
-						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">
-							OGeek CTF 2019-Enjoy You Self
-						</a>
-						<p>
-							前言最近ctf不少，但是成绩不咋样，菜的真实。新学期开始了，最后一年了。。。继续努力吧。OPPO OGeek CTF 2019咋说呢，菜。。。总结一下学到的东西吧。
-Enjoy You Self线上环境：http://47.107.2...
-						</p>
-					</div>
-
-					<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">				
-						<img src="/images/post-cover/30.jpg" class="relateImg" alt="OGeek CTF 2019-Enjoy You Self">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/08/25/XXE初识/" title="XXE初识">
-							XXE初识
-						</a>
-						<p>
-							前言最近在玩的ctf都有一个题是xxe漏洞，没见过没学习过，感觉一脸懵逼。。。课后赶紧来学习一波。。。
-
-						</p>
-					</div>
-
-					<a href="/2019/08/25/XXE初识/" title="XXE初识">				
-						<img src="/images/post-cover/29.jpg" class="relateImg" alt="XXE初识">
 					</a>
 				</li>											
 		
@@ -1006,7 +1199,7 @@ Enjoy You Self线上环境：http://47.107.2...
 	<div class="copyright">
 		<p>
 			 
-				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
 			
 			
 			

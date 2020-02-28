@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      thinkphp5基础学习 | 似雍&amp;&amp;非庸
+      linux三剑客 | 似雍&amp;&amp;非庸
     
   </title>
   <meta name="author" content="Alex">
@@ -110,7 +110,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《thinkphp5基础学习》
+						当前文章&nbsp;:&nbsp;《linux三剑客》
 					
 				</p>
 				<!-- Progress bar -->
@@ -273,8 +273,8 @@
 	
 	<div class="article-title">
 		
-	<a href="/2019/11/08/thinkphp基础学习/" itemprop="url">
-		thinkphp5基础学习
+	<a href="/2020/02/27/linux三剑客/" itemprop="url">
+		linux三剑客
 	</a>
 
 	</div>
@@ -283,17 +283,17 @@
 		<span>
 			
 	发布于
-	<a href="/2019/11/08/thinkphp基础学习/" itemprop="url">
-		<time datetime="2019-11-08T07:28:27.000Z" itemprop="datePublished">
-	  		2019-11-08
+	<a href="/2020/02/27/linux三剑客/" itemprop="url">
+		<time datetime="2020-02-27T03:15:07.000Z" itemprop="datePublished">
+	  		2020-02-27
 	  </time>
 	</a> 
 
 	/
 	更新于
-	<a href="/2019/11/08/thinkphp基础学习/" itemprop="url">
-		<time datetime="2019-11-08T07:28:27.000Z" itemprop="dateUpdated">
-	  		2019-11-08
+	<a href="/2020/02/27/linux三剑客/" itemprop="url">
+		<time datetime="2020-02-27T03:15:07.000Z" itemprop="dateUpdated">
+	  		2020-02-27
 	  </time>
 	</a> 	
 
@@ -303,8 +303,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/框架/" class=" ">
-			框架
+		<a href="/tags/linux/" class=" ">
+			linux
 		</a>
 	
 		
@@ -312,7 +312,7 @@
 		/
 		
 
-    <span class="leancloud_visitors" id="/2019/11/08/thinkphp基础学习/_visitors" data-url="/2019/11/08/thinkphp基础学习/" data-title="thinkphp5基础学习">
+    <span class="leancloud_visitors" id="/2020/02/27/linux三剑客/_visitors" data-url="/2020/02/27/linux三剑客/" data-title="linux三剑客">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -321,7 +321,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2019/11/08/thinkphp基础学习/_likes" data-url="/2019/11/08/thinkphp基础学习/" data-title="thinkphp5基础学习" rel="unlike">
+    <span class="leancloud_likes" id="/2020/02/27/linux三剑客/_likes" data-url="/2020/02/27/linux三剑客/" data-title="linux三剑客" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -330,26 +330,146 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="thinkphp5基础认识"><a href="#thinkphp5基础认识" class="headerlink" title="thinkphp5基础认识"></a>thinkphp5基础认识</h2><p>在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。</p>
-<p>在thinkphp中，是通过“入口文件/模块名(module)/控制器名(controller)/触发器名(action）”来确定用户的URL对应执行哪个方法中的语句的。</p>
-<p>把<code>application</code>下面的子文件夹，称为<code>模块(Module)</code>，把模块下的<code>controller</code>文件夹中的子文件称之为<code>控制器(Controller)</code>，把控制器文件中的方法称为<code>触发器(Action)</code>。</p>
-<p>在thinkphp每一个URL都会对应着一个触发器。</p>
-<p>为了理清Thinkphp的文件路径与访问的url路径对应关系。我下面列据出一个比较乱的例子，能够很好的说明问题。首先先声明：我们的入口文件是本地<code>www</code>的<code>/thinkphp5.0/public/index.php</code>对应url地址是<code>http://localhost/thinkphp5.0/public/index.php</code>。</p>
-<h3 id="thinkphp的默认值"><a href="#thinkphp的默认值" class="headerlink" title="thinkphp的默认值"></a>thinkphp的默认值</h3><ol>
-<li>当我们未指定模块名时，调用的是默认模块index。</li>
-<li>当我们未指定控制器名时，调用的是默认控制器Index（注意，这个是Index，而不是index，原因是控制器实际上是一个类，我们规定类的名字首写字母要大写）。</li>
-<li>当我们在URL中未指定触发器名时，调用的是默认触发器index。</li>
-</ol>
-<p>首先理解这个简单的例子：<br>我们访问入口文件<code>/thinkphp5.0/public/index.php</code>，对应url地址是<code>http://localhost/thinkphp5.0/public/index.php</code>。未指明对应的模块，默认访问调用了模块index,未指定控制器名，调用的是默认控制器Index,未指定触发器名，调用的是默认触发器index。实际对应的url应该为<code>http://localhost/thinkphp5.0/public/index.php/index/Index/index</code>。实际执行的是<code>/thinkphp5.0/application/index/controller/Index.php</code>中的<code>index()</code>方法。<br>深入理解：仔细看图片中的文件结构来给出对应的url。<br><img src="https://s2.ax1x.com/2019/11/08/MZkult.png" alt="MZkult.png"><br>我们想要的访问执行<code>/thinkphp5.0/application/alex/controller/Alex.php</code>中的<code>index()</code>方法。<br>首先是访问入口文件：<code>http://localhost/thinkphp5.0/public/index.php</code>然后加模块名再加控制器名再加触发器名。所以应该url是<code>http://localhost/thinkphp5.0/public/index.php/alex/ALex/index</code>。（这里末尾的index可以省略。因为默认访问。public后的index.php也可省略，因为apache默认访问。）即可显示<code>alex</code>。</p>
-<p>我们想要的访问执行<code>/thinkphp5.0/application/alex/controller/Alex.php</code>中的<code>aaaa()</code>方法。对应的url应该为：<br><code>http://localhost/thinkphp5.0/public/index.php/alex/ALex/aaaa</code>。即可显示<code>abex</code>。<br>这就是url与thinkphp文件对应的关系。</p>
-<h3 id="MCA"><a href="#MCA" class="headerlink" title="MCA"></a>MCA</h3><p><code>M</code> = <code>M</code>odule 它对应一个文件夹</p>
-<p><code>C</code> = <code>C</code>ontroller 它对应一个文件</p>
-<p><code>A</code> = <code>A</code>ction 它对应一个方法（它还有几个名字：触发器、函数、function、method）<br>每个URL都会对应唯一的一组MCA，这组唯一的MCA会执行特定的function。当用户访问一个URL时，就会执行一个对应的function，我们把一些代码写在这个function中，那么相应的功能就实现了。</p>
-<h2 id="thinkphp5数据库操作"><a href="#thinkphp5数据库操作" class="headerlink" title="thinkphp5数据库操作"></a>thinkphp5数据库操作</h2><p><strong>怕坑记：在给控制器起名的时候，只允许首字母大写，不允许其他字母大写。。。</strong></p>
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前用一些脚本都经常用到grep,sed,awk。但是一直不太熟悉，今天来学习一下，做个备忘录。</p>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><pre class="line-numbers language-html"><code class="language-html">格式：
+grep [OPTIONS] PATTERN [FILE...]
+grep [OPTIONS] [-e PATTERN]  [FILE...]
+参数：
+-c    --count   #计算符合样式的列数
+-l    --file-with-matches   #列出文件内容符合指定的样式的文件名称。 
+-v   --revert-match   #显示不包含匹配文本的所有行。
+-i    --ignore-case   #忽略字符大小写的差别。
+-o   # 只显示匹配到的关键字
+-n  # 现实行号
+
+-E    使用正则表达式
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>sed : 流编辑器，一次处理一行内容</p>
+<pre class="line-numbers language-html"><code class="language-html">sed [-nefr] [动作] [文件]
+选项与参数：
+-n ：使用安静(silent)模式。在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到终端上。但如果加上 -n 参数后，则只有经过sed 特殊处理的那一行(或者动作)才会被列出来
+-e ：直接在命令列模式上进行 sed 的动作编辑
+-f ：直接将 sed 的动作写在一个文件内， -f filename 则可以运行 filename 内的 sed 动作
+-r ：sed 的动作支持的是延伸型正规表示法的语法。(默认是基础正规表示法语法)
+-i ：直接修改读取的文件内容，而不是输出到终端。
+
+动作说明： [n1[,n2]] 动作：
+n1, n2 ：不一定存在，一般代表选择进行动作的行数，比如，如果我的动作是需要在 10 到 20 行之间进行的，则10,20[动作行为]
+
+动作：
+#a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)
+#c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！
+#d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；
+    sed  "3d"  file  #  删除第三行
+    sed  "1,3d"  # 删除前三行
+    sed  "1d;3d;5d"  # 删除1、3、5行
+    sed  "/^$/d" #删除空行   
+    sed  "/abc/d" #删除所有含有abc的行
+    sed  "/abc/，/def/d" #删除abc 和 def 之间的行，包括其自身
+    sed  "1，/def/d" #删除第一行到 def 之间的行，包括其自身
+    sed  "/abc/，+3d " # 删除含有abc的行之后，在删除3行
+    sed  "/abc/，～3d" #从含有abc的行开始，共删除3行
+    sed  "1~2d"  # 从第1行开始，每2行删除一行， 删除奇数行
+    sed  "2~2d"  # 从第2行开始，每2行删除一行， 删除奇数行
+    sed  "$d"  # 删除最后一行
+    sed  "/dd\|cc/d"  删除有dd或者cc的行
+
+#i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；
+#p ：列印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行
+    sed -n  "3p"  file  #  显示第三行
+    sed -n  "1,3p"  # 显示前三行
+    sed -n  "2,+3p"  # 显示第二行，及后面的三行
+    sed -n  "$p"  # 显示最后一行
+    sed -n "1p;3p;5p"  # 只显示文件1、3、5行
+    sed -n  "$="  # 显示文件行数
+#s ：替换，可以直接进行取代的工作。通常这个 s 的动作可以搭配正规表示法，例如 1,20s/old/new/g
+    's/old/new/g'  
+
+    sed  "s/\(all\)/bb/"
+    sed -r "s/(all)/bb/"
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>awk :  一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</p>
+<pre class="line-numbers language-html"><code class="language-html"># 命令行调用方式
+awk [-F  field-separator]  'commands'  input-file(s)
+
+#  commands 是真正awk命令，[-F域分隔符]是可选的。 input-file(s) 是待处理的文件。    在awk中，文件的每一行中，由域分隔符分开的每一项称为一个域。通常，在不指名-F域分隔符的情况下，默认的域分隔符是空格。
+
+# awk工作流程：
+# 读入有'\n'换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是"空白键" 或 "[tab]键",所以$1表示登录用户，$3表示登录用户ip,以此类推。
+
+cat /etc/passwd |awk  -F ':'  '{print $1}'  
+cat /etc/passwd |awk  -F ':'  '{print $1"\t"$7}'
+
+awk 常用内置变量
+ARGC               命令行参数个数
+ARGV               命令行参数排列， ARGV[0] ARGV[1]
+ENVIRON            支持队列中系统环境变量的使用
+FILENAME           awk浏览的文件名
+FNR                浏览文件的记录数
+FS                 设置输入域分隔符，等价于命令行 -F选项
+NF                 浏览记录的域的个数
+NR                 已读的记录数
+OFS                输出域分隔符
+ORS                输出记录分隔符
+RS                 控制记录分隔符
+
+# 统计/etc/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:
+#awk  -F ':'  '{print "filename:" FILENAME ",linenumber:" NR ",columns:" NF ",linecontent:"$0}' /etc/passwd
+
+# 使用printf替代print,可以让代码更加简洁，易读
+awk  -F ':'  '{printf("filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n",FILENAME,NR,NF,$0)}' /etc/passwd
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="其他一些容易忘记的命令"><a href="#其他一些容易忘记的命令" class="headerlink" title="其他一些容易忘记的命令"></a>其他一些容易忘记的命令</h2><h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h3><pre class="line-numbers language-html"><code class="language-html">* * * * * command to be executed
+- - - - - -
+| | | | | |
+| | | | | --- 预执行的命令
+| | | | ----- 表示星期0～7（其中星期天可以用0或7表示）
+| | | ------- 表示月份1～12
+| | --------- 表示日期1～31
+| ----------- 表示小时1～23（0表示0点）
+------------- 表示分钟1～59 每分钟用*或者 */1表示
+
+
+-u user：用来设定某个用户的crontab服务；
+-e：编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。
+-l：显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。
+-r：从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。
+-i：在删除用户的crontab文件时给确认提示
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>ubuntu下配置文件在/var/spool/cron/crontabs/下。</p>
+<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><pre class="line-numbers language-html"><code class="language-html">-c ：建立一个压缩文件的参数指令(create 的意思)；
+-x ：解开一个压缩文件的参数指令！
+-t ：查看 tarfile 里面的文件！
+特别注意  c/x/t 同时仅能存在一个，因为不可能同时压缩与解压缩。
+-z ：是否同时具有 gzip 的属性？亦即是否需要用 gzip 压缩？
+-j ：是否同时具有 bzip2 的属性？亦即是否需要用 bzip2 压缩？
+-v ：压缩的过程中显示文件！这个常用，但不建议用在背景执行过程！
+-f ：使用档名，请留意，在 f 之后要立即接文件名
+-p ：使用原文件的原来属性（属性不会依据使用者而变）
+-P ：可以使用绝对路径来压缩！
+-N ：比后面接的日期(yyyy/mm/dd)还要新的才会被打包进新建的文件中！
+
+
+# 将当前目录下所有.txt文件打包并压缩归档到文件this.tar.gz
+tar czvf this.tar.gz ./*.txt 
+# 将当前目录下的this.tar.gz中的文件解压到当前目录
+tar xzvf this.tar.gz ./
+
+
+# 将整个 /etc 目录下的文件全部打包成为 /tmp/etc.tar
+tar -cvf /tmp/etc.tar /etc  # 仅打包，不压缩！
+tar -zcvf /tmp/etc.tar.gz /etc  # 打包后，以 gzip 压缩
+tar -jcvf /tmp/etc.tar.bz2 /etc  # 打包后，以 bzip2 压缩
+
+# 解压文件
+tar -xf  a.tar.gz   # 
+tar -xf  a.tar.gz  -C /tmp  # 指定解包路径
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/images/post-cover/6.jpg"></div>
+	<div id="current-post-cover" data-scr="/images/post-cover/39.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -363,12 +483,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇" rel="next">
+			<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -386,22 +502,90 @@
 		
 				<li>
 					<div>
-						<a href="/2019/07/24/flask框架/" title="flask框架">
-							flask框架
+						<a href="/2018/10/09/linux基本操作/" title="linux基本操作">
+							linux基本操作
 						</a>
 						<p>
-							python flask框架hello worldfrom flask import Flask
-
-app = Flask(__name__)
-@app.route('/') 
-
-def index(name):
-    return...
+							centos常用命令及快捷键整理常用linux命令文件和目录cd /home                        进入 '/home' 目录
+cd ..                                返回上一...
 						</p>
 					</div>
 
-					<a href="/2019/07/24/flask框架/" title="flask框架">				
-						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
+					<a href="/2018/10/09/linux基本操作/" title="linux基本操作">				
+						<img src="/images/post-cover/30.jpg" class="relateImg" alt="linux基本操作">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息">
+							linux查看系统信息
+						</a>
+						<p>
+							linux系统下经常查看各种信息，总结一下。
+系统uname -a               # 查看内核/操作系统/CPU信息
+head -n 1 /etc/issue   # 查看操作系统版本
+cat /etc/issue | ...
+						</p>
+					</div>
+
+					<a href="/2018/10/08/linux查看系统信息/" title="linux查看系统信息">				
+						<img src="/images/post-cover/29.jpg" class="relateImg" alt="linux查看系统信息">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">
+							计算机组成原理学习
+						</a>
+						<p>
+							计算机组成原理第一章 计算机系统概论计算机系统的层次结构
+冯·诺依曼计算机的特点
+
+计算机由运算器、存储器、控制器、输入设备和输出设备五大部件组成
+指令(程序)和数据以二进制同等地位地存储在存储器中，可按址寻访
+指令由操作码和地址码组...
+						</p>
+					</div>
+
+					<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="计算机组成原理学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
 					</a>
 				</li>											
 		
@@ -491,82 +675,6 @@ if(!isset($_GET['c'])){
 
 					<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">				
 						<img src="/images/post-cover/25.jpg" class="relateImg" alt="phar拓展反序列化攻击面">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/10/09/基本工具使用/" title="基本工具使用">
-							基本工具使用
-						</a>
-						<p>
-							常用工具nc/ncatnc被誉为网络界的瑞士军刀。它的功能可见一般。。。
-
-侦听模式 / 传输模式 
-telnet / 获取banner信息 
-传输文本信息 
-传输文件/传输目录 
-加密传输文件 
-远程控制/木⻢ 
-加密所有流量 
-流...
-						</p>
-					</div>
-
-					<a href="/2019/10/09/基本工具使用/" title="基本工具使用">				
-						<img src="/images/post-cover/35.jpg" class="relateImg" alt="基本工具使用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
-							buuctf刷题记录
-						</a>
-						<p>
-							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
-hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
-						</p>
-					</div>
-
-					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
-						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">
-							OGeek CTF 2019-Enjoy You Self
-						</a>
-						<p>
-							前言最近ctf不少，但是成绩不咋样，菜的真实。新学期开始了，最后一年了。。。继续努力吧。OPPO OGeek CTF 2019咋说呢，菜。。。总结一下学到的东西吧。
-Enjoy You Self线上环境：http://47.107.2...
-						</p>
-					</div>
-
-					<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">				
-						<img src="/images/post-cover/30.jpg" class="relateImg" alt="OGeek CTF 2019-Enjoy You Self">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/08/25/XXE初识/" title="XXE初识">
-							XXE初识
-						</a>
-						<p>
-							前言最近在玩的ctf都有一个题是xxe漏洞，没见过没学习过，感觉一脸懵逼。。。课后赶紧来学习一波。。。
-
-						</p>
-					</div>
-
-					<a href="/2019/08/25/XXE初识/" title="XXE初识">				
-						<img src="/images/post-cover/29.jpg" class="relateImg" alt="XXE初识">
 					</a>
 				</li>											
 		
@@ -848,7 +956,7 @@ Enjoy You Self线上环境：http://47.107.2...
 	<div class="copyright">
 		<p>
 			 
-				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
 			
 			
 			

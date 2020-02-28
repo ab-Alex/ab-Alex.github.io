@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      XXE初识 | 似雍&amp;&amp;非庸
+      thinkphp5基础学习 | 似雍&amp;&amp;非庸
     
   </title>
   <meta name="author" content="Alex">
@@ -110,7 +110,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《XXE初识》
+						当前文章&nbsp;:&nbsp;《thinkphp5基础学习》
 					
 				</p>
 				<!-- Progress bar -->
@@ -273,8 +273,8 @@
 	
 	<div class="article-title">
 		
-	<a href="/2019/08/25/XXE初识/" itemprop="url">
-		XXE初识
+	<a href="/2019/02/08/thinkphp基础学习/" itemprop="url">
+		thinkphp5基础学习
 	</a>
 
 	</div>
@@ -283,17 +283,17 @@
 		<span>
 			
 	发布于
-	<a href="/2019/08/25/XXE初识/" itemprop="url">
-		<time datetime="2019-08-25T06:53:37.000Z" itemprop="datePublished">
-	  		2019-08-25
+	<a href="/2019/02/08/thinkphp基础学习/" itemprop="url">
+		<time datetime="2019-02-08T07:28:27.000Z" itemprop="datePublished">
+	  		2019-02-08
 	  </time>
 	</a> 
 
 	/
 	更新于
-	<a href="/2019/08/25/XXE初识/" itemprop="url">
-		<time datetime="2019-08-25T06:53:37.000Z" itemprop="dateUpdated">
-	  		2019-08-25
+	<a href="/2019/02/08/thinkphp基础学习/" itemprop="url">
+		<time datetime="2019-02-08T07:28:27.000Z" itemprop="dateUpdated">
+	  		2020-02-28
 	  </time>
 	</a> 	
 
@@ -303,8 +303,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/XXE/" class=" ">
-			XXE
+		<a href="/tags/框架/" class=" ">
+			框架
 		</a>
 	
 		
@@ -312,7 +312,7 @@
 		/
 		
 
-    <span class="leancloud_visitors" id="/2019/08/25/XXE初识/_visitors" data-url="/2019/08/25/XXE初识/" data-title="XXE初识">
+    <span class="leancloud_visitors" id="/2019/02/08/thinkphp基础学习/_visitors" data-url="/2019/02/08/thinkphp基础学习/" data-title="thinkphp5基础学习">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -321,7 +321,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2019/08/25/XXE初识/_likes" data-url="/2019/08/25/XXE初识/" data-title="XXE初识" rel="unlike">
+    <span class="leancloud_likes" id="/2019/02/08/thinkphp基础学习/_likes" data-url="/2019/02/08/thinkphp基础学习/" data-title="thinkphp5基础学习" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -330,11 +330,26 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在玩的ctf都有一个题是xxe漏洞，没见过没学习过，感觉一脸懵逼。。。课后赶紧来学习一波。。。</p>
+		<h2 id="thinkphp5基础认识"><a href="#thinkphp5基础认识" class="headerlink" title="thinkphp5基础认识"></a>thinkphp5基础认识</h2><p>在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。</p>
+<p>在thinkphp中，是通过“入口文件/模块名(module)/控制器名(controller)/触发器名(action）”来确定用户的URL对应执行哪个方法中的语句的。</p>
+<p>把<code>application</code>下面的子文件夹，称为<code>模块(Module)</code>，把模块下的<code>controller</code>文件夹中的子文件称之为<code>控制器(Controller)</code>，把控制器文件中的方法称为<code>触发器(Action)</code>。</p>
+<p>在thinkphp每一个URL都会对应着一个触发器。</p>
+<p>为了理清Thinkphp的文件路径与访问的url路径对应关系。我下面列据出一个比较乱的例子，能够很好的说明问题。首先先声明：我们的入口文件是本地<code>www</code>的<code>/thinkphp5.0/public/index.php</code>对应url地址是<code>http://localhost/thinkphp5.0/public/index.php</code>。</p>
+<h3 id="thinkphp的默认值"><a href="#thinkphp的默认值" class="headerlink" title="thinkphp的默认值"></a>thinkphp的默认值</h3><ol>
+<li>当我们未指定模块名时，调用的是默认模块index。</li>
+<li>当我们未指定控制器名时，调用的是默认控制器Index（注意，这个是Index，而不是index，原因是控制器实际上是一个类，我们规定类的名字首写字母要大写）。</li>
+<li>当我们在URL中未指定触发器名时，调用的是默认触发器index。</li>
+</ol>
+<p>首先理解这个简单的例子：<br>我们访问入口文件<code>/thinkphp5.0/public/index.php</code>，对应url地址是<code>http://localhost/thinkphp5.0/public/index.php</code>。未指明对应的模块，默认访问调用了模块index,未指定控制器名，调用的是默认控制器Index,未指定触发器名，调用的是默认触发器index。实际对应的url应该为<code>http://localhost/thinkphp5.0/public/index.php/index/Index/index</code>。实际执行的是<code>/thinkphp5.0/application/index/controller/Index.php</code>中的<code>index()</code>方法。<br>深入理解：仔细看图片中的文件结构来给出对应的url。<br><img src="https://s2.ax1x.com/2019/11/08/MZkult.png" alt="MZkult.png"><br>我们想要的访问执行<code>/thinkphp5.0/application/alex/controller/Alex.php</code>中的<code>index()</code>方法。<br>首先是访问入口文件：<code>http://localhost/thinkphp5.0/public/index.php</code>然后加模块名再加控制器名再加触发器名。所以应该url是<code>http://localhost/thinkphp5.0/public/index.php/alex/ALex/index</code>。（这里末尾的index可以省略。因为默认访问。public后的index.php也可省略，因为apache默认访问。）即可显示<code>alex</code>。</p>
+<p>我们想要的访问执行<code>/thinkphp5.0/application/alex/controller/Alex.php</code>中的<code>aaaa()</code>方法。对应的url应该为：<br><code>http://localhost/thinkphp5.0/public/index.php/alex/ALex/aaaa</code>。即可显示<code>abex</code>。<br>这就是url与thinkphp文件对应的关系。</p>
+<h3 id="MCA"><a href="#MCA" class="headerlink" title="MCA"></a>MCA</h3><p><code>M</code> = <code>M</code>odule 它对应一个文件夹</p>
+<p><code>C</code> = <code>C</code>ontroller 它对应一个文件</p>
+<p><code>A</code> = <code>A</code>ction 它对应一个方法（它还有几个名字：触发器、函数、function、method）<br>每个URL都会对应唯一的一组MCA，这组唯一的MCA会执行特定的function。当用户访问一个URL时，就会执行一个对应的function，我们把一些代码写在这个function中，那么相应的功能就实现了。</p>
+<h2 id="thinkphp5数据库操作"><a href="#thinkphp5数据库操作" class="headerlink" title="thinkphp5数据库操作"></a>thinkphp5数据库操作</h2><p><strong>怕坑记：在给控制器起名的时候，只允许首字母大写，不允许其他字母大写。。。</strong></p>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/images/post-cover/29.jpg"></div>
+	<div id="current-post-cover" data-scr="/images/post-cover/6.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -348,12 +363,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self" rel="prev">
+			<a href="/2019/03/13/浅谈命令执行/" title="浅谈命令执行" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现" rel="next">
+			<a href="/2018/12/10/ctf中web的常见知识点/" title="ctf中web的常见知识点" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -368,6 +383,101 @@
 
 <div class="relate-post">
 	<ul>
+		
+				<li>
+					<div>
+						<a href="/2019/07/24/flask框架/" title="flask框架">
+							flask框架
+						</a>
+						<p>
+							python flask框架hello worldfrom flask import Flask
+
+app = Flask(__name__)
+@app.route('/') 
+
+def index(name):
+    return...
+						</p>
+					</div>
+
+					<a href="/2019/07/24/flask框架/" title="flask框架">				
+						<img src="/images/post-cover/26.jpg" class="relateImg" alt="flask框架">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2020/02/27/linux三剑客/" title="linux三剑客">
+							linux三剑客
+						</a>
+						<p>
+							前言之前用一些脚本都经常用到grep,sed,awk。但是一直不太熟悉，今天来学习一下，做个备忘录。
+grep格式：
+grep [OPTIONS] PATTERN [FILE...]
+grep [OPTIONS] [-e PATTER...
+						</p>
+					</div>
+
+					<a href="/2020/02/27/linux三剑客/" title="linux三剑客">				
+						<img src="/images/post-cover/39.jpg" class="relateImg" alt="linux三剑客">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">
+							计算机组成原理学习
+						</a>
+						<p>
+							计算机组成原理第一章 计算机系统概论计算机系统的层次结构
+冯·诺依曼计算机的特点
+
+计算机由运算器、存储器、控制器、输入设备和输出设备五大部件组成
+指令(程序)和数据以二进制同等地位地存储在存储器中，可按址寻访
+指令由操作码和地址码组...
+						</p>
+					</div>
+
+					<a href="/2019/12/02/计算机组成原理学习/" title="计算机组成原理学习">				
+						<img src="/images/post-cover/38.jpg" class="relateImg" alt="计算机组成原理学习">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
+					</a>
+				</li>											
+		
 		
 				<li>
 					<div>
@@ -401,23 +511,6 @@ ini_set("display_errors"...
 
 					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
 						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">
-							thinkphp5基础学习
-						</a>
-						<p>
-							thinkphp5基础认识在thinkphp5中，无论我们怎么对项目进行更改，最终我们访问的文件只有一个，我们把这种只需要通过访问一个（单个）文件就能实现各种功能需求的设计，叫做『单入口模式』。
-在thinkphp中，是通过“入口文件...
-						</p>
-					</div>
-
-					<a href="/2019/11/08/thinkphp基础学习/" title="thinkphp5基础学习">				
-						<img src="/images/post-cover/6.jpg" class="relateImg" alt="thinkphp5基础学习">
 					</a>
 				</li>											
 		
@@ -471,82 +564,6 @@ if(!isset($_GET['c'])){
 
 					<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">				
 						<img src="/images/post-cover/25.jpg" class="relateImg" alt="phar拓展反序列化攻击面">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/10/09/基本工具使用/" title="基本工具使用">
-							基本工具使用
-						</a>
-						<p>
-							常用工具nc/ncatnc被誉为网络界的瑞士军刀。它的功能可见一般。。。
-
-侦听模式 / 传输模式 
-telnet / 获取banner信息 
-传输文本信息 
-传输文件/传输目录 
-加密传输文件 
-远程控制/木⻢ 
-加密所有流量 
-流...
-						</p>
-					</div>
-
-					<a href="/2019/10/09/基本工具使用/" title="基本工具使用">				
-						<img src="/images/post-cover/35.jpg" class="relateImg" alt="基本工具使用">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
-							buuctf刷题记录
-						</a>
-						<p>
-							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
-hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
-						</p>
-					</div>
-
-					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
-						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">
-							OGeek CTF 2019-Enjoy You Self
-						</a>
-						<p>
-							前言最近ctf不少，但是成绩不咋样，菜的真实。新学期开始了，最后一年了。。。继续努力吧。OPPO OGeek CTF 2019咋说呢，菜。。。总结一下学到的东西吧。
-Enjoy You Self线上环境：http://47.107.2...
-						</p>
-					</div>
-
-					<a href="/2019/09/04/OGeek-CTF-2019-Enjoy-You-Self/" title="OGeek CTF 2019-Enjoy You Self">				
-						<img src="/images/post-cover/30.jpg" class="relateImg" alt="OGeek CTF 2019-Enjoy You Self">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">
-							2018n1ctf-esay-php复现
-						</a>
-						<p>
-							前言最近做题，两次遇见这个题。第一次看着writeup都没复现成功。emm（菜的真实。。。）。这次自己搭的环境用三种方法来复现这个题。
-环境搭建官方给了环境，有dockerfile。所以比较容易搭建的。官方文件在docker上安装上d...
-						</p>
-					</div>
-
-					<a href="/2019/08/06/2018n1ctf-esay-php复现/" title="2018n1ctf-esay-php复现">				
-						<img src="/images/post-cover/29.jpg" class="relateImg" alt="2018n1ctf-esay-php复现">
 					</a>
 				</li>											
 		
@@ -828,7 +845,7 @@ Enjoy You Self线上环境：http://47.107.2...
 	<div class="copyright">
 		<p>
 			 
-				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
 			
 			
 			

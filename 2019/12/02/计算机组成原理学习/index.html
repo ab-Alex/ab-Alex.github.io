@@ -1,0 +1,1045 @@
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      计算机组成原理学习 | 似雍&amp;&amp;非庸
+    
+  </title>
+  <meta name="author" content="Alex">
+  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="description" content="个人博客" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="https://source.unsplash.com/collection/954550/1920x1080" data-random-max="110" data-random-src="/images/post-cover/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
+
+					
+						<li class="menu-search">
+							<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+						</li>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《计算机组成原理学习》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+				<li class="menu-search">
+					<a href="javascript:;" class="popup-trigger" title="Search">搜索</a>
+				</li>
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2019/12/02/计算机组成原理学习/" itemprop="url">
+		计算机组成原理学习
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2019/12/02/计算机组成原理学习/" itemprop="url">
+		<time datetime="2019-12-02T10:26:26.000Z" itemprop="datePublished">
+	  		2019-12-02
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2019/12/02/计算机组成原理学习/" itemprop="url">
+		<time datetime="2019-12-02T10:26:26.000Z" itemprop="dateUpdated">
+	  		2019-12-25
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/基础学习/" class=" ">
+			基础学习
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2019/12/02/计算机组成原理学习/_visitors" data-url="/2019/12/02/计算机组成原理学习/" data-title="计算机组成原理学习">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2019/12/02/计算机组成原理学习/_likes" data-url="/2019/12/02/计算机组成原理学习/" data-title="计算机组成原理学习" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<h1 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h1><h2 id="第一章-计算机系统概论"><a href="#第一章-计算机系统概论" class="headerlink" title="第一章 计算机系统概论"></a>第一章 计算机系统概论</h2><h3 id="计算机系统的层次结构"><a href="#计算机系统的层次结构" class="headerlink" title="计算机系统的层次结构"></a>计算机系统的层次结构</h3><p><img src="https://s2.ax1x.com/2019/12/04/Q1YNiF.png" alt="Q1YNiF.png"><br><img src="https://s2.ax1x.com/2019/12/04/Q1Ydz9.jpg" alt="Q1Ydz9.jpg"></p>
+<h3 id="冯·诺依曼计算机的特点"><a href="#冯·诺依曼计算机的特点" class="headerlink" title="冯·诺依曼计算机的特点"></a>冯·诺依曼计算机的特点</h3><blockquote>
+<ol>
+<li>计算机由运算器、存储器、控制器、输入设备和输出设备五大部件组成</li>
+<li>指令(程序)和数据以二进制同等地位地存储在存储器中，可按址寻访</li>
+<li>指令由操作码和地址码组成</li>
+<li>机器以运算器为中心</li>
+<li>存储程序<br>结构框图<br><img src="https://s2.ax1x.com/2019/12/04/Q1w5Lj.png" alt="Q1w5Lj.png"></li>
+</ol>
+</blockquote>
+<h3 id="现代计算机由三大部分组成（机器以存储器为中心）"><a href="#现代计算机由三大部分组成（机器以存储器为中心）" class="headerlink" title="现代计算机由三大部分组成（机器以存储器为中心）"></a>现代计算机由三大部分组成（机器以存储器为中心）</h3><blockquote>
+<ol>
+<li>CPU(Central Processing Unit) 中央处理器，核心部件为ALU(Arithmetic Logic Unit,算术逻辑单元)和CU(Control Unit,控制单元)</li>
+<li>I/O设备(受CU控制)</li>
+<li>主存储器(Main Memory,MM)，分为RAM(随机存储器)和ROM(只读存储器)<br>结构框图<br><img src="https://s2.ax1x.com/2019/12/04/Q1wvy4.png" alt="Q1wvy4.png"></li>
+</ol>
+</blockquote>
+<h4 id="现代计算机硬件框图"><a href="#现代计算机硬件框图" class="headerlink" title="现代计算机硬件框图"></a>现代计算机硬件框图</h4><p><img src="https://s2.ax1x.com/2019/12/04/Q10ZOH.png" alt="Q10ZOH.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/04/Q10Mkt.png" alt="Q10Mkt.png"></p>
+<h4 id="解决复杂性管理的方法"><a href="#解决复杂性管理的方法" class="headerlink" title="解决复杂性管理的方法"></a>解决复杂性管理的方法</h4><blockquote>
+<ol>
+<li>层次化：将被设计的系统划分为多个模块或子模块</li>
+<li>模块化： 有明确定义的功能和接口</li>
+<li>规则性: 模块更容易被重用</li>
+</ol>
+</blockquote>
+<h3 id="存储器的基本组成"><a href="#存储器的基本组成" class="headerlink" title="存储器的基本组成"></a>存储器的基本组成</h3><p><img src="https://s2.ax1x.com/2019/12/04/Q1rhhq.png" alt="Q1rhhq.png"></p>
+<h4 id="存储体"><a href="#存储体" class="headerlink" title="存储体"></a>存储体</h4><p>存储器的核心是存储体。存储体由存储单元组成，存储单元由存储元件组成。存储元件有两种状态即（0/1）.<br>存储单元存储一串二进制代码。<br>存储字：存储单元中存储的二进制代码的组合<br>存储字长： 存储单元中二进制代码的位数<br>每个存储单元都有对应的地址.</p>
+<h4 id="MAR-Memory-Address-Register，存储地址寄存器"><a href="#MAR-Memory-Address-Register，存储地址寄存器" class="headerlink" title="MAR(Memory Address Register，存储地址寄存器)"></a>MAR(Memory Address Register，存储地址寄存器)</h4><p>反映了存储单元的个数</p>
+<h4 id="MDR（Memory-Data-Register，存储器数据寄存器）"><a href="#MDR（Memory-Data-Register，存储器数据寄存器）" class="headerlink" title="MDR（Memory Data Register，存储器数据寄存器）"></a>MDR（Memory Data Register，存储器数据寄存器）</h4><p>反映了存储字长</p>
+<h3 id="运算器的结构"><a href="#运算器的结构" class="headerlink" title="运算器的结构"></a>运算器的结构</h3><p>累加型计算机的运算器的结构<br><img src="https://s2.ax1x.com/2019/12/04/Q1yfS0.png" alt="Q1yfS0.png"><br>运算过程数据存储位置<br><img src="https://s2.ax1x.com/2019/12/04/Q1yxOO.png" alt="Q1yxOO.png"><br><img src="https://s2.ax1x.com/2019/12/04/Q16tnU.png" alt="Q16tnU.png"><br><img src="https://s2.ax1x.com/2019/12/04/Q16h4A.png" alt="Q16h4A.png"><br><img src="https://s2.ax1x.com/2019/12/04/Q1ckE4.png" alt="Q1ckE4.png"><br><img src="https://s2.ax1x.com/2019/12/04/Q1c85d.png" alt="Q1c85d.png"></p>
+<h3 id="控制器的基本结构"><a href="#控制器的基本结构" class="headerlink" title="控制器的基本结构"></a>控制器的基本结构</h3><p>完成一条指令的步骤<br>取指令  -&gt; PC<br>分析指令  -&gt;IR<br>执行指令  -&gt;CU<br>PC存放当前要执行的指令地址，自带加一功能。<br>即PC+1-&gt;PC<br>IR存放当前要执行的命令</p>
+<h3 id="主机完成一条指令的过程"><a href="#主机完成一条指令的过程" class="headerlink" title="主机完成一条指令的过程"></a>主机完成一条指令的过程</h3><p>硬件结构<br><img src="https://s2.ax1x.com/2019/12/04/Q1239A.png" alt="Q1239A.png"><br>取数指令执行过程<br><img src="https://s2.ax1x.com/2019/12/04/Q120hj.png" alt="Q120hj.png"><br>存数指令执行过程<br><img src="https://s2.ax1x.com/2019/12/04/Q12I3R.png" alt="Q12I3R.png"></p>
+<p>执行程序的过程<br>OP指操作码<br>Ad指地址码<br><img src="https://s2.ax1x.com/2019/12/04/Q1RxdU.png" alt="Q1RxdU.png"></p>
+<h3 id="计算机硬件的技术指标"><a href="#计算机硬件的技术指标" class="headerlink" title="计算机硬件的技术指标"></a>计算机硬件的技术指标</h3><h4 id="机器字长"><a href="#机器字长" class="headerlink" title="机器字长"></a>机器字长</h4><p>机器字长：CPU一次能处理数据的位数，通常与CPU的寄存器位数有关。</p>
+<p>一般越大，越好。</p>
+<h4 id="计算机的运算速度"><a href="#计算机的运算速度" class="headerlink" title="计算机的运算速度"></a>计算机的运算速度</h4><p>主频  一般越大越好。<br>核数，每个核所支持的线程数   一般越大越好<br><img src="https://s2.ax1x.com/2019/12/04/Q1fQNF.png" alt="Q1fQNF.png"> Tm越大越好<br>CPI 计算机执行一条指令所需的时钟周期数 一般越小越好<br>MIPS 每秒处理的百万级的指令数  一般越大越好<br>FLOPS 每秒所执行的浮点运算次数 一般越大越好</p>
+<h4 id="存储容量"><a href="#存储容量" class="headerlink" title="存储容量"></a>存储容量</h4><p>存储容量分主存容量和辅存容量。<br>主存容量指主存中存放的二进制代码的个数。<br>存储容量=存储单元个数x存储字长</p>
+<h2 id="第二章-计算机的发展史"><a href="#第二章-计算机的发展史" class="headerlink" title="第二章 计算机的发展史"></a>第二章 计算机的发展史</h2><p>略</p>
+<h2 id="第三章-系统总线"><a href="#第三章-系统总线" class="headerlink" title="第三章 系统总线"></a>第三章 系统总线</h2><h3 id="总线特性及性能指标"><a href="#总线特性及性能指标" class="headerlink" title="总线特性及性能指标"></a>总线特性及性能指标</h3><ol>
+<li>机械特性： 尺寸、形状、排列顺序</li>
+<li>电气特性： 传输方向和有效电平范围</li>
+<li>功能特性： 每根传输线的功能</li>
+<li>时间特性： 信号的时序关系</li>
+</ol>
+<p>总线的宽度<br>标准传输率<br>时钟同步/异步<br>总线复用<br>信号线数<br>总线控制方式<br>其他： 负载能力</p>
+<h2 id="第四章-存储器"><a href="#第四章-存储器" class="headerlink" title="第四章 存储器"></a>第四章 存储器</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h4 id="存储器的类型"><a href="#存储器的类型" class="headerlink" title="存储器的类型"></a>存储器的类型</h4><p><img src="https://s2.ax1x.com/2019/12/16/Q5Ape1.png" alt="Q5Ape1.png"><br><img src="https://s2.ax1x.com/2019/12/16/Q5AZyd.png" alt="Q5AZyd.png"><br><img src="https://s2.ax1x.com/2019/12/16/Q5AlY8.png" alt="Q5AlY8.png"></p>
+<h4 id="现代存储器的层次结构"><a href="#现代存储器的层次结构" class="headerlink" title="现代存储器的层次结构"></a>现代存储器的层次结构</h4><p>存储器三个主要特性的关系<br><img src="https://s2.ax1x.com/2019/12/16/Q5ABfU.png" alt="Q5ABfU.png"><br>缓存-主存层次和主存-辅助层次<br><img src="https://s2.ax1x.com/2019/12/16/Q5Avh8.png" alt="Q5Avh8.png"></p>
+<h3 id="主存储器"><a href="#主存储器" class="headerlink" title="主存储器"></a>主存储器</h3><h4 id="主存储器-概述"><a href="#主存储器-概述" class="headerlink" title="主存储器-概述"></a>主存储器-概述</h4><h5 id="主存的基本组成"><a href="#主存的基本组成" class="headerlink" title="主存的基本组成"></a>主存的基本组成</h5><p><img src="https://s2.ax1x.com/2019/12/16/Q5VdRU.png" alt="Q5VdRU.png"></p>
+<h4 id="主存与cpu之间的联系"><a href="#主存与cpu之间的联系" class="headerlink" title="主存与cpu之间的联系"></a>主存与cpu之间的联系</h4><p><img src="https://s2.ax1x.com/2019/12/16/Q5V6d1.png" alt="Q5V6d1.png"></p>
+<h5 id="主存中存储单元地址的分配"><a href="#主存中存储单元地址的分配" class="headerlink" title="主存中存储单元地址的分配"></a>主存中存储单元地址的分配</h5><p>十六进制数12345678H 如何在主存储器中存储的？<br>两种方式： 大端方式和小端方式（x86）<br><img src="https://s2.ax1x.com/2019/12/16/Q5ZGlD.png" alt="Q5ZGlD.png"></p>
+<pre class="line-numbers language-html"><code class="language-html">位：我们常说的bit，位就是传说中提到的计算机中的最小数据单位：说白了就是0或者1；计算机内存中的存储都是01这两个东西。
+
+字节：英文单词：（byte），byte是存储空间的基本计量单位。1byte 存1个英文字母，2个byte存一个汉字。规定上是1个字节等于8个比特（1Byte = 8bit）。
+
+字：字就是由一些字符组成的，是据算计处理数据时一次存取，加工和传送的数据长度。
+
+字由若干字节构成，字的位数叫字长，一台8位机子：一个字等于1个字节，字长为8位，如果是16位的机子，一个字等于2个字节，字长为16，字是计算机处理数据和运算的单位。
+
+由此可见，计算机的字长决定了其CPU一次操作处理实际位数的多少，即：计算机的字长越大，其性能越好。
+
+位、字，字节与KB的关系：
+KB 1KB=1024B
+MB 1MB=1024KB
+GB 1GB=1024MB
+TB 1TB=1024GB
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>设地址线是24根， 按 <strong>字节</strong> 寻址 2的24次方B=16MB 个<br>若字长（存储字长，机器字长）为16位， 按<strong>字</strong>寻址 16MB/2 =8MW(一个字等于两个字节)<br>若字长（存储字长，机器字长）为32位， 按<strong>字</strong>寻址 16MB/4 =4MW(一个字等于四个字节)</p>
+<h5 id="主存的技术指标"><a href="#主存的技术指标" class="headerlink" title="主存的技术指标"></a>主存的技术指标</h5><p><img src="https://s2.ax1x.com/2019/12/16/Q5mZZ9.png" alt="Q5mZZ9.png"></p>
+<h4 id="半导体存储芯片"><a href="#半导体存储芯片" class="headerlink" title="半导体存储芯片"></a>半导体存储芯片</h4><h5 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h5><p><img src="https://s2.ax1x.com/2019/12/16/Q5KaJ1.png" alt="Q5KaJ1.png"><br>地址线（单向）   数据线（双向）   容量<br>10                    4            1kx4位<br>14                    1            16kx1位<br>13                    8            8kx8位</p>
+<p>用16kx1位的芯片组成64kx8位的存储器<br>8个芯片组组成一个16kx8位的芯片组<br>四个16kx8位的芯片组构成一个64kx8位的存储器</p>
+<p>共32片</p>
+<h5 id="译码驱动方式"><a href="#译码驱动方式" class="headerlink" title="译码驱动方式"></a>译码驱动方式</h5><h6 id="线选法"><a href="#线选法" class="headerlink" title="线选法"></a>线选法</h6><p><img src="https://s2.ax1x.com/2019/12/16/Q5M2BF.png" alt="Q5M2BF.png"><br>10根地址线译码后的线数为2的10次方</p>
+<h6 id="重合法"><a href="#重合法" class="headerlink" title="重合法"></a>重合法</h6><p><img src="https://s2.ax1x.com/2019/12/16/Q5MTc6.png" alt="Q5MTc6.png"><br>10根行地址线和10根列地址线译码后的线数为2的10次方乘2</p>
+<h4 id="随机存取存储器（RAM）"><a href="#随机存取存储器（RAM）" class="headerlink" title="随机存取存储器（RAM）"></a>随机存取存储器（RAM）</h4><h5 id="静态RAM-SRAM"><a href="#静态RAM-SRAM" class="headerlink" title="静态RAM(SRAM)"></a>静态RAM(SRAM)</h5><h5 id="动态RAM-DRAM"><a href="#动态RAM-DRAM" class="headerlink" title="动态RAM(DRAM)"></a>动态RAM(DRAM)</h5><h4 id="只读存储器（ROM）"><a href="#只读存储器（ROM）" class="headerlink" title="只读存储器（ROM）"></a>只读存储器（ROM）</h4><h4 id="主存储器-存储器与CPU的连接（重点）"><a href="#主存储器-存储器与CPU的连接（重点）" class="headerlink" title="主存储器-存储器与CPU的连接（重点）"></a>主存储器-存储器与CPU的连接（重点）</h4><h5 id="存储器容量的扩展"><a href="#存储器容量的扩展" class="headerlink" title="存储器容量的扩展"></a>存储器容量的扩展</h5><ol>
+<li>位扩展</li>
+<li>字扩展</li>
+<li>字和位同时扩展<h6 id="位扩展（增加存储字长）"><a href="#位扩展（增加存储字长）" class="headerlink" title="位扩展（增加存储字长）"></a>位扩展（增加存储字长）</h6>用1Kx4位存储芯片组成1Kx8位的存储器<br>首先，要确定片数，很简单：两片，(8<em>1)/(4</em>1)=2片<br>扩展位，需要用两个芯片同时工作，所以要连接到同一条片选线。<br>然后是确定1Kx8位的存储器需要的地址线和数据线的数目：<br>1K=2的10次方 所以需要10根地址线<br>8位，所以需要8根数据线<br>所以连接方式如图：<br><img src="https://s2.ax1x.com/2019/12/18/QHeiFJ.png" alt="QHeiFJ.png"><h6 id="字扩展（增加存储字的数量）"><a href="#字扩展（增加存储字的数量）" class="headerlink" title="字扩展（增加存储字的数量）"></a>字扩展（增加存储字的数量）</h6>用1Kx8位存储芯片组成2Kx8位的存储器<br>首先，确定片数，很简单：两片，(8<em>2)/(8</em>1)=2片<br>确定2Kx8位的存储器需要的地址线和数据线的数目：<br>2K=2的11次方 所以需要11根地址线<br>8位，所以需要8根数据线<br>两个存储芯片不能同时工作，（同时工作会导致数据线信号混乱）<br>1Kx8位存储芯片需要的地址线是十根。还剩一根地址线。我们可以通过这条剩下的地址线来确定我们取数据的芯片。<br>所以连接方式如图：<br><img src="https://s2.ax1x.com/2019/12/19/Qq7daD.png" alt="Qq7daD.png"></li>
+</ol>
+<h6 id="字、位同时扩展"><a href="#字、位同时扩展" class="headerlink" title="字、位同时扩展"></a>字、位同时扩展</h6><p>用1Kx4位存储芯片组成4Kx8位的存储器。<br>首先，确定片数，很简单：八片，(8<em>4)/(4</em>1)=8片<br>确定4Kx8位的存储器需要的地址线和数据线的数目：<br>4K=2的12次方 所以需要12根地址线<br>8位，所以需要8根数据线<br>1Kx4位需要的地址线是10根<br>两个1Kx4位的芯片构成一组是1Kx8位的芯片，同组芯片的片选信号一致。（扩展位）<br>剩余两根地址线，可以组成（00，01，10，11）四组。<br>所以连接方式如图：<br><img src="https://s2.ax1x.com/2019/12/19/QL921f.png" alt="QL921f.png"></p>
+<h5 id="存储器与CPU连接"><a href="#存储器与CPU连接" class="headerlink" title="存储器与CPU连接"></a>存储器与CPU连接</h5><p>1、 地址线的连接（低位作为地址信号，高位作为芯片选择信号）<br>2、 数据线的连接（CPU的数据线数是多少条，就需要存储片扩展多少位）<br>3、 读/写命令线的连接 (ROM只能读，不能写，一般就是把读写信号连接到每一个芯片）<br>4、 片选线的连接（片选线决定了芯片的选择，首先要确定CPU访问的是存储器，MREQ为低电平时访问的是存储器，高电平访问I/O设备）<br>5、 合理的选择存储芯片（片选逻辑尽可能简单）</p>
+<ul>
+<li>ROM(系统程序，配置信息的用ROM因为不需要改动)</li>
+<li>RAM （用户程序、系统程序运行的区域，可读可写，用RAM）<br>6、 其他（时序、负载）<br>例题：<br><img src="https://s2.ax1x.com/2019/12/19/QLi37Q.png" alt="QLi37Q.png"><br><img src="https://s2.ax1x.com/2019/12/19/QLiBBF.png" alt="QLiBBF.png"></li>
+</ul>
+<p>解：<br>十六进制转位二进制：<br><img src="https://s2.ax1x.com/2019/12/19/QLnOvd.png" alt="QLnOvd.png"><br>八位由CPU的数据线的条数决定。</p>
+<p>芯片的选择：</p>
+<p>故它需要2Kx8位的ROM型存储器,1Kx8位的RAM型存储器。因为没有1Kx8位的RAM型芯片，故用两片1Kx4位的RAM型芯片来替代扩展位，需要两个芯片片选信号连接在一起。</p>
+<p>地址线的分配：<br>2Kx8位的ROM型芯片需要11根地址线（2的11次方=2K）<br>1Kx8位的RAM型存储器需要10根地址线（2的10次方=1K）<br>即：<br><img src="https://s2.ax1x.com/2019/12/19/QLKypF.png" alt="QLKypF.png"></p>
+<p>补充知识：<br>74138译码器通过C、B、A端的输入不同有八个输出端即（000-111 共八个）G1高电平有效，G2A,G2B低电平有效。<br>故需要A13连C端，A12连B端，A11连A端。（解释：138译码器是将二进制转为十进制，比如CBA=111，则输出端为Y7。此处为101和100即输出端为Y4和Y5）如果Y4有效，则选择的是ROM芯片，如果Y5有效则选择RAM芯片。</p>
+<p>片选线选择：<br>G1高电平有效，故连接A14。（都为1）<br>G2A低电平有效,故连接A15。（都为0）<br>G2B低电平有效,故连接MREQ。（都为低电平有效）<br>要想访问RAM芯片，需要Y5有效且A10为0故需要与门共同构成片选线。<br>故如图：<br><img src="https://s2.ax1x.com/2019/12/19/QLJNdJ.png" alt="QLJNdJ.png"></p>
+<p>例题二：<br>描述同上，要求最小的4K为系统程序区，相邻的8K为用户程序区。</p>
+<p>步骤同上：<br>1.写出对应的二进制地址码<br>2.确定芯片的数量及类型<br>3.分配地址线<br>4.确定片选信号<br>5.确立片选逻辑</p>
+<p>第一步和第二步：<br><img src="https://s2.ax1x.com/2019/12/25/lFUU6P.png" alt="lFUU6P.png"><br>第三步：<br>分配地址线：都是4K的芯片所以都是12根地址线（A0-A11)。<br>第四步：<br>138译码器输入端C，B，A对应A14，A13，A12。<br>控制端G1，G2A，G2B对应直接接在电源上（或者A15取反接入），A15，MREQ。<br>故如图：<br><img src="https://s2.ax1x.com/2019/12/25/lFaAnf.png" alt="lFaAnf.png"></p>
+<h4 id="存储器的校验"><a href="#存储器的校验" class="headerlink" title="存储器的校验"></a>存储器的校验</h4><h3 id="高速缓冲存储器"><a href="#高速缓冲存储器" class="headerlink" title="高速缓冲存储器"></a>高速缓冲存储器</h3><h3 id="辅助存储器"><a href="#辅助存储器" class="headerlink" title="辅助存储器"></a>辅助存储器</h3>	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/images/post-cover/38.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2020/02/27/linux三剑客/" title="linux三剑客">
+							linux三剑客
+						</a>
+						<p>
+							前言之前用一些脚本都经常用到grep,sed,awk。但是一直不太熟悉，今天来学习一下，做个备忘录。
+grep格式：
+grep [OPTIONS] PATTERN [FILE...]
+grep [OPTIONS] [-e PATTER...
+						</p>
+					</div>
+
+					<a href="/2020/02/27/linux三剑客/" title="linux三剑客">				
+						<img src="/images/post-cover/39.jpg" class="relateImg" alt="linux三剑客">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+							i春秋2020新春战“疫”网络安全公益赛 web Writeup
+						</a>
+						<p>
+							前言这次比赛题目质量挺好的，除啦环境可能有时候有点问题。（就让我遇到了。心态炸了一天。。。）其他都挺好的。
+DAY1简单的招聘系统知识点：sql注入的联合注入或盲注存在注册和登陆功能，首先进行注册后登陆进系统，发现有一个模块是管理员才...
+						</p>
+					</div>
+
+					<a href="/2020/02/24/i春秋2020新春战“疫”网络安全公益赛-web-Writeup/" title="i春秋2020新春战“疫”网络安全公益赛 web Writeup">				
+						<img src="/images/post-cover/6.jpg" class="relateImg" alt="i春秋2020新春战“疫”网络安全公益赛 web Writeup">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">
+							2019安洵杯+2019广外比赛web部分题解
+						</a>
+						<p>
+							2019安洵杯easy_web知识点：MD5强碰撞，命令执行这个题比较简单，看题目发现传入参数img和cmd，然而图片是传入的img参数控制，让我想到ddctf的一道题，然后发现img是通过把文件名进行转十六进制后两次base64编码...
+						</p>
+					</div>
+
+					<a href="/2019/12/01/2019安洵杯-2019广外比赛web部分题解/" title="2019安洵杯+2019广外比赛web部分题解">				
+						<img src="/images/post-cover/37.jpg" class="relateImg" alt="2019安洵杯+2019广外比赛web部分题解">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">
+							bypass disfunction
+						</a>
+						<p>
+							前言PHP 的 disabled_functions主要是用于禁用一些危险的函数防止攻击者执行系统命令。但是有一些绕过方法。这里做个总结。
+基本思路有四种绕过 disable_functions 的手法：第一种，攻击后端组件，寻找存在...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/bypass-disfunction/" title="bypass disfunction">				
+						<img src="/images/post-cover/24.jpg" class="relateImg" alt="bypass disfunction">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">
+							2019极客大挑战RCE ME
+						</a>
+						<p>
+							题目环境：http://114.116.44.23:40001/
+题目还是老样子。无字母数字rce。知识点其实都有写过，就不说了。详细参见：【RCE提高篇】题目源码：
+&lt;?php
+ini_set("display_errors"...
+						</p>
+					</div>
+
+					<a href="/2019/11/20/2019极客大挑战RCE-ME/" title="2019极客大挑战RCE ME">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="2019极客大挑战RCE ME">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">
+							RCE提高篇
+						</a>
+						<p>
+							前言首先，需要了解一下命令执行的函数，这里推荐几篇文章，来认识这些函数。浅谈eval和assert从底层分析eval和assert的区别命令执行与代码执行的小结巧用命令注入的N种方式命令注入绕过姿势我就不在说这几个东西，大牛们都说的很...
+						</p>
+					</div>
+
+					<a href="/2019/10/17/RCE提高篇/" title="RCE提高篇">				
+						<img src="/images/post-cover/32.jpg" class="relateImg" alt="RCE提高篇">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">
+							buuctf刷题记录(序)
+						</a>
+						<p>
+							love math知识点：代码审计，绕waf直接给出源码：
+&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+    sho...
+						</p>
+					</div>
+
+					<a href="/2019/10/16/buuctf刷题记录-序/" title="buuctf刷题记录(序)">				
+						<img src="/images/post-cover/33.jpg" class="relateImg" alt="buuctf刷题记录(序)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">
+							phar拓展反序列化攻击面
+						</a>
+						<p>
+							pharphar扩展提供了一种将整个php应用程序放入名为“phar”（php archive）的单个文件中的方法，以便于分发和安装。除了提供这个服务之外，phar扩展还提供了一个文件格式抽象方法，用于通过phardata类创建和操作...
+						</p>
+					</div>
+
+					<a href="/2019/10/11/phar拓展反序列化攻击面/" title="phar拓展反序列化攻击面">				
+						<img src="/images/post-cover/25.jpg" class="relateImg" alt="phar拓展反序列化攻击面">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/10/09/基本工具使用/" title="基本工具使用">
+							基本工具使用
+						</a>
+						<p>
+							常用工具nc/ncatnc被誉为网络界的瑞士军刀。它的功能可见一般。。。
+
+侦听模式 / 传输模式 
+telnet / 获取banner信息 
+传输文本信息 
+传输文件/传输目录 
+加密传输文件 
+远程控制/木⻢ 
+加密所有流量 
+流...
+						</p>
+					</div>
+
+					<a href="/2019/10/09/基本工具使用/" title="基本工具使用">				
+						<img src="/images/post-cover/35.jpg" class="relateImg" alt="基本工具使用">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">
+							buuctf刷题记录
+						</a>
+						<p>
+							前言最近感觉自己菜出来新境界。。。刷点题来证明我还存在。。。言归正传。开刷
+hack world知识点：sql布尔盲注，bypass进入题目，发现这是典型的sql布尔盲注，题目给出了表名和列名都是flag，用burp进行fuzz测试发...
+						</p>
+					</div>
+
+					<a href="/2019/09/07/buuctf刷题记录/" title="buuctf刷题记录">				
+						<img src="/images/post-cover/31.jpg" class="relateImg" alt="buuctf刷题记录">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- comment gitalk -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+	//Thanks O-R
+	//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+	//去除尾部匹配正则数组的字符串  
+	//Remove redundant characters
+	String.prototype.trimEnd = function(regStr) {
+		var result = this;
+		if(regStr == undefined || regStr == null || regStr == "") {
+			return result;
+		}
+		var array = regStr.split(',');
+
+		if(array.length > 0) {
+
+			var c = array.shift();
+			var str = this;
+			var i = str.length;
+			var rg = new RegExp(c);
+			var matchArr = str.match(rg);
+
+			if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+				var matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+					.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+					.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+					.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+					.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+					.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+					.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+					.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+				matchStr = matchStr + '$';
+				result = str.replace(new RegExp(matchStr), "");
+			}
+
+			if(array.length > 0) {
+				return result.trimEnd(array.join())
+			} else {
+				return result;
+			}
+		}
+	};
+
+	//Create gitalk
+	var gitalk = new Gitalk({
+		clientID: 'b7a5e9f0853539dc3363',
+		clientSecret: '3cd61bd5dfe5ddffe1c91e4392ca95874aade540',
+		//id: window.location.pathname,
+		//id: decodeURI(window.location.pathname),
+		//id: (window.location.pathname).split("/").pop().substring(0, 49),
+		id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+		repo: 'blog-Comment-Repo',
+		owner: 'ab-Alex',
+		admin: 'ab-Alex',
+		distractionFreeMode: 'true',
+	})
+	gitalk.render('gitalk-container');
+</script>
+
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+
+	<script>
+		var appid = 'dXz',
+            appkey = 'wzG';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
+
+
+ 
+
+<!-- show math formula -->
+
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config(
+			{ 
+				tex2jax: {
+					inlineMath: [['$','$'], ['\\(','\\)']]
+				} 
+			}
+		);
+	</script>
+
+
+
+<script>
+	//Refer to https://xinyo.org/archives/66226, thanks xinyo!
+	function codeCopy() {
+		var copyContainerId = 'copy-nav';
+						
+		$("pre").before(" <nav class=' " + copyContainerId + " '><i class='code-language'></i></nav> ");
+		
+		$('.' + copyContainerId).append("<i class='fa fa-clipboard copy-btn' aria-hidden='true'></i>");
+		
+		$('#article-content').find('pre').each( function () {
+			var language = $(this).children('code').attr('class').substr(9);//why 9? Need to check language?
+			$(this).prev().find('.code-language').text( language );	
+		});
+				
+		//为复制按钮添加click事件
+		$('.copy-btn').on("click", function() {
+			//初始化
+			$("textarea").remove("#targetId");
+			
+			//获取对应的代码
+			var codePre = $(this).parent().next(),
+				codeText = codePre[0].textContent,
+				target = document.createElement("textarea");
+			target.style.position = "absolute";
+			target.style.left = "-9999px";
+			target.style.top = "0";
+			target.id = "targetId";
+			codePre.append(target);
+			target.textContent = codeText;
+
+			//选中textarea内的代码
+			target.focus();
+			target.setSelectionRange(0, target.value.length);
+
+			// 复制选中的内容
+			document.execCommand("copy");
+			
+			//删除添加的节点
+			$("textarea").remove("#targetId");
+			
+			var thisCopied = $(this);
+			thisCopied.addClass('copy-status');	
+			setTimeout( function() {
+				thisCopied.removeClass('copy-status');
+			}, 2000)
+		});	
+	}
+	
+	if( $('.layout-post').length )	{
+		codeCopy();
+	}
+</script>
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+		
+
+		<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2020, content by Alex. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay. 					
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+    <!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup">
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      ESC
+   </span>
+		<div class="local-search-header">
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			
+
+   
+	<div id="topN"></div>
+	
+    <script>
+        var appid = 'dXz',
+            appkey = 'wzG',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
+
+		</div>
+	</div>
+</div>
+
+<script src="/js/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>
